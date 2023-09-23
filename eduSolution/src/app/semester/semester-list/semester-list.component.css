@@ -1,0 +1,32 @@
+.button-add{
+    margin-left: 15px;
+    border-radius: 20%; /* Zaokrąglone brzegi, aby przycisk był owalny */
+    width: 80px;
+    height: 50px;
+    background-color: rgb(157, 159, 165);
+}
+
+.semesters{
+    background-color: rgb(167, 177, 160);
+}
+
+.table{
+    background-color: rgb(199, 196, 196);
+    border-radius: 30px;
+}
+
+.container{
+    color: black;
+    border-radius: 30px;
+}
+
+.table {
+    border-radius: 10px;
+  }
+  
+  .table th, .table td {
+    border: 1px solid rgb(161, 157, 157);
+    border-radius: 10px;
+  }
+  
+  
