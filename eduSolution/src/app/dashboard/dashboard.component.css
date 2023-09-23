@@ -1,37 +1,25 @@
 /* Globalne style dla panelu administracyjnego */
 .admin-panel {
-    display: flex;
-    background-color: #f2f2f2; /* Kolor tła całej strony */
-  }
-  
-  /* Styl paska bocznego nawigacyjnego */
-  .sidebar {
-    width: 250px;
-    background-color: #333; /* Kolor tła panelu bocznego */
-    color: #fff; /* Kolor tekstu */
-    padding: 20px;
-    margin-left: -690px;
-    margin-top: -85px;
-  }
-  
-  .sidebar h2 {
-    color: #fff; /* Kolor tytułu panelu bocznego */
-  }
-  
-  .sidebar ul {
-    list-style: none;
-    padding: 0;
-  }
-  
-  .sidebar li {
-    margin-bottom: 10px;
-  }
-  
-  .sidebar a {
-    text-decoration: none;
-    color: #fff;
-    display: block;
-  }
+  background-color: #252525; /* Kolor tła całej strony */
+  /* position: fixed; */
+  top: 85px;
+  left: 0;
+  width: 250px;
+  height: 100%; /* Panel administracyjny zajmie całą dostępną wysokość strony */
+  overflow-y: auto; /* Dodaj pasek przewijania w razie potrzeby */
+  z-index: 100; /* Upewnij się, że panel jest na wierzchu */
+  padding: 20px; /* Dostosuj marginesy lub paddingi do Twoich potrzeb */
+  margin-top: 1px;
+  font-family: Arial, sans-serif; /* Wybierz odpowiednią czcionkę */
+  font-size: 16px; /* Wybierz odpowiedni rozmiar czcionki */
+  color: #faf8f8; /* Kolor tekstu w panelu */
+}
+
+.admin-panel a {
+  text-decoration: none;
+  color: #fff; /* Kolor linków (możesz dostosować go do swoich preferencji) */
+}
+
   
   /* Styl treści głównej */
   .main-content {
@@ -40,4 +28,17 @@
     background-color: #fff; /* Kolor tła treści głównej */
     color: #333; /* Kolor tekstu w treści głównej */
   }
+
+  #toggle-button {
+    /* position: fixed; */
+    top: 100px;
+    left: 10px;
+    cursor: pointer;
+    background-color: #007BFF;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+}
   
