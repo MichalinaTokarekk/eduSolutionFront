@@ -35,14 +35,14 @@
   }
 
   .toolbar {
-    position: absolute;
+    /* position: absolute; */
     top: 0;
     left: 0;
     right: 0;
     height: 60px;
     display: flex;
     align-items: center;
-    background-color: #1976d2;
+    background-color: #30423b;
     color: white;
     font-weight: 600;
   }
@@ -300,15 +300,31 @@
       visibility: hidden;
     }
   }
+
+  .colorful-container {
+    background-color: #254b33; /* Kolor tła kontenera (np. niebieski) */
+    color: #fff; /* Kolor tekstu w kontenerze (np. biały) */
+    padding: 20px; /* Wewnętrzny odstęp kontenera */
+    display: flex;
+  }
 </style>
+
+
+
+  <div class="colorful-container" style="height: 50px;">
+    <div class="image-wrapper">
+        <img src="assets/images/eduSolution-image.png" alt="Opis obrazka" style="height: 80px; margin-top: -15px; margin-left: -15px; margin-bottom: -20px;">
+    </div>
+</div>
+
 
 <!-- Toolbar -->
 <div class="toolbar" role="banner">
-  <img
+  <!-- <img
     width="40"
     alt="Angular Logo"
     src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg=="
-  />
+  /> -->
   <span>Welcome</span>
     <div class="spacer"></div>
     <a aria-label="Angular on twitter" target="_blank" rel="noopener" href="https://twitter.com/angular" title="Twitter">
@@ -324,6 +340,8 @@
       </svg>
     </a>
 </div>
+
+
 
 <div class="content" role="main">
 
