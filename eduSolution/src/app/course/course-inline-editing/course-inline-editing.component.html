@@ -1,0 +1,58 @@
+<div class="row">
+    <div class="col-6">
+
+    </div>
+    <div class="col-2 text-end"> 
+        <button class="btn btn-sm btn-primary" (click)="onAdd()">Add New</button>
+        <input type="text" [(ngModel)]="searchText" placeholder="Search" (ngModelChange)="filter($event)" class="form-control">
+    </div>
+    
+</div>
+<div class="row">
+    <div class="col-8">
+        <table class="table table-bordered ">
+            <thead>
+                <tr class="bg-success text-white">
+                    <th>Lp</th>
+                    <th (click)="onNameSort()">Nazwa</th>
+                    <th>Opis</th> 
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let course of courseArray;let srNo = index">
+                    <td>{{srNo+1}}</td>
+                    <td>
+                        <div *ngIf="course.isEdit">
+                            <input type="text" class="form-control" [(ngModel)]="course.name">
+                        </div>
+                        <div  *ngIf="!course.isEdit">
+                            {{course.name}}
+                        </div>
+                     
+                    </td>
+                    <td> 
+                        <div *ngIf="course.isEdit">
+                            <input type="text" class="form-control" [(ngModel)]="course.description">
+                        </div>
+                        <div  *ngIf="!course.isEdit">
+                            {{course.description}}
+                        </div>
+                    </td>
+
+                    <td class="text-center"> 
+                        <div *ngIf="!course.isEdit">
+                            <i class="fa fa-pencil-square-o px-1" aria-hidden="true" (click)="onEdit(course)"></i>
+                            <i class="fa fa-trash-o" aria-hidden="true" (click)="onDelete(course)"></i>
+                        </div>
+                        <div *ngIf="course.isEdit">
+                            <i class="fa fa-cloud px-1" (click)="onUpdate(course)" aria-hidden="true"></i>
+                            <i class="fa fa-times-circle" aria-hidden="true" (click)="onCancel(course)"></i>
+                        </div>
+                       
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

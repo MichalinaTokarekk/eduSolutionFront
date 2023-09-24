@@ -21,6 +21,8 @@ import {MatTableModule} from '@angular/material/table';
 import { TableModule } from 'primeng/table';
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { NgClass } from '@angular/common';
+import { CourseService } from './course/course-service/course.service';
+import { CourseInlineEditingComponent } from './course/course-inline-editing/course-inline-editing.component';
 
 
 
@@ -49,7 +51,8 @@ export class MaterialModule {}
     AppComponent,
     DashboardComponent,
     MainPageComponent,
-    SemesterListComponent
+    SemesterListComponent,
+    CourseInlineEditingComponent
   ],
   imports: [
     BrowserModule,
@@ -63,7 +66,7 @@ export class MaterialModule {}
     ReactiveFormsModule,
 
   ],
-  providers: [SemesterService],
+  providers: [SemesterService, CourseService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
