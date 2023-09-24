@@ -3,20 +3,20 @@
 
     </div>
     <div class="col-2 text-end"> 
-        <button class="btn btn-sm btn-primary" (click)="onAdd()">Add New</button>
-        <input type="text" [(ngModel)]="searchText" placeholder="Search" (ngModelChange)="filter($event)" class="form-control">
+        <!-- <input type="text" [(ngModel)]="searchText" placeholder="Search" (ngModelChange)="filter($event)" class="form-control"> -->
     </div>
     
 </div>
 <div class="row">
     <div class="col-8">
+        <button class="btn btn-sm btn-primary" (click)="onAdd()">Add New</button>
         <table class="table table-bordered ">
             <thead>
                 <tr class="bg-success text-white">
                     <th>Lp</th>
                     <th (click)="onNameSort()">Nazwa</th>
                     <th>Opis</th> 
-                    <th>Action</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -41,16 +41,16 @@
                     </td>
 
                     <td class="text-center"> 
-                        <div *ngIf="!course.isEdit">
+                        <div class="text-end" *ngIf="!course.isEdit">
                             <i class="fa fa-pencil-square-o px-1" aria-hidden="true" (click)="onEdit(course)"></i>
                             <i class="fa fa-trash-o" aria-hidden="true" (click)="onDelete(course)"></i>
                         </div>
-                        <div *ngIf="course.isEdit">
+                        <div class="text-end" *ngIf="course.isEdit">
                             <i class="fa fa-cloud px-1" (click)="onUpdate(course)" aria-hidden="true"></i>
                             <i class="fa fa-times-circle" aria-hidden="true" (click)="onCancel(course)"></i>
                         </div>
-                       
                     </td>
+                    
                 </tr>
             </tbody>
         </table>
