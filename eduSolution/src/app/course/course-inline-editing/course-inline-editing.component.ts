@@ -90,20 +90,22 @@ export class CourseInlineEditingComponent implements OnInit {
 
     onUpdate(userObj: any) {
         // write api call and send obj
-    // Wywołanie metody save z CourseService do aktualizacji danych
-    this.courseService.save(userObj)
-        .subscribe(
-        (data) => {
-            // Obsłuż dane po udanej aktualizacji
-            console.log('Aktualizacja zakończona sukcesem:', data);
-            userObj.isEdit = false;
+      if (!userObj.name || userObj.name.trim() === '') {
+        // Jeśli pole "name" jest puste, nie wykonuj aktualizacji
+        return;
+      }
+      this.courseService.save(userObj)
+          .subscribe(
+            (data) => {
+                // Obsłuż dane po udanej aktualizacji
+                console.log('Aktualizacja zakończona sukcesem:', data);
+                userObj.isEdit = false;
 
-        },
-        (error) => {
-            // Obsłuż błąd
-            console.error('Błąd podczas aktualizacji:', error);
-        }
-        );
+            },
+            (error) => {
+                console.error('Błąd podczas aktualizacji:', error);
+            }
+          );
         
     }
 
@@ -196,4 +198,18 @@ onDelete(obj: any) {
       duration: 5000, // Czas wyświetlania powiadomienia (w milisekundach)
     });
   }
+
+  isNameEmpty = false;
+
+
+  validateCourseName(name: string) {
+    if (!name) {
+        this.isNameEmpty = true;
+        return "Pole wymagane";
+    } else {
+        this.isNameEmpty = false;
+        return "";
+    }
+}
+
 }

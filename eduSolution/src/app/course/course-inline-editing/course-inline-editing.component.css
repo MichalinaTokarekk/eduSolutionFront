@@ -105,3 +105,22 @@ i {
 .table td:last-child {
     text-align: right;
 }
+
+.input-container {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.form-control {
+    flex: 1;
+    padding: 5px;
+}
+
+.error-message {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 5px;
+    color: red; /* Kolor czerwony */
+}
