@@ -7,6 +7,9 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { MainPageComponent } from './main-page/main-page.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule, HTTP_INTERCEPTORS, HttpInterceptor } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { RouterModule, Routes } from '@angular/router';
+
 
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatCardModule} from '@angular/material/card';
@@ -15,6 +18,9 @@ import { SemesterListComponent } from './semester/semester-list/semester-list.co
 import { SemesterService } from './semester/semester-service/semester.service';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatTableModule} from '@angular/material/table';
+import { TableModule } from 'primeng/table';
+import { SelectButtonModule } from 'primeng/selectbutton';
+import { NgClass } from '@angular/common';
 
 
 
@@ -25,10 +31,15 @@ import {MatTableModule} from '@angular/material/table';
     MatSnackBarModule,
     MatCardModule,
     MatDialogModule,
-    MatTableModule
+    MatTableModule,
+    TableModule,
+    SelectButtonModule
   ],
   declarations: [
     
+  ],
+  imports: [
+    BrowserAnimationsModule
   ]
 })
 export class MaterialModule {}
@@ -45,7 +56,12 @@ export class MaterialModule {}
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    MaterialModule
+    MaterialModule,
+    FormsModule,
+    NgClass,
+    RouterModule,
+    ReactiveFormsModule,
+
   ],
   providers: [SemesterService],
   bootstrap: [AppComponent]

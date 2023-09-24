@@ -1,0 +1,11 @@
+<div class="custom-dialog-container">
+    <h1 mat-dialog-title class="custom-dialog-title">Czy chcesz usunąć to pole?</h1>
+    <div mat-dialog-content class="custom-dialog-content">
+      {{ data }}
+    </div>
+    <div mat-dialog-actions class="custom-dialog-actions">
+      <button mat-button (click)="onCancel()" class="cancel-button">Anuluj</button>
+      <button mat-button color="warn" (click)="onConfirm()" class="confirm-button">Potwierdź</button>
+    </div>
+  </div>
+  

@@ -5,6 +5,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { catchError, of, tap } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { SemesterService } from '../semester-service/semester.service';
+import { ConfirmationDialogSemesterComponent } from 'src/app/confirmations/semester/confirmation-dialog-semester.component';
+
 
 @Component({
   selector: 'app-semester-list',
@@ -17,6 +19,7 @@ export class SemesterListComponent implements OnInit{
 
   constructor (private semesterService : SemesterService, private router: Router, private snackBar: MatSnackBar, private dialogg: MatDialog) {}
 
+  
   ngOnInit(){
     this.loadList();
 
@@ -39,27 +42,27 @@ export class SemesterListComponent implements OnInit{
   
 
 
-//   remove(id: string) {
-//     const dialogRef = this.dialogg.open(ConfirmationDialogAuthorComponent);
+  remove(id: string) {
+    const dialogRef = this.dialogg.open(ConfirmationDialogSemesterComponent);
 
-//     dialogRef.afterClosed().subscribe((result: boolean) => {
-//       if (result === true) {
-//         this.semesterService.remove(id).subscribe(
-//           response => {
-//             this.loadList();
-//             this.openSnackBar('Pole usunięte pomyślnie', 'Success');
-//           },
-//           error => {
-//             let errorMessage = 'An error occurred';
-//             if (error && error.error) {
-//               errorMessage = error.error;
-//             }
-//             this.openSnackBar(errorMessage, 'Error');
-//           }
-//         );
-//       }
-//     });
-//   }
+    dialogRef.afterClosed().subscribe((result: boolean) => {
+      if (result === true) {
+        this.semesterService.remove(id).subscribe(
+          response => {
+            this.loadList();
+            this.openSnackBar('Pole usunięte pomyślnie', 'Success');
+          },
+          error => {
+            let errorMessage = 'An error occurred';
+            if (error && error.error) {
+              errorMessage = error.error;
+            }
+            this.openSnackBar(errorMessage, 'Error');
+          }
+        );
+      }
+    });
+  }
   
 
   openSnackBar(message: string, action: string) {
@@ -77,4 +80,6 @@ export class SemesterListComponent implements OnInit{
 //     }
 //     return false
 //   }
+
+
 }
