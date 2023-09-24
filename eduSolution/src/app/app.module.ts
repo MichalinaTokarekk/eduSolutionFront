@@ -23,6 +23,8 @@ import { SelectButtonModule } from 'primeng/selectbutton';
 import { NgClass } from '@angular/common';
 import { CourseService } from './course/course-service/course.service';
 import { CourseInlineEditingComponent } from './course/course-inline-editing/course-inline-editing.component';
+import { ClassGroupService } from './classGroup/classGroup-service/classGroup.service';
+import { ClassGroupInlineCrudComponent } from './classGroup/classGroup-inline-crud/classGroup-inline-crud.component';
 
 
 
@@ -52,7 +54,8 @@ export class MaterialModule {}
     DashboardComponent,
     MainPageComponent,
     SemesterListComponent,
-    CourseInlineEditingComponent
+    CourseInlineEditingComponent,
+    ClassGroupInlineCrudComponent
   ],
   imports: [
     BrowserModule,
@@ -66,7 +69,7 @@ export class MaterialModule {}
     ReactiveFormsModule,
 
   ],
-  providers: [SemesterService, CourseService],
+  providers: [SemesterService, CourseService, ClassGroupService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
