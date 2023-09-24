@@ -82,6 +82,11 @@ export class CourseInlineEditingComponent implements OnInit {
     this.courseArray.unshift(obj);
   }
 
+  onRemoveFirst() {
+    if (this.courseArray.length > 0) {
+        this.courseArray.shift(); // Usuń pierwszy element z tablicy
+    }
+}
 
     onUpdate(userObj: any) {
         // write api call and send obj
@@ -133,10 +138,16 @@ export class CourseInlineEditingComponent implements OnInit {
 
 
   onCancel(obj:any) {
-    const oldObj =  JSON.parse(this.oldUserObj);
-    // obj.name = oldObj.name;
-    // obj.description=  oldObj.description;
+    if (this.oldUserObj) {
+      const oldObj = JSON.parse(this.oldUserObj);
+      // obj.name = oldObj.name;
+      // obj.description = oldObj.description;
+      obj.isEdit = false;
+  } else {
     obj.isEdit = false;
+    this.onRemoveFirst();
+
+  }
   }
 
 //    onDelete(obj: any) {
