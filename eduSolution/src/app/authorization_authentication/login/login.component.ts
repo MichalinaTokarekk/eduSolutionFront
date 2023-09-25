@@ -38,7 +38,20 @@ export class LoginComponent implements OnInit {
         } else{
           alert("Logowanie nieudane");
         }
-      })
+      },
+      (error) => {
+        // Obsługa błędu HTTP, na przykład 403
+        if (error.status === 403) {
+          // alert("Niepoprawne dane logowania.");
+          const errorMessage = document.getElementById('login-error-message');
+          if (errorMessage) {
+            errorMessage.innerText = "Niepoprawne dane logowania";
+          }
+        } else {
+          alert("Wystąpił nieoczekiwany błąd.");
+        }
+      }
+      )
     }
   }
 }
