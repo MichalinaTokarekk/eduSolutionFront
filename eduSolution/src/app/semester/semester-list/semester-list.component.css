@@ -1,61 +1,126 @@
-.card {
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    padding: 20px;
-    background-color: #fff;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    margin: 20px;
-  }
-  
-  .flex {
+i {
+    color: #0747a6;
+    font-size: 20px;
+}
+.form-control {
+    border: 2px solid #347fca !important;
+}
+
+/* Style for the search input */
+.input-container {
     display: flex;
     align-items: center;
-    justify-content: center;
-  }
-  
-  /* Styl dla p-selectButton */
-  .p-selectButton {
-    width: 200px; /* Dostosuj szerokość według potrzeb */
-  }
-  
-  /* Styl dla p-table */
-  .p-table {
+}
+
+/* Style for the table */
+.table {
+    width: 1400px;
+    border-collapse: collapse;
+    margin-top: 0px;
+    margin-left: 5px;
+    margin-right: auto;
+    margin: 0 auto;
+    padding: 50px;
+    text-align: center;
+    border-radius: 5px; /* Dodaj zaokrąglone rogi */
+    overflow: hidden; 
+}
+
+.table th,
+.table td {
+    padding: 10px;
+    text-align: left;
+}
+
+/* Style for the table header row */
+.table thead tr {
+    background-color: #505351; /* Green background color */
+    color: #fff; /* White text color */
+}
+
+/* Style for alternating rows */
+.table tbody tr:nth-child(even) {
+    background-color: #f2f2f2; /* Light gray background color */
+}
+
+/* Style for icons in the Action column */
+.table .fa {
+    cursor: pointer;
+    font-size: 20px;
+    margin-right: 10px;
+}
+
+/* Style for the edit and delete icons */
+.table .fa-pencil-square-o {
+    color: #007bff; /* Blue color */
+}
+
+.table .fa-trash-o {
+    color: #dc3545; /* Red color */
+}
+
+/* Style for the cloud and times-circle icons */
+.table .fa-cloud {
+    color: #28a745; /* Green color */
+}
+
+.table .fa-times-circle {
+    color: #6c757d; /* Gray color */
+}
+
+/* Style for input fields within table cells */
+.table input.form-control {
     width: 100%;
-    margin-top: 20px;
-  }
-  
-  /* Styl dla nagłówka tabeli */
-  th {
-    /* background-color: #f5f5f5; */
-    color: #333;
-    font-weight: bold;
-    padding: 10px;
-    width: auto;
-  }
-  
-  /* Styl dla wierszy tabeli */
-  tr:nth-child(even) {
-    background-color: #f2f2f2;
-  }
-  
-  /* Styl dla komórek tabeli */
-  td {
-    padding: 10px;
-  }
-  
-  /* Hover nad wierszami tabeli */
-  tr:hover {
-    background-color: #e0e0e0;
-  }
+    padding: 5px;
+}
 
-  .align-left {
-    text-align: left; /* Ustawienie zawartości komórki w lewo */
-  }
+/* Style for the Add New button */
+.btn-primary {
+    background-color: #007bff; /* Blue background color */
+    color: #fff; /* White text color */
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+}
 
-  .button-cell {
-    text-align: right; /* Wyśrodkowanie zawartości komórki na prawo */
-    padding-right: 10px; /* Dodanie odstępu po prawej stronie przycisków */
-  }
-  
-  
-  
+/* Align the search input to the right */
+.text-end {
+    text-align: right;
+}
+
+.btn.btn-sm.btn-primary {
+    background-color: #007bff; /* Kolor tła przycisku */
+    color: #fff; /* Kolor tekstu przycisku */
+    border: none; /* Usunięcie obramowania przycisku */
+    padding: 5px 10px; /* Wielkość wypełnienia przycisku */
+    cursor: pointer; /* Kształt kursora po najechaniu na przycisk */
+    font-size: 20px; /* Rozmiar czcionki */
+    border-radius: 10px;
+    margin-left: 5px;
+    margin-top: 15px;
+    margin-bottom: 10px;
+}
+
+.table th:last-child,
+.table td:last-child {
+    text-align: right;
+}
+
+.input-container {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.form-control {
+    flex: 1;
+    padding: 5px;
+}
+
+.error-message {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 5px;
+    color: red; /* Kolor czerwony */
+}
