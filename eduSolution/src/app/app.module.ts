@@ -21,6 +21,10 @@ import {MatTableModule} from '@angular/material/table';
 import { TableModule } from 'primeng/table';
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { NgClass } from '@angular/common';
+import {MatSelectModule} from '@angular/material/select';
+
+
+
 import { CourseService } from './course/course-service/course.service';
 import { CourseInlineEditingComponent } from './course/course-inline-editing/course-inline-editing.component';
 import { ClassGroupService } from './classGroup/classGroup-service/classGroup.service';
@@ -37,7 +41,8 @@ import { ClassGroupInlineCrudComponent } from './classGroup/classGroup-inline-cr
     MatDialogModule,
     MatTableModule,
     TableModule,
-    SelectButtonModule
+    SelectButtonModule,
+    MatSelectModule
   ],
   declarations: [
     

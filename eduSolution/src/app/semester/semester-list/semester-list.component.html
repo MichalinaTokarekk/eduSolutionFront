@@ -40,6 +40,7 @@
                 <tr class="bg-success text-white">
                     <th>Lp</th>
                     <th (click)="onNameSort()">Nazwa</th>
+                    <th>Kursy</th> 
                     <th></th>
                 </tr>
             </thead>
@@ -60,6 +61,23 @@
                             {{course.name}}
                         </div>
                      
+                    </td>
+                    <td> 
+                        <div *ngIf="course.isEdit">
+                            <!-- <input type="text" class="form-control" [(ngModel)]="course.description"> -->
+                        <mat-form-field class="select">
+                            <mat-select [formControl]="courseMultiCtrl" placeholder="Autorzy" [multiple]="true" required="true">
+                                <!-- <mat-select-search [formControl]="genreMultiFilterCtrl"></mat-select-search> -->
+                                    <mat-option *ngFor="let course of filteredCoursesMulti | async" [value]="course">
+                                    {{course.name}}
+                                    </mat-option>
+                              </mat-select>
+                        </mat-form-field>
+                        </div>
+                        <div  *ngIf="!course.isEdit">
+                            <a *ngFor="let course of course.courses" >{{ course.name}}<br> </a>
+                            <!-- {{course.courses}} -->
+                        </div>
                     </td>
 
                     <td class="text-center"> 

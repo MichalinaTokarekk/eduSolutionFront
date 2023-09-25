@@ -2,11 +2,14 @@ import { Component, OnInit } from '@angular/core';
 // import { Observable } from '@rxjs';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { catchError, of, tap } from 'rxjs';
+import { ReplaySubject, catchError, of, tap } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { SemesterService } from '../semester-service/semester.service';
 import { ConfirmationDialogSemesterComponent } from 'src/app/confirmations/semester/confirmation-dialog-semester.component';
 import { HttpClient } from '@angular/common/http';
+import { FormControl } from '@angular/forms';
+import { Course } from 'src/app/interfaces/course-interface';
+import { CourseService } from 'src/app/course/course-service/course.service';
 
 
 @Component({
@@ -88,11 +91,36 @@ courseArray: any[] = [];
   oldUserObj: any;
   searchText: string ='';
   isEditing = false;
-  constructor(private http: HttpClient, private semesterService: SemesterService, private router: Router, private dialog: MatDialog, private snackBar: MatSnackBar){
+  constructor(private http: HttpClient, private semesterService: SemesterService, private courseService: CourseService, 
+    private router: Router, private dialog: MatDialog, private snackBar: MatSnackBar){
 
   }
+
+//   Multiselect:
+
+public courseMultiCtrl: FormControl = new FormControl();
+public filteredCoursesMulti: ReplaySubject<Course[]> = new ReplaySubject<Course[]>(1);
+selectedCourseNames: string[] = [];
+
+
   ngOnInit(): void {
     this.loadList();
+    this.courseService.getAll().subscribe (data => {
+
+        this.filteredCoursesMulti.next(data.slice());
+    });
+
+    
+    this.courseMultiCtrl.valueChanges.subscribe(selectedAuthors => {
+        this.selectedCourseNames = selectedAuthors.map((course: { name: any; }) => course.name);
+    });
+
+    const selectedCoursesStr = localStorage.getItem('selectedCourses');
+    if (selectedCoursesStr) {
+      const selectedCourses = JSON.parse(selectedCoursesStr);
+      this.selectedCourseNames = selectedCourses.map((course: { name: any; }) => course.name);
+    }
+
   }
   onNameSort() {
     const filteredData =  this.filteredSemesters.sort((a: any, b: any) =>
@@ -147,6 +175,7 @@ courseArray: any[] = [];
     //   "id": 1,
       "name": "",
       "description": "",
+      "courses": [],
       "isEdit": true
     };
     this.courseArray.unshift(obj);
@@ -164,11 +193,21 @@ courseArray: any[] = [];
         // Jeśli pole "name" jest puste, nie wykonuj aktualizacji
         return;
       }
+      const selectedCourses = this.selectedCourseNames.map((courseName: string) => {
+        return { name: courseName }; // Zakładając, że masz dostęp do nazw kursów
+       });
+       localStorage.setItem('selectedCourses', JSON.stringify(selectedCourses));
+    //    console.log('Wybrane kursy zapisane w localStorage:', selectedCourses);
+    //    console.log('Dane wysyłane do serwera:', userObj);
+
+
+        userObj.courses = selectedCourses;
       this.semesterService.save(userObj)
           .subscribe(
             (data) => {
                 // Obsłuż dane po udanej aktualizacji
-                console.log('Aktualizacja zakończona sukcesem:', data);
+                console.log('Aktualizacja zakończona sukcesem:', userObj);
+                console.log('Dane wysyłane do serwera:', userObj);
                 userObj.isEdit = false;
 
             },
@@ -176,6 +215,8 @@ courseArray: any[] = [];
                 console.error('Błąd podczas aktualizacji:', error);
             }
           );
+          console.log('Dane wysyłane do serwera:', userObj);
+
         
     }
 
