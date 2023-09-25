@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { LoginService } from './authorization_authentication/service/login.service';
 
 @Component({
   selector: 'app-root',
@@ -9,7 +10,21 @@ import { Router } from '@angular/router';
 export class AppComponent {
   title = 'eduSolution';
 
-  constructor(private route:Router){
+  constructor(private route:Router, private loginService: LoginService){
 
   }
+
+  isLoggedIn(): boolean {
+    return this.loginService.isLoggedIn();
+  }
+
+  actions(){
+    if(this.loginService.getToken()!=''){
+      let _currentRole = this.loginService.getRoleByToken(this.loginService.getToken());
+      if(_currentRole=='admin' || _currentRole=='student'){
+        return true;
+      }
+    }
+    return false
+}
 }

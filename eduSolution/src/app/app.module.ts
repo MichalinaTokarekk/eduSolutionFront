@@ -25,10 +25,13 @@ import {MatSelectModule} from '@angular/material/select';
 
 
 
+
 import { CourseService } from './course/course-service/course.service';
 import { CourseInlineEditingComponent } from './course/course-inline-editing/course-inline-editing.component';
 import { ClassGroupService } from './classGroup/classGroup-service/classGroup.service';
 import { ClassGroupInlineCrudComponent } from './classGroup/classGroup-inline-crud/classGroup-inline-crud.component';
+import { LoginService } from './authorization_authentication/service/login.service';
+import { LoginComponent } from './authorization_authentication/login/login.component';
 
 
 
@@ -60,7 +63,8 @@ export class MaterialModule {}
     MainPageComponent,
     SemesterListComponent,
     CourseInlineEditingComponent,
-    ClassGroupInlineCrudComponent
+    ClassGroupInlineCrudComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -72,9 +76,10 @@ export class MaterialModule {}
     NgClass,
     RouterModule,
     ReactiveFormsModule,
+    FormsModule
 
   ],
-  providers: [SemesterService, CourseService, ClassGroupService],
+  providers: [SemesterService, CourseService, ClassGroupService, LoginService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
