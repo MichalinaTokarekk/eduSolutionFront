@@ -8,6 +8,7 @@ import { ClassGroupInlineCrudComponent } from './classGroup/classGroup-inline-cr
 import { LoginComponent } from './authorization_authentication/login/login.component';
 import { AuthGuard } from './authorization_authentication/shared/auth.guard';
 import { UserInlineCrudComponent } from './user/user-iline-crud/user-inline-crud.component';
+import { AdminPanelComponent } from './admin-panel/admin-panel.component';
 
 const routes: Routes = [
   {path: "dashboard", component: DashboardComponent, canActivate:[AuthGuard]},
@@ -17,6 +18,7 @@ const routes: Routes = [
   {path: "classGroup-inline-crud", component: ClassGroupInlineCrudComponent},
   {path: "login", component: LoginComponent},
   {path: "user-inline-crud", component: UserInlineCrudComponent},
+  {path: "admin-panel", component: AdminPanelComponent},
 ];
 
 @NgModule({
