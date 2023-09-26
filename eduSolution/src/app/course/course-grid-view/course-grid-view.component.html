@@ -1,0 +1,12 @@
+<mat-grid-list cols="3" rowHeight="1:1" class="custom-grid-list">
+    <mat-grid-tile *ngFor="let course of courseArray" class="custom-grid-tile">
+      <a href="">
+        <!-- <img [src]="course.imageUrl" [alt]="course.name" />  -->
+        <img src="assets/images/ksiazka2.jpg" [alt]="course.name" class="course-image"/> 
+        <p>{{ course.name }}</p>
+      </a>
+    </mat-grid-tile>
+  </mat-grid-list>
+  
+
+  

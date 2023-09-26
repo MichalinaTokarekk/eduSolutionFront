@@ -35,6 +35,7 @@ import { LoginComponent } from './authorization_authentication/login/login.compo
 import { UserService } from './user/user-service/user.service';
 import { UserInlineCrudComponent } from './user/user-iline-crud/user-inline-crud.component';
 import { AdminPanelComponent } from './admin-panel/admin-panel.component';
+import { CourseGridViewComponent } from './course/course-grid-view/course-grid-view.component';
 
 
 
@@ -69,7 +70,8 @@ export class MaterialModule {}
     ClassGroupInlineCrudComponent,
     LoginComponent,
     UserInlineCrudComponent,
-    AdminPanelComponent
+    AdminPanelComponent,
+    CourseGridViewComponent
   ],
   imports: [
     BrowserModule,
