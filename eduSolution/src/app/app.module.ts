@@ -32,6 +32,8 @@ import { ClassGroupService } from './classGroup/classGroup-service/classGroup.se
 import { ClassGroupInlineCrudComponent } from './classGroup/classGroup-inline-crud/classGroup-inline-crud.component';
 import { LoginService } from './authorization_authentication/service/login.service';
 import { LoginComponent } from './authorization_authentication/login/login.component';
+import { UserService } from './user/user-service/user.service';
+import { UserInlineCrudComponent } from './user/user-iline-crud/user-inline-crud.component';
 
 
 
@@ -64,7 +66,8 @@ export class MaterialModule {}
     SemesterListComponent,
     CourseInlineEditingComponent,
     ClassGroupInlineCrudComponent,
-    LoginComponent
+    LoginComponent,
+    UserInlineCrudComponent
   ],
   imports: [
     BrowserModule,
@@ -79,7 +82,7 @@ export class MaterialModule {}
     FormsModule
 
   ],
-  providers: [SemesterService, CourseService, ClassGroupService, LoginService],
+  providers: [SemesterService, CourseService, ClassGroupService, LoginService, UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,0 +1,206 @@
+<div class="row">
+    <div class="col-6">
+
+    </div>
+    <div class="col-2 text-end"> 
+        <!-- <input type="text" [(ngModel)]="searchText" placeholder="Search" (ngModelChange)="filter($event)" class="form-control"> -->
+    </div>
+    
+</div>
+<div class="row">
+    <div class="col-8">
+        <button class="btn btn-sm btn-primary" (click)="onAdd()">Add New</button>
+        <table class="table table-bordered ">
+            <thead>
+                <tr class="bg-success text-white">
+                    <th>Lp</th>
+                    <th (click)="onNameSort()">Imię</th>
+                    <th (click)="onNameSort()">Nazwisko</th>
+                    <th (click)="onNameSort()">E-mail</th>
+                    <th (click)="onNameSort()">Rola</th>
+                    <th (click)="onNameSort()">Ulica</th>
+                    <th (click)="onNameSort()">Numer budynku</th>
+                    <th (click)="onNameSort()">Numer mieszkania</th>
+                    <th (click)="onNameSort()">Miasto</th>
+                    <th (click)="onNameSort()">Poczta</th>
+                    <th (click)="onNameSort()">Kod pocztowy</th>
+                    <th (click)="onNameSort()">Kraj</th>
+                    <!-- <th>Opis</th>  -->
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let user of userArray;let srNo = index">
+                    <td>{{srNo+1}}</td>
+                    <td>
+                        <div *ngIf="user.isEdit" class="form-group">
+                            <div class="input-container">
+                                <input type="text" class="form-control" [(ngModel)]="user.firstName" [ngClass]="{'is-invalid': validateUser(user.firstName) !== ''}">
+                                <div class="text-danger error-message" *ngIf="!user.firstName">
+                                    {{user.firstName}}
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div *ngIf="!user.isEdit">
+                            {{user.firstName}}
+                        </div>
+                     
+                    </td>
+                    <td>
+                        <div *ngIf="user.isEdit" class="form-group">
+                            <div class="input-container">
+                                <input type="text" class="form-control" [(ngModel)]="user.lastName" [ngClass]="{'is-invalid': validateUser(user.lastName) !== ''}">
+                                <div class="text-danger error-message" *ngIf="!user.lastName">
+                                    {{user.lastName}}
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div *ngIf="!user.isEdit">
+                            {{user.lastName}}
+                        </div>
+                     
+                    </td>
+                    <td>
+                        <div *ngIf="user.isEdit">
+                            <input type="text" class="form-control" [(ngModel)]="user.email">
+                        </div>
+                        <div  *ngIf="!user.isEdit">
+                            {{user.email}}
+                        </div>
+                     
+                    </td>
+                    <td>
+                        <div *ngIf="user.isEdit">
+                            <input type="text" class="form-control" [(ngModel)]="user.role">
+                        </div>
+                        <div  *ngIf="!user.isEdit">
+                            {{user.role}}
+                        </div>
+                     
+                    </td>
+                    <td>
+                        <div *ngIf="user.isEdit" class="form-group">
+                            <div class="input-container">
+                                <input type="text" class="form-control" [(ngModel)]="user.streetName" [ngClass]="{'is-invalid': validateUser(user.streetName) !== ''}">
+                                <div class="text-danger error-message" *ngIf="!user.streetName">
+                                    {{user.streetName}}
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div *ngIf="!user.isEdit">
+                            {{user.streetName}}
+                        </div>
+                     
+                    </td>
+                    <td>
+                        <div *ngIf="user.isEdit" class="form-group">
+                            <div class="input-container">
+                                <input type="text" class="form-control" [(ngModel)]="user.buildingNumber" [ngClass]="{'is-invalid': validateUser(user.buildingNumber) !== ''}">
+                                <div class="text-danger error-message" *ngIf="!user.buildingNumber">
+                                    {{user.buildingNumber}}
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div *ngIf="!user.isEdit">
+                            {{user.buildingNumber}}
+                        </div>
+                     
+                    </td>
+                    <td>
+                        <div *ngIf="user.isEdit" class="form-group">
+                            <div class="input-container">
+                                <input type="text" class="form-control" [(ngModel)]="user.apartmentNumber" [ngClass]="{'is-invalid': validateUser(user.apartmentNumber) !== ''}">
+                                <div class="text-danger error-message" *ngIf="!user.apartmentNumber">
+                                    {{user.apartmentNumber}}
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div *ngIf="!user.isEdit">
+                            {{user.apartmentNumber}}
+                        </div>
+                     
+                    </td>
+                    <td>
+                        <div *ngIf="user.isEdit" class="form-group">
+                            <div class="input-container">
+                                <input type="text" class="form-control" [(ngModel)]="user.city" [ngClass]="{'is-invalid': validateUser(user.city) !== ''}">
+                                <div class="text-danger error-message" *ngIf="!user.city">
+                                    {{user.city}}
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div *ngIf="!user.isEdit">
+                            {{user.city}}
+                        </div>
+                     
+                    </td>
+                    <td>
+                        <div *ngIf="user.isEdit" class="form-group">
+                            <div class="input-container">
+                                <input type="text" class="form-control" [(ngModel)]="user.post" [ngClass]="{'is-invalid': validateUser(user.post) !== ''}">
+                                <div class="text-danger error-message" *ngIf="!user.post">
+                                    {{user.post}}
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div *ngIf="!user.isEdit">
+                            {{user.post}}
+                        </div>
+                     
+                    </td>
+                    <td>
+                        <div *ngIf="user.isEdit" class="form-group">
+                            <div class="input-container">
+                                <input type="text" class="form-control" [(ngModel)]="user.postCode" [ngClass]="{'is-invalid': validateUser(user.postCode) !== ''}">
+                                <div class="text-danger error-message" *ngIf="!user.postCode">
+                                    {{user.postCode}}
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div *ngIf="!user.isEdit">
+                            {{user.postCode}}
+                        </div>
+                     
+                    </td>
+                    <td>
+                        <div *ngIf="user.isEdit" class="form-group">
+                            <div class="input-container">
+                                <input type="text" class="form-control" [(ngModel)]="user.country" [ngClass]="{'is-invalid': validateUser(user.country) !== ''}">
+                                <div class="text-danger error-message" *ngIf="!user.country">
+                                    {{user.country}}
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div *ngIf="!user.isEdit">
+                            {{user.country}}
+                        </div>
+                     
+                    </td>
+                    
+
+
+                    <td class="text-center"> 
+                        <div class="text-end" *ngIf="!user.isEdit">
+                            <i class="fa fa-pencil-square-o px-1" aria-hidden="true" (click)="onEdit(user)"></i>
+                            <i class="fa fa-trash-o" aria-hidden="true" (click)="onDelete(user)"></i>
+                        </div>
+                        <div class="text-end" *ngIf="user.isEdit">
+                            <i class="fa fa-cloud px-1" (click)="onUpdate(user)" aria-hidden="true"></i>
+                            <i class="fa fa-times-circle" aria-hidden="true" (click)="onCancel(user)"></i>
+                        </div>
+                    </td>
+                    
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -18,6 +18,7 @@ export class CourseInlineEditingComponent implements OnInit {
   oldUserObj: any;
   searchText: string ='';
   isEditing = false;
+  ascendingSort = true;
   constructor(private http: HttpClient, private courseService: CourseService, private router: Router, private dialog: MatDialog, private snackBar: MatSnackBar){
 
   }
@@ -25,10 +26,46 @@ export class CourseInlineEditingComponent implements OnInit {
     this.loadList();
   }
   onNameSort() {
-    const filteredData =  this.filteredCourses.sort((a: any, b: any) =>
-    a.name.localeCompare(b.name));
-    this.filteredCourses = filteredData;
+    // const filteredData =  this.filteredCourses.sort((a: any, b: any) =>
+    // a.name.localeCompare(b.name));
+    // this.filteredCourses = filteredData;
+
+    const sortedData = this.filteredCourses.sort((a: any, b: any) => {
+      if (this.ascendingSort) {
+        return a.name.localeCompare(b.name);
+      } else {
+        return b.name.localeCompare(a.name); // Sortowanie malejąco
+      }
+    });
+    this.filteredCourses = sortedData;
+    this.ascendingSort = !this.ascendingSort; // Zmień kierunek sortowania
   }
+
+
+
+  onLpSort() {
+    // Filtruj dane, aby pominięte były undefined wartości
+    const filteredAndParsedData = this.filteredCourses
+      .filter((course: any) => course.srNo !== undefined)
+      .map((course: any) => ({
+        ...course,
+        srNo: Number(course.srNo)
+      }));
+  
+    const sortedData = filteredAndParsedData.sort((a: any, b: any) => {
+      if (this.ascendingSort) {
+        return a.srNo - b.srNo; // Sortowanie rosnące liczb
+      } else {
+        return b.srNo - a.srNo; // Sortowanie malejąco liczb
+      }
+    });
+  
+    this.filteredCourses = sortedData;
+    this.ascendingSort = !this.ascendingSort;
+  }
+  
+  
+  
 
   filter(event: any) {
     this.filteredCourses = this.courseArray.filter((searchData:any) => {
