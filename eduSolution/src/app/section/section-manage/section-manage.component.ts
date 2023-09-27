@@ -180,6 +180,8 @@ onDelete(obj: any) {
 // }
 
 currentEditingSection: any;
+isNewSection = true; 
+
 onEdit(section: any) {
   // Zapisz aktualnie edytowaną sekcję
   this.currentEditingSection = section;
@@ -199,17 +201,9 @@ isAddingNewSection: boolean = false;
       content: 'Zawartość nowego panelu',
       sectionName: this.newSectionName, // Dodaj nazwę sekcji do panelu
     };
-  
-    const newSection = {
-      name: this.newSectionName,
-    };
     this.panels.push(newPanel);
-    this.isAddingNewSection = true;    
     this.newSectionName = '';
     this.isAddingNewSection = true;
-    
-    this.sectionService.save(newSection)
-    
   }
 
 
@@ -235,8 +229,33 @@ isAddingNewSection: boolean = false;
         section.isEdit = false; // Wyłącz tryb edycji
       });
       this.currentEditingSection = null; // Wyczyść aktualnie edytowaną sekcję
+    } else if(this.isAddingNewSection){
+      this.sectionService.save(this.currentEditingSection).subscribe((response) => {
+        this.isAddingNewSection = false;
+      });
     }
   }
+
+  onSaveNew() {
+    const newSection = {
+      name: this.newSectionName,
+      // Jeśli masz dostęp do właściwości href, możesz ją ustawić tutaj
+    };
+  
+    // Dodaj kod do wywołania metody save w Twoim serwisie
+    this.sectionService.save(newSection).subscribe((response) => {
+      // Tutaj możesz obsłużyć odpowiedź z serwera, np. zaktualizować dane w komponencie
+      console.log('Nowa sekcja została zapisana w bazie danych:', response);
+      this.sectionArray.push(response);
+  
+      // Jeśli zapis się powiódł, można wyczyścić pole newSectionName
+      this.newSectionName = '';
+  
+      // Zaznacz, że nie dodajemy już nowej sekcji
+      this.isAddingNewSection = false;
+    });
+  }
+  
   
   
 }
