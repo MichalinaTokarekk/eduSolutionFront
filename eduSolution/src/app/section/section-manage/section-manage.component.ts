@@ -224,6 +224,10 @@ isAddingNewSection: boolean = false;
 
   onSave(section: any) {
     if (this.currentEditingSection) {
+      if (!this.currentEditingSection.name) {
+        console.error('Nazwa sekcji nie może być pusta!');
+        return;
+      }
       // Edytuj aktualnie zapisywaną sekcję
       this.sectionService.save(this.currentEditingSection).subscribe((response) => {
         section.isEdit = false; // Wyłącz tryb edycji
@@ -237,6 +241,11 @@ isAddingNewSection: boolean = false;
   }
 
   onSaveNew() {
+    if (!this.newSectionName) {
+      console.error('Nazwa sekcji nie może być pusta!');
+      return;
+    }
+
     const newSection = {
       name: this.newSectionName,
       // Jeśli masz dostęp do właściwości href, możesz ją ustawić tutaj
