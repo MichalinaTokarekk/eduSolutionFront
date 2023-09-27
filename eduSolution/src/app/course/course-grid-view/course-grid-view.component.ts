@@ -73,4 +73,11 @@ export class CourseGridViewComponent implements OnInit {
     })
   }
 
+  // W CourseGridViewComponent
+    onCourseSelection(courseId: number) {
+        // Przekazanie ID do SectionManage
+        this.router.navigate(['/section-manage', courseId]);
+  }
+  
+
 }

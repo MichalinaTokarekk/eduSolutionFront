@@ -3,7 +3,8 @@
       <a href="">
         <!-- <img [src]="course.imageUrl" [alt]="course.name" />  -->
         <img src="assets/images/ksiazka2.jpg" [alt]="course.name" class="course-image"/> 
-         <p></p><a routerLink="/section-manage" style="color: rgb(8, 8, 8);">{{ course.name }}</a>
+         <!-- <p></p><a routerLink="/section-manage" style="color: rgb(8, 8, 8);">{{ course.name }}</a> -->
+         <p></p><a [routerLink]="['/section-manage', { courseId: course.id }]" style="color: rgb(8, 8, 8);">{{ course.name }}</a>
       </a>
     </mat-grid-tile>
   </mat-grid-list>

@@ -32,6 +32,11 @@ export class SectionService {
   remove (id: string):Observable<string> {
     return this.http.delete<string>(this.SECTION_API + '/deleteSection/' + id);
   }
+
+  getSectionsByCourseId(courseId: string): Observable<any[]> {
+    const url = `${this.SECTION_API}/sectionsByCourse/${courseId}`;
+    return this.http.get<any[]>(url);
+  }
 }
 
 

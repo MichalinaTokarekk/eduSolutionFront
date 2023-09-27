@@ -23,6 +23,8 @@ const routes: Routes = [
   {path: "admin-panel", component: AdminPanelComponent},
   {path: "course-grid-view", component: CourseGridViewComponent},
   {path: "section-manage", component: SectionManage},
+  {path: "section-manage/:courseId", component: SectionManage},
+  
 ];
 
 @NgModule({

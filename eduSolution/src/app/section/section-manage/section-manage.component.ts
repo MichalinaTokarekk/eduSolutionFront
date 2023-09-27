@@ -3,7 +3,7 @@ import {Component, OnInit} from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import {MatExpansionModule} from '@angular/material/expansion';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { SectionService } from '../section-service/section.service';
 import { ConfirmationDialogSemesterComponent } from '../../confirmations/semester/confirmation-dialog-semester.component';
 
@@ -25,11 +25,18 @@ export class SectionManage implements OnInit {
   searchText: string ='';
   isEditing = false;
   ascendingSort = true;
-  constructor(private http: HttpClient, private sectionService: SectionService, private router: Router, private dialog: MatDialog, private snackBar: MatSnackBar){
-
+  constructor(private http: HttpClient, private route: ActivatedRoute, private sectionService: SectionService, private router: Router, private dialog: MatDialog, private snackBar: MatSnackBar){
+    this.route.params.subscribe(params => {
+      const courseId = params['courseId'];
+      // Teraz możesz wykorzystać courseId w swoim kodzie, np. w żądaniach HTTP
+    });
   }
   ngOnInit(): void {
     this.loadList();
+    this.route.params.subscribe((params) => {
+      const courseId = +params['courseId'];
+      // Teraz masz dostęp do courseId i możesz go użyć przy tworzeniu sekcji
+    });
   }
   onNameSort() {
     const sortedData = this.filteredSections.sort((a: any, b: any) => {
@@ -67,13 +74,25 @@ export class SectionManage implements OnInit {
       this.filteredSections= res;
     })
   }
+  courseId!: string;
+  sectionsByCourse!: Array<any>;
 
   loadList() {
-    this.sectionService.getAll().subscribe (data => {
-      this.sectionArray = data;
-      this.filteredSections = data
+    // this.sectionService.getAll().subscribe (data => {
+    //   this.sectionArray = data;
+    //   this.filteredSections = data
 
-    })
+    // })
+    this.route.params.subscribe(params => {
+      this.courseId = params['courseId'];
+      this.loadSectionsByCourseId(this.courseId);
+    });
+  }
+
+  loadSectionsByCourseId(courseId: string): void {
+    this.sectionService.getSectionsByCourseId(courseId).subscribe(sections => {
+      this.sectionsByCourse = sections;
+    });
   }
 
   
@@ -239,19 +258,25 @@ isAddingNewSection: boolean = false;
       });
     }
   }
+  
+  
 
   onSaveNew() {
     if (!this.newSectionName) {
       console.error('Nazwa sekcji nie może być pusta!');
       return;
     }
-
+    // Pobierz ID kursu wybranego przez użytkownika
+    const courseId = this.route.snapshot.params['courseId'];
     const newSection = {
       name: this.newSectionName,
+      course: {
+        id: courseId
+      },
       // Jeśli masz dostęp do właściwości href, możesz ją ustawić tutaj
     };
   
-    // Dodaj kod do wywołania metody save w Twoim serwisie
+    newSection.course = courseId;
     this.sectionService.save(newSection).subscribe((response) => {
       // Tutaj możesz obsłużyć odpowiedź z serwera, np. zaktualizować dane w komponencie
       console.log('Nowa sekcja została zapisana w bazie danych:', response);

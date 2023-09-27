@@ -52,7 +52,7 @@
    <input *ngIf="isAddingNewSection" type="text" [(ngModel)]="newSectionName" placeholder="Nowa nazwa sekcji">
    <button *ngIf="isAddingNewSection" (click)="onSaveNew()">Zapisz</button>
    <mat-accordion>
-    <mat-expansion-panel *ngFor="let section of sectionArray; let srNo = index">
+    <mat-expansion-panel *ngFor="let section of sectionsByCourse; let srNo = index">
       <mat-expansion-panel-header>
         <mat-panel-title>
           <input
