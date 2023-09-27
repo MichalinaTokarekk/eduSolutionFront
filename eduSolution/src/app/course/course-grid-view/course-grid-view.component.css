@@ -1,6 +1,7 @@
 .course-image {
     max-width: 200px; /* Maksymalna szerokość obrazka */
     max-height: 200px; /* Maksymalna wysokość obrazka */
+    border-radius: 10px;
   }
   
   .custom-grid-list{

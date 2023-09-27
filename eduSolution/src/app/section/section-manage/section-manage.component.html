@@ -1,0 +1,52 @@
+<!-- <button (click)="onAddSection()">Dodaj nowy panel</button>
+
+<mat-accordion>
+  <mat-expansion-panel hideToggle *ngFor="let panel of panels">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        {{ panel.sectionName }}
+      </mat-panel-title>
+      <mat-panel-description>
+        This is a summary of the content
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <p>This is the primary content of the panel.</p>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel>
+    <mat-expansion-panel-header *ngFor="let section of sectionArray; let srNo = index">
+      <mat-panel-title>
+        <div *ngIf="isAddingNewSection==true && srNo === panels.length - 1">
+          <input type="text" [(ngModel)]="newSectionName" placeholder="Nowa nazwa sekcji"> 
+        </div>
+        <div *ngIf="!newSectionName">
+          <input type="text" [(ngModel)]="section.name" placeholder="">        
+        </div>
+        <button *ngIf="!section.isEdit" (click)="onEdit(section)">Edytuj</button>
+        <button *ngIf="section.isEdit" (click)="onSave(section, section.name)">Zapisz</button>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+  </mat-expansion-panel>
+</mat-accordion> -->
+
+
+
+
+   <button (click)="onAddSection()">Dodaj nowy panel</button>
+
+   <mat-accordion>
+     <mat-expansion-panel *ngFor="let section of sectionArray; let srNo = index">
+      
+       <mat-expansion-panel-header>
+         <mat-panel-title>
+           <input type="text" [(ngModel)]="section.name" [disabled]="!section.isEdit" placeholder="Nowa nazwa sekcji">
+           <button *ngIf="!section.isEdit" (click)="onEdit(section)">Edytuj</button>
+           <button *ngIf="section.isEdit" (click)="onSave(section)">Zapisz</button>
+         </mat-panel-title>
+       </mat-expansion-panel-header>
+       <p *ngIf="!section.isEdit">This is the content of section {{ srNo }}</p>
+     </mat-expansion-panel>
+   </mat-accordion>
+
+
+   

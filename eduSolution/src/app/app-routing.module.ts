@@ -10,6 +10,7 @@ import { AuthGuard } from './authorization_authentication/shared/auth.guard';
 import { UserInlineCrudComponent } from './user/user-iline-crud/user-inline-crud.component';
 import { AdminPanelComponent } from './admin-panel/admin-panel.component';
 import { CourseGridViewComponent } from './course/course-grid-view/course-grid-view.component';
+import { SectionManage } from './section/section-manage/section-manage.component';
 
 const routes: Routes = [
   {path: "dashboard", component: DashboardComponent, canActivate:[AuthGuard]},
@@ -21,6 +22,7 @@ const routes: Routes = [
   {path: "user-inline-crud", component: UserInlineCrudComponent},
   {path: "admin-panel", component: AdminPanelComponent},
   {path: "course-grid-view", component: CourseGridViewComponent},
+  {path: "section-manage", component: SectionManage},
 ];
 
 @NgModule({

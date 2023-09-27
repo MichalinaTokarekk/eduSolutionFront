@@ -36,6 +36,9 @@ import { UserService } from './user/user-service/user.service';
 import { UserInlineCrudComponent } from './user/user-iline-crud/user-inline-crud.component';
 import { AdminPanelComponent } from './admin-panel/admin-panel.component';
 import { CourseGridViewComponent } from './course/course-grid-view/course-grid-view.component';
+import { SectionManage } from './section/section-manage/section-manage.component';
+import { SectionService } from './section/section-service/section.service';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 
 
@@ -49,7 +52,11 @@ import { CourseGridViewComponent } from './course/course-grid-view/course-grid-v
     MatTableModule,
     TableModule,
     SelectButtonModule,
-    MatSelectModule
+    MatSelectModule,
+    ReactiveFormsModule,
+    FormsModule,
+    MatExpansionModule,
+    RouterModule
   ],
   declarations: [
     
@@ -71,7 +78,8 @@ export class MaterialModule {}
     LoginComponent,
     UserInlineCrudComponent,
     AdminPanelComponent,
-    CourseGridViewComponent
+    CourseGridViewComponent,
+    SectionManage
   ],
   imports: [
     BrowserModule,
@@ -83,10 +91,11 @@ export class MaterialModule {}
     NgClass,
     RouterModule,
     ReactiveFormsModule,
-    FormsModule
-
+    FormsModule,
+    MatExpansionModule
+    
   ],
-  providers: [SemesterService, CourseService, ClassGroupService, LoginService, UserService],
+  providers: [SemesterService, CourseService, ClassGroupService, LoginService, UserService, SectionService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
