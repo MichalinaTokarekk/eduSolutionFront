@@ -8,6 +8,8 @@ import { SectionService } from '../section-service/section.service';
 import { ConfirmationDialogSemesterComponent } from '../../confirmations/semester/confirmation-dialog-semester.component';
 import { EduMaterialService } from 'src/app/eduMaterial/eduMaterial-service/eduMaterial.service';
 import { Section } from 'src/app/interfaces/section-interface';
+import { EduMaterial } from 'src/app/interfaces/eduMaterial-interface';
+import { catchError, of, tap } from 'rxjs';
 
 
 /**
@@ -41,6 +43,8 @@ export class SectionManage implements OnInit {
       const courseId = +params['courseId'];
       // Teraz masz dostęp do courseId i możesz go użyć przy tworzeniu sekcji
     });
+
+    
   }
   onNameSort() {
     const sortedData = this.filteredSections.sort((a: any, b: any) => {
@@ -80,6 +84,12 @@ export class SectionManage implements OnInit {
   }
   courseId!: string;
   sectionsByCourse!: Array<any>;
+  eduMaterialsBySection!: any;
+
+  sectionId!: string;
+  getSectionId(sectionId: string){
+    this.sectionId = sectionId;
+  }
 
   loadList() {
     // this.sectionService.getAll().subscribe (data => {
@@ -90,8 +100,26 @@ export class SectionManage implements OnInit {
     this.route.params.subscribe(params => {
       this.courseId = params['courseId'];
       this.loadSectionsByCourseId(this.courseId);
+    // this.loadEduMaterialsBySectionId(this.sectionId);
     });
   }
+
+  // loadList() {
+  //   this.route.params.subscribe(params => {
+  //     this.courseId = params['courseId'];
+  //     this.sectionService.getSectionsByCourseId(this.courseId).subscribe(sections => {
+  //       this.sectionsByCourse = sections;
+  
+  //       // Wywołaj loadEduMaterialsBySectionId po uzyskaniu sekcji
+  //       if (sections.length > 0) {
+  //         // Zakładam, że wybierasz pierwszą sekcję, można dostosować do konkretnej sekcji
+  //         const firstSectionId = sections[0].id;
+  //         this.loadEduMaterialsBySectionId(firstSectionId);
+  //       }
+  //     });
+  //   });
+  // }
+  
 
   loadSectionsByCourseId(courseId: string): void {
     this.sectionService.getSectionsByCourseId(courseId).subscribe(sections => {
@@ -99,7 +127,15 @@ export class SectionManage implements OnInit {
     });
   }
 
+
   
+
+  loadEduMaterialsBySectionId(sectionId: string): void {
+    this.sectionService.eduMaterialsBySectionId(sectionId).subscribe(eduMaterials => {
+      this.eduMaterialsBySection = eduMaterials;
+    });
+  }
+
 
 
 
@@ -172,6 +208,19 @@ onDelete(obj: any) {
         );
       }
     });
+
+    // this.sectionService.remove(obj.id).pipe(
+    //   tap(response => {this.loadList();
+    //   }),
+    //   catchError(error => {
+    //     let errorMessage = 'An error occurred';
+    //     if (error && error.error) {
+    //       errorMessage = error.error;
+    //     }
+    //     this.openSnackBar(errorMessage, 'Error');
+    //     return of(); // Zwracamy pustego observable w przypadku błędu
+    //   })
+    // ).subscribe();
   }
 
   
@@ -195,6 +244,20 @@ onDeleteEduMaterial(obj: any) {
       );
     }
   });
+
+  // this.eduMaterialService.remove(obj.id).pipe(
+  //   tap(response => {this.loadList();
+  //   }),
+  //   catchError(error => {
+  //     let errorMessage = 'An error occurred';
+  //     if (error && error.error) {
+  //       errorMessage = error.error;
+  //     }
+  //     this.openSnackBar(errorMessage, 'Error');
+  //     return of(); // Zwracamy pustego observable w przypadku błędu
+  //   })
+  // ).subscribe();
+  
 }
   
 
@@ -320,34 +383,90 @@ isAddingNewSection: boolean = false;
   newMaterialName: string = '';
   isAddingNewEduMaterial = true;
   
-  onAddMaterial(sectionId: any){
-    const eduMaterial = {
-      name: this.newMaterialName, 
-    };
-    this.eduMaterialService.save(eduMaterial).subscribe(
-      (response) => {
-        this.sectionService.get(sectionId)
-        console.log("Dodane pomyslnie")
-        if (!sectionId.eduMaterials) {
-          sectionId.eduMaterials = [];
-        }
-        sectionId.eduMaterials.push(response);
-      }
-    )
+  // onAddMaterial(section: any){
+  //   // console.log("Zawartość section:", section.id);
+  //   const eduMaterial = {
+  //     name: this.newMaterialName, 
+  //     sectionId: section.id
+  //   };
+  //   this.eduMaterialService.save(eduMaterial).subscribe(
+  //     (response) => {
+  //       this.sectionService.get(section)
+  //       console.log("Dodane pomyslnie")
+
+  //       if (response.sections) {
+  //         response.sections = [];
+  //         console.log(response.sections)
+  //       }
+
+  //       response.sections.push(section.id);
+  //     }
+  //   )
+
+
+
+
+
+
 
     // const section = this.sectionService.get(sectionId);
     
-    this.currentEditingSection.eduMaterial = eduMaterial;
+    // this.currentEditingSection.eduMaterial = eduMaterial;
     // this.isEditing = false;
 
-    this.sectionService.updateEduMaterial(sectionId).subscribe(
-      (updatedSection) => {
-        this.currentEditingSection.eduMaterial = sectionId.eduMaterial;
-        // Object.assign(this.currentEditingSection.eduMaterial, sectionId.eduMaterial);
-        console.log("Sekcja zaktualizowana pomyślnie", updatedSection);
-      }
-    )
+    // this.sectionService.updateEduMaterial(sectionId).subscribe(
+    //   (updatedSection) => {
+    //     this.currentEditingSection.eduMaterial = sectionId.eduMaterial;
+    //     // Object.assign(this.currentEditingSection.eduMaterial, sectionId.eduMaterial);
+    //     console.log("Sekcja zaktualizowana pomyślnie", updatedSection);
+    //   }
+    // )
+  // }
+
+  sectionMaterials: any[] = [];
+
+  onAddMaterial(section: any) {
+    if (section && section.id) {
+      // Utwórz nowy materiał edukacyjny
+      const eduMaterial: EduMaterial = {
+        id: 0, // Jeśli ID jest automatycznie generowane przez serwer, pozostaw to jako 0
+        name: this.newMaterialName,
+        sections: [section] // Dodaj sekcję do materiału
+      };
+  
+      this.eduMaterialService.save(eduMaterial).subscribe(
+        (response) => {
+          console.log("Dodane pomyslnie");
+  
+          // Pobierz indeks sekcji w materiałach
+          const sectionIndex = this.sectionMaterials.findIndex((s) => s.id === section.id);
+  
+          // Jeśli sekcja jest już w materiałach, zaktualizuj ją, w przeciwnym razie dodaj nową sekcję
+          if (sectionIndex !== -1) {
+            this.sectionMaterials[sectionIndex].sections.push(response);
+          } else {
+            this.sectionMaterials.push(response);
+          }
+        },
+        (error) => {
+          console.error("Błąd podczas dodawania materiału:", error);
+        }
+      );
+    } else {
+      console.error("Błąd: section lub section.id jest niezdefiniowany.");
+    }
+    this.newSectionName = '';
   }
+  
+  
+
+  
+  
+  
+
+
+  
+  
 
   onBackButton(obj: any) {
     obj.isEdit = false;

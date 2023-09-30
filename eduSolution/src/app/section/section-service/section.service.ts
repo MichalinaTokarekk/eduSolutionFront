@@ -8,6 +8,7 @@ export class SectionService {
 
   public API = '//localhost:9191';
   public SECTION_API = this.API + '/section-controller';
+  public EDUMATERIAL_API = this.API + '/edu-material-controller';
 
   constructor (private http: HttpClient){}
 
@@ -44,6 +45,12 @@ export class SectionService {
   getSectionsByCourseId(courseId: string): Observable<any[]> {
     const url = `${this.SECTION_API}/sectionsByCourse/${courseId}`;
     return this.http.get<any[]>(url);
+  }
+
+  eduMaterialsBySectionId(sectionId: string) {
+    // const url = `${this.SECTION_API}/eduMaterialsBySectionId/${sectionId}`;
+    return this.http.get(this.EDUMATERIAL_API + '/eduMaterialsBySectionId/' + sectionId);
+    // return this.http.get<any[]>(url);
   }
 }
 

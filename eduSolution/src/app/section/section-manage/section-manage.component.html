@@ -52,7 +52,7 @@
    <input *ngIf="isAddingNewSection" type="text" [(ngModel)]="newSectionName" placeholder="Nowa nazwa sekcji">
    <button *ngIf="isAddingNewSection" (click)="onSaveNew()">Zapisz</button>
    <mat-accordion>
-    <mat-expansion-panel *ngFor="let section of sectionsByCourse; let srNo = index">
+    <mat-expansion-panel *ngFor="let section of sectionsByCourse; let srNo = index" (click)="loadEduMaterialsBySectionId(section.id)">
       <mat-expansion-panel-header>
         <mat-panel-title>
           <input
@@ -74,7 +74,7 @@
 
       
       <ng-container>
-        <div *ngFor="let eduMaterial of section.eduMaterials">
+        <div *ngFor="let eduMaterial  of eduMaterialsBySection">
         <a routerLink="/main-page">{{ eduMaterial.name }}</a>
         <i class="fa fa-trash-o" aria-hidden="true" (click)="onDeleteEduMaterial(eduMaterial)"></i>
       </div>

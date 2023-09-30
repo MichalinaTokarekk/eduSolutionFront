@@ -19,6 +19,10 @@ export class EduMaterialService {
     return this.http.get(this.EDUMATERIAL_API + '/eduMaterial/' + id);
   }
 
+  eduMaterialName(name: string) {
+    return this.http.get(this.EDUMATERIAL_API + '/eduMaterialName/' + name);
+  }
+
   save (eduMaterial: any) : Observable <any> {
     let result: Observable<Object>;
     if(eduMaterial['href']){
@@ -27,6 +31,11 @@ export class EduMaterialService {
       result = this.http.post(this.EDUMATERIAL_API + '/addEduMaterial', eduMaterial)
     }
     return result;
+  }
+
+  addSection(eduMaterial: any, sectionId: number) {
+    const url = this.EDUMATERIAL_API +`/addSection?sectionId=${sectionId}`;
+    return this.http.post(url, eduMaterial);
   }
 
   remove (id: string):Observable<string> {
