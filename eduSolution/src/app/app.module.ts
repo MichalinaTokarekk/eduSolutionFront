@@ -39,6 +39,7 @@ import { CourseGridViewComponent } from './course/course-grid-view/course-grid-v
 import { SectionManage } from './section/section-manage/section-manage.component';
 import { SectionService } from './section/section-service/section.service';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { EduMaterialService } from './eduMaterial/eduMaterial-service/eduMaterial.service';
 
 
 
@@ -95,7 +96,7 @@ export class MaterialModule {}
     MatExpansionModule
     
   ],
-  providers: [SemesterService, CourseService, ClassGroupService, LoginService, UserService, SectionService],
+  providers: [SemesterService, CourseService, ClassGroupService, LoginService, UserService, SectionService, EduMaterialService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

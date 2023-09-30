@@ -29,6 +29,14 @@ export class SectionService {
     return result;
   }
 
+
+  updateEduMaterial(section: any){
+    let result: Observable<Object>;
+    result = this.http.put(this.SECTION_API + '/updateEduMaterial', section)
+    return result;
+  }
+ 
+
   remove (id: string):Observable<string> {
     return this.http.delete<string>(this.SECTION_API + '/deleteSection/' + id);
   }

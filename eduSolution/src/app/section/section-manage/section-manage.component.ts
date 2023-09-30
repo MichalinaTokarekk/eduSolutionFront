@@ -6,6 +6,9 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SectionService } from '../section-service/section.service';
 import { ConfirmationDialogSemesterComponent } from '../../confirmations/semester/confirmation-dialog-semester.component';
+import { EduMaterialService } from 'src/app/eduMaterial/eduMaterial-service/eduMaterial.service';
+import { Section } from 'src/app/interfaces/section-interface';
+
 
 /**
  * @title Basic expansion panel
@@ -25,7 +28,8 @@ export class SectionManage implements OnInit {
   searchText: string ='';
   isEditing = false;
   ascendingSort = true;
-  constructor(private http: HttpClient, private route: ActivatedRoute, private sectionService: SectionService, private router: Router, private dialog: MatDialog, private snackBar: MatSnackBar){
+  constructor(private http: HttpClient, private route: ActivatedRoute, private sectionService: SectionService, private router: Router, 
+    private dialog: MatDialog, private snackBar: MatSnackBar, private eduMaterialService: EduMaterialService){
     this.route.params.subscribe(params => {
       const courseId = params['courseId'];
       // Teraz możesz wykorzystać courseId w swoim kodzie, np. w żądaniach HTTP
@@ -289,7 +293,76 @@ isAddingNewSection: boolean = false;
       this.isAddingNewSection = false;
     });
   }
+
+  newMaterialName: string = '';
+
   
+  onAddMaterial(sectionId: any){
+    const eduMaterial = {
+      name: this.newMaterialName, 
+    };
+    this.eduMaterialService.save(eduMaterial).subscribe(
+      (response) => {
+        this.sectionService.get(sectionId)
+        console.log("Dodane pomyslnie")
+        if (!sectionId.eduMaterials) {
+          sectionId.eduMaterials = [];
+        }
+        sectionId.eduMaterials.push(response);
+      }
+    )
+
+    // const section = this.sectionService.get(sectionId);
+    
+    this.currentEditingSection.eduMaterial = eduMaterial;
+    // this.isEditing = false;
+
+    this.sectionService.updateEduMaterial(sectionId).subscribe(
+      (updatedSection) => {
+        this.currentEditingSection.eduMaterial = sectionId.eduMaterial;
+        // Object.assign(this.currentEditingSection.eduMaterial, sectionId.eduMaterial);
+        console.log("Sekcja zaktualizowana pomyślnie", updatedSection);
+      }
+    )
+  }
+
+  // onAddMaterial(sectionId: any) {
+  //   const eduMaterial = {
+  //     name: this.newMaterialName,
+  //   };
   
+  //   // Zapisz materiał edukacyjny
+  //   this.eduMaterialService.save(eduMaterial).subscribe(
+  //     (response) => {
+  //       // Po zapisaniu materiału możesz pobrać sekcję, do której chcesz dodać materiał.
+  //       this.sectionService.get(sectionId).subscribe(
+  //         (section) => {
+  //           console.log("Dodane pomyslnie");
+  //           if (!sectionId.eduMaterials) {
+  //             sectionId.eduMaterials = [];
+  //           }
+  //           sectionId.eduMaterials.push(response); // Dodaj materiał do listy eduMaterials
+  
+  //           // Następnie zaktualizuj sekcję, aby zachować zmiany.
+  //           this.sectionService.updateEduMaterial(section).subscribe(
+  //             (updatedSection) => {
+  //               console.log("Sekcja zaktualizowana pomyślnie", updatedSection);
+  //               this.newMaterialName = ''; // Wyczyść pole nowego materiału po dodaniu
+  //             },
+  //             (error) => {
+  //               console.error("Błąd podczas aktualizacji sekcji", error);
+  //             }
+  //           );
+  //         },
+  //         (error) => {
+  //           console.error("Błąd podczas pobierania sekcji", error);
+  //         }
+  //       );
+  //     },
+  //     (error) => {
+  //       console.error("Błąd podczas zapisywania materiału edukacyjnego", error);
+  //     }
+  //   );
+  // }  
   
 }
