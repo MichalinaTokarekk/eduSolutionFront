@@ -173,6 +173,29 @@ onDelete(obj: any) {
       }
     });
   }
+
+  
+onDeleteEduMaterial(obj: any) {
+  const dialogRef = this.dialog.open(ConfirmationDialogSemesterComponent);
+
+  dialogRef.afterClosed().subscribe((result: boolean) => {
+    if (result === true) {
+      this.eduMaterialService.remove(obj.id).subscribe(
+        response => {
+          this.loadList();
+          this.openSnackBar('Pole usunięte pomyślnie', 'Success');
+        },
+        error => {
+          let errorMessage = 'An error occurred';
+          if (error && error.error) {
+            errorMessage = error.error;
+          }
+          this.openSnackBar(errorMessage, 'Error');
+        }
+      );
+    }
+  });
+}
   
 
   openSnackBar(message: string, action: string) {
