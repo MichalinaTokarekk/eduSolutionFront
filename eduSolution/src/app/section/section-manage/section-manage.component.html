@@ -65,6 +65,7 @@
           <span *ngIf="!section.isEdit && !section.isNewSection">{{ section.name }}</span>
           <button *ngIf="!section.isEdit" (click)="onEdit(section)">Edytuj</button>
           <button *ngIf="section.isEdit" (click)="onSave(section)">Zapisz zmiany</button>
+          <button *ngIf="section.isEdit" (click)="onBackButton(section)">Wyjdź z edycji</button>
           <i class="fa fa-trash-o" aria-hidden="true" (click)="onDelete(section)"></i>
         </mat-panel-title>
       </mat-expansion-panel-header>

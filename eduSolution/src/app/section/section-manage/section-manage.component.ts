@@ -326,43 +326,10 @@ isAddingNewSection: boolean = false;
     )
   }
 
-  // onAddMaterial(sectionId: any) {
-  //   const eduMaterial = {
-  //     name: this.newMaterialName,
-  //   };
+  onBackButton(obj: any) {
+    obj.isEdit = false;
+  }
+
   
-  //   // Zapisz materiał edukacyjny
-  //   this.eduMaterialService.save(eduMaterial).subscribe(
-  //     (response) => {
-  //       // Po zapisaniu materiału możesz pobrać sekcję, do której chcesz dodać materiał.
-  //       this.sectionService.get(sectionId).subscribe(
-  //         (section) => {
-  //           console.log("Dodane pomyslnie");
-  //           if (!sectionId.eduMaterials) {
-  //             sectionId.eduMaterials = [];
-  //           }
-  //           sectionId.eduMaterials.push(response); // Dodaj materiał do listy eduMaterials
-  
-  //           // Następnie zaktualizuj sekcję, aby zachować zmiany.
-  //           this.sectionService.updateEduMaterial(section).subscribe(
-  //             (updatedSection) => {
-  //               console.log("Sekcja zaktualizowana pomyślnie", updatedSection);
-  //               this.newMaterialName = ''; // Wyczyść pole nowego materiału po dodaniu
-  //             },
-  //             (error) => {
-  //               console.error("Błąd podczas aktualizacji sekcji", error);
-  //             }
-  //           );
-  //         },
-  //         (error) => {
-  //           console.error("Błąd podczas pobierania sekcji", error);
-  //         }
-  //       );
-  //     },
-  //     (error) => {
-  //       console.error("Błąd podczas zapisywania materiału edukacyjnego", error);
-  //     }
-  //   );
-  // }  
   
 }
