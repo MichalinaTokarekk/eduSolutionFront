@@ -295,7 +295,7 @@ isAddingNewSection: boolean = false;
   }
 
   newMaterialName: string = '';
-
+  isAddingNewEduMaterial = true;
   
   onAddMaterial(sectionId: any){
     const eduMaterial = {

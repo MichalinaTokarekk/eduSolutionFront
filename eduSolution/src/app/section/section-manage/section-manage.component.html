@@ -72,10 +72,10 @@
       <!-- <button *ngIf="section.isEdit" (click)="onAddMaterial(section)">Dodaj materiał</button> -->
 
       
-      <ng-container *ngIf="section.eduMaterials && section.eduMaterials.length">
+      <ng-container>
         <a routerLink="/main-page" *ngFor="let eduMaterial of section.eduMaterials">{{ eduMaterial.name }}<br></a>
-        <input *ngIf="section.isEdit && !section.eduMaterial" type="text" [(ngModel)]="newMaterialName" placeholder="Nowy materiał">
-        <button *ngIf="section.isEdit" (click)="onAddMaterial(section)">Dodaj materiał</button>
+        <input *ngIf="section.isEdit || !section.eduMaterials || section.eduMaterials.length === 0" type="text" [(ngModel)]="newMaterialName" placeholder="Nowy materiał">
+        <button *ngIf="section.isEdit || !section.eduMaterials || section.eduMaterials.length === 0" (click)="onAddMaterial(section)">Dodaj materiał</button>
       </ng-container>
       
         
