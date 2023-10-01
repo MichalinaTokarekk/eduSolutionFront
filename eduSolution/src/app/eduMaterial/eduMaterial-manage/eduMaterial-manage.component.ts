@@ -194,8 +194,31 @@ onAddFile() {
     }
   }
 
-  downloadFile(fileName: string): void {
-    this.emFileService.downloadFile(fileName).subscribe((blob: Blob) => {
+//   downloadFile(fileName: string): void {
+//     this.emFileService.downloadFile(fileName).subscribe((blob: Blob) => {
+//       // Tworzymy link do pobierania pliku
+//       const url = window.URL.createObjectURL(blob);
+  
+//       // Tworzymy element <a> i nadajemy mu atrybuty, aby otworzyć pobrany plik w nowej karcie
+//       const a = document.createElement('a');
+//       document.body.appendChild(a);
+//       a.style.display = 'none';
+//       a.href = url;
+//       a.download = fileName;
+  
+//       // Klikamy na ten element, aby rozpocząć pobieranie pliku
+//       a.click();
+  
+//       // Po pobraniu pliku usuwamy link i element <a>
+//       window.URL.revokeObjectURL(url);
+//       document.body.removeChild(a);
+//     }, error => {
+//       console.error('Błąd podczas pobierania pliku', error);
+//     });
+//   }
+  
+downloadFileById(fileId: number): void {
+    this.emFileService.downloadFileById(fileId).subscribe((blob: Blob) => {
       // Tworzymy link do pobierania pliku
       const url = window.URL.createObjectURL(blob);
   
@@ -204,7 +227,7 @@ onAddFile() {
       document.body.appendChild(a);
       a.style.display = 'none';
       a.href = url;
-      a.download = fileName;
+      a.download = `${fileId}.pdf`; // Zmień nazwę pliku na coś sensownego lub korzystając z informacji o pliku
   
       // Klikamy na ten element, aby rozpocząć pobieranie pliku
       a.click();
@@ -217,6 +240,5 @@ onAddFile() {
     });
   }
   
-
 
 }

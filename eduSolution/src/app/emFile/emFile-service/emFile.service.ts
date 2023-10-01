@@ -60,13 +60,22 @@ export class EMFileService {
     return this.http.post<string>(`${this.EMFILE_API}`, formData, { headers });
   }
 
-  downloadFile(fileName: string): Observable<Blob> {
+//   downloadFile(fileName: string): Observable<Blob> {
+//     const headers = new HttpHeaders({
+//       'Accept': 'application/octet-stream', // Ustawić odpowiednie nagłówki dla pliku binarnego
+//     });
+
+//     return this.http.get(`${this.EMFILE_API}/${fileName}`, { headers, responseType: 'blob' });
+//   }
+
+downloadFileById(fileId: number): Observable<Blob> {
     const headers = new HttpHeaders({
       'Accept': 'application/octet-stream', // Ustawić odpowiednie nagłówki dla pliku binarnego
     });
-
-    return this.http.get(`${this.EMFILE_API}/${fileName}`, { headers, responseType: 'blob' });
+  
+    return this.http.get(`${this.EMFILE_API}/${fileId}`, { headers, responseType: 'blob' });
   }
+  
 }
 
 

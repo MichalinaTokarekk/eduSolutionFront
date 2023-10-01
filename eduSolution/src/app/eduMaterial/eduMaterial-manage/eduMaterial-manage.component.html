@@ -35,7 +35,7 @@
     <h2>Pliki materiałów edukacyjnych:</h2>
     <ul>
       <li *ngFor="let emFile of emFiles">
-        <a (click)="downloadFile(emFile.name)" href="javascript:void(0);" >{{ emFile.name }}</a>
+        <a (click)="downloadFileById(emFile.id)" href="javascript:void(0);" >{{ emFile.name }}</a>
       </li>
     </ul>
   </div>
