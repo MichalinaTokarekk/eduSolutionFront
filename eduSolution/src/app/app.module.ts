@@ -41,6 +41,7 @@ import { SectionService } from './section/section-service/section.service';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { EduMaterialService } from './eduMaterial/eduMaterial-service/eduMaterial.service';
 import { EduMaterialManage } from './eduMaterial/eduMaterial-manage/eduMaterial-manage.component';
+import { EMFileService } from './emFile/emFile-service/emFile.service';
 
 
 
@@ -98,7 +99,7 @@ export class MaterialModule {}
     MatExpansionModule
     
   ],
-  providers: [SemesterService, CourseService, ClassGroupService, LoginService, UserService, SectionService, EduMaterialService],
+  providers: [SemesterService, CourseService, ClassGroupService, LoginService, UserService, SectionService, EduMaterialService, EMFileService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

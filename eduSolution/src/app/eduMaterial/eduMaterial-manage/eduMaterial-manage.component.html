@@ -10,7 +10,7 @@
       <input *ngIf="eduMaterial.isEdit" class="input" type="text" id="name" name="name" [(ngModel)]="eduMaterial.name">
       <span class="input" *ngIf="!eduMaterial.isEdit">{{ eduMaterial.name }}</span>
       <button *ngIf="!eduMaterial.isEdit" (click)="onEdit(eduMaterial)">Edytuj</button>
-      <button *ngIf="eduMaterial.isEdit" (click)="notOnEdit(eduMaterial)" type="submit">Zapisz zmiany</button>
+      <button *ngIf="eduMaterial.isEdit"  type="submit">Zapisz zmiany</button>
     </div>
     <div>
       <label for="description"></label>
@@ -20,13 +20,24 @@
     <!-- <button *ngIf="eduMaterial.isEdit" type="submit">Zapisz zmiany</button> -->
   </form>
 
-<body>
-    <h2>Panel do dodawania plików</h2>
-    
-    <!-- Formularz do dodawania plików -->
-    <form action="/upload" method="post" enctype="multipart/form-data">
-        <label for="file">Wybierz plik:</label>
-        <input type="file" name="file" id="file" accept=".pdf, .doc, .docx, .jpg, .png"> <!-- Akceptowane rozszerzenia plików -->
-        <input type="submit" value="Prześlij plik">
-    </form>
-</body>
+<div>
+  <h2>Panel do dodawania plików</h2>
+  
+  <!-- Formularz do dodawania plików -->
+  <form (submit)="onAddFile()" enctype="multipart/form-data">
+    <label for="file">Wybierz plik:</label>
+    <input type="file" name="file" id="file" accept=".pdf, .doc, .docx, .jpg, .png" (change)="onFileSelected($event)">
+    <!-- Akceptowane rozszerzenia plików -->
+    <button type="submit">Prześlij plik</button>
+  </form>
+
+  <div *ngIf="emFiles && emFiles.length > 0">
+    <h2>Pliki materiałów edukacyjnych:</h2>
+    <ul>
+      <li *ngFor="let emFile of emFiles">
+        <a (click)="downloadFile(emFile.name)" href="javascript:void(0);" >{{ emFile.name }}</a>
+      </li>
+    </ul>
+  </div>
+</div>
+

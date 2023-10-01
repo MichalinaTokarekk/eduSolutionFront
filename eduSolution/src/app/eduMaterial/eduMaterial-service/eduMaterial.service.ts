@@ -8,6 +8,7 @@ export class EduMaterialService {
 
   public API = '//localhost:9191';
   public EDUMATERIAL_API = this.API + '/edu-material-controller';
+  public EMFILE_API = this.API + '/edu-material-controller';
 
   constructor (private http: HttpClient){}
 
