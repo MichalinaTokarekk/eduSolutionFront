@@ -456,6 +456,7 @@ isAddingNewSection: boolean = false;
       console.error("Błąd: section lub section.id jest niezdefiniowany.");
     }
     this.newSectionName = '';
+    section.isEdit = false;
   }
   
   

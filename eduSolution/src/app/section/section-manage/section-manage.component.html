@@ -79,7 +79,7 @@
         <i class="fa fa-trash-o" aria-hidden="true" (click)="onDeleteEduMaterial(eduMaterial)"></i>
       </div>
         <input *ngIf="section.isEdit" type="text" [(ngModel)]="newMaterialName" placeholder="Nowy materiał">
-        <button *ngIf="section.isEdit" (click)="onAddMaterial(section)">Dodaj materiał</button>
+        <button  *ngIf="section.isEdit" (click)="onAddMaterial(section)">Nazwij materiał</button>
       </ng-container>
       
       
