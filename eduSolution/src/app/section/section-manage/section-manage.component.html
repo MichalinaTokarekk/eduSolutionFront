@@ -75,7 +75,7 @@
       
       <ng-container>
         <div *ngFor="let eduMaterial  of eduMaterialsBySection">
-        <a routerLink="/main-page">{{ eduMaterial.name }}</a>
+        <a [routerLink]="['/eduMaterial-manage', eduMaterial.id]">{{ eduMaterial.name }}</a>
         <i class="fa fa-trash-o" aria-hidden="true" (click)="onDeleteEduMaterial(eduMaterial)"></i>
       </div>
         <input *ngIf="section.isEdit" type="text" [(ngModel)]="newMaterialName" placeholder="Nowy materiał">

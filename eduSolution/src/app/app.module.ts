@@ -40,6 +40,7 @@ import { SectionManage } from './section/section-manage/section-manage.component
 import { SectionService } from './section/section-service/section.service';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { EduMaterialService } from './eduMaterial/eduMaterial-service/eduMaterial.service';
+import { EduMaterialManage } from './eduMaterial/eduMaterial-manage/eduMaterial-manage.component';
 
 
 
@@ -80,7 +81,8 @@ export class MaterialModule {}
     UserInlineCrudComponent,
     AdminPanelComponent,
     CourseGridViewComponent,
-    SectionManage
+    SectionManage,
+    EduMaterialManage
   ],
   imports: [
     BrowserModule,

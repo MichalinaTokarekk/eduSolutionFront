@@ -11,6 +11,7 @@ import { UserInlineCrudComponent } from './user/user-iline-crud/user-inline-crud
 import { AdminPanelComponent } from './admin-panel/admin-panel.component';
 import { CourseGridViewComponent } from './course/course-grid-view/course-grid-view.component';
 import { SectionManage } from './section/section-manage/section-manage.component';
+import { EduMaterialManage } from './eduMaterial/eduMaterial-manage/eduMaterial-manage.component';
 
 const routes: Routes = [
   {path: "dashboard", component: DashboardComponent, canActivate:[AuthGuard]},
@@ -24,6 +25,7 @@ const routes: Routes = [
   {path: "course-grid-view", component: CourseGridViewComponent},
   {path: "section-manage", component: SectionManage},
   {path: "section-manage/:courseId", component: SectionManage},
+  {path: "eduMaterial-manage/:id", component: EduMaterialManage},
   
 ];
 
