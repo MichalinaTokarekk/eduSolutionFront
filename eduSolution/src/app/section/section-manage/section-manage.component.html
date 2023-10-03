@@ -48,13 +48,14 @@
      </mat-expansion-panel>
    </mat-accordion> -->
 
-   <button  (click)="onAddSection()">Dodaj nowy panel</button><br>
-   <input *ngIf="isAddingNewSection" type="text" [(ngModel)]="newSectionName" placeholder="Nowa nazwa sekcji">
-   <button *ngIf="isAddingNewSection" (click)="onSaveNew()">Zapisz</button>
+   <button  class="add-section-button" (click)="onAddSection()">Dodaj nowy panel</button><br>
+   <input class="newSectionInput" *ngIf="isAddingNewSection" type="text" [(ngModel)]="newSectionName" placeholder="Nowa nazwa sekcji">
+   <button class="onSaveNew" *ngIf="isAddingNewSection" (click)="onSaveNew()">Zapisz</button>
+   <button class="onSaveNew" *ngIf="isAddingNewSection" (click)="onCloseButton()">Wyjdź</button>
    <mat-accordion>
-    <mat-expansion-panel *ngFor="let section of sectionsByCourse; let srNo = index" (click)="loadEduMaterialsBySectionId(section.id)">
-      <mat-expansion-panel-header>
-        <mat-panel-title>
+    <mat-expansion-panel class="expansionPanel" *ngFor="let section of sectionsByCourse; let srNo = index" (click)="loadEduMaterialsBySectionId(section.id)">
+      <mat-expansion-panel-header class="header">
+        <mat-panel-title class="matPanelTitle">
           <input
             *ngIf="section.isEdit || section.isNewSection" 
             type="text"
@@ -62,11 +63,11 @@
             [disabled]="!section.isEdit"
             placeholder=""
           >
-          <span *ngIf="!section.isEdit && !section.isNewSection">{{ section.name }}</span>
-          <button *ngIf="!section.isEdit" (click)="onEdit(section)">Edytuj</button>
+          <span class="section-name" *ngIf="!section.isEdit && !section.isNewSection">{{ section.name }}</span>
+          <button *ngIf="!section.isEdit" class="edit-button" (click)="onEdit(section)">Edytuj</button>
           <button *ngIf="section.isEdit" (click)="onSave(section)">Zapisz zmiany</button>
           <button *ngIf="section.isEdit" (click)="onBackButton(section)">Wyjdź z edycji</button>
-          <i class="fa fa-trash-o" aria-hidden="true" (click)="onDelete(section)"></i>
+          <i class="fa fa-trash-o trash-icon" aria-hidden="true" (click)="onDelete(section)"></i>
         </mat-panel-title>
       </mat-expansion-panel-header>
       <p *ngIf="!section.isEdit">This is the content of section {{ srNo + 1 }}</p>
@@ -74,12 +75,26 @@
 
       
       <ng-container>
-        <div *ngFor="let eduMaterial  of eduMaterialsBySection">
-        <a [routerLink]="['/eduMaterial-manage', eduMaterial.id]">{{ eduMaterial.name }}</a>
-        <i class="fa fa-trash-o" aria-hidden="true" (click)="onDeleteEduMaterial(eduMaterial)"></i>
-      </div>
-        <input *ngIf="section.isEdit" type="text" [(ngModel)]="newMaterialName" placeholder="Nowy materiał">
-        <button  *ngIf="section.isEdit" (click)="onAddMaterial(section)">Nazwij materiał</button>
+        <!-- <div *ngFor="let eduMaterial  of eduMaterialsBySection">
+          <a [routerLink]="['/eduMaterial-manage', eduMaterial.id]">{{ eduMaterial.name }}</a>
+          <i class="fa fa-trash-o" aria-hidden="true" (click)="onDeleteEduMaterial(eduMaterial)"></i>
+        </div> -->
+        <div *ngFor="let eduMaterial of eduMaterialsBySection" class="panelfiles">
+            <ul>
+              <li >
+                <a [routerLink]="['/eduMaterial-manage', eduMaterial.id]">{{ eduMaterial.name }}</a>
+                <i class="fa fa-trash-o" aria-hidden="true" (click)="onDeleteEduMaterial(eduMaterial)"></i>
+              </li>
+            </ul>
+        </div>
+        <!-- <ul class="edu-material-list">
+          <li *ngFor="let eduMaterial of eduMaterialsBySection" class="edu-material-item">
+            <a [routerLink]="['/eduMaterial-manage', eduMaterial.id]" class="edu-material-link">{{ eduMaterial.name }}</a>
+            <i class="fa fa-trash-o delete-icon" aria-hidden="true" (click)="onDeleteEduMaterial(eduMaterial)"></i>
+          </li>
+        </ul> -->
+        <input *ngIf="section.isEdit" class="new-material-input" type="text" [(ngModel)]="newMaterialName" placeholder="Nowy materiał">
+        <button  *ngIf="section.isEdit" class="add-material-button" (click)="onAddMaterial(section)">Dodaj materiał</button>
       </ng-container>
       
       

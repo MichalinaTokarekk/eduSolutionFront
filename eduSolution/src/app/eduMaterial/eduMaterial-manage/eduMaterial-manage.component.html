@@ -9,8 +9,8 @@
       <label for="name"></label>
       <input *ngIf="eduMaterial.isEdit" class="input" type="text" id="name" name="name" [(ngModel)]="eduMaterial.name">
       <span class="input" *ngIf="!eduMaterial.isEdit">{{ eduMaterial.name }}</span>
-      <button *ngIf="!eduMaterial.isEdit" (click)="onEdit(eduMaterial)">Edytuj</button>
-      <button *ngIf="eduMaterial.isEdit"  type="submit">Zapisz zmiany</button>
+      <button class="editButton" *ngIf="!eduMaterial.isEdit" (click)="onEdit(eduMaterial)">Edytuj</button>
+      <button class="saveButton" *ngIf="eduMaterial.isEdit"  type="submit">Zapisz zmiany</button>
     </div>
     <div>
       <label for="description"></label>

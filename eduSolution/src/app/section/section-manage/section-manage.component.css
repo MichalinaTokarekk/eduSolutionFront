@@ -2,3 +2,130 @@
     margin-left: 8px;
   }
   
+.add-section-button{
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-left: 5px;
+  background-color: #007bff; /* Kolor tła */
+  color: #fff; /* Kolor tekstu */
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.newSectionInput{
+  margin-left: 5px;
+  margin-bottom: 10px;
+}
+
+/* Styl dla listy materiałów edukacyjnych */
+.edu-material-list {
+  list-style: none;
+  padding: 0;
+}
+
+/* Styl dla pojedynczego elementu listy */
+.edu-material-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #ccc;
+  padding: 10px 0;
+}
+
+/* Styl dla linku do materiału edukacyjnego */
+.edu-material-link {
+  text-decoration: none;
+  color: #007bff; /* Kolor linku */
+  font-weight: bold;
+}
+
+/* Styl ikony kosza */
+.delete-icon {
+  color: #d9534f; /* Kolor czerwony */
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.trash-icon {
+  color: #dc3545; /* Kolor ikony kosza */
+  font-size: 18px; /* Rozmiar ikony kosza */
+  cursor: pointer;
+  margin-right: 10px; /* Odstęp z prawej strony */
+  margin-left: 10px;
+}
+
+/* Styl dla inputa do nowego materiału */
+.new-material-input {
+  border: 1px solid #ccc;
+  padding: 5px;
+  border-radius: 5px;
+  margin-right: 10px;
+}
+
+/* Styl dla przycisku "Dodaj materiał" */
+.add-material-button {
+  background-color: #28a745; /* Kolor zielony */
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* Styl dla sekcji, które nie są w trybie edycji */
+.section-name {
+  font-weight: bold; /* Pogrubienie tekstu */
+  margin-right: 10px; /* Odstęp z prawej strony */
+}
+
+/* Styl przycisku "Edytuj" */
+.edit-button {
+  background-color: #dbdbd9; /* Kolor przycisku edycji */
+  color: #212529; /* Kolor tekstu na przycisku */
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+
+/* Stylizacja bloczków */
+.panelfiles {
+  background-color: #e6e8eb; /* Kolor tła bloczka */
+  border-radius: 5px; /* Zaokrąglenie rogów bloczka */
+  margin-bottom: 10px; /* Odstęp między bloczkami */
+  overflow: hidden; /* Ukryj zawartość, która wychodzi poza bloczek */
+  width: 300px;
+  height: 46px;
+}
+
+.panelfiles ul {
+  list-style: none; /* Usunięcie domyślnych punktów na liście */
+  padding: 0; /* Usunięcie wewnętrznego odstępu dla listy */
+}
+
+.panelfiles li {
+  background-color: #e6e8eb; /* Kolor tła pojedynczego bloczka */
+  padding-left: 10px;
+  padding-bottom: 100px;
+  padding-top: -100px;
+  display: flex; /* Ustawienie elementów li na poziomie */
+  justify-content: space-between; /* Rozłożenie elementów li na całej szerokości bloczka */
+}
+
+/* Stylizacja linku i ikony kosza */
+.panelfiles a {
+  text-decoration: none; /* Usunięcie podkreślenia odnośnika */
+  color: #333; /* Kolor tekstu linku */
+  font-weight: bold; /* Pogrubienie tekstu linku */
+}
+
+/* Styl ikony kosza */
+.panelfiles .fa-trash-o {
+  color: #dc3545; /* Kolor ikony kosza */
+  font-size: 18px; /* Rozmiar ikony kosza */
+  cursor: pointer;
+  margin-right: 10px;
+}

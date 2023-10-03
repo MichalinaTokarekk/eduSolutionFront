@@ -473,6 +473,10 @@ isAddingNewSection: boolean = false;
     obj.isEdit = false;
   }
 
+  onCloseButton() {
+    this.isAddingNewSection = false;
+  }
+
   
   
 }
