@@ -55,15 +55,23 @@ export class EMFileService {
     return this.http.get(this.EMFILE_API + '/emFilesByEduMaterialId/' + eduMaterialId);
   }
 
-  uploadFile(file: File): Observable<string> {
+
+  uploadFile(file: File, eduMaterialId: string): Observable<string> {
     const formData = new FormData();
     formData.append('file', file);
-
-    const headers = new HttpHeaders({
-      'Accept': 'application/json',
-    });
-
-    return this.http.post<string>(`${this.EMFILE_API}`, formData, { headers });
+  
+    // Dodaj odpowiednie nagłówki, w tym nagłówek do obsługi przesyłania danych jako formularza
+    const headers = new HttpHeaders();
+  
+    // Ustaw nagłówek 'Accept' na 'application/json'
+    headers.append('Accept', 'application/json');
+  
+    // Ustaw nagłówek 'Authorization' lub inne, jeśli to konieczne
+  
+    // Zmień endpoint URL na wyglądający podobnie do Postmana
+    const apiUrl = `${this.EMFILE_API}/${eduMaterialId}`;
+  
+    return this.http.post<string>(apiUrl, formData, { headers });
   }
 
 //   downloadFile(fileName: string): Observable<Blob> {

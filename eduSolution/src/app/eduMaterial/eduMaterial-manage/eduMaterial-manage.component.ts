@@ -136,16 +136,21 @@ eduMaterialEMFiles: any[] = [];
   // emFileId!: number;
 
 onAddFile(eduMaterial: any) {
+  this.route.paramMap.subscribe((params: ParamMap) => {
+    const id = params.get('id');
+    if (id !== null) {
+        
+  
   const emFile: EMFile = {
-    id: 0, // Jeśli ID jest automatycznie generowane przez serwer, pozostaw to jako 0
-    eduMaterials: [eduMaterial], 
-    name: this.fileToUpload.name, 
-    type: this.fileToUpload.type,
+    id: id, // Jeśli ID jest automatycznie generowane przez serwer, pozostaw to jako 0
+    eduMaterial: eduMaterial, 
+    // name: this.fileToUpload.name, 
+    // type: this.fileToUpload.type,
     // fileData: new Uint8Array(0) 
   };
   
     if (this.fileToUpload) {
-      this.emFileService.uploadFile(this.fileToUpload).subscribe(
+      this.emFileService.uploadFile(this.fileToUpload, id).subscribe(
         (response: string) => {
           console.log("Plik został przesłany:", response);
           const responseData = JSON.parse(response);
@@ -156,36 +161,41 @@ onAddFile(eduMaterial: any) {
         (uploadError) => {
           console.error("Błąd podczas przesyłania pliku:", uploadError);
           console.log("fileToUpload:", this.fileToUpload);
+          console.log("id:", id);
 
         }
       );
+      
 
 
-      this.emFileService.save(emFile).subscribe(
-        (response) => {
-          console.log("Dodane pomyslnie");
+      // this.emFileService.save(emFile).subscribe(
+      //   (response) => {
+      //     console.log("Dodane pomyslnie");
 
-          emFile.id = response.id;
+      //     emFile.id = response.id;
   
-          // Pobierz indeks sekcji w materiałach
-          const eduMaterialIndex = this.eduMaterialEMFiles.findIndex((s) => s.id === eduMaterial.id);
+      //     // Pobierz indeks sekcji w materiałach
+      //     const eduMaterialIndex = this.eduMaterialEMFiles.findIndex((s) => s.id === eduMaterial.id);
   
-          // Jeśli sekcja jest już w materiałach, zaktualizuj ją, w przeciwnym razie dodaj nową sekcję
-          if (eduMaterialIndex !== -1) {
-            this.eduMaterialEMFiles[eduMaterialIndex].emFile = emFile;
-          }
-        },
-        (error) => {
-          console.error("Błąd podczas dodawania materiału:", error);
-          console.error("emFile:", emFile);
-        }
-      );
+      //     // Jeśli sekcja jest już w materiałach, zaktualizuj ją, w przeciwnym razie dodaj nową sekcję
+      //     if (eduMaterialIndex !== -1) {
+      //       this.eduMaterialEMFiles[eduMaterialIndex].emFile = emFile;
+      //     }
+      //   },
+      //   (error) => {
+      //     console.error("Błąd podczas dodawania materiału:", error);
+      //     console.error("emFile:", emFile);
+      //   }
+      // );
     
     
     }
+    
     else {
       console.log("Nie wybrano pliku.");
     }
+  }
+});
   }
 
 
