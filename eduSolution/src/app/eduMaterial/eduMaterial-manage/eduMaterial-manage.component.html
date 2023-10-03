@@ -24,7 +24,7 @@
   <h2>Panel do dodawania plików</h2>
   
   <!-- Formularz do dodawania plików -->
-  <form (submit)="onAddFile()" enctype="multipart/form-data">
+  <form (submit)="onAddFile(eduMaterial)" enctype="multipart/form-data">
     <label for="file">Wybierz plik:</label>
     <input type="file" name="file" id="file" accept=".pdf, .doc, .docx, .jpg, .png" (change)="onFileSelected($event)">
     <!-- Akceptowane rozszerzenia plików -->

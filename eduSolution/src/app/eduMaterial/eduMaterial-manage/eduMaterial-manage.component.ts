@@ -23,10 +23,10 @@ import { EMFileService } from 'src/app/emFile/emFile-service/emFile.service';
 })
 export class EduMaterialManage implements OnInit {
 eduMaterial: any = {};
+  emFileIdContainer: any;
 
   constructor(private http: HttpClient, private route: ActivatedRoute, private router: Router, private dialog: MatDialog, private snackBar: MatSnackBar, 
     private eduMaterialService: EduMaterialService, private emFileService: EMFileService){
-    
   }
 
   emFilesByEduMaterial!: Array<any>;
@@ -130,62 +130,69 @@ ngOnInit(): void {
     section.isEdit = false;
   }
 
-  fileToUpload: File | null = null;
 
-//   onFileSelected(event: Event) {
-//     const inputElement = event.target as HTMLInputElement;
-//     if (inputElement.files && inputElement.files.length > 0) {
-//       this.fileToUpload = inputElement.files[0];
-//     }
-//   }
 
-//   onAddEMFile(eduMaterial: any) {
-//     if (this.fileToUpload) {
-//         const emFile: EMFile = {
-//             id: 0,
-//             eduMaterials: [eduMaterial],
-//             filePath: ''
-//         };
+eduMaterialEMFiles: any[] = [];
+  // emFileId!: number;
 
-//         // Tworzymy obiekt FormData i dodajemy wybrany plik
-//         const formData = new FormData();
-//         formData.append('file', this.fileToUpload);
-
-//         // Wywołujemy usługę, aby przesłać plik
-//         this.emFileService.save(this.fileToUpload).subscribe(
-//             (response: any) => {
-//                 // Tutaj możesz obsłużyć odpowiedź po przesłaniu pliku, np. dostęp do ścieżki pliku
-//                 emFile.filePath = response.filePath;
-
-               
-//             },
-//             (uploadError) => {
-//                 console.error('Błąd podczas przesyłania pliku:', uploadError);
-//                 // Obsłuż błąd przesyłania pliku, jeśli wystąpi
-//                 console.log('dane', emFile);
-
-//             }
-//         );
-//     } else {
-//         console.log('Nie wybrano pliku.');
-//     }
-// }
-
-onAddFile() {
+onAddFile(eduMaterial: any) {
+  const emFile: EMFile = {
+    id: 0, // Jeśli ID jest automatycznie generowane przez serwer, pozostaw to jako 0
+    eduMaterials: [eduMaterial], 
+    name: this.fileToUpload.name, 
+    type: this.fileToUpload.type,
+    // fileData: new Uint8Array(0) 
+  };
+  
     if (this.fileToUpload) {
       this.emFileService.uploadFile(this.fileToUpload).subscribe(
         (response: string) => {
           console.log("Plik został przesłany:", response);
-          // Tutaj możesz obsłużyć odpowiedź po przesłaniu pliku, np. dostęp do ścieżki pliku
+          const responseData = JSON.parse(response);
+          
+      
+          
         },
         (uploadError) => {
           console.error("Błąd podczas przesyłania pliku:", uploadError);
+          console.log("fileToUpload:", this.fileToUpload);
+
         }
       );
-    } else {
+
+
+      this.emFileService.save(emFile).subscribe(
+        (response) => {
+          console.log("Dodane pomyslnie");
+
+          emFile.id = response.id;
+  
+          // Pobierz indeks sekcji w materiałach
+          const eduMaterialIndex = this.eduMaterialEMFiles.findIndex((s) => s.id === eduMaterial.id);
+  
+          // Jeśli sekcja jest już w materiałach, zaktualizuj ją, w przeciwnym razie dodaj nową sekcję
+          if (eduMaterialIndex !== -1) {
+            this.eduMaterialEMFiles[eduMaterialIndex].emFile = emFile;
+          }
+        },
+        (error) => {
+          console.error("Błąd podczas dodawania materiału:", error);
+          console.error("emFile:", emFile);
+        }
+      );
+    
+    
+    }
+    else {
       console.log("Nie wybrano pliku.");
     }
   }
+
+
+
+  fileToUpload!: File;
+
+
 
   onFileSelected(event: Event) {
     const inputElement = event.target as HTMLInputElement;
@@ -239,6 +246,8 @@ downloadFileById(fileId: number): void {
       console.error('Błąd podczas pobierania pliku', error);
     });
   }
+
+  
   
 
 }

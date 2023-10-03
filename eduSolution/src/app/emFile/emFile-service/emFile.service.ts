@@ -33,6 +33,12 @@ export class EMFileService {
     return result;
   }
 
+  update (eduMaterial: any) : Observable <any> {
+    let result: Observable<Object>;
+      result = this.http.put(this.EMFILE_API + '/updateEMFile', eduMaterial)
+    return result;
+  }
+
 //   uploadFile(file: File): Observable<any> {
 //     const formData: FormData = new FormData();
 //     formData.append('file', file, file.name);
