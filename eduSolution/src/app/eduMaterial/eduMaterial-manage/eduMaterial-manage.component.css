@@ -4,6 +4,103 @@
     margin-left: 10px;
 }
 
+.textarea {
+    width: 1000px;
+    height: 300px;
+    padding: 10px; /* Wewnętrzny odstęp */
+    font-size: 14px; /* Rozmiar czcionki */
+    border: 1px solid #ccc; /* Grubaść i kolor obramowania */
+    border-radius: 5px; /* Zaokrąglenie narożników */
+    resize: vertical; /* Umożliwienie zmiany wysokości textarea (jeśli potrzebne) */
+  }
+  
+  /* Styl dla textarea po najechaniu myszą */
+  .textarea:hover {
+    border-color: #666; /* Zmiana koloru obramowania po najechaniu myszą */
+  }
+  
+  /* Styl dla textarea po skoncentrowaniu na nim uwagi */
+  .textarea:focus {
+    border-color: #007bff; /* Zmiana koloru obramowania po skoncentrowaniu na textarea */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Dodanie cienia po skoncentrowaniu */
+    outline: none; /* Wyłączenie domyślnego obramowania po skoncentrowaniu */
+  }
+  
+
 .input{
     margin-left: 10px;
 }
+
+.panelfiles{
+    margin-left: 10px;
+}
+
+/* Stylizacja listy plików */
+ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  li {
+    margin-bottom: 16px;
+    padding: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 300px;
+  }
+  
+  a {
+    text-decoration: none;
+    color: #007bff;
+  }
+  
+  a:hover {
+    text-decoration: underline;
+  }
+
+  .footer {
+    background-color: #333; /* Kolor tła stopki */
+    color: #fff; /* Kolor tekstu w stopce */
+    padding: 20px; /* Wewnętrzny odstęp w stopce */
+    text-align: center; /* Wyrównanie tekstu do środka */
+  }
+
+  /* Styl dla całego formularza */
+.panelfiles form {
+    margin: 20px 0;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f7f7f7;
+  }
+  
+  /* Styl dla etykiety */
+  .panelfiles form label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+  }
+  
+  /* Styl dla pola wyboru pliku */
+  .panelfiles form input[type="file"] {
+    margin-bottom: 10px;
+  }
+  
+  /* Styl dla przycisku "Prześlij plik" */
+  .panelfiles form button[type="submit"] {
+    padding: 5px 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  /* Styl dla przycisku "Prześlij plik" po najechaniu myszą */
+  .panelfiles form button[type="submit"]:hover {
+    background-color: #0056b3;
+  }
+  
+  
+  
