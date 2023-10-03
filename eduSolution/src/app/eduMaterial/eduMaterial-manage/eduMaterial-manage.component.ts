@@ -198,6 +198,35 @@ onAddFile(eduMaterial: any) {
 });
   }
 
+  onDeleteEMFile(obj: any) {
+    const dialogRef = this.dialog.open(ConfirmationDialogSemesterComponent);
+  
+    dialogRef.afterClosed().subscribe((result: boolean) => {
+      if (result === true) {
+        this.emFileService.remove(obj.id).subscribe(
+          response => {
+            this.openSnackBar('Pole usunięte pomyślnie', 'Success');
+          },
+          error => {
+            let errorMessage = 'An error occurred';
+            if (error && error.error) {
+              errorMessage = error.error;
+            }
+            this.openSnackBar(errorMessage, 'Error');
+          }
+        );
+      }
+    });
+    
+  }
+    
+  
+    openSnackBar(message: string, action: string) {
+      this.snackBar.open(message, action, {
+        duration: 5000, // Czas wyświetlania powiadomienia (w milisekundach)
+      });
+    }
+
 
 
   fileToUpload!: File;
@@ -276,6 +305,8 @@ downloadFileById(fileId: number): void {
       console.error('Błąd podczas pobierania pliku', error);
     });
   }
+
+
 
   
   

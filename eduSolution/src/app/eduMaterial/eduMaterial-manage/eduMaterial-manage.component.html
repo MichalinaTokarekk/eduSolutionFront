@@ -36,6 +36,7 @@
     <ul>
       <li *ngFor="let emFile of emFiles">
         <a (click)="downloadFileById(emFile.id)" href="javascript:void(0);" >{{ emFile.name }}</a>
+        <i class="fa fa-trash-o" aria-hidden="true" (click)="onDeleteEMFile(emFile)"></i>
       </li>
     </ul>
   </div>
