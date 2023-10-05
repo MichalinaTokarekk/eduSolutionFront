@@ -42,6 +42,8 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { EduMaterialService } from './eduMaterial/eduMaterial-service/eduMaterial.service';
 import { EduMaterialManage } from './eduMaterial/eduMaterial-manage/eduMaterial-manage.component';
 import { EMFileService } from './emFile/emFile-service/emFile.service';
+import { HomeworkTestService } from './homeworkTest/homeworkTest-service/homeworkTest.service';
+import { HomeworkTestManage } from './homeworkTest/homeworkTest-manage/homeworkTest-manage.component';
 
 
 
@@ -83,7 +85,8 @@ export class MaterialModule {}
     AdminPanelComponent,
     CourseGridViewComponent,
     SectionManage,
-    EduMaterialManage
+    EduMaterialManage,
+    HomeworkTestManage
   ],
   imports: [
     BrowserModule,
@@ -99,7 +102,7 @@ export class MaterialModule {}
     MatExpansionModule
     
   ],
-  providers: [SemesterService, CourseService, ClassGroupService, LoginService, UserService, SectionService, EduMaterialService, EMFileService],
+  providers: [SemesterService, CourseService, ClassGroupService, LoginService, UserService, SectionService, EduMaterialService, EMFileService, HomeworkTestService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

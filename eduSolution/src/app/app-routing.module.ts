@@ -12,6 +12,7 @@ import { AdminPanelComponent } from './admin-panel/admin-panel.component';
 import { CourseGridViewComponent } from './course/course-grid-view/course-grid-view.component';
 import { SectionManage } from './section/section-manage/section-manage.component';
 import { EduMaterialManage } from './eduMaterial/eduMaterial-manage/eduMaterial-manage.component';
+import { HomeworkTestManage } from './homeworkTest/homeworkTest-manage/homeworkTest-manage.component';
 
 const routes: Routes = [
   {path: "dashboard", component: DashboardComponent, canActivate:[AuthGuard]},
@@ -26,6 +27,7 @@ const routes: Routes = [
   {path: "section-manage", component: SectionManage},
   {path: "section-manage/:courseId", component: SectionManage},
   {path: "eduMaterial-manage/:id", component: EduMaterialManage},
+  {path: "homeworkTest-manage/:id", component: HomeworkTestManage},
   
 ];
 

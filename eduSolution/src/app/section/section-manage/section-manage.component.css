@@ -76,7 +76,7 @@
 
 /* Styl dla sekcji, które nie są w trybie edycji */
 .section-name {
-  font-weight: bold; /* Pogrubienie tekstu */
+  /* font-weight: bold; */
   margin-right: 10px; /* Odstęp z prawej strony */
 }
 
@@ -93,12 +93,13 @@
 
 /* Stylizacja bloczków */
 .panelfiles {
-  background-color: #e6e8eb; /* Kolor tła bloczka */
+  background-color: #cccdce; /* Kolor tła bloczka */
   border-radius: 5px; /* Zaokrąglenie rogów bloczka */
   margin-bottom: 10px; /* Odstęp między bloczkami */
   overflow: hidden; /* Ukryj zawartość, która wychodzi poza bloczek */
   width: 300px;
-  height: 46px;
+  height: 70px;
+  border: #212529;
 }
 
 .panelfiles ul {
@@ -107,7 +108,7 @@
 }
 
 .panelfiles li {
-  background-color: #e6e8eb; /* Kolor tła pojedynczego bloczka */
+  background-color: #cccdce; /* Kolor tła pojedynczego bloczka */
   padding-left: 10px;
   padding-bottom: 100px;
   padding-top: -100px;
@@ -119,7 +120,7 @@
 .panelfiles a {
   text-decoration: none; /* Usunięcie podkreślenia odnośnika */
   color: #333; /* Kolor tekstu linku */
-  font-weight: bold; /* Pogrubienie tekstu linku */
+  /* font-weight: bold;  */
 }
 
 /* Styl ikony kosza */

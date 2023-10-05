@@ -10,6 +10,8 @@ import { EduMaterialService } from 'src/app/eduMaterial/eduMaterial-service/eduM
 import { Section } from 'src/app/interfaces/section-interface';
 import { EduMaterial } from 'src/app/interfaces/eduMaterial-interface';
 import { catchError, of, tap } from 'rxjs';
+import { HomeworkTestService } from 'src/app/homeworkTest/homeworkTest-service/homeworkTest.service';
+import { HomeworkTest } from 'src/app/interfaces/homeworkTest-interface';
 
 
 /**
@@ -31,7 +33,7 @@ export class SectionManage implements OnInit {
   isEditing = false;
   ascendingSort = true;
   constructor(private http: HttpClient, private route: ActivatedRoute, private sectionService: SectionService, private router: Router, 
-    private dialog: MatDialog, private snackBar: MatSnackBar, private eduMaterialService: EduMaterialService){
+    private dialog: MatDialog, private snackBar: MatSnackBar, private eduMaterialService: EduMaterialService, private homeworkTestService: HomeworkTestService){
     this.route.params.subscribe(params => {
       const courseId = params['courseId'];
       // Teraz możesz wykorzystać courseId w swoim kodzie, np. w żądaniach HTTP
@@ -85,6 +87,7 @@ export class SectionManage implements OnInit {
   courseId!: string;
   sectionsByCourse!: Array<any>;
   eduMaterialsBySection!: any;
+  homeworkTestsBySection!: any;
 
   sectionId!: string;
   getSectionId(sectionId: string){
@@ -133,6 +136,9 @@ export class SectionManage implements OnInit {
   loadEduMaterialsBySectionId(sectionId: string): void {
     this.sectionService.eduMaterialsBySectionId(sectionId).subscribe(eduMaterials => {
       this.eduMaterialsBySection = eduMaterials;
+    });
+    this.homeworkTestService.homeworkTestsBySectionId(sectionId).subscribe(homeworkTests => {
+      this.homeworkTestsBySection = homeworkTests;
     });
   }
 
@@ -259,6 +265,28 @@ onDeleteEduMaterial(obj: any) {
   // ).subscribe();
   
 }
+
+onDeleteHomeworkTest(obj: any) {
+  const dialogRef = this.dialog.open(ConfirmationDialogSemesterComponent);
+
+  dialogRef.afterClosed().subscribe((result: boolean) => {
+    if (result === true) {
+      this.homeworkTestService.remove(obj.id).subscribe(
+        response => {
+          this.loadList();
+          this.openSnackBar('Pole usunięte pomyślnie', 'Success');
+        },
+        error => {
+          let errorMessage = 'An error occurred';
+          if (error && error.error) {
+            errorMessage = error.error;
+          }
+          this.openSnackBar(errorMessage, 'Error');
+        }
+      );
+    }
+  });  
+}
   
 
   openSnackBar(message: string, action: string) {
@@ -381,6 +409,7 @@ isAddingNewSection: boolean = false;
   }
 
   newMaterialName: string = '';
+  newHomeworkTestName: string = '';
   isAddingNewEduMaterial = true;
   
   // onAddMaterial(section: any){
@@ -446,6 +475,43 @@ isAddingNewSection: boolean = false;
             this.sectionMaterials[sectionIndex].sections.push(response);
           } else {
             this.sectionMaterials.push(response);
+          }
+        },
+        (error) => {
+          console.error("Błąd podczas dodawania materiału:", error);
+        }
+      );
+    } else {
+      console.error("Błąd: section lub section.id jest niezdefiniowany.");
+    }
+    this.newSectionName = '';
+    section.isEdit = false;
+  }
+
+
+  sectionHomeworkTests: any[] = [];
+
+  onAddHomeworkTest(section: any) {
+    if (section && section.id) {
+      // Utwórz nowy materiał edukacyjny
+      const homeworkTest: HomeworkTest = {
+        id: 0, // Jeśli ID jest automatycznie generowane przez serwer, pozostaw to jako 0
+        name: this.newHomeworkTestName,
+        section: section // Dodaj sekcję do materiału
+      };
+  
+      this.homeworkTestService.save(homeworkTest).subscribe(
+        (response) => {
+          console.log("Dodane pomyslnie");
+  
+          // Pobierz indeks sekcji w materiałach
+          const sectionIndex = this.sectionHomeworkTests.findIndex((s) => s.id === section.id);
+  
+          // Jeśli sekcja jest już w materiałach, zaktualizuj ją, w przeciwnym razie dodaj nową sekcję
+          if (sectionIndex !== -1) {
+            this.sectionHomeworkTests[sectionIndex].sections.push(response);
+          } else {
+            this.sectionHomeworkTests.push(response);
           }
         },
         (error) => {
