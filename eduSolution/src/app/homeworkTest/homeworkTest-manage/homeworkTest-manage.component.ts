@@ -83,8 +83,8 @@ ngOnInit(): void {
   submitForm() {
     // Wywołaj usługę, aby zapisać materiał edukacyjny
     this.homeworkTestService.save(this.homeworkTest).subscribe(
-      (savedEduMaterial: EduMaterial) => {
-        console.log('Zapisano zmiany:', savedEduMaterial);
+      (savedHomeworkTests: HomeworkTest) => {
+        console.log('Zapisano zmiany:', savedHomeworkTests);
         // Możesz dodać obsługę sukcesu tutaj
         this.homeworkTest.isEdit = false;
       },

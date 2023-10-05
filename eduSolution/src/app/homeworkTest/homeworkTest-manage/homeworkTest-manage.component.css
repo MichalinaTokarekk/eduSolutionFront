@@ -1,34 +1,86 @@
-
-
-
-  
-  /* Styl dla textarea po najechaniu myszą */
-  .textarea:hover {
-    border-color: #666; /* Zmiana koloru obramowania po najechaniu myszą */
+/* Stylizacja głównego kontenera */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    margin-left: 1px;
+    width: 900px;
   }
   
-  /* Styl dla textarea po skoncentrowaniu na nim uwagi */
-  .textarea:focus {
-    border-color: #007bff; /* Zmiana koloru obramowania po skoncentrowaniu na textarea */
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Dodanie cienia po skoncentrowaniu */
-    outline: none; /* Wyłączenie domyślnego obramowania po skoncentrowaniu */
+  /* Stylizacja panelu plików */
+  .panelfiles {
+    background-color: #f5f5f5;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
   }
   
-
-.input{
-    margin-left: 10px;
-}
-
-.panelfiles{
-    margin-left: 10px;
-}
-
-/* Stylizacja listy plików */
-ul {
+  /* Stylizacja nagłówka "Materiał edukacyjny" */
+  .panelfiles h2 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  /* Stylizacja etykiet formularza */
+  .form-group label {
+    font-weight: bold;
+  }
+  
+  
+  /* Stylizacja pola tekstowego "Polecenie" */
+  .textarea {
+    width: 830px;
+    height: 500px;
+    padding-left: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    font-size: 15px;
+  }
+  
+  /* Stylizacja przycisku do przesyłania plików */
+  .form-group input[type="file"] {
+    margin-top: 10px;
+  }
+  
+  /* Stylizacja listy plików */
+  ul {
     list-style-type: none;
     padding: 0;
   }
   
+  /* Stylizacja elementów listy plików */
+  li {
+    margin-bottom: 10px;
+  }
+  
+  /* Stylizacja ikony usuwania pliku */
+  .fa-trash-o {
+    margin-left: 10px;
+    color: #d9534f;
+    cursor: pointer;
+  }
+  
+  /* Stylizacja stopki */
+  .footer {
+    background-color: #333;
+    color: #fff;
+    padding: 10px 0;
+    text-align: center;
+  }
+  
+  /* Stylizacja linków w stopce */
+  .footer a {
+    color: #fff;
+    text-decoration: none;
+  }
+  
+  /* Stylizacja linków w stopce po najechaniu kursorem */
+  .footer a:hover {
+    text-decoration: underline;
+  }
+
   li {
     margin-bottom: 16px;
     padding: 16px;
@@ -47,33 +99,31 @@ ul {
     text-decoration: underline;
   }
 
-  .footer {
-    background-color: #333; /* Kolor tła stopki */
-    color: #fff; /* Kolor tekstu w stopce */
-    padding: 20px; /* Wewnętrzny odstęp w stopce */
-    text-align: center; /* Wyrównanie tekstu do środka */
+  ul {
+    list-style-type: none;
+    padding: 0;
   }
 
-  /* Styl dla całego formularza */
-.panelfiles form {
+ .filesadd{
     margin: 20px 0;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
     background-color: #f7f7f7;
-    width: 700px;
-    height: 700px;
-  }
-  
-  /* Styl dla etykiety */
-  .panelfiles form label {
+    width: 500px;
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+ }
+
+ .filesadd form label {
     display: block;
     margin-bottom: 10px;
     font-weight: bold;
   }
   
   /* Styl dla pola wyboru pliku */
-  .panelfiles form input[type="file"] {
+  .filesadd form input[type="file"] {
     margin-bottom: 10px;
   }
   
@@ -93,56 +143,12 @@ ul {
     background-color: #0056b3;
   }
 
-  /* Styl ikony kosza */
-.fa-trash-o {
-    color: red; /* Kolor ikony */
-    cursor: pointer; /* Kursor zmienia się na wskaźnik podczas najechania myszą */
-    float: right;
-  }
-
-  .editButton{
-    margin-left: 10px;
-    margin-top: 10px;
-    background-color: #007bff; /* Kolor tła */
-    color: #fff; /* Kolor tekstu */
-    border: none;
-    padding: 5px 10px;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-
-  .saveButton{
-    margin-left: 10px;
-    margin-top: 10px;
-    background-color: #007bff; /* Kolor tła */
-    color: #fff; /* Kolor tekstu */
-    border: none;
-    padding: 5px 10px;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-
-
-
-  .form-group {
-    margin-bottom: 10px;
-    padding: 0%;
-  }
-  
  
   
-  .textarea {
-    width: 670px;
-    height: 300px;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-  }
+
   
 
+  
+  
  
-  
-  
-  
   

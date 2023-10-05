@@ -69,46 +69,49 @@
     </div>
   </div> -->
 
-  <div class="panelfiles">
-    <h2>Materiał edukacyjny</h2>
-    <form (submit)="submitForm()">
-      <div class="form-group">
-        <label for="name">Nazwa:</label>
-        <input *ngIf="homeworkTest.isEdit" class="input" type="text" id="name" name="name" [(ngModel)]="homeworkTest.name">
-        <span class="input" *ngIf="!homeworkTest.isEdit">{{ homeworkTest.name }}</span>
-        <button class="editButton" *ngIf="!homeworkTest.isEdit" (click)="onEdit(homeworkTest)">Edytuj</button>
-        <button class="saveButton" *ngIf="homeworkTest.isEdit" type="submit">Zapisz zmiany</button>
-      </div>
-      <div class="form-group">
-        <label for="taskContent">Polecenie:</label>
-        <textarea class="textarea" id="taskContent" name="taskContent" [(ngModel)]="homeworkTest.taskContent" [readonly]="!homeworkTest.isEdit"></textarea>
-      </div>
-  
-      <!-- Formularz do dodawania plików -->
-      <div class="form-group">
-        <label for="file">Wybierz plik:</label>
-        <input type="file" name="file" id="file" accept=".pdf, .doc, .docx, .jpg, .png" (change)="onFileSelected($event)">
-        <!-- Akceptowane rozszerzenia plików -->
-      </div>
-      <button type="submit">Prześlij plik</button>
-  
-      <div *ngIf="htFiles && htFiles.length > 0">
-        <h2>Pliki do zadania:</h2>
-        <ul>
-          <li *ngFor="let htFile of htFiles">
-            <a (click)="downloadFileById(htFile.id)" href="javascript:void(0);">{{ htFile.name }}</a>
-            <i class="fa fa-trash-o" aria-hidden="true" (click)="onDeleteEMFile(htFile)"></i>
-          </li>
-        </ul>
-      </div>
-    </form>
-  </div>
-  
-  
-
-<footer class="footer">
   <div class="container">
-    <p>&copy; 2023 EduSolution. Wszelkie prawa zastrzeżone.</p>
-    <p>Kontakt: kontakt@example.com</p>
+    <div class="panelfiles">
+      <h2>Materiał edukacyjny</h2>
+      <form (submit)="submitForm()">
+        <div class="form-group">
+          <label for="name">Nazwa:</label><br>
+          <input *ngIf="homeworkTest.isEdit" class="input" type="text" id="name" name="name" [(ngModel)]="homeworkTest.name">
+          <span class="input" *ngIf="!homeworkTest.isEdit">{{ homeworkTest.name }}</span>
+          <button class="editButton" *ngIf="!homeworkTest.isEdit" (click)="onEdit(homeworkTest)">Edytuj</button>
+          <button class="saveButton" *ngIf="homeworkTest.isEdit" type="submit">Zapisz zmiany</button>
+        </div><br>
+        <div class="form-group">
+          <label for="taskContent">Polecenie:</label>
+          <textarea class="textarea" id="taskContent" name="taskContent" [(ngModel)]="homeworkTest.taskContent" [readonly]="!homeworkTest.isEdit"></textarea>
+        </div>
+    
+        <!-- Formularz do dodawania plików -->
+        <form (submit)="onAddFile(homeworkTest)" enctype="multipart/form-data">
+          <div class="filesadd">
+            <label for="file">Wybierz plik:</label>
+            <input type="file" name="file" id="file" accept=".pdf, .doc, .docx, .jpg, .png" (change)="onFileSelected($event)">
+            <!-- Akceptowane rozszerzenia plików -->
+          <button type="submit">Prześlij plik</button>
+          </div>
+        </form>
+    
+        <div *ngIf="htFiles && htFiles.length > 0">
+          <h2>Pliki do zadania:</h2>
+          <ul>
+            <li *ngFor="let htFile of htFiles">
+              <a (click)="downloadFileById(htFile.id)" href="javascript:void(0);">{{ htFile.name }}</a>
+              <i class="fa fa-trash-o" aria-hidden="true" (click)="onDeleteEMFile(htFile)"></i>
+            </li>
+          </ul>
+        </div>
+      </form>
+    </div>
   </div>
-</footer>
+    
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2023 EduSolution. Wszelkie prawa zastrzeżone.</p>
+      <p>Kontakt: kontakt@example.com</p>
+    </div>
+  </footer>
+  
