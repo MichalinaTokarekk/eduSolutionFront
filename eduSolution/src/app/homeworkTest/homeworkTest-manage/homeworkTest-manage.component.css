@@ -1,19 +1,6 @@
-.textarea{
-    width: 691px;
-    height: 259px;
-    margin-left: 10px;
-}
 
-.textarea {
-    width: 1000px;
-    height: 300px;
-    padding: 10px; /* Wewnętrzny odstęp */
-    font-size: 14px; /* Rozmiar czcionki */
-    border: 1px solid #ccc; /* Grubaść i kolor obramowania */
-    border-radius: 5px; /* Zaokrąglenie narożników */
-    resize: vertical; /* Umożliwienie zmiany wysokości textarea (jeśli potrzebne) */
-    margin-top: 10px;
-  }
+
+
   
   /* Styl dla textarea po najechaniu myszą */
   .textarea:hover {
@@ -74,7 +61,8 @@ ul {
     border: 1px solid #ccc;
     border-radius: 5px;
     background-color: #f7f7f7;
-    width: 500px;
+    width: 700px;
+    height: 700px;
   }
   
   /* Styl dla etykiety */
@@ -133,6 +121,27 @@ ul {
     border-radius: 5px;
     cursor: pointer;
   }
+  
+
+
+
+  .form-group {
+    margin-bottom: 10px;
+    padding: 0%;
+  }
+  
+ 
+  
+  .textarea {
+    width: 670px;
+    height: 300px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+
+ 
   
   
   

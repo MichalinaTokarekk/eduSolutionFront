@@ -12,6 +12,9 @@ import { Subscription, catchError, of, switchMap, tap } from 'rxjs';
 import { EMFile } from 'src/app/interfaces/emFile-interface';
 import { EMFileService } from 'src/app/emFile/emFile-service/emFile.service';
 import { HomeworkTestService } from '../homeworkTest-service/homeworkTest.service';
+import { HomeworkTest } from 'src/app/interfaces/homeworkTest-interface';
+import { HTFile } from 'src/app/interfaces/htFile-interface';
+import { HTFileService } from 'src/app/htFile/htFile-service/htFile.service';
 
 
 /**
@@ -24,29 +27,29 @@ import { HomeworkTestService } from '../homeworkTest-service/homeworkTest.servic
 })
 export class HomeworkTestManage implements OnInit {
 homeworkTest: any = {};
-emFileIdContainer: any;
+htFileIdContainer: any;
 
   constructor(private http: HttpClient, private route: ActivatedRoute, private router: Router, private dialog: MatDialog, private snackBar: MatSnackBar, 
-    private homeworkTestService: HomeworkTestService, private emFileService: EMFileService){
+    private homeworkTestService: HomeworkTestService, private htFileService: HTFileService){
   }
 
-emFilesByEduMaterial!: Array<any>;
+htFilesByHomeworkTest!: Array<any>;
 
-emFiles!: any[]; 
+htFiles!: any[]; 
 ngOnInit(): void {
     // Pobierz ID materiału edukacyjnego z parametrów routingu
     this.route.paramMap.subscribe((params: ParamMap) => {
       const id = params.get('id');
       if (id !== null) {
         // Użyj usługi do pobrania materiału edukacyjnego na podstawie ID
-        this.homeworkTestService.get(id).subscribe((eduMaterial: any) => {
+        this.homeworkTestService.get(id).subscribe((homeworkTest: any) => {
           // Zapisz materiał edukacyjny w komponencie
-          this.homeworkTest = eduMaterial;
+          this.homeworkTest = homeworkTest;
   
           // Pobierz pliki materiałów edukacyjnych po ID materiału edukacyjnego
-          this.emFileService.emFilesByEduMaterialId(eduMaterial.id).subscribe((emFiles: any) => {
+          this.htFileService.htFilesByHomeworkTestsId(homeworkTest.id).subscribe((htFiles: any) => {
             // Tutaj możesz wykonać operacje na emFiles, np. przypisać je do właściwości komponentu
-            this.emFiles = emFiles;
+            this.htFiles = htFiles;
           }, error => {
             console.error(error);
             // Obsłuż błąd, jeśli wystąpi
@@ -62,7 +65,7 @@ ngOnInit(): void {
   }
   
 
-  loadEMFilesByEduMaterialId(eduMaterialId: string): void {
+  loadHTFilesByHomeworkTestId(eduMaterialId: string): void {
     // this.emFileService.emFilesByEduMaterialId(eduMaterialId).subscribe(sections => {
     //   this.emFilesByEduMaterial = sections;
     // });
@@ -117,22 +120,22 @@ ngOnInit(): void {
 eduMaterialEMFiles: any[] = [];
   // emFileId!: number;
 
-onAddFile(eduMaterial: any) {
+onAddFile(homeworkTest: any) {
   this.route.paramMap.subscribe((params: ParamMap) => {
     const id = params.get('id');
     if (id !== null) {
         
   
-  const emFile: EMFile = {
+  const htFile: HTFile = {
     id: id, // Jeśli ID jest automatycznie generowane przez serwer, pozostaw to jako 0
-    eduMaterial: eduMaterial, 
+    homeworkTest: homeworkTest, 
     // name: this.fileToUpload.name, 
     // type: this.fileToUpload.type,
     // fileData: new Uint8Array(0) 
   };
   
     if (this.fileToUpload) {
-      this.emFileService.uploadFile(this.fileToUpload, id).subscribe(
+      this.htFileService.uploadFile(this.fileToUpload, id).subscribe(
         (response: string) => {
           console.log("Plik został przesłany:", response);
           const responseData = JSON.parse(response);
@@ -162,7 +165,7 @@ onAddFile(eduMaterial: any) {
   
     dialogRef.afterClosed().subscribe((result: boolean) => {
       if (result === true) {
-        this.emFileService.remove(obj.id).subscribe(
+        this.htFileService.remove(obj.id).subscribe(
           response => {
             this.openSnackBar('Pole usunięte pomyślnie', 'Success');
           },
@@ -200,7 +203,7 @@ onAddFile(eduMaterial: any) {
   }
   
 downloadFileById(fileId: number): void {
-    this.emFileService.downloadFileById(fileId).subscribe((blob: Blob) => {
+    this.htFileService.downloadFileById(fileId).subscribe((blob: Blob) => {
       // Tworzymy link do pobierania pliku
 
     

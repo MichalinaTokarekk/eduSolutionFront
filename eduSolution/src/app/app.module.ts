@@ -44,6 +44,7 @@ import { EduMaterialManage } from './eduMaterial/eduMaterial-manage/eduMaterial-
 import { EMFileService } from './emFile/emFile-service/emFile.service';
 import { HomeworkTestService } from './homeworkTest/homeworkTest-service/homeworkTest.service';
 import { HomeworkTestManage } from './homeworkTest/homeworkTest-manage/homeworkTest-manage.component';
+import { HTFileService } from './htFile/htFile-service/htFile.service';
 
 
 
@@ -86,7 +87,7 @@ export class MaterialModule {}
     CourseGridViewComponent,
     SectionManage,
     EduMaterialManage,
-    HomeworkTestManage
+    HomeworkTestManage,
   ],
   imports: [
     BrowserModule,
@@ -102,7 +103,8 @@ export class MaterialModule {}
     MatExpansionModule
     
   ],
-  providers: [SemesterService, CourseService, ClassGroupService, LoginService, UserService, SectionService, EduMaterialService, EMFileService, HomeworkTestService],
+  providers: [SemesterService, CourseService, ClassGroupService, LoginService, UserService, SectionService, EduMaterialService, EMFileService, 
+    HomeworkTestService, HTFileService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

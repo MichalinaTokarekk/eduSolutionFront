@@ -1,5 +1,5 @@
-<form (submit)="submitForm()">
-    <div>
+<!-- <form (submit)="submitForm()"> -->
+    <!-- <div>
       <label for="name"></label>
       <input *ngIf="homeworkTest.isEdit" class="input" type="text" id="name" name="name" [(ngModel)]="homeworkTest.name">
       <span class="input" *ngIf="!homeworkTest.isEdit">{{ homeworkTest.name }}</span>
@@ -8,31 +8,103 @@
     </div>
     <div>
       <label for="taskContent"></label>
-      <textarea class="textarea" id="taskContent" name="taskContent" [(ngModel)]="homeworkTest.taskContent" [readonly]="!homeworkTest.isEdit"></textarea>
+      <textarea class="textarea" id="taskContent" name="taskContent" [(ngModel)]="homeworkTest.taskContent" [readonly]="!homeworkTest.isEdit"></textarea> -->
       <!-- <span class="input" *ngIf="!eduMaterial.isEdit">{{ eduMaterial.description }}</span> -->
-    </div>
+    <!-- </div> -->
     <!-- <button *ngIf="eduMaterial.isEdit" type="submit">Zapisz zmiany</button> -->
-</form>
+<!-- </form> -->
 
-<div class="panelfiles">  
+<!-- <div class="panelfiles">   -->
   <!-- Formularz do dodawania plików -->
-  <form (submit)="onAddFile(homeworkTest)" enctype="multipart/form-data">
+  <!-- <form (submit)="onAddFile(homeworkTest)" enctype="multipart/form-data">
     <label for="file">Wybierz plik:</label>
-    <input type="file" name="file" id="file" accept=".pdf, .doc, .docx, .jpg, .png" (change)="onFileSelected($event)">
+    <input type="file" name="file" id="file" accept=".pdf, .doc, .docx, .jpg, .png" (change)="onFileSelected($event)"> -->
     <!-- Akceptowane rozszerzenia plików -->
-    <button type="submit">Prześlij plik</button>
+    <!-- <button type="submit">Prześlij plik</button>
   </form>
 
-  <div *ngIf="emFiles && emFiles.length > 0">
+  <div *ngIf="htFiles && htFiles.length > 0">
     <h2>Pliki do zadania:</h2>
     <ul>
-      <li *ngFor="let emFile of emFiles">
-        <a (click)="downloadFileById(emFile.id)" href="javascript:void(0);" >{{ emFile.name }}</a>
-        <i class="fa fa-trash-o" aria-hidden="true" (click)="onDeleteEMFile(emFile)"></i>
+      <li *ngFor="let htFile of htFiles">
+        <a (click)="downloadFileById(htFile.id)" href="javascript:void(0);" >{{ htFile.name }}</a>
+        <i class="fa fa-trash-o" aria-hidden="true" (click)="onDeleteEMFile(htFile)"></i>
       </li>
     </ul>
   </div>
-</div>
+</div> -->
+
+<!-- <div class="panelfiles">
+    <h2>Materiał edukacyjny</h2>
+    <form (submit)="submitForm()">
+      <div class="form-group">
+        <label for="name">Nazwa:</label>
+        <input *ngIf="homeworkTest.isEdit" class="input" type="text" id="name" name="name" [(ngModel)]="homeworkTest.name">
+        <span class="input" *ngIf="!homeworkTest.isEdit">{{ homeworkTest.name }}</span>
+        <button class="editButton" *ngIf="!homeworkTest.isEdit" (click)="onEdit(homeworkTest)">Edytuj</button>
+        <button class="saveButton" *ngIf="homeworkTest.isEdit" type="submit">Zapisz zmiany</button>
+      </div>
+      <div class="form-group">
+        <label for="taskContent">Polecenie:</label>
+        <textarea class="textarea" id="taskContent" name="taskContent" [(ngModel)]="homeworkTest.taskContent" [readonly]="!homeworkTest.isEdit"></textarea>
+      </div>
+    </form>
+  
+    <form (submit)="onAddFile(homeworkTest)" enctype="multipart/form-data">
+      <div class="form-group">
+        <label for="file">Wybierz plik:</label>
+        <input type="file" name="file" id="file" accept=".pdf, .doc, .docx, .jpg, .png" (change)="onFileSelected($event)">
+      </div>
+      <button type="submit">Prześlij plik</button>
+    </form>
+  
+    <div *ngIf="htFiles && htFiles.length > 0">
+      <h2>Pliki do zadania:</h2>
+      <ul>
+        <li *ngFor="let htFile of htFiles">
+          <a (click)="downloadFileById(htFile.id)" href="javascript:void(0);">{{ htFile.name }}</a>
+          <i class="fa fa-trash-o" aria-hidden="true" (click)="onDeleteEMFile(htFile)"></i>
+        </li>
+      </ul>
+    </div>
+  </div> -->
+
+  <div class="panelfiles">
+    <h2>Materiał edukacyjny</h2>
+    <form (submit)="submitForm()">
+      <div class="form-group">
+        <label for="name">Nazwa:</label>
+        <input *ngIf="homeworkTest.isEdit" class="input" type="text" id="name" name="name" [(ngModel)]="homeworkTest.name">
+        <span class="input" *ngIf="!homeworkTest.isEdit">{{ homeworkTest.name }}</span>
+        <button class="editButton" *ngIf="!homeworkTest.isEdit" (click)="onEdit(homeworkTest)">Edytuj</button>
+        <button class="saveButton" *ngIf="homeworkTest.isEdit" type="submit">Zapisz zmiany</button>
+      </div>
+      <div class="form-group">
+        <label for="taskContent">Polecenie:</label>
+        <textarea class="textarea" id="taskContent" name="taskContent" [(ngModel)]="homeworkTest.taskContent" [readonly]="!homeworkTest.isEdit"></textarea>
+      </div>
+  
+      <!-- Formularz do dodawania plików -->
+      <div class="form-group">
+        <label for="file">Wybierz plik:</label>
+        <input type="file" name="file" id="file" accept=".pdf, .doc, .docx, .jpg, .png" (change)="onFileSelected($event)">
+        <!-- Akceptowane rozszerzenia plików -->
+      </div>
+      <button type="submit">Prześlij plik</button>
+  
+      <div *ngIf="htFiles && htFiles.length > 0">
+        <h2>Pliki do zadania:</h2>
+        <ul>
+          <li *ngFor="let htFile of htFiles">
+            <a (click)="downloadFileById(htFile.id)" href="javascript:void(0);">{{ htFile.name }}</a>
+            <i class="fa fa-trash-o" aria-hidden="true" (click)="onDeleteEMFile(htFile)"></i>
+          </li>
+        </ul>
+      </div>
+    </form>
+  </div>
+  
+  
 
 <footer class="footer">
   <div class="container">
