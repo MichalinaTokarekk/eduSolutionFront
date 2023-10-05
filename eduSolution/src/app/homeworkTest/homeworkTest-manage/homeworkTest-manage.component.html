@@ -80,8 +80,9 @@
           <button class="editButton" *ngIf="!homeworkTest.isEdit" (click)="onEdit(homeworkTest)">Edytuj</button>
           <button class="saveButton" *ngIf="homeworkTest.isEdit" type="submit">Zapisz zmiany</button>
         </div><br>
+        <label for="taskContent">Polecenie:</label>
         <div class="form-group">
-          <label for="taskContent">Polecenie:</label>
+          <!-- <label for="taskContent">Polecenie:</label> -->
           <textarea class="textarea" id="taskContent" name="taskContent" [(ngModel)]="homeworkTest.taskContent" [readonly]="!homeworkTest.isEdit"></textarea>
         </div>
     
@@ -109,9 +110,7 @@
   </div>
     
   <footer class="footer">
-    <div class="container">
       <p>&copy; 2023 EduSolution. Wszelkie prawa zastrzeżone.</p>
       <p>Kontakt: kontakt@example.com</p>
-    </div>
   </footer>
   

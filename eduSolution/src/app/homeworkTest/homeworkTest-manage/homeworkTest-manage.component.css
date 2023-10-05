@@ -3,8 +3,12 @@
     max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
-    margin-left: 1px;
-    width: 900px;
+    width: 1900px;
+  }
+
+  .containerTwo {
+    margin-left: 930px;
+    margin-top: -1127px;
   }
   
   /* Stylizacja panelu plików */
@@ -30,12 +34,13 @@
   
   /* Stylizacja pola tekstowego "Polecenie" */
   .textarea {
-    width: 830px;
-    height: 500px;
+    width: 1030px;
+    height: 300px;
     padding-left: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
     margin-bottom: 10px;
+    margin-left: -1px;
     font-size: 15px;
   }
   
