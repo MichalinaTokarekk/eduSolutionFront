@@ -15,6 +15,8 @@ import { HomeworkTestService } from '../homeworkTest-service/homeworkTest.servic
 import { HomeworkTest } from 'src/app/interfaces/homeworkTest-interface';
 import { HTFile } from 'src/app/interfaces/htFile-interface';
 import { HTFileService } from 'src/app/htFile/htFile-service/htFile.service';
+import { AnswerService } from 'src/app/answer/answer-service/answer.service';
+import { LoginService } from 'src/app/authorization_authentication/service/login.service';
 
 
 /**
@@ -30,12 +32,13 @@ homeworkTest: any = {};
 htFileIdContainer: any;
 
   constructor(private http: HttpClient, private route: ActivatedRoute, private router: Router, private dialog: MatDialog, private snackBar: MatSnackBar, 
-    private homeworkTestService: HomeworkTestService, private htFileService: HTFileService){
+    private homeworkTestService: HomeworkTestService, private htFileService: HTFileService, private answerService: AnswerService, private loginService: LoginService){
   }
 
 htFilesByHomeworkTest!: Array<any>;
 
 htFiles!: any[]; 
+answer!: any; 
 ngOnInit(): void {
     // Pobierz ID materiału edukacyjnego z parametrów routingu
     this.route.paramMap.subscribe((params: ParamMap) => {
@@ -53,6 +56,18 @@ ngOnInit(): void {
           }, error => {
             console.error(error);
             // Obsłuż błąd, jeśli wystąpi
+          });
+
+
+        const token = this.loginService.getToken();
+        const _token = token.split('.')[1];
+        const _atobData = atob(_token);
+        const _finalData = JSON.parse(_atobData);
+
+          this.answerService.getAnswerByHomeworkTestIdAndUserId(homeworkTest.id, _finalData.id).subscribe((answer: any) => {
+            this.answer = answer;
+          }, error => {
+            console.error(error);
           });
         }, error => {
           console.error(error);

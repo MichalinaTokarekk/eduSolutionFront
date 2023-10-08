@@ -106,6 +106,15 @@
           </ul>
         </div>
       </form>
+      <div *ngIf="answer">
+        <h2>Odpowiedź na pracę domową</h2>
+        <p><strong>Zawartość odpowiedzi:</strong> {{ answer.answerContent }}</p>
+        <p><strong>Status odpowiedzi:</strong> {{ answer.answerStatus }}</p>
+      </div>
+      <div *ngIf="!answer">
+        <p>Brak dostępnej odpowiedzi.</p>
+      </div>
+      
     </div>
   </div>
     
