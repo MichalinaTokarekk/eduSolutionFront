@@ -46,6 +46,7 @@ import { HomeworkTestService } from './homeworkTest/homeworkTest-service/homewor
 import { HomeworkTestManage } from './homeworkTest/homeworkTest-manage/homeworkTest-manage.component';
 import { HTFileService } from './htFile/htFile-service/htFile.service';
 import { AnswerService } from './answer/answer-service/answer.service';
+import { AFileService } from './aFile/aFile-service/aFile.service';
 
 
 
@@ -105,7 +106,7 @@ export class MaterialModule {}
     
   ],
   providers: [SemesterService, CourseService, ClassGroupService, LoginService, UserService, SectionService, EduMaterialService, EMFileService, 
-    HomeworkTestService, HTFileService, AnswerService],
+    HomeworkTestService, HTFileService, AnswerService, AFileService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -71,7 +71,7 @@
 
   <div class="container">
     <div class="panelfiles">
-      <h2>Materiał edukacyjny</h2>
+      <h2>Zadanie</h2>
       <form (submit)="submitForm()">
         <div class="form-group">
           <label for="name">Nazwa:</label><br>
@@ -117,6 +117,12 @@
             <textarea class="textarea" id="answerContent" name="answerContent" [(ngModel)]="answer.answerContent"></textarea><br>
             <button (click)="onUpdateAnswer()">Zapisz zmiany</button>
           </div>
+
+            <div *ngFor="let aFile of aFilesByAnswer" (click)="loadAFilesByAnswerId(answer.id)">
+                <a (click)="downloadFileById(aFile.id)" href="javascript:void(0);">{{ aFile.name }}</a>
+                <i class="fa fa-trash-o" aria-hidden="true" (click)="onDeleteAFile(aFile)"></i>
+            </div>
+
       </div>
       <div *ngIf="!answer">
         <p>Brak dostępnej odpowiedzi.</p>

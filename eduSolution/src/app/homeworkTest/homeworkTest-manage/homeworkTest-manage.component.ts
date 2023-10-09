@@ -18,6 +18,7 @@ import { HTFileService } from 'src/app/htFile/htFile-service/htFile.service';
 import { AnswerService } from 'src/app/answer/answer-service/answer.service';
 import { LoginService } from 'src/app/authorization_authentication/service/login.service';
 import { Answer } from 'src/app/interfaces/answer-interface';
+import { AFileService } from 'src/app/aFile/aFile-service/aFile.service';
 
 
 /**
@@ -33,13 +34,16 @@ homeworkTest: any = {};
 htFileIdContainer: any;
 
   constructor(private http: HttpClient, private route: ActivatedRoute, private router: Router, private dialog: MatDialog, private snackBar: MatSnackBar, 
-    private homeworkTestService: HomeworkTestService, private htFileService: HTFileService, private answerService: AnswerService, private loginService: LoginService){
+    private homeworkTestService: HomeworkTestService, private htFileService: HTFileService, private answerService: AnswerService, private loginService: LoginService,
+    private aFileService: AFileService){
   }
 
 htFilesByHomeworkTest!: Array<any>;
 
 htFiles!: any[]; 
+aFiles!: any[]; 
 answer!: any; 
+answerId!: any; 
 ngOnInit(): void {
     // Pobierz ID materiału edukacyjnego z parametrów routingu
     this.route.paramMap.subscribe((params: ParamMap) => {
@@ -67,9 +71,14 @@ ngOnInit(): void {
 
           this.answerService.getAnswerByHomeworkTestIdAndUserId(homeworkTest.id, _finalData.id).subscribe((answer: any) => {
             this.answer = answer;
+
+            if(answer) {
+            this.loadAFilesByAnswerId(answer.id);
+            }
           }, error => {
             console.error(error);
           });
+
         }, error => {
           console.error(error);
           // Obsłuż błąd, jeśli wystąpi
@@ -78,6 +87,13 @@ ngOnInit(): void {
         console.log("Nie ma nic");
       }
     });
+  }
+
+  aFilesByAnswer!: any;
+  loadAFilesByAnswerId(answerId: string): void {
+    this.aFileService.aFilesByAnswerId(answerId).subscribe(aFiles => {
+        this.aFilesByAnswer = aFiles;
+      });
   }
   
 
@@ -350,6 +366,29 @@ downloadFileById(fileId: number): void {
         );
       }
     });  
+  }
+
+  onDeleteAFile(obj: any) {
+    const dialogRef = this.dialog.open(ConfirmationDialogSemesterComponent);
+  
+    dialogRef.afterClosed().subscribe((result: boolean) => {
+      if (result === true) {
+        this.aFileService.remove(obj.id).subscribe(
+          response => {
+            this.openSnackBar('Pole usunięte pomyślnie', 'Success');
+            location.reload();
+          },
+          error => {
+            let errorMessage = 'An error occurred';
+            if (error && error.error) {
+              errorMessage = error.error;
+            }
+            this.openSnackBar(errorMessage, 'Error');
+          }
+        );
+      }
+    });
+    
   }
 
 }
