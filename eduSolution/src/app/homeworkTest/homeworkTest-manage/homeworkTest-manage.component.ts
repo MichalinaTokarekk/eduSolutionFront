@@ -19,6 +19,7 @@ import { AnswerService } from 'src/app/answer/answer-service/answer.service';
 import { LoginService } from 'src/app/authorization_authentication/service/login.service';
 import { Answer } from 'src/app/interfaces/answer-interface';
 import { AFileService } from 'src/app/aFile/aFile-service/aFile.service';
+import { AFile } from 'src/app/interfaces/aFile-interface';
 
 
 /**
@@ -390,5 +391,49 @@ downloadFileById(fileId: number): void {
     });
     
   }
+
+
+  aFileToUpload!: File;
+
+
+
+  onAFileSelected(event: Event) {
+    const inputElement = event.target as HTMLInputElement;
+    if (inputElement.files && inputElement.files.length > 0) {
+      this.aFileToUpload = inputElement.files[0];
+    }
+  }
+
+  onAddAFile(answer: any) {
+      if (this.aFileToUpload) {
+        this.aFileService.uploadFile(this.aFileToUpload, answer.id).subscribe(
+          (response: string) => {
+            console.log("Plik został przesłany:", response);
+            const responseData = JSON.parse(response);
+            this.handleFileUploadComplete(responseData, answer);
+        
+            
+          },
+          (uploadError) => {
+            console.error("Błąd podczas przesyłania pliku:", uploadError);
+            console.log("aFileToUpload:", this.aFileToUpload);
+            console.log("answerId:", answer.id);
+            location.reload();
+          }
+        );
+      
+      }
+      
+      else {
+        console.log("Nie wybrano pliku.");
+      }
+    }
+
+    handleFileUploadComplete(responseData: any, answer: any) {
+        console.log("Przesyłanie pliku zakończone.");
+        // Tutaj możesz wykonać dodatkowe akcje, które chcesz po zakończeniu przesyłania pliku
+        location.reload();
+      }
+        
 
 }
