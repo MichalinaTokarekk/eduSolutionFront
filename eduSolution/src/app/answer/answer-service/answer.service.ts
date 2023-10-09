@@ -31,7 +31,7 @@ export class AnswerService {
   }
 
   remove (id: string):Observable<string> {
-    return this.http.delete<string>(this.ANSWER_API + '/deleteHomeworkTest/' + id);
+    return this.http.delete<string>(this.ANSWER_API + '/deleteAnswer/' + id);
   }
 
   answersByHomeworkTestId(homeworkTestId: string) {

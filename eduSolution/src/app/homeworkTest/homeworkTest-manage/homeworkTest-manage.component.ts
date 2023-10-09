@@ -17,6 +17,7 @@ import { HTFile } from 'src/app/interfaces/htFile-interface';
 import { HTFileService } from 'src/app/htFile/htFile-service/htFile.service';
 import { AnswerService } from 'src/app/answer/answer-service/answer.service';
 import { LoginService } from 'src/app/authorization_authentication/service/login.service';
+import { Answer } from 'src/app/interfaces/answer-interface';
 
 
 /**
@@ -121,6 +122,15 @@ ngOnInit(): void {
     // Ustaw flagę isEdit na true dla wybranej sekcji
     section.isEdit = true;
   }
+
+
+
+isAnswerContentVisible: boolean = false;
+isEditing: boolean = false;
+currentEditingAnswer: any;
+  onEditAnswer(answer: any) {
+    this.isAnswerContentVisible = true;
+}
 
   notOnEdit(section: any) {
     // Zapisz aktualnie edytowaną sekcję
@@ -260,9 +270,84 @@ downloadFileById(fileId: number): void {
     });
   }
 
+  newAnswerContent: string = '';
+  onSaveAnswer() {
+    this.route.paramMap.subscribe((params: ParamMap) => {
+        const id = params.get('id');
+        if (id !== null) {
+          // Użyj usługi do pobrania materiału edukacyjnego na podstawie ID
+          this.homeworkTestService.get(id).subscribe((homeworkTest: any) => {
+            // Zapisz materiał edukacyjny w komponencie
+            this.homeworkTest = homeworkTest;
+  
+          const token = this.loginService.getToken();
+          const _token = token.split('.')[1];
+          const _atobData = atob(_token);
+          const _finalData = JSON.parse(_atobData);
+
+        const answer: Answer = {
+            id: 0,
+            answerContent: this.newAnswerContent,
+            homeworkTest: homeworkTest,
+            user: _finalData.id
+        };
+        
+          this.answerService.save(answer).subscribe(savedAnswer => {
+            // Tutaj możesz dodać odpowiednie akcje po zapisaniu odpowiedzi, np. powiadomienie o sukcesie.
+            console.log('Odpowiedź została zapisana.');
+            
+            // Następnie zresetuj newAnswerContent
+            this.newAnswerContent = '';
+            this.isEditing = false;
+            this.isAnswerContentVisible = false;
+
+          }, error => {
+            console.error('Błąd podczas zapisywania odpowiedzi:', error);
+          });
 
 
+          }, error => {
+            console.error(error);
+          });
+        } 
+      });
+  }
+
+
+
+  onUpdateAnswer() {
+    this.answerService.save(this.answer).subscribe(updatedAnswer => {
+      // Tutaj możesz dodać odpowiednie akcje po zaktualizowaniu odpowiedzi, np. powiadomienie o sukcesie.
+      console.log('Odpowiedź została zaktualizowana.');
+      this.isEditing = false;
+      this.isAnswerContentVisible = false;
+     
+
+    }, error => {
+      console.error('Błąd podczas aktualizacji odpowiedzi:', error);
+    });
+  }
   
   
+  onDeleteAnswer(obj: any) {
+    const dialogRef = this.dialog.open(ConfirmationDialogSemesterComponent);
+  
+    dialogRef.afterClosed().subscribe((result: boolean) => {
+      if (result === true) {
+        this.answerService.remove(obj.id).subscribe(
+          response => {
+            this.openSnackBar('Pole usunięte pomyślnie', 'Success');
+          },
+          error => {
+            let errorMessage = 'An error occurred';
+            if (error && error.error) {
+              errorMessage = error.error;
+            }
+            this.openSnackBar(errorMessage, 'Error');
+          }
+        );
+      }
+    });  
+  }
 
 }

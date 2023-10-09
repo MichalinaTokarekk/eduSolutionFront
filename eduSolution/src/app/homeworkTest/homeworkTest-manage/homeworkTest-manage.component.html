@@ -107,12 +107,25 @@
         </div>
       </form>
       <div *ngIf="answer">
+        <button (click)="onEditAnswer(answer)">Edytuj odpowiedź</button>
+        <button (click)="onDeleteAnswer(answer)">Usuń odpowiedź</button>
         <h2>Odpowiedź na pracę domową</h2>
         <p><strong>Zawartość odpowiedzi:</strong> {{ answer.answerContent }}</p>
         <p><strong>Status odpowiedzi:</strong> {{ answer.answerStatus }}</p>
+        <div *ngIf="isAnswerContentVisible">
+            <!-- Dodaj pole do edycji treści odpowiedzi -->
+            <textarea class="textarea" id="answerContent" name="answerContent" [(ngModel)]="answer.answerContent"></textarea><br>
+            <button (click)="onUpdateAnswer()">Zapisz zmiany</button>
+          </div>
       </div>
       <div *ngIf="!answer">
         <p>Brak dostępnej odpowiedzi.</p>
+        <button (click)="onEditAnswer(answer)">Dodaj odpowiedź</button>
+        <div *ngIf="isAnswerContentVisible">
+            <!-- <label for="answerContent">Treść odpowiedzi:</label> -->
+            <textarea class="textarea" id="answerContent" name="answerContent" [(ngModel)]="newAnswerContent"></textarea>
+            <button (click)="onSaveAnswer()">Zapisz odpowiedź</button>
+          </div>
       </div>
       
     </div>
