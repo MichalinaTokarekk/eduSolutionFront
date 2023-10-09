@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import {Component, OnInit} from '@angular/core';
+import {Component, ElementRef, OnInit, Renderer2} from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import {MatExpansionModule} from '@angular/material/expansion';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -20,6 +20,9 @@ import { LoginService } from 'src/app/authorization_authentication/service/login
 import { Answer } from 'src/app/interfaces/answer-interface';
 import { AFileService } from 'src/app/aFile/aFile-service/aFile.service';
 import { AFile } from 'src/app/interfaces/aFile-interface';
+import { ClassGroupService } from 'src/app/classGroup/classGroup-service/classGroup.service';
+import { CourseService } from 'src/app/course/course-service/course.service';
+import { ClassGroup } from 'src/app/interfaces/classGroup-interface';
 
 
 /**
@@ -36,13 +39,14 @@ htFileIdContainer: any;
 
   constructor(private http: HttpClient, private route: ActivatedRoute, private router: Router, private dialog: MatDialog, private snackBar: MatSnackBar, 
     private homeworkTestService: HomeworkTestService, private htFileService: HTFileService, private answerService: AnswerService, private loginService: LoginService,
-    private aFileService: AFileService){
+    private aFileService: AFileService, private classGroupService: ClassGroupService, private courseService: CourseService){
   }
 
 htFilesByHomeworkTest!: Array<any>;
 
 htFiles!: any[]; 
 aFiles!: any[]; 
+course!: any; 
 answer!: any; 
 answerId!: any; 
 ngOnInit(): void {
@@ -88,6 +92,24 @@ ngOnInit(): void {
         console.log("Nie ma nic");
       }
     });
+
+    this.route.paramMap.subscribe((params: ParamMap) => {
+        const id = params.get('id');
+        if (id !== null) {
+          this.homeworkTestService.get(id).subscribe((homeworkTest: any) => {
+            this.homeworkTest = homeworkTest;
+            console.log('courseId', homeworkTest.section.course.id)
+
+            this.loadClassGroupsByCoursesId(homeworkTest.section.course.id);
+      
+          }, error => {
+            console.error(error);
+          });
+        } else {
+          console.log("Nie ma nic");
+        }
+      });
+      
   }
 
   aFilesByAnswer!: any;
@@ -96,6 +118,19 @@ ngOnInit(): void {
         this.aFilesByAnswer = aFiles;
       });
   }
+
+//   classGroupsByCoursesId!: any;
+// classGroupsByCoursesId: any[] = [];
+classGroupsByCoursesId: ClassGroup[] = [];
+  loadClassGroupsByCoursesId(courseId: string): void {
+    this.classGroupService.findClassGroupsByCoursesId(courseId).subscribe(classGroups => {
+        this.classGroupsByCoursesId = classGroups as ClassGroup[];
+        console.log('classGroupsByCoursesId:', this.classGroupsByCoursesId);
+      });
+      console.log('Została wywołana');
+  }
+
+  
   
 
   loadHTFilesByHomeworkTestId(eduMaterialId: string): void {

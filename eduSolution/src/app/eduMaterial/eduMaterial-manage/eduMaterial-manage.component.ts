@@ -77,6 +77,8 @@ ngOnInit(): void {
         console.log("Nie ma nic");
       }
     });
+
+    
   }
   
 

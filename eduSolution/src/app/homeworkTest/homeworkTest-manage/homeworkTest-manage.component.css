@@ -148,6 +148,43 @@
     background-color: #0056b3;
   }
 
+
+
+
+
+
+
+
+
+  /* Dodaj styl dla paneli */
+.panel {
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  
+  /* Dodaj styl dla treści ukrytej w panelu */
+  .panel-content {
+    padding: 10px;
+    background-color: #f9f9f9;
+    display: block;
+    transition: max-height 0.2s ease-out;
+    max-height: 0;
+    overflow: hidden;
+  }
+  
+  /* Dodaj styl dla aktywnego panelu */
+  .panel a.active {
+    font-weight: bold;
+  }
+  
+  /* Dodaj klasę ukrycia */
+  .hidden {
+    max-height: 0 !important;
+  }
+  
+
  
   
 

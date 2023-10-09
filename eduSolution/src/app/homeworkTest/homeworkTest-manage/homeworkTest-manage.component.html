@@ -143,7 +143,12 @@
             <button (click)="onSaveAnswer()">Zapisz odpowiedź</button>
           </div>
       </div>
+      <br>
+      <br>
       
+      <div *ngFor="let classGroup of classGroupsByCoursesId">
+        <a href="javascript:void(0);" (click)="loadClassGroupsByCoursesId(course.section.course.id)">{{ classGroup.name }}</a>
+      </div>
     </div>
   </div>
     

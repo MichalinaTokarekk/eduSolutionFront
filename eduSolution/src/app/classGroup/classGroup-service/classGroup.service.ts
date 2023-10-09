@@ -32,6 +32,10 @@ export class ClassGroupService {
   remove (id: string):Observable<string> {
     return this.http.delete<string>(this.CLASSGROUP_API + '/deleteGroup/' + id);
   }
+
+  findClassGroupsByCoursesId(courseId: string) {
+    return this.http.get(this.CLASSGROUP_API + '/findClassGroupsByCourseId/' + courseId);
+  }
 }
 
 
