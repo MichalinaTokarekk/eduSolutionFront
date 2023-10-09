@@ -301,6 +301,7 @@ downloadFileById(fileId: number): void {
             this.isEditing = false;
             this.isAnswerContentVisible = false;
 
+            location.reload();
           }, error => {
             console.error('Błąd podczas zapisywania odpowiedzi:', error);
           });
@@ -337,6 +338,7 @@ downloadFileById(fileId: number): void {
         this.answerService.remove(obj.id).subscribe(
           response => {
             this.openSnackBar('Pole usunięte pomyślnie', 'Success');
+            location.reload();
           },
           error => {
             let errorMessage = 'An error occurred';
