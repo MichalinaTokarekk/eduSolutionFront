@@ -1,3 +1,4 @@
+import { ClassGroup } from "./classGroup-interface";
 import { Role } from "./role-interface";
 
 export interface User {
@@ -17,5 +18,6 @@ export interface User {
     updatedBy: string;
     updatedAt: Date;
     role: Role;
+    teachingClassGroups: ClassGroup;
 }
   

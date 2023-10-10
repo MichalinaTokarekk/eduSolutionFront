@@ -23,6 +23,7 @@ import { AFile } from 'src/app/interfaces/aFile-interface';
 import { ClassGroupService } from 'src/app/classGroup/classGroup-service/classGroup.service';
 import { CourseService } from 'src/app/course/course-service/course.service';
 import { ClassGroup } from 'src/app/interfaces/classGroup-interface';
+import { UserService } from 'src/app/user/user-service/user.service';
 
 
 /**
@@ -35,11 +36,12 @@ import { ClassGroup } from 'src/app/interfaces/classGroup-interface';
 })
 export class HomeworkTestManage implements OnInit {
 homeworkTest: any = {};
+classGroupsByUserId: any = {};
 htFileIdContainer: any;
 
   constructor(private http: HttpClient, private route: ActivatedRoute, private router: Router, private dialog: MatDialog, private snackBar: MatSnackBar, 
     private homeworkTestService: HomeworkTestService, private htFileService: HTFileService, private answerService: AnswerService, private loginService: LoginService,
-    private aFileService: AFileService, private classGroupService: ClassGroupService, private courseService: CourseService){
+    private aFileService: AFileService, private classGroupService: ClassGroupService, private courseService: CourseService, private userService: UserService){
   }
 
 htFilesByHomeworkTest!: Array<any>;
@@ -109,8 +111,40 @@ ngOnInit(): void {
           console.log("Nie ma nic");
         }
       });
+
+      const token = this.loginService.getToken();
+        const _token = token.split('.')[1];
+        const _atobData = atob(_token);
+        const _finalData = JSON.parse(_atobData);
+
+      this.userService.getTeachingClassGroupsByUserId(_finalData.id).subscribe(classGroups => {
+        this.classGroupsByUserId = classGroups;
+
+        console.log('Klasy użytkownika:', this.classGroupsByUserId);
+        // console.log('filter', this.filteredClassGroups);
+      }, error => {
+        console.error('Błąd podczas pobierania klas użytkownika:', error);
+      });
       
   }
+
+  filteredClassGroups: ClassGroup[] = [];
+
+  filterClassGroups(): void {
+    this.filteredClassGroups = this.classGroupsByCoursesId.filter((courseClassGroup: ClassGroup) => {
+      // Sprawdź, czy classGroup jest obecny w classGroupsByUserId
+      const foundUserClassGroup = this.classGroupsByUserId.find((userClassGroup: ClassGroup) => userClassGroup.id === courseClassGroup.id);
+      
+      return foundUserClassGroup !== undefined;
+    });
+  
+    console.log('filter', this.filteredClassGroups);
+  }
+  
+  
+  
+  
+  
 
   aFilesByAnswer!: any;
   loadAFilesByAnswerId(answerId: string): void {
@@ -125,10 +159,11 @@ classGroupsByCoursesId: ClassGroup[] = [];
   loadClassGroupsByCoursesId(courseId: string): void {
     this.classGroupService.findClassGroupsByCoursesId(courseId).subscribe(classGroups => {
         this.classGroupsByCoursesId = classGroups as ClassGroup[];
+        this.filterClassGroups();
         console.log('classGroupsByCoursesId:', this.classGroupsByCoursesId);
       });
       console.log('Została wywołana');
-  }
+}
 
   
   

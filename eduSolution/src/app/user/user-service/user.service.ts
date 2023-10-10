@@ -7,7 +7,7 @@ import { Observable } from "rxjs";
 export class UserService {
 
   public API = '//localhost:9191';
-  public USER_API = this.API + '/user-controller';
+  public USER_API = this.API + '/user-controller/';
   public LIBRARYCARD_API = this.API + '/library-card-controller';
   public REGISTER_API = this.API + '/auth';
 
@@ -40,6 +40,10 @@ export class UserService {
     return this.http.delete<string>(this.USER_API + '/deleteUser/' + id);
   }
 
+
+  getTeachingClassGroupsByUserId(userId: string) {
+    return this.http.get(this.USER_API + 'teachingClassGroups/' + userId);
+  }
 
 }
 
