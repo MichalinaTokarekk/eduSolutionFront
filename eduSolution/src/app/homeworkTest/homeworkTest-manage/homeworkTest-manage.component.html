@@ -146,9 +146,19 @@
       <br>
       <br>
       
-      <div *ngFor="let classGroup of filteredClassGroups">
+      <!-- <div *ngFor="let classGroup of filteredClassGroups">
         <a  href="javascript:void(0);" (click)="loadClassGroupsByCoursesId(course.section.course.id)">{{ classGroup.name }}</a>
-      </div>
+      </div> -->
+
+      <mat-accordion>
+        <mat-expansion-panel class="expansionPanel" *ngFor="let classGroup of filteredClassGroups; let srNo = index" >
+          <mat-expansion-panel-header class="header">
+            <mat-panel-title class="matPanelTitle">{{ classGroup.name }}</mat-panel-title>
+          </mat-expansion-panel-header>
+        </mat-expansion-panel>
+      </mat-accordion>
+      
+
     </div>
   </div>
     

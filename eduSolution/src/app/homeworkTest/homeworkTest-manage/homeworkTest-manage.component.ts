@@ -126,6 +126,8 @@ ngOnInit(): void {
         console.error('Błąd podczas pobierania klas użytkownika:', error);
       });
       
+
+      
   }
 
   filteredClassGroups: ClassGroup[] = [];
