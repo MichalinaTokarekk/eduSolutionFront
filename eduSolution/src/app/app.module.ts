@@ -47,6 +47,7 @@ import { HomeworkTestManage } from './homeworkTest/homeworkTest-manage/homeworkT
 import { HTFileService } from './htFile/htFile-service/htFile.service';
 import { AnswerService } from './answer/answer-service/answer.service';
 import { AFileService } from './aFile/aFile-service/aFile.service';
+import { AnswerDetailComponent } from './answer/answer-detail/answer-detail.component';
 
 
 
@@ -64,7 +65,7 @@ import { AFileService } from './aFile/aFile-service/aFile.service';
     ReactiveFormsModule,
     FormsModule,
     MatExpansionModule,
-    RouterModule
+    RouterModule,
   ],
   declarations: [
     
@@ -90,6 +91,7 @@ export class MaterialModule {}
     SectionManage,
     EduMaterialManage,
     HomeworkTestManage,
+    AnswerDetailComponent
   ],
   imports: [
     BrowserModule,

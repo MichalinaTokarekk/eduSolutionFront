@@ -30,6 +30,12 @@ export class AnswerService {
     return result;
   }
 
+  updateAnswer(answer: any): Observable <any> {
+    let result: Observable<Object>;
+    result = this.http.put(this.ANSWER_API + '/updateAnswer', answer)
+    return result;
+  }
+
   remove (id: string):Observable<string> {
     return this.http.delete<string>(this.ANSWER_API + '/deleteAnswer/' + id);
   }

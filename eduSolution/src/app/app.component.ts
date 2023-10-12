@@ -21,7 +21,7 @@ export class AppComponent {
   actions(){
     if(this.loginService.getToken()!=''){
       let _currentRole = this.loginService.getRoleByToken(this.loginService.getToken());
-      if(_currentRole=='admin' || _currentRole=='student'){
+      if(_currentRole=='admin' || _currentRole=='student' || _currentRole=='teacher'){
         return true;
       }
     }

@@ -24,6 +24,7 @@ import { ClassGroupService } from 'src/app/classGroup/classGroup-service/classGr
 import { CourseService } from 'src/app/course/course-service/course.service';
 import { ClassGroup } from 'src/app/interfaces/classGroup-interface';
 import { UserService } from 'src/app/user/user-service/user.service';
+import { AnswerDetailComponent } from 'src/app/answer/answer-detail/answer-detail.component';
 
 
 
@@ -53,6 +54,7 @@ aFiles!: any[];
 course!: any; 
 answer!: any; 
 answerId!: any; 
+userRole!: string;
 ngOnInit(): void {
     // Pobierz ID materiału edukacyjnego z parametrów routingu
     this.route.paramMap.subscribe((params: ParamMap) => {
@@ -141,6 +143,7 @@ ngOnInit(): void {
     //     console.log('answersByHomeworkTestAndClassGroup', this.answersByHomeworkTestAndClassGroup);
     //   });
 
+    this.userRole = _finalData.role;
   }
 
   filteredClassGroups: ClassGroup[] = [];
@@ -172,6 +175,18 @@ getClassGroupId(selectedClassGroupId: number): void {
       console.log('classGroupId', this.selectedClassGroupId);
     });
   }
+
+  openAnswerDetailsDialog(answer: Answer): void {
+    const dialogRef = this.dialog.open(AnswerDetailComponent, {
+      width: '400px', // dostosuj szerokość do swoich potrzeb
+      data: { answer }, // przekaż odpowiedź jako dane
+    });
+  
+    dialogRef.afterClosed().subscribe(result => {
+      // Tutaj możesz obsłużyć akcje po zamknięciu dialogu, jeśli jest to konieczne
+    });
+  }
+  
   
   
   
@@ -445,6 +460,8 @@ downloadFileById(fileId: number): void {
       console.error('Błąd podczas aktualizacji odpowiedzi:', error);
     });
   }
+
+  
   
   
   onDeleteAnswer(obj: any) {

@@ -106,6 +106,7 @@
           </ul>
         </div>
       </form>
+      <div *ngIf="userRole === 'student' || userRole === 'admin'">
       <div *ngIf="answer">
         <button (click)="onEditAnswer(answer)">Edytuj odpowiedź</button>
         <button (click)="onDeleteAnswer(answer)">Usuń odpowiedź</button>
@@ -134,6 +135,7 @@
             </div>
 
       </div>
+    
       <div *ngIf="!answer">
         <p>Brak dostępnej odpowiedzi.</p>
         <button (click)="onEditAnswer(answer)">Dodaj odpowiedź</button>
@@ -143,26 +145,28 @@
             <button (click)="onSaveAnswer()">Zapisz odpowiedź</button>
           </div>
       </div>
-      <br>
-      <br>
+    </div>
       
       <!-- <div *ngFor="let classGroup of filteredClassGroups">
         <a  href="javascript:void(0);" (click)="loadClassGroupsByCoursesId(course.section.course.id)">{{ classGroup.name }}</a>
       </div> -->
 
-      <mat-accordion>
-        <mat-expansion-panel class="expansionPanel" *ngFor="let classGroup of filteredClassGroups; let srNo = index" (click)="getClassGroupId(classGroup.id)">
-          <mat-expansion-panel-header class="header">
-            <mat-panel-title class="matPanelTitle">{{ classGroup.name }}</mat-panel-title>
-          </mat-expansion-panel-header>
-          <div *ngIf="answersByHomeworkTestAndClassGroup">
-              <div *ngFor="let answer of answersByHomeworkTestAndClassGroup">
-                {{ answer.user.firstName}} {{answer.user.lastName}} 
-                {{ answer.answerContent }} 
-              </div> 
-          </div>
-        </mat-expansion-panel>
-      </mat-accordion>
+    <div *ngIf="userRole === 'teacher'"> 
+        <h2>Odpowiedzi:</h2>
+        <mat-accordion>
+            <mat-expansion-panel class="expansionPanel" *ngFor="let classGroup of filteredClassGroups; let srNo = index" (click)="getClassGroupId(classGroup.id)">
+            <mat-expansion-panel-header class="header">
+                <mat-panel-title class="matPanelTitle">{{ classGroup.name }}</mat-panel-title>
+            </mat-expansion-panel-header>
+            <div *ngIf="answersByHomeworkTestAndClassGroup">
+                <div *ngFor="let answer of answersByHomeworkTestAndClassGroup">
+                    <a (click)="openAnswerDetailsDialog(answer)">{{ answer.user.firstName}} {{answer.user.lastName}} </a>
+                    <!-- <a (click)="openAnswerDetailsDialog(answer)"> {{ answer.answerContent }} </a> -->
+                </div> 
+            </div>
+            </mat-expansion-panel>
+        </mat-accordion>
+    </div>
       
 
     </div>
