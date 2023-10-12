@@ -151,10 +151,16 @@
       </div> -->
 
       <mat-accordion>
-        <mat-expansion-panel class="expansionPanel" *ngFor="let classGroup of filteredClassGroups; let srNo = index" >
+        <mat-expansion-panel class="expansionPanel" *ngFor="let classGroup of filteredClassGroups; let srNo = index" (click)="getClassGroupId(classGroup.id)">
           <mat-expansion-panel-header class="header">
             <mat-panel-title class="matPanelTitle">{{ classGroup.name }}</mat-panel-title>
           </mat-expansion-panel-header>
+          <div *ngIf="answersByHomeworkTestAndClassGroup">
+              <div *ngFor="let answer of answersByHomeworkTestAndClassGroup">
+                {{ answer.user.firstName}} {{answer.user.lastName}} 
+                {{ answer.answerContent }} 
+              </div> 
+          </div>
         </mat-expansion-panel>
       </mat-accordion>
       

@@ -41,8 +41,8 @@ export class UserService {
   }
 
 
-  getTeachingClassGroupsByUserId(userId: string) {
-    return this.http.get(this.USER_API + 'teachingClassGroups/' + userId);
+  getTeachingClassGroupsByUserId(userId: string): Observable<any> {
+    return this.http.get<any>(this.USER_API + 'teachingClassGroups/' + userId);
   }
 
 }

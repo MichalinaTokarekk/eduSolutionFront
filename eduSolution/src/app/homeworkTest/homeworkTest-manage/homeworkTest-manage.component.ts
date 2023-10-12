@@ -26,6 +26,7 @@ import { ClassGroup } from 'src/app/interfaces/classGroup-interface';
 import { UserService } from 'src/app/user/user-service/user.service';
 
 
+
 /**
  * @title Basic expansion panel
  */
@@ -37,6 +38,7 @@ import { UserService } from 'src/app/user/user-service/user.service';
 export class HomeworkTestManage implements OnInit {
 homeworkTest: any = {};
 classGroupsByUserId: any = {};
+answersByHomeworkTestAndClassGroup: any = {};
 htFileIdContainer: any;
 
   constructor(private http: HttpClient, private route: ActivatedRoute, private router: Router, private dialog: MatDialog, private snackBar: MatSnackBar, 
@@ -126,8 +128,19 @@ ngOnInit(): void {
         console.error('Błąd podczas pobierania klas użytkownika:', error);
       });
       
-
       
+    //   this.answerService.findByHomeworkTestAndClassGroup(this.homeworkTest, this.selectedClassGroupId).subscribe(answersByHomeworkTestAndClassGroup => {
+    //     this.answersByHomeworkTestAndClassGroup = answersByHomeworkTestAndClassGroup;
+
+    //     console.log('odpowiedzi ', this.answersByHomeworkTestAndClassGroup);
+    //     // console.log('filter', this.filteredClassGroups);
+    //   }, error => {
+    //     console.error('Błąd podczas pobierania klas użytkownika:', error);
+    //     console.log('homeworkTestId', this.homeworkTest);
+    //     console.log('classGroupId', this.selectedClassGroupId);
+    //     console.log('answersByHomeworkTestAndClassGroup', this.answersByHomeworkTestAndClassGroup);
+    //   });
+
   }
 
   filteredClassGroups: ClassGroup[] = [];
@@ -143,7 +156,22 @@ ngOnInit(): void {
     console.log('filter', this.filteredClassGroups);
   }
   
+  selectedClassGroupId!: number;
+//   getClassGroupId(selectedClassGroupId: number): void {
+//     this.selectedClassGroupId = selectedClassGroupId;
+//  }
   
+getClassGroupId(selectedClassGroupId: number): void {
+    this.selectedClassGroupId = selectedClassGroupId;
+    this.answerService.findByHomeworkTestAndClassGroup(this.homeworkTest.id, this.selectedClassGroupId).subscribe(answersByHomeworkTestAndClassGroup => {
+      this.answersByHomeworkTestAndClassGroup = answersByHomeworkTestAndClassGroup;
+      console.log('odpowiedzi ', this.answersByHomeworkTestAndClassGroup);
+    }, error => {
+      console.error('Błąd podczas pobierania klas użytkownika:', error);
+      console.log('homeworkTestId', this.homeworkTest.id);
+      console.log('classGroupId', this.selectedClassGroupId);
+    });
+  }
   
   
   
