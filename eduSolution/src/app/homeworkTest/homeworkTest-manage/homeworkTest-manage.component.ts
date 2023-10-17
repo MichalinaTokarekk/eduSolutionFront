@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import {Component, ElementRef, OnInit, Renderer2} from '@angular/core';
+import {Component, ElementRef, OnInit, Renderer2, ViewChild} from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import {MatExpansionModule} from '@angular/material/expansion';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -37,6 +37,9 @@ import { AnswerDetailComponent } from 'src/app/answer/answer-detail/answer-detai
   styleUrls: ['homeworkTest-manage.component.css'],
 })
 export class HomeworkTestManage implements OnInit {
+@ViewChild(AnswerDetailComponent, { static: false })
+answerDetailComponent!: AnswerDetailComponent;
+
 homeworkTest: any = {};
 classGroupsByUserId: any = {};
 answersByHomeworkTestAndClassGroup: any = {};
@@ -184,6 +187,9 @@ getClassGroupId(selectedClassGroupId: number): void {
   
     dialogRef.afterClosed().subscribe(result => {
       // Tutaj możesz obsłużyć akcje po zamknięciu dialogu, jeśli jest to konieczne
+      if (result === 'saved') {
+        this.answerDetailComponent.updateAnswerDetails();
+      }
     });
   }
   
