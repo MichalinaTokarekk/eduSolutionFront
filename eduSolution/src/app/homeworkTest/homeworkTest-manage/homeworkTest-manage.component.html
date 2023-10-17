@@ -108,14 +108,18 @@
       </form>
       <div *ngIf="userRole === 'student' || userRole === 'admin'">
       <div *ngIf="answer">
+        <h2>Odpowiedź na pracę domową</h2>
         <button (click)="onEditAnswer(answer)">Edytuj odpowiedź</button>
         <button (click)="onDeleteAnswer(answer)">Usuń odpowiedź</button>
-        <h2>Odpowiedź na pracę domową</h2>
-        <p><strong>Zawartość odpowiedzi:</strong> {{ answer.answerContent }}</p>
-        <p><strong>Status odpowiedzi:</strong> {{ answer.answerStatus }}</p>
+        <!-- <p><strong>Zawartość odpowiedzi:</strong> {{ answer.answerContent }}</p> -->
+        <div *ngIf="!isAnswerContentVisible" class="answer-content">
+          {{ answer.answerContent }}
+        </div>
+        <p *ngIf="!isAnswerContentVisible"><strong>Status odpowiedzi:</strong> {{ answer.answerStatus }}</p>
         <div *ngIf="isAnswerContentVisible">
             <!-- Dodaj pole do edycji treści odpowiedzi -->
             <textarea class="textarea" id="answerContent" name="answerContent" [(ngModel)]="answer.answerContent"></textarea><br>
+            <p *ngIf="isAnswerContentVisible"><strong>Status odpowiedzi:</strong> {{ answer.answerStatus }}</p>
             <button (click)="onUpdateAnswer()">Zapisz zmiany</button>
             
         <!-- Formularz do dodawania plików -->

@@ -182,7 +182,7 @@ getClassGroupId(selectedClassGroupId: number): void {
   openAnswerDetailsDialog(answer: Answer): void {
     const dialogRef = this.dialog.open(AnswerDetailComponent, {
       width: '400px', // dostosuj szerokość do swoich potrzeb
-      data: { answer }, // przekaż odpowiedź jako dane
+      data: { answer, aFilesByAnswer: this.aFilesByAnswer }, // przekaż odpowiedź jako dane
     });
   
     dialogRef.afterClosed().subscribe(result => {
@@ -192,9 +192,6 @@ getClassGroupId(selectedClassGroupId: number): void {
       }
     });
   }
-  
-  
-  
   
 
   aFilesByAnswer!: any;
@@ -540,7 +537,7 @@ downloadFileById(fileId: number): void {
           (uploadError) => {
             console.error("Błąd podczas przesyłania pliku:", uploadError);
             console.log("aFileToUpload:", this.aFileToUpload);
-            console.log("answerId:", answer.id);
+            // console.log("answerId:", answer.id);
             location.reload();
           }
         );

@@ -34,7 +34,7 @@
   
   /* Stylizacja pola tekstowego "Polecenie" */
   .textarea {
-    width: 1030px;
+    width: 1150px;
     height: 300px;
     padding-left: 10px;
     border: 1px solid #ccc;
@@ -184,6 +184,14 @@
     max-height: 0 !important;
   }
   
+  .answer-content {
+    font-size: 18px; /* Rozmiar czcionki */
+    padding: 10px; /* Wewnętrzne wypełnienie */
+    border: 1px solid #ccc; /* Obramowanie */
+    max-width: 100%; /* Maksymalna szerokość */
+    height: 200px; /* Wysokość obszaru tekstowego */
+    overflow-y: scroll; /* Pasek przewijania, jeśli tekst jest dłuższy niż obszar */
+  }
 
  
   
