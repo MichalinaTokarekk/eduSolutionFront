@@ -49,7 +49,7 @@ import { LoginService } from 'src/app/authorization_authentication/service/login
     width: 100%;
     padding: 5px;
     margin: 5px 0; /* zmniejszenie marginesu od góry i dołu */
-    max-width: 300px; /* ograniczenie maksymalnej szerokości inputów */
+    max-width: 346px; /* ograniczenie maksymalnej szerokości inputów */
   }
   button {
     background-color: #007bff;
