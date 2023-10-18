@@ -38,4 +38,12 @@
     padding: 10px;
     margin: 5px 0;
   }
+
+  .course-name {
+    font-size: 18px;
+    font-weight: bold;
+    color: #292727; /* Przykładowy kolor tekstu */
+    /* Dodaj więcej stylów według swoich preferencji */
+  }
+  
   

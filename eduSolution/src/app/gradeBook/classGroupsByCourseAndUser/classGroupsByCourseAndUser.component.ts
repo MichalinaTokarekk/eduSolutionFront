@@ -8,6 +8,8 @@ import { ConfirmationDialogSemesterComponent } from '../../confirmations/semeste
 import { Subscription, catchError, of, switchMap, tap } from 'rxjs';
 import { ClassGroupService } from 'src/app/classGroup/classGroup-service/classGroup.service';
 import { LoginService } from 'src/app/authorization_authentication/service/login.service';
+import { UserService } from 'src/app/user/user-service/user.service';
+import { CourseService } from 'src/app/course/course-service/course.service';
 
 
 /**
@@ -19,25 +21,26 @@ import { LoginService } from 'src/app/authorization_authentication/service/login
   styleUrls: ['classGroupsByCourseAndUser.component.css'],
 })
 export class ClassGroupsByCourseAndUser implements OnInit {
-classGroup: any = {};
+course: any = {};
 classGroups!: any[]; 
+users!: any[]; 
 
 constructor(private http: HttpClient, private route: ActivatedRoute, private router: Router, private dialog: MatDialog, private snackBar: MatSnackBar, 
-            private classGroupService: ClassGroupService, private loginService: LoginService){}
+            private classGroupService: ClassGroupService, private loginService: LoginService, private userService: UserService, private courseService: CourseService){}
 
 
 ngOnInit(): void {
     this.route.paramMap.subscribe((params: ParamMap) => {
       const id = params.get('id');
       if (id !== null) {
-        this.classGroupService.get(id).subscribe((classGroup: any) => {
-          this.classGroup = classGroup;
+        this.courseService.get(id).subscribe((course: any) => {
+          this.course = course;
 
           const token = this.loginService.getToken();
           const _token = token.split('.')[1];
           const _atobData = atob(_token);
           const _finalData = JSON.parse(_atobData);
-          this.classGroupService.findClassGroupsByCourseAndUserId(classGroup.id, _finalData.id).subscribe((classGroups: any) => {
+          this.classGroupService.findClassGroupsByCourseAndUserId(course.id, _finalData.id).subscribe((classGroups: any) => {
             this.classGroups = classGroups;
           }, error => {
             console.error(error);
@@ -53,7 +56,11 @@ ngOnInit(): void {
   }
   
 
-
+  loadEduMaterialsBySectionId(classGroupId: number): void {
+    this.userService.findUsersByClassGroupId(classGroupId).subscribe(users => {
+      this.users = users;
+    });
+  }
 
 
 }

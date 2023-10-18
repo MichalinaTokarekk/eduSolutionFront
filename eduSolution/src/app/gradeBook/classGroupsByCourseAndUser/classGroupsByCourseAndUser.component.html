@@ -12,19 +12,27 @@
   </div>
    -->
 
+   <div class="course-name">{{ course.name }}</div>
    <div class="expansion-panel-container">
     <mat-accordion>
-      <mat-expansion-panel>
+      <mat-expansion-panel *ngFor="let cg of classGroups" (click)="loadEduMaterialsBySectionId(cg.id)">
         <mat-expansion-panel-header>
           <mat-panel-title>
             <ul class="class-list">
-                <li *ngFor="let cg of classGroups" class="class-item">
+                <li class="class-item">
                   {{ cg.name }}
                 </li>
             </ul>
           </mat-panel-title>
         </mat-expansion-panel-header>
-        
+        <div *ngIf="users">
+            <h3>Użytkownicy przypisani do klasy:</h3>
+            <ul class="user-list">
+              <li *ngFor="let user of users" class="user-item">
+                {{ user.firstName }} {{ user.lastName }}
+              </li>
+            </ul>
+        </div>
       </mat-expansion-panel>
     </mat-accordion>
   </div>
