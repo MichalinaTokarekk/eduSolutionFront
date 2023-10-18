@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { Observable, throwError } from "rxjs";
+import { ClassGroup } from "src/app/interfaces/classGroup-interface";
 
 
 @Injectable()
@@ -35,6 +36,10 @@ export class ClassGroupService {
 
   findClassGroupsByCoursesId(courseId: string) {
     return this.http.get(this.CLASSGROUP_API + '/findClassGroupsByCourseId/' + courseId);
+  }
+
+  findClassGroupsByCourseAndUserId(courseId: number, userId: number) {
+    return this.http.get<ClassGroup[]>(`${this.CLASSGROUP_API}/findClassGroupsByCourseAndUserId/${courseId}/${userId}`);
   }
 }
 

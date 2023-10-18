@@ -49,6 +49,7 @@ import { AnswerService } from './answer/answer-service/answer.service';
 import { AFileService } from './aFile/aFile-service/aFile.service';
 import { AnswerDetailComponent } from './answer/answer-detail/answer-detail.component';
 import { TeachingCoursesComponent } from './gradeBook/teachingCourses/teachingCourses.component';
+import { ClassGroupsByCourseAndUser } from './gradeBook/classGroupsByCourseAndUser/classGroupsByCourseAndUser.component';
 
 
 
@@ -93,7 +94,8 @@ export class MaterialModule {}
     EduMaterialManage,
     HomeworkTestManage,
     AnswerDetailComponent,
-    TeachingCoursesComponent
+    TeachingCoursesComponent,
+    ClassGroupsByCourseAndUser
   ],
   imports: [
     BrowserModule,

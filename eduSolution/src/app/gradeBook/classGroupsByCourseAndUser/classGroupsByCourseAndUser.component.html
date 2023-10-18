@@ -1,0 +1,32 @@
+<!-- <div *ngIf="classGroups">
+    <h3>Klasy przypisane do kursu:</h3>
+    <ul class="class-list">
+      <li *ngFor="let cg of classGroups" class="class-item">
+        {{ cg.name }}
+      </li>
+    </ul>
+  </div>
+  
+  <div *ngIf="!classGroup && !classGroups">
+    <p class="no-data-message">Brak dostępnych danych.</p>
+  </div>
+   -->
+
+   <div class="expansion-panel-container">
+    <mat-accordion>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <ul class="class-list">
+                <li *ngFor="let cg of classGroups" class="class-item">
+                  {{ cg.name }}
+                </li>
+            </ul>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
+  
+  

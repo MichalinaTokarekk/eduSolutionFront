@@ -15,6 +15,7 @@
                 <tr class="bg-success text-white">
                     <th>Lp</th>
                     <th (click)="onNameSort()" style="text-align: left;">Nazwa</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -34,7 +35,11 @@
                             {{course.name}}
                         </div>
                      
-                    </td>                   
+                    </td>  
+
+                    <td>
+                        <a [routerLink]="['/classGrioupsByCourseAndUser', course.id]">Przejdź dalej</a> 
+                    </td>            
                 </tr>
             </tbody>
         </table>
