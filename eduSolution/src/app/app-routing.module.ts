@@ -13,6 +13,7 @@ import { CourseGridViewComponent } from './course/course-grid-view/course-grid-v
 import { SectionManage } from './section/section-manage/section-manage.component';
 import { EduMaterialManage } from './eduMaterial/eduMaterial-manage/eduMaterial-manage.component';
 import { HomeworkTestManage } from './homeworkTest/homeworkTest-manage/homeworkTest-manage.component';
+import { TeachingCoursesComponent } from './gradeBook/teachingCourses/teachingCourses.component';
 
 const routes: Routes = [
   {path: "dashboard", component: DashboardComponent, canActivate:[AuthGuard]},
@@ -28,6 +29,7 @@ const routes: Routes = [
   {path: "section-manage/:courseId", component: SectionManage},
   {path: "eduMaterial-manage/:id", component: EduMaterialManage},
   {path: "homeworkTest-manage/:id", component: HomeworkTestManage},
+  {path: "teachingCourses-view", component: TeachingCoursesComponent},
   
 ];
 

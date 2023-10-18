@@ -48,6 +48,7 @@ import { HTFileService } from './htFile/htFile-service/htFile.service';
 import { AnswerService } from './answer/answer-service/answer.service';
 import { AFileService } from './aFile/aFile-service/aFile.service';
 import { AnswerDetailComponent } from './answer/answer-detail/answer-detail.component';
+import { TeachingCoursesComponent } from './gradeBook/teachingCourses/teachingCourses.component';
 
 
 
@@ -91,7 +92,8 @@ export class MaterialModule {}
     SectionManage,
     EduMaterialManage,
     HomeworkTestManage,
-    AnswerDetailComponent
+    AnswerDetailComponent,
+    TeachingCoursesComponent
   ],
   imports: [
     BrowserModule,

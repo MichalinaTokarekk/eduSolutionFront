@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { Observable, throwError } from "rxjs";
+import { Course } from "src/app/interfaces/course-interface";
 
 
 @Injectable()
@@ -17,6 +18,10 @@ export class CourseService {
 
   get(id: string) {
     return this.http.get(this.COURSE_API + '/course/' + id);
+  }
+
+  findCoursesByUserId(userId: number) {
+    return this.http.get(this.COURSE_API + '/findCoursesByUserId/' + userId); 
   }
 
   save (course: any) : Observable <any> {

@@ -1,0 +1,42 @@
+<div class="row">
+    <div class="col-6">
+
+    </div>
+    <div class="col-2 text-end"> 
+        <!-- <input type="text" [(ngModel)]="searchText" placeholder="Search" (ngModelChange)="filter($event)" class="form-control"> -->
+    </div>
+    
+</div>
+<br><br>
+<div class="row">
+    <div class="col-8">
+        <table class="table table-bordered ">
+            <thead>
+                <tr class="bg-success text-white">
+                    <th>Lp</th>
+                    <th (click)="onNameSort()" style="text-align: left;">Nazwa</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let course of courseArray;let srNo = index">
+                    <td>{{srNo+1}}</td>
+                    <td>
+                        <div *ngIf="course.isEdit" class="form-group">
+                            <div class="input-container">
+                                <input type="text" class="form-control" [(ngModel)]="course.name">
+                                <div class="text-danger error-message" *ngIf="!course.name">
+                                    {{(course.name)}}
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div *ngIf="!course.isEdit">
+                            {{course.name}}
+                        </div>
+                     
+                    </td>                   
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
