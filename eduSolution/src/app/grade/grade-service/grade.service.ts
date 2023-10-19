@@ -19,8 +19,8 @@ export class GradeService {
     return this.http.get(this.GRADE_API + '/grade/' + id);
   }
 
-  getGradesByStudentId(studentId: number) {
-    return this.http.get(this.GRADE_API + '/getGradesByStudentId/' + studentId);
+  getGradesByStudentId(studentId: number, courseId: number) {
+    return this.http.get(this.GRADE_API + '/findByStudentIdAndCourseId/' + studentId + '/' + courseId);
   }
 
   save (grade: any) : Observable <any> {

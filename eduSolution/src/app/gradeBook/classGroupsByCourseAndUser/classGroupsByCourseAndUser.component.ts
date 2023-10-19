@@ -78,9 +78,9 @@ ngOnInit(): void {
 
 gradesByUser: { [key: number]: Grade[] } = {}; 
 
-loadGradesByStudentId(studentId: number) {
+loadGradesByStudentId(studentId: number, courseId: number) {
     console.log('Kliknięto przycisk Pobierz oceny.');
-    this.gradeService.getGradesByStudentId(studentId).subscribe((grades) => {
+    this.gradeService.getGradesByStudentId(studentId, courseId).subscribe((grades) => {
         console.log('Oceny dla studentId ' + studentId + ':', grades);
         this.gradesByUser[studentId] = grades as Grade[];
     });

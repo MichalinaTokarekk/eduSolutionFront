@@ -30,7 +30,7 @@
             <ul class="user-list">
               <li *ngFor="let user of users" class="user-item">
                 {{ user.firstName }} {{ user.lastName }}
-                <button (click)="loadGradesByStudentId(user.id)">Pokaż oceny</button>
+                <button (click)="loadGradesByStudentId(user.id, course.id)">Pokaż oceny</button>
                     <div *ngIf="gradesByUser[user.id]" class="grade-section">
                         <h4>Oceny:
                             <div class="grade-list">
