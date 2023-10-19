@@ -12,6 +12,8 @@ import { UserService } from 'src/app/user/user-service/user.service';
 import { CourseService } from 'src/app/course/course-service/course.service';
 import { GradeService } from 'src/app/grade/grade-service/grade.service';
 import { Grade } from 'src/app/interfaces/grade-interface';
+import { AddGradeDetailComponent } from 'src/app/grade/grade-detail/add-Grade-detail.component';
+import { User } from 'src/app/interfaces/user-interface';
 
 
 /**
@@ -86,7 +88,23 @@ loadGradesByStudentId(studentId: number, courseId: number) {
     });
   }
   
+  answerDetailComponent!: AddGradeDetailComponent;
+  selectedStudent: User | undefined;
 
+  openAddGradeDetailDialog(studentId: number, courseId: number, studentFirstName: string, studentLastName: string): void {
+    const dialogRef = this.dialog.open(AddGradeDetailComponent, {
+      width: '520px', // dostosuj szerokość do swoich potrzeb
+      height: '250px',
+      data: { studentId, courseId, studentFirstName, studentLastName, }, // przekaż odpowiedź jako dane
+    });
+  
+    dialogRef.afterClosed().subscribe(result => {
+      // Tutaj możesz obsłużyć akcje po zamknięciu dialogu, jeśli jest to konieczne
+      if (result === 'saved') {
+        // this.answerDetailComponent.updateAnswerDetails();
+      }
+    });
+  }
 
 
 

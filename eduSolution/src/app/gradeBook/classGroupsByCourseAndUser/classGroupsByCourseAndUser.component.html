@@ -33,6 +33,7 @@
                 <button (click)="loadGradesByStudentId(user.id, course.id)">Pokaż oceny</button>
                     <div *ngIf="gradesByUser[user.id]" class="grade-section">
                         <h4>Oceny:
+                            <button (click)="openAddGradeDetailDialog(user.id, course.id, user.firstName, user.lastName)" class="add-grade-button">Dodaj ocenę</button>
                             <div class="grade-list">
                                 <span *ngFor="let grade of gradesByUser[user.id]; let last = last" class="grade-value">
                                   {{grade.value}}

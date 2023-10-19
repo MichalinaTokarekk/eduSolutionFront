@@ -51,6 +51,8 @@ import { AnswerDetailComponent } from './answer/answer-detail/answer-detail.comp
 import { TeachingCoursesComponent } from './gradeBook/teachingCourses/teachingCourses.component';
 import { ClassGroupsByCourseAndUser } from './gradeBook/classGroupsByCourseAndUser/classGroupsByCourseAndUser.component';
 import { GradeService } from './grade/grade-service/grade.service';
+import { TypeOfTestingKnowledgeService } from './typeOfTestingKnowledge/typeOfTestingKnowledge-service/typeOfTestingKnowledge.service';
+import { AddGradeDetailComponent } from './grade/grade-detail/add-Grade-detail.component';
 
 
 
@@ -96,7 +98,8 @@ export class MaterialModule {}
     HomeworkTestManage,
     AnswerDetailComponent,
     TeachingCoursesComponent,
-    ClassGroupsByCourseAndUser
+    ClassGroupsByCourseAndUser,
+    AddGradeDetailComponent
   ],
   imports: [
     BrowserModule,
@@ -113,7 +116,7 @@ export class MaterialModule {}
     
   ],
   providers: [SemesterService, CourseService, ClassGroupService, LoginService, UserService, SectionService, EduMaterialService, EMFileService, 
-    HomeworkTestService, HTFileService, AnswerService, AFileService, GradeService],
+    HomeworkTestService, HTFileService, AnswerService, AFileService, GradeService, TypeOfTestingKnowledgeService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
