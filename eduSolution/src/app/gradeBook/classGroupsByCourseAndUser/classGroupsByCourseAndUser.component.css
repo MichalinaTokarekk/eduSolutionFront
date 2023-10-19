@@ -43,7 +43,27 @@
     font-size: 18px;
     font-weight: bold;
     color: #292727; /* Przykładowy kolor tekstu */
-    /* Dodaj więcej stylów według swoich preferencji */
+    
   }
+
+  .grade-section {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ccc; /* Przykładowa kreska oddzielająca oceny od nagłówka */
+    padding: 10px; /* Dodatkowe wypełnienie wokół całego bloku */
+    margin-bottom: 10px; /* Odstęp między blokami grade-section (opcjonalny) */
+  }
+  
+  .grades-header {
+    margin-right: 10px;
+    font-size: 20px; /* Zwiększenie rozmiaru czcionki dla nagłówka (opcjonalny) */
+  }
+  
+  .grade-value {
+    font-size: 18px;
+    margin: 0;
+  }
+  
+  
   
   

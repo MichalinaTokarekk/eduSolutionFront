@@ -26,10 +26,22 @@
           </mat-panel-title>
         </mat-expansion-panel-header>
         <div *ngIf="users">
-            <h3>Użytkownicy przypisani do klasy:</h3>
+            <h3>Użytkownicy przypisani do grupy:</h3>
             <ul class="user-list">
               <li *ngFor="let user of users" class="user-item">
                 {{ user.firstName }} {{ user.lastName }}
+                <button (click)="loadGradesByStudentId(user.id)">Pokaż oceny</button>
+                    <div *ngIf="gradesByUser[user.id]" class="grade-section">
+                        <h4>Oceny:
+                            <div class="grade-list">
+                                <span *ngFor="let grade of gradesByUser[user.id]; let last = last" class="grade-value">
+                                  {{grade.value}}
+                                <span *ngIf="!last">, </span>
+                                </span>
+                            </div>
+                        </h4>
+                        
+                    </div>
               </li>
             </ul>
         </div>

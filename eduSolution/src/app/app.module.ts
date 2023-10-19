@@ -50,6 +50,7 @@ import { AFileService } from './aFile/aFile-service/aFile.service';
 import { AnswerDetailComponent } from './answer/answer-detail/answer-detail.component';
 import { TeachingCoursesComponent } from './gradeBook/teachingCourses/teachingCourses.component';
 import { ClassGroupsByCourseAndUser } from './gradeBook/classGroupsByCourseAndUser/classGroupsByCourseAndUser.component';
+import { GradeService } from './grade/grade-service/grade.service';
 
 
 
@@ -112,7 +113,7 @@ export class MaterialModule {}
     
   ],
   providers: [SemesterService, CourseService, ClassGroupService, LoginService, UserService, SectionService, EduMaterialService, EMFileService, 
-    HomeworkTestService, HTFileService, AnswerService, AFileService],
+    HomeworkTestService, HTFileService, AnswerService, AFileService, GradeService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
