@@ -7,21 +7,21 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { MainPageComponent } from './main-page/main-page.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule, HTTP_INTERCEPTORS, HttpInterceptor } from '@angular/common/http';
-import { FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 
 
-import {MatGridListModule} from '@angular/material/grid-list';
-import {MatCardModule} from '@angular/material/card';
-import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatCardModule } from '@angular/material/card';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { SemesterListComponent } from './semester/semester-list/semester-list.component';
 import { SemesterService } from './semester/semester-service/semester.service';
-import {MatDialogModule} from '@angular/material/dialog';
-import {MatTableModule} from '@angular/material/table';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatTableModule } from '@angular/material/table';
 import { TableModule } from 'primeng/table';
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { NgClass } from '@angular/common';
-import {MatSelectModule} from '@angular/material/select';
+import { MatSelectModule } from '@angular/material/select';
 
 
 
@@ -54,6 +54,7 @@ import { GradeService } from './grade/grade-service/grade.service';
 import { TypeOfTestingKnowledgeService } from './typeOfTestingKnowledge/typeOfTestingKnowledge-service/typeOfTestingKnowledge.service';
 import { AddGradeDetailComponent } from './grade/grade-detail/add-Grade-detail.component';
 import { DetailEditGradeComponent } from './grade/grade-detail/detailEditGrade.component';
+import { TokenInterceptorService } from './authorization_authentication/service/token-interceptor.service';
 
 
 
@@ -74,13 +75,13 @@ import { DetailEditGradeComponent } from './grade/grade-detail/detailEditGrade.c
     RouterModule,
   ],
   declarations: [
-    
+
   ],
   imports: [
     BrowserAnimationsModule
   ]
 })
-export class MaterialModule {}
+export class MaterialModule { }
 
 @NgModule({
   declarations: [
@@ -115,10 +116,13 @@ export class MaterialModule {}
     ReactiveFormsModule,
     FormsModule,
     MatExpansionModule
-    
+
   ],
-  providers: [SemesterService, CourseService, ClassGroupService, LoginService, UserService, SectionService, EduMaterialService, EMFileService, 
-    HomeworkTestService, HTFileService, AnswerService, AFileService, GradeService, TypeOfTestingKnowledgeService],
+  providers: [SemesterService, CourseService, ClassGroupService, LoginService, UserService, SectionService, EduMaterialService, EMFileService,
+    HomeworkTestService, HTFileService, AnswerService, AFileService, GradeService, TypeOfTestingKnowledgeService,
+    {
+      provide: HTTP_INTERCEPTORS, useClass: TokenInterceptorService, multi: true
+    }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
