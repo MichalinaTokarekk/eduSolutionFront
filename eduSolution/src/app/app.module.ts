@@ -53,6 +53,7 @@ import { ClassGroupsByCourseAndUser } from './gradeBook/classGroupsByCourseAndUs
 import { GradeService } from './grade/grade-service/grade.service';
 import { TypeOfTestingKnowledgeService } from './typeOfTestingKnowledge/typeOfTestingKnowledge-service/typeOfTestingKnowledge.service';
 import { AddGradeDetailComponent } from './grade/grade-detail/add-Grade-detail.component';
+import { DetailEditGradeComponent } from './grade/grade-detail/detailEditGrade.component';
 
 
 
@@ -99,7 +100,8 @@ export class MaterialModule {}
     AnswerDetailComponent,
     TeachingCoursesComponent,
     ClassGroupsByCourseAndUser,
-    AddGradeDetailComponent
+    AddGradeDetailComponent,
+    DetailEditGradeComponent
   ],
   imports: [
     BrowserModule,

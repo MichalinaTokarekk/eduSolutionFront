@@ -14,6 +14,7 @@ import { GradeService } from 'src/app/grade/grade-service/grade.service';
 import { Grade } from 'src/app/interfaces/grade-interface';
 import { AddGradeDetailComponent } from 'src/app/grade/grade-detail/add-Grade-detail.component';
 import { User } from 'src/app/interfaces/user-interface';
+import { DetailEditGradeComponent } from 'src/app/grade/grade-detail/detailEditGrade.component';
 
 
 /**
@@ -79,14 +80,16 @@ ngOnInit(): void {
 //   }
 
 gradesByUser: { [key: number]: Grade[] } = {}; 
+teacher: any;
 
 loadGradesByStudentId(studentId: number, courseId: number) {
     console.log('Kliknięto przycisk Pobierz oceny.');
     this.gradeService.getGradesByStudentId(studentId, courseId).subscribe((grades) => {
         console.log('Oceny dla studentId ' + studentId + ':', grades);
         this.gradesByUser[studentId] = grades as Grade[];
+       
     });
-  }
+}
   
   answerDetailComponent!: AddGradeDetailComponent;
   selectedStudent: User | undefined;
@@ -96,6 +99,23 @@ loadGradesByStudentId(studentId: number, courseId: number) {
       width: '520px', // dostosuj szerokość do swoich potrzeb
       height: '250px',
       data: { studentId, courseId, studentFirstName, studentLastName, }, // przekaż odpowiedź jako dane
+    });
+  
+    dialogRef.afterClosed().subscribe(result => {
+      // Tutaj możesz obsłużyć akcje po zamknięciu dialogu, jeśli jest to konieczne
+      if (result === 'saved') {
+        // this.answerDetailComponent.updateAnswerDetails();
+      }
+    });
+  }
+
+
+  openDetailEditGradeDialog(studentId: number, courseId: number, studentFirstName: string, studentLastName: string, teacherFirstName: string, teacherLastName: string): void {
+  const gradesForStudentInCourse = this.gradeService.getGradesByStudentId(studentId, courseId);
+    const dialogRef = this.dialog.open(DetailEditGradeComponent, {
+      width: '520px', // dostosuj szerokość do swoich potrzeb
+      height: '500px',
+      data: {  grades: this.gradeService.getGradesByStudentId(studentId, courseId), studentId, courseId, studentFirstName, studentLastName, teacherFirstName, teacherLastName}, // przekaż odpowiedź jako dane
     });
   
     dialogRef.afterClosed().subscribe(result => {

@@ -32,16 +32,16 @@
                 {{ user.firstName }} {{ user.lastName }}
                 <button (click)="loadGradesByStudentId(user.id, course.id)">Pokaż oceny</button>
                     <div *ngIf="gradesByUser[user.id]" class="grade-section">
-                        <h4>Oceny:
-                            <button (click)="openAddGradeDetailDialog(user.id, course.id, user.firstName, user.lastName)" class="add-grade-button">Dodaj ocenę</button>
+                        <!-- <h4>Oceny:</h4> -->
+                        <button (click)="openAddGradeDetailDialog(user.id, course.id, user.firstName, user.lastName)" class="add-grade-button">Dodaj ocenę</button>
+                        <button (click)="openDetailEditGradeDialog(user.id, course.id, user.firstName, user.lastName, gradesByUser[user.id][0].teacher.firstName, gradesByUser[user.id][0].teacher.lastName)" class="add-grade-button">Pokaż szczegóły</button>
                             <div class="grade-list">
                                 <span *ngFor="let grade of gradesByUser[user.id]; let last = last" class="grade-value">
                                   {{grade.value}}
                                 <span *ngIf="!last">, </span>
                                 </span>
+
                             </div>
-                        </h4>
-                        
                     </div>
               </li>
             </ul>

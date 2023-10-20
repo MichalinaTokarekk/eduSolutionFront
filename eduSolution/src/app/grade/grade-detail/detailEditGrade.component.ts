@@ -1,0 +1,118 @@
+import { Component, Inject, Input, OnInit } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
+import { AFileService } from 'src/app/aFile/aFile-service/aFile.service';
+import { HomeworkTestService } from 'src/app/homeworkTest/homeworkTest-service/homeworkTest.service';
+import { HTFileService } from 'src/app/htFile/htFile-service/htFile.service';
+import { LoginService } from 'src/app/authorization_authentication/service/login.service';
+import { GradeService } from '../grade-service/grade.service';
+import { TypeOfTestingKnowledge } from 'src/app/interfaces/typeOfTestingKnowledge-interface';
+import { Grade } from 'src/app/interfaces/grade-interface';
+
+@Component({
+  selector: 'app-answer-detail',
+  template: `
+    <div class="answer-detail-container">
+  <h3 class="add-grade-heading">Lista ocen dla studenta: {{ studentFirstName }} {{ studentLastName }}</h3>
+
+  <ng-container *ngFor="let grade of gradesByUser[studentId]">
+    <div class="grade-item">
+      <p>Wartość oceny: {{ grade.value }}</p>
+      <p>Opis oceny: {{ grade.description }}</p>
+      <p>Nauczyciel: {{ data.teacherFirstName }} {{ data.teacherLastName }}</p>
+
+      <!-- <button (click)="EditGrade()">Edytuj ocenę</button> -->
+    </div>
+  </ng-container>
+</div>
+
+  `,
+  styles: [`
+ .answer-detail-container {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin: 10px;
+  background-color: #f5f5f5;
+  border-radius: 5px;
+}
+
+.add-grade-heading {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.grade-item {
+  border: 1px solid #ddd;
+  padding: 10px;
+  margin: 10px 0;
+  background-color: #fff;
+  border-radius: 5px;
+}
+
+.grade-item p {
+  margin: 5px 0;
+}
+
+/* Dodatkowy styl dla przycisku "Edytuj ocenę", który jest aktualnie wyłączony */
+.grade-item button {
+  background-color: #ddd;
+  border: none;
+  color: #333;
+  padding: 5px 10px;
+  border-radius: 3px;
+  cursor: not-allowed;
+}
+
+.grade-item button:hover {
+  background-color: #ddd;
+}
+
+`]
+})
+    export class DetailEditGradeComponent implements OnInit{
+
+    grades: Grade[] = [];    
+    studentFirstName: any;
+    studentLastName: any;
+    teacherFirstName: any;
+    teacherLastName: any;
+    studentId: any;
+    courseId: any;
+    value!: string;
+    description!: string;
+    typeOfTestingKnowledge!: TypeOfTestingKnowledge;
+
+    
+    constructor(@Inject(MAT_DIALOG_DATA) public data: any, public dialogRef: MatDialogRef<DetailEditGradeComponent>, private router: Router,
+                        private route: ActivatedRoute, private aFileService: AFileService, private homeworkTestService: HomeworkTestService, private htFileService: HTFileService,
+                        private loginService: LoginService, private gradeService: GradeService) {
+        this.grades = data.grades;
+        this.studentFirstName = data.studentFirstName;
+        this.studentLastName = data.studentLastName;
+        this.teacherFirstName = data.teacherFirstName;
+        this.teacherLastName = data.teacherLastName;
+        this.studentId = data.studentId;
+        this.courseId = data.courseId;
+        console.log('nauczyciel', this.teacherFirstName);
+}
+
+ngOnInit(): void {
+    console.log('Kliknięto przycisk Pobierz oceny.');
+    this.gradeService.getGradesByStudentId(this.studentId, this.courseId).subscribe((grades) => {
+        console.log('Oceny dla studentId ' + this.studentId + ':', grades);
+        this.gradesByUser[this.studentId] = grades as Grade[];
+        
+        console.log('load', this.gradesByUser[this.studentId]);
+    });
+}
+
+
+    gradesByUser: { [key: number]: Grade[] } = {};
+    
+
+  
+   
+    
+}
+
