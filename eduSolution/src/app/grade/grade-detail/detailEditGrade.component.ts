@@ -12,7 +12,7 @@ import { Grade } from 'src/app/interfaces/grade-interface';
 @Component({
   selector: 'app-answer-detail',
   template: `
-    <div class="answer-detail-container">
+    <!-- <div class="answer-detail-container">
   <h3 class="add-grade-heading">Lista ocen dla studenta: {{ studentFirstName }} {{ studentLastName }}</h3>
 
   <ng-container *ngFor="let grade of gradesByUser[studentId]">
@@ -21,13 +21,53 @@ import { Grade } from 'src/app/interfaces/grade-interface';
       <p>Opis oceny: {{ grade.description }}</p>
       <p>Nauczyciel: {{ data.teacherFirstName }} {{ data.teacherLastName }}</p>
 
-      <!-- <button (click)="EditGrade()">Edytuj ocenę</button> -->
+      <button (click)="EditGrade()">Edytuj ocenę</button>
+    </div>
+  </ng-container>
+</div> -->
+
+<div class="answer-detail-container">
+  <h3 class="add-grade-heading">Lista ocen dla studenta: {{ studentFirstName }} {{ studentLastName }}</h3>
+
+  <ng-container *ngFor="let grade of gradesByUser[studentId]; let i = index">
+    <div class="grade-item">
+      <p>
+        Wartość oceny:
+        <input [(ngModel)]="gradesByUser[studentId][i].value" [readonly]="!isEditing[i]" class="grade-input">
+      </p>
+      <p>
+        Opis oceny:
+        <input [(ngModel)]="gradesByUser[studentId][i].description" [readonly]="!isEditing[i]" class="grade-input">
+      </p>
+      <p>Nauczyciel: {{ data.teacherFirstName }} {{ data.teacherLastName }}</p>
+
+      <button *ngIf="!isEditing[i]" (click)="toggleEditing(i)" class="edit-button">Edytuj ocenę</button>
+      <button *ngIf="isEditing[i]" (click)="saveEditing(i)" class="edit-button">Zapisz</button>
+
+      <button (click)="deleteGrade(i)" class="delete-button">Usuń</button>
     </div>
   </ng-container>
 </div>
 
+
+
   `,
   styles: [`
+ .edit-button {
+  background-color: #007bff; /* Kolor tła */
+  color: #fff; /* Kolor tekstu */
+  padding: 5px 10px; /* Wielkość przycisku */
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s; /* Dla płynnej zmiany koloru tła */
+  outline: none; /* Usunięcie domyślnego obramowania */
+}
+
+.edit-button:hover, .edit-button:focus {
+  background-color: #0056b3; /* Kolor tła po najechaniu myszką (hover) lub uzyskaniu focusu */
+}
+
+
  .answer-detail-container {
   border: 1px solid #ccc;
   padding: 10px;
@@ -109,10 +149,38 @@ ngOnInit(): void {
 
 
     gradesByUser: { [key: number]: Grade[] } = {};
-    
+    isEditing: boolean[] = [];
 
-  
+
+    toggleEditing(index: number) {
+        this.isEditing[index] = !this.isEditing[index];
+      }
    
-    
+      saveEditing(index: number) {
+        // Tutaj dodaj kod do zapisywania zmian w ocenie na serwerze
+        const editedGrade = this.gradesByUser[this.studentId][index];
+        // Wyślij zmienione dane na serwer lub wykonaj inne odpowiednie operacje
+        // Na przykład:
+        this.gradeService.save(editedGrade).subscribe((response) => {
+          // Obsługa odpowiedzi po zapisaniu oceny
+          // Możesz również zaktualizować stan ocen w odpowiedzi z serwera, jeśli to konieczne
+          this.isEditing[index] = false; // Wyłącz edycję po zapisie
+        });
+        location.reload();
+      }
+
+
+    deleteGrade(index: number) {
+        const gradeId = this.gradesByUser[this.studentId][index].id.toString(); // Konwersja na string
+        
+        // Tutaj wykonaj operację usunięcia oceny na serwerze lub w lokalnej tablicy
+        // Na przykład:
+        this.gradeService.remove(gradeId).subscribe((response) => {
+            // Obsługa odpowiedzi po usunięciu oceny
+            this.gradesByUser[this.studentId].splice(index, 1); // Usuń ocenę z lokalnej tablicy
+        });
+        location.reload();
+    }
+      
 }
 
