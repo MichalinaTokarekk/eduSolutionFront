@@ -8,6 +8,7 @@ import { LoginService } from 'src/app/authorization_authentication/service/login
 import { GradeService } from '../grade-service/grade.service';
 import { TypeOfTestingKnowledge } from 'src/app/interfaces/typeOfTestingKnowledge-interface';
 import { Grade } from 'src/app/interfaces/grade-interface';
+import { TypeOfTestingKnowledgeService } from 'src/app/typeOfTestingKnowledge/typeOfTestingKnowledge-service/typeOfTestingKnowledge.service';
 
 @Component({
   selector: 'app-answer-detail',
@@ -41,7 +42,13 @@ import { Grade } from 'src/app/interfaces/grade-interface';
       </p>
       <p>Nauczyciel: {{ data.teacherFirstName }} {{ data.teacherLastName }}</p>
       <p *ngIf="typeOfTestingKnowledge[i] && typeOfTestingKnowledge[i].name">Typ oceny: {{ typeOfTestingKnowledge[i].name }} </p>
-      <p *ngIf="!typeOfTestingKnowledge[i]">Nie podano typu oceny</p>
+      <!-- <p *ngIf="!typeOfTestingKnowledge[i]">Nie podano typu oceny</p> -->
+      <p *ngIf="isEditing[i]">
+        Typ oceny:
+        <mat-select class="knowledge-select" [(ngModel)]="selectedKnowledge[i]" name="knowledge" placeholder="Wybierz rodzaj oceny">
+        <mat-option *ngFor="let knowledge of allKnowledge" [value]="knowledge.id">{{ knowledge.name }}</mat-option>
+      </mat-select>
+        </p>
 
       <button *ngIf="!isEditing[i]" (click)="toggleEditing(i)" class="edit-button">Edytuj ocenę</button>
       <button *ngIf="isEditing[i]" (click)="saveEditing(i)" class="edit-button">Zapisz</button>
@@ -125,11 +132,15 @@ import { Grade } from 'src/app/interfaces/grade-interface';
     value!: string;
     description!: string;
     typeOfTestingKnowledge: TypeOfTestingKnowledge[] = [];
+    allKnowledge: TypeOfTestingKnowledge[] = [];
+    selectedKnowledge: number[] = [];
+
+
 
     
     constructor(@Inject(MAT_DIALOG_DATA) public data: any, public dialogRef: MatDialogRef<DetailEditGradeComponent>, private router: Router,
                         private route: ActivatedRoute, private aFileService: AFileService, private homeworkTestService: HomeworkTestService, private htFileService: HTFileService,
-                        private loginService: LoginService, private gradeService: GradeService) {
+                        private loginService: LoginService, private gradeService: GradeService, private typeOfTestingKnowledgeService: TypeOfTestingKnowledgeService) {
         this.grades = data.grades;
         this.studentFirstName = data.studentFirstName;
         this.studentLastName = data.studentLastName;
@@ -148,6 +159,12 @@ ngOnInit(): void {
         this.gradesByUser[this.studentId] = grades as Grade[];
         
         console.log('load', this.gradesByUser[this.studentId]);
+        
+    });
+
+
+    this.typeOfTestingKnowledgeService.getAll().subscribe((knowledge: TypeOfTestingKnowledge[]) => {
+        this.allKnowledge = knowledge;
     });
 }
 
@@ -160,25 +177,22 @@ ngOnInit(): void {
         this.isEditing[index] = !this.isEditing[index];
       }
    
-      saveEditing(index: number) {
-        // Tutaj dodaj kod do zapisywania zmian w ocenie na serwerze
-        const editedGrade = this.gradesByUser[this.studentId][index];
-        // Wyślij zmienione dane na serwer lub wykonaj inne odpowiednie operacje
-        // Na przykład:
-        this.gradeService.save(editedGrade).subscribe((response) => {
-          // Obsługa odpowiedzi po zapisaniu oceny
-          // Możesz również zaktualizować stan ocen w odpowiedzi z serwera, jeśli to konieczne
-          this.isEditing[index] = false; // Wyłącz edycję po zapisie
-        });
-        location.reload();
+
+    saveEditing(index: number) {
+    const editedGrade = this.gradesByUser[this.studentId][index];
+    if (this.selectedKnowledge[index] !== undefined) {
+        editedGrade.typeOfTestingKnowledge = this.allKnowledge.find(type => type.id === this.selectedKnowledge[index]) as TypeOfTestingKnowledge;
       }
+    this.gradeService.save(editedGrade).subscribe((response) => {
+        this.isEditing[index] = false; // Wyłącz edycję po zapisie
+    });
+    location.reload();
+    }
 
 
     deleteGrade(index: number) {
         const gradeId = this.gradesByUser[this.studentId][index].id.toString(); // Konwersja na string
         
-        // Tutaj wykonaj operację usunięcia oceny na serwerze lub w lokalnej tablicy
-        // Na przykład:
         this.gradeService.remove(gradeId).subscribe((response) => {
             // Obsługa odpowiedzi po usunięciu oceny
             this.gradesByUser[this.studentId].splice(index, 1); // Usuń ocenę z lokalnej tablicy
