@@ -37,7 +37,7 @@
                         <button (click)="openDetailEditGradeDialog(user.id, course.id, user.firstName, user.lastName, gradesByUser[user.id][0].teacher.firstName, gradesByUser[user.id][0].teacher.lastName)" class="add-grade-button">Pokaż szczegóły</button>
                             <div class="grade-list">
                                 <span *ngFor="let grade of gradesByUser[user.id]; let last = last" class="grade-value">
-                                  {{grade.value}}
+                                  {{grade.value}}   
                                 <span *ngIf="!last">, </span>
                                 </span>
 

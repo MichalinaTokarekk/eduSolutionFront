@@ -15,6 +15,7 @@ import { Grade } from 'src/app/interfaces/grade-interface';
 import { AddGradeDetailComponent } from 'src/app/grade/grade-detail/add-Grade-detail.component';
 import { User } from 'src/app/interfaces/user-interface';
 import { DetailEditGradeComponent } from 'src/app/grade/grade-detail/detailEditGrade.component';
+import { TypeOfTestingKnowledge } from 'src/app/interfaces/typeOfTestingKnowledge-interface';
 
 
 /**
@@ -33,7 +34,9 @@ grades!: any[];
 
 constructor(private http: HttpClient, private route: ActivatedRoute, private router: Router, private dialog: MatDialog, private snackBar: MatSnackBar, 
             private classGroupService: ClassGroupService, private loginService: LoginService, private userService: UserService, private courseService: CourseService,
-            private gradeService: GradeService){}
+            private gradeService: GradeService){
+                this.grades = []; 
+            }
 
 
 ngOnInit(): void {
@@ -60,6 +63,7 @@ ngOnInit(): void {
         console.log("Nie ma nic");
       }
     });
+    // this.getTypeOfTestingKnowledge();
   }
   
 
@@ -87,7 +91,6 @@ loadGradesByStudentId(studentId: number, courseId: number) {
     this.gradeService.getGradesByStudentId(studentId, courseId).subscribe((grades) => {
         console.log('Oceny dla studentId ' + studentId + ':', grades);
         this.gradesByUser[studentId] = grades as Grade[];
-       
     });
 }
   
@@ -102,29 +105,65 @@ loadGradesByStudentId(studentId: number, courseId: number) {
     });
   
     dialogRef.afterClosed().subscribe(result => {
-      // Tutaj możesz obsłużyć akcje po zamknięciu dialogu, jeśli jest to konieczne
       if (result === 'saved') {
         // this.answerDetailComponent.updateAnswerDetails();
       }
     });
   }
 
+  allTypes: TypeOfTestingKnowledge[] = [];
+  getTypeOfTestingKnowledge() {
+    this.allTypes = this.grades.map((grade) => grade.typeOfTestingKnowledge);
+    console.log('Pobrane typy ocen:', this.allTypes);
+  }
 
-  openDetailEditGradeDialog(studentId: number, courseId: number, studentFirstName: string, studentLastName: string, teacherFirstName: string, teacherLastName: string): void {
-  const gradesForStudentInCourse = this.gradeService.getGradesByStudentId(studentId, courseId);
-    const dialogRef = this.dialog.open(DetailEditGradeComponent, {
-      width: '520px', // dostosuj szerokość do swoich potrzeb
-      height: '500px',
-      data: {  grades: this.gradeService.getGradesByStudentId(studentId, courseId), studentId, courseId, studentFirstName, studentLastName, teacherFirstName, teacherLastName}, // przekaż odpowiedź jako dane
-    });
+//   openDetailEditGradeDialog(studentId: number, courseId: number, studentFirstName: string, studentLastName: string, teacherFirstName: string, teacherLastName: string): void {
+//   const gradesForStudentInCourse = this.gradeService.getGradesByStudentId(studentId, courseId);
+
+//     const dialogRef = this.dialog.open(DetailEditGradeComponent, {
+//       width: '520px', 
+//       height: '500px',
+//       data: {  grades: this.gradeService.getGradesByStudentId(studentId, courseId), studentId, courseId, studentFirstName, studentLastName, teacherFirstName, teacherLastName, allTypes: this.allTypes}, 
+//     });
   
-    dialogRef.afterClosed().subscribe(result => {
-      // Tutaj możesz obsłużyć akcje po zamknięciu dialogu, jeśli jest to konieczne
-      if (result === 'saved') {
-        // this.answerDetailComponent.updateAnswerDetails();
-      }
+//     dialogRef.afterClosed().subscribe(result => {
+//       if (result === 'saved') {
+//       }
+//     });
+
+//     console.log('types', this.allTypes)
+//   }
+
+
+openDetailEditGradeDialog(studentId: number, courseId: number, studentFirstName: string, studentLastName: string, teacherFirstName: string, teacherLastName: string): void {
+    this.gradeService.getGradesByStudentId(studentId, courseId).subscribe((grades: any) => {
+      const typesOfGrades = grades.map((grade: Grade) => grade.typeOfTestingKnowledge);
+  
+      const dialogRef = this.dialog.open(DetailEditGradeComponent, {
+        width: '520px',
+        height: '500px',
+        data: {
+          grades,
+          studentId,
+          courseId,
+          studentFirstName,
+          studentLastName,
+          teacherFirstName,
+          teacherLastName,
+          allTypes: typesOfGrades,
+        },
+      });
+  
+      dialogRef.afterClosed().subscribe(result => {
+        if (result === 'saved') {
+          // Obsługa po zamknięciu dialogu
+        }
+      });
     });
   }
+  
+  
+  
 
 
 

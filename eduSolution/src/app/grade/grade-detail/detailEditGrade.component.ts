@@ -40,6 +40,8 @@ import { Grade } from 'src/app/interfaces/grade-interface';
         <input [(ngModel)]="gradesByUser[studentId][i].description" [readonly]="!isEditing[i]" class="grade-input">
       </p>
       <p>Nauczyciel: {{ data.teacherFirstName }} {{ data.teacherLastName }}</p>
+      <p *ngIf="typeOfTestingKnowledge[i] && typeOfTestingKnowledge[i].name">Typ oceny: {{ typeOfTestingKnowledge[i].name }} </p>
+      <p *ngIf="!typeOfTestingKnowledge[i]">Nie podano typu oceny</p>
 
       <button *ngIf="!isEditing[i]" (click)="toggleEditing(i)" class="edit-button">Edytuj ocenę</button>
       <button *ngIf="isEditing[i]" (click)="saveEditing(i)" class="edit-button">Zapisz</button>
@@ -119,9 +121,10 @@ import { Grade } from 'src/app/interfaces/grade-interface';
     teacherLastName: any;
     studentId: any;
     courseId: any;
+    type!: TypeOfTestingKnowledge;
     value!: string;
     description!: string;
-    typeOfTestingKnowledge!: TypeOfTestingKnowledge;
+    typeOfTestingKnowledge: TypeOfTestingKnowledge[] = [];
 
     
     constructor(@Inject(MAT_DIALOG_DATA) public data: any, public dialogRef: MatDialogRef<DetailEditGradeComponent>, private router: Router,
@@ -134,7 +137,8 @@ import { Grade } from 'src/app/interfaces/grade-interface';
         this.teacherLastName = data.teacherLastName;
         this.studentId = data.studentId;
         this.courseId = data.courseId;
-        console.log('nauczyciel', this.teacherFirstName);
+        this.typeOfTestingKnowledge = data.allTypes;
+        console.log('typ', this.typeOfTestingKnowledge);
 }
 
 ngOnInit(): void {
