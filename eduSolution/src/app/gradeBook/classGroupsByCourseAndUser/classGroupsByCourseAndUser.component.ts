@@ -16,6 +16,7 @@ import { AddGradeDetailComponent } from 'src/app/grade/grade-detail/add-Grade-de
 import { User } from 'src/app/interfaces/user-interface';
 import { DetailEditGradeComponent } from 'src/app/grade/grade-detail/detailEditGrade.component';
 import { TypeOfTestingKnowledge } from 'src/app/interfaces/typeOfTestingKnowledge-interface';
+import { AddFinalGradeDetailComponent } from 'src/app/grade/grade-detail/addFinalGrade.component';
 
 
 /**
@@ -36,6 +37,8 @@ constructor(private http: HttpClient, private route: ActivatedRoute, private rou
             private classGroupService: ClassGroupService, private loginService: LoginService, private userService: UserService, private courseService: CourseService,
             private gradeService: GradeService){
                 this.grades = []; 
+
+                
             }
 
 
@@ -164,7 +167,31 @@ openDetailEditGradeDialog(studentId: number, courseId: number, studentFirstName:
   
   
   
+  openAddFinalGradeDetailDialog(studentId: number, courseId: number, studentFirstName: string, studentLastName: string): void {
+    const dialogRef = this.dialog.open(AddFinalGradeDetailComponent, {
+      width: '520px', // dostosuj szerokość do swoich potrzeb
+      height: '250px',
+      data: { studentId, courseId, studentFirstName, studentLastName, }, // przekaż odpowiedź jako dane
+    });
+  
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === 'saved') {
+        // this.answerDetailComponent.updateAnswerDetails();
+      }
+    });
+  }
 
-
+  isFinalGradeAvailable(user: any): boolean {
+    if (this.gradesByUser[user.id]) {
+      for (const grade of this.gradesByUser[user.id]) {
+        if (grade.isFinalValue == true) {
+          return true;
+        }
+      }
+    }
+    return false; 
+  }
+  
+  
 
 }

@@ -34,12 +34,24 @@
                     <div *ngIf="gradesByUser[user.id]" class="grade-section">
                         <!-- <h4>Oceny:</h4> -->
                         <button (click)="openAddGradeDetailDialog(user.id, course.id, user.firstName, user.lastName)" class="add-grade-button">Dodaj ocenę</button>
+                        <button *ngIf="!isFinalGradeAvailable(user)" (click)="openAddFinalGradeDetailDialog(user.id, course.id, user.firstName, user.lastName)" class="add-grade-button">Dodaj ocenę końcową</button>
                         <button (click)="openDetailEditGradeDialog(user.id, course.id, user.firstName, user.lastName, gradesByUser[user.id][0].teacher.firstName, gradesByUser[user.id][0].teacher.lastName)" class="add-grade-button">Pokaż szczegóły</button>
                             <div class="grade-list">
                                 <span *ngFor="let grade of gradesByUser[user.id]; let last = last" class="grade-value">
-                                  {{grade.value}}   
+                                    <ng-container *ngIf="grade && !(grade.isFinalValue)">
+                                        {{ grade.value }}
+                                    </ng-container>
                                 <span *ngIf="!last">, </span>
+                                
+                                
+    
                                 </span>
+
+                            <div *ngFor="let grade of gradesByUser[user.id]; let last = last" >
+                                <ng-container *ngIf="grade && grade.isFinalValue">
+                                    <div class="grade-final-value">{{ grade.value }}</div>
+                                  </ng-container>
+                            </div>
 
                             </div>
                     </div>

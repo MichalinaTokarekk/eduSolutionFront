@@ -55,6 +55,7 @@ import { TypeOfTestingKnowledgeService } from './typeOfTestingKnowledge/typeOfTe
 import { AddGradeDetailComponent } from './grade/grade-detail/add-Grade-detail.component';
 import { DetailEditGradeComponent } from './grade/grade-detail/detailEditGrade.component';
 import { TokenInterceptorService } from './authorization_authentication/service/token-interceptor.service';
+import { AddFinalGradeDetailComponent } from './grade/grade-detail/addFinalGrade.component';
 
 
 
@@ -102,7 +103,8 @@ export class MaterialModule { }
     TeachingCoursesComponent,
     ClassGroupsByCourseAndUser,
     AddGradeDetailComponent,
-    DetailEditGradeComponent
+    DetailEditGradeComponent,
+    AddFinalGradeDetailComponent
   ],
   imports: [
     BrowserModule,

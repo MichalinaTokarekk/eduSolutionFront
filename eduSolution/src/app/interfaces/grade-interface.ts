@@ -10,4 +10,5 @@ export interface Grade {
     teacher: User;
     typeOfTestingKnowledge: TypeOfTestingKnowledge;
     course: Course;
+    isFinalValue: boolean;
 }
