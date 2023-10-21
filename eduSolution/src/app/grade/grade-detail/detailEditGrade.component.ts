@@ -42,7 +42,7 @@ import { TypeOfTestingKnowledgeService } from 'src/app/typeOfTestingKnowledge/ty
       </p>
       <p>Nauczyciel: {{ data.teacherFirstName }} {{ data.teacherLastName }}</p>
       <p *ngIf="typeOfTestingKnowledge[i] && typeOfTestingKnowledge[i].name">Typ oceny: {{ typeOfTestingKnowledge[i].name }} </p>
-      <!-- <p *ngIf="!typeOfTestingKnowledge[i]">Nie podano typu oceny</p> -->
+      <p *ngIf="!typeOfTestingKnowledge[i]">Nie podano typu oceny</p>
       <p *ngIf="isEditing[i]">
         Typ oceny:
         <mat-select class="knowledge-select" [(ngModel)]="selectedKnowledge[i]" name="knowledge" placeholder="Wybierz rodzaj oceny">
