@@ -56,6 +56,7 @@ import { AddGradeDetailComponent } from './grade/grade-detail/add-Grade-detail.c
 import { DetailEditGradeComponent } from './grade/grade-detail/detailEditGrade.component';
 import { TokenInterceptorService } from './authorization_authentication/service/token-interceptor.service';
 import { AddFinalGradeDetailComponent } from './grade/grade-detail/addFinalGrade.component';
+import { CoursesByStudentComponent } from './gradeBook/coursesByStudent/coursesByStudent.component';
 
 
 
@@ -104,7 +105,8 @@ export class MaterialModule { }
     ClassGroupsByCourseAndUser,
     AddGradeDetailComponent,
     DetailEditGradeComponent,
-    AddFinalGradeDetailComponent
+    AddFinalGradeDetailComponent,
+    CoursesByStudentComponent
   ],
   imports: [
     BrowserModule,

@@ -15,6 +15,7 @@ import { EduMaterialManage } from './eduMaterial/eduMaterial-manage/eduMaterial-
 import { HomeworkTestManage } from './homeworkTest/homeworkTest-manage/homeworkTest-manage.component';
 import { TeachingCoursesComponent } from './gradeBook/teachingCourses/teachingCourses.component';
 import { ClassGroupsByCourseAndUser } from './gradeBook/classGroupsByCourseAndUser/classGroupsByCourseAndUser.component';
+import { CoursesByStudentComponent } from './gradeBook/coursesByStudent/coursesByStudent.component';
 
 const routes: Routes = [
   {path: "dashboard", component: DashboardComponent, canActivate:[AuthGuard]},
@@ -32,6 +33,7 @@ const routes: Routes = [
   {path: "homeworkTest-manage/:id", component: HomeworkTestManage},
   {path: "teachingCourses-view", component: TeachingCoursesComponent},
   {path: "classGrioupsByCourseAndUser/:id", component: ClassGroupsByCourseAndUser},
+  {path: "coursesByStudent-view", component: CoursesByStudentComponent},
   
 ];
 

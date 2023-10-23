@@ -24,6 +24,11 @@ export class CourseService {
     return this.http.get(this.COURSE_API + '/findCoursesByUserId/' + userId); 
   }
 
+  findCoursesByStudentId(userId: number) {
+    return this.http.get(this.COURSE_API + '/findCoursesByStudentId/' + userId); 
+
+  }
+
   save (course: any) : Observable <any> {
     let result: Observable<Object>;
     if(course['href']){
