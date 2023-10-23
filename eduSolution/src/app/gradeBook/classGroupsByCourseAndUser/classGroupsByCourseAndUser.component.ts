@@ -184,7 +184,7 @@ openDetailEditGradeDialog(studentId: number, courseId: number, studentFirstName:
   isFinalGradeAvailable(user: any): boolean {
     if (this.gradesByUser[user.id]) {
       for (const grade of this.gradesByUser[user.id]) {
-        if (grade.isFinalValue == true) {
+        if (grade.finalValue == true) {
           return true;
         }
       }

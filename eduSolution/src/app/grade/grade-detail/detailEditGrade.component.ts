@@ -180,16 +180,16 @@ ngOnInit(): void {
 
     saveEditing(index: number) {
     const editedGrade = this.gradesByUser[this.studentId][index];
-    if(!editedGrade.isFinalValue) {
+    if(!editedGrade.finalValue) {
         if (this.selectedKnowledge[index] !== undefined) {
             editedGrade.typeOfTestingKnowledge = this.allKnowledge.find(type => type.id === this.selectedKnowledge[index]) as TypeOfTestingKnowledge;
         }
         this.gradeService.save(editedGrade).subscribe((response) => {
             this.isEditing[index] = false; // Wyłącz edycję po zapisie
-            console.log('editedGrade.isFinalValue:', editedGrade.isFinalValue);
+            console.log('editedGrade.isFinalValue:', editedGrade.finalValue);
         });
-    }else if (editedGrade.isFinalValue == true) {
-            this.gradeService.addFinalGrade(editedGrade).subscribe((response) => {
+    }else if (editedGrade.finalValue == true) {
+            this.gradeService.updateFinalGrade(editedGrade).subscribe((response) => {
                 this.isEditing[index] = false; // Wyłącz edycję po zapisie
             });
         }

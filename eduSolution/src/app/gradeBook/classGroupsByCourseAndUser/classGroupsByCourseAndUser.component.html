@@ -38,20 +38,22 @@
                         <button (click)="openDetailEditGradeDialog(user.id, course.id, user.firstName, user.lastName, gradesByUser[user.id][0].teacher.firstName, gradesByUser[user.id][0].teacher.lastName)" class="add-grade-button">Pokaż szczegóły</button>
                             <div class="grade-list">
                                 <span *ngFor="let grade of gradesByUser[user.id]; let last = last" class="grade-value">
-                                    <ng-container *ngIf="grade && !(grade.isFinalValue)">
+                                    <ng-container *ngIf="grade && !(grade.finalValue)">
                                         {{ grade.value }}
                                     </ng-container>
-                                <span *ngIf="!last">, </span>
+                                  <span *ngIf="!last">, </span>
                                 
                                 
     
                                 </span>
 
-                            <div *ngFor="let grade of gradesByUser[user.id]; let last = last" >
-                                <ng-container *ngIf="grade && grade.isFinalValue">
-                                    <div class="grade-final-value">{{ grade.value }}</div>
+                              <div *ngFor="let grade of gradesByUser[user.id]; let last = last" >
+                                  <ng-container *ngIf="grade && grade.finalValue">
+                                      <div class="grade-final-value">{{ grade.value }}</div>
                                   </ng-container>
-                            </div>
+                              </div>
+
+                              
 
                             </div>
                     </div>
