@@ -36,26 +36,23 @@
                         <button (click)="openAddGradeDetailDialog(user.id, course.id, user.firstName, user.lastName)" class="add-grade-button">Dodaj ocenę</button>
                         <button *ngIf="isFinalGradeAvailable(user) == false" (click)="openAddFinalGradeDetailDialog(user.id, course.id, user.firstName, user.lastName)" class="add-grade-button">Dodaj ocenę końcową</button>
                         <button (click)="openDetailEditGradeDialog(user.id, course.id, user.firstName, user.lastName, gradesByUser[user.id][0].teacher.firstName, gradesByUser[user.id][0].teacher.lastName)" class="add-grade-button">Pokaż szczegóły</button>
-                            <div class="grade-list">
+                        <br>
+                            <div class="grade-list" style="white-space: pre;">
                                 <span *ngFor="let grade of gradesByUser[user.id]; let last = last" class="grade-value">
                                     <ng-container *ngIf="grade && !(grade.finalValue)">
                                         {{ grade.value }}
                                     </ng-container>
-                                  <span *ngIf="!last">, </span>
-                                
-                                
-    
+                                  <span *ngIf="!last && !grade.finalValue">, </span>    
                                 </span>
 
-                              <div *ngFor="let grade of gradesByUser[user.id]; let last = last" >
-                                  <ng-container *ngIf="grade && grade.finalValue">
-                                      <div class="grade-final-value">{{ grade.value }}</div>
-                                  </ng-container>
-                              </div>
-
-                              
-
                             </div>
+
+                            
+                            <div *ngFor="let grade of gradesByUser[user.id]; let last = last" >
+                              <ng-container *ngIf="grade && grade.finalValue">
+                                  <div class="grade-final-value">Ocena końcowa: {{ grade.value }}</div>
+                              </ng-container>
+                          </div>
                     </div>
               </li>
             </ul>

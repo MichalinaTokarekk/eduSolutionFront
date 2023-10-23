@@ -31,7 +31,7 @@ import { TypeOfTestingKnowledgeService } from 'src/app/typeOfTestingKnowledge/ty
   <h3 class="add-grade-heading">Lista ocen dla studenta: {{ studentFirstName }} {{ studentLastName }}</h3>
 
   <ng-container *ngFor="let grade of gradesByUser[studentId]; let i = index">
-    <div class="grade-item">
+    <div class="grade-item" *ngIf="grade && !grade.finalValue">
       <p>
         Wartość oceny:
         <input [(ngModel)]="gradesByUser[studentId][i].value" [readonly]="!isEditing[i]" class="grade-input">
@@ -50,6 +50,22 @@ import { TypeOfTestingKnowledgeService } from 'src/app/typeOfTestingKnowledge/ty
       </mat-select>
         </p>
 
+      <button *ngIf="!isEditing[i]" (click)="toggleEditing(i)" class="edit-button">Edytuj ocenę</button>
+      <button *ngIf="isEditing[i]" (click)="saveEditing(i)" class="edit-button">Zapisz</button>
+
+      <button (click)="deleteGrade(i)" class="delete-button">Usuń</button>
+    </div>
+   
+  </ng-container>
+
+  <h4>Ocena końcowa:</h4> 
+  <ng-container *ngFor="let grade of gradesByUser[studentId]; let i = index">
+  <div class="grade-item" *ngIf="grade && grade.finalValue">
+      <p>
+        Wartość oceny:
+        <input [(ngModel)]="gradesByUser[studentId][i].value" [readonly]="!isEditing[i]" class="grade-input">
+      </p>
+      <p>Nauczyciel: {{ data.teacherFirstName }} {{ data.teacherLastName }}</p>
       <button *ngIf="!isEditing[i]" (click)="toggleEditing(i)" class="edit-button">Edytuj ocenę</button>
       <button *ngIf="isEditing[i]" (click)="saveEditing(i)" class="edit-button">Zapisz</button>
 

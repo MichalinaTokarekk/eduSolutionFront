@@ -52,6 +52,7 @@
     border: 1px solid #ccc; /* Przykładowa kreska oddzielająca oceny od nagłówka */
     padding: 10px; /* Dodatkowe wypełnienie wokół całego bloku */
     margin-bottom: 10px; /* Odstęp między blokami grade-section (opcjonalny) */
+    display: flex; 
   }
   
   .grades-header {
@@ -65,8 +66,17 @@
   }
 
   .grade-final-value{
-    margin-right: 5px;
+    float: right;
+    margin-right: -1100px;
+    font-size: large;
   }
+
+  .add-grade-button {
+    clear: both;
+    flex-direction: column;
+
+}
+
   
   
   
