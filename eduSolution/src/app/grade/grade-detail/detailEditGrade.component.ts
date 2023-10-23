@@ -188,12 +188,12 @@ ngOnInit(): void {
             this.isEditing[index] = false; // Wyłącz edycję po zapisie
             console.log('editedGrade.isFinalValue:', editedGrade.isFinalValue);
         });
-    }else {
-        if (editedGrade.isFinalValue == true) {
+    }else if (editedGrade.isFinalValue == true) {
             this.gradeService.addFinalGrade(editedGrade).subscribe((response) => {
+                this.isEditing[index] = false; // Wyłącz edycję po zapisie
             });
         }
-    }
+    
 
     // location.reload();
     }
