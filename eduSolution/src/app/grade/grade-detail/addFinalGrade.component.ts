@@ -26,12 +26,14 @@ import { MatSnackBar } from '@angular/material/snack-bar';
       <button (click)="addNewGrade()">Dodaj ocenę</button>
     </div> -->
 
-    <h3 class="add-grade-heading">Dodaj nową ocenę dla {{ studentFirstName }} {{ studentLastName }}</h3>
-<div class="grade-input">
+<div class="additional-block">
+  <h3 class="add-grade-heading">Dodaj nową ocenę dla {{ studentFirstName }} {{ studentLastName }}</h3>
+  <div class="grade-input">
   <div class="input-field">
     <input class="value-input" [(ngModel)]="newValue" name="newValue" type="number" placeholder="Wartość oceny" required>
   </div>
   <button class="add-button" (click)="addNewGrade()">Dodaj ocenę</button>
+  </div>
 </div>
 
 
@@ -39,6 +41,21 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 
   `,
   styles: [`
+  .additional-block {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin: 10px;
+  background-color: #f5f5f5;
+  border-radius: 5px;
+  height: 120px;
+  width: 400px;
+}
+
+.add-grade-heading {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
  /* Styl dla całego formularza */
 .grade-input {
   text-align: center;
@@ -61,24 +78,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   padding: 5px;
   border: 1px solid #ccc;
   border-radius: 5px;
-}
-
-/* Styl dla pola opisu oceny */
-.description-input {
-  width: 505px;
-  padding: 5px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-}
-
-/* Styl dla selecta */
-.knowledge-select {
-  width: 505px;
-  padding: 5px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  font-size: 14px;
-  margin-right: 50px;
+  width: 300px;
+  margin-left: -100px;
 }
 
 /* Styl dla przycisku Dodaj ocenę */
@@ -90,7 +91,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   border-radius: 5px;
   cursor: pointer;
   font-size: 16px;
-  margin-left: -385px;
+  margin-left: -280px;
 }
 
 .add-button:hover {

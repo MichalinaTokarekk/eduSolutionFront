@@ -102,8 +102,8 @@ loadGradesByStudentId(studentId: number, courseId: number) {
 
   openAddGradeDetailDialog(studentId: number, courseId: number, studentFirstName: string, studentLastName: string): void {
     const dialogRef = this.dialog.open(AddGradeDetailComponent, {
-      width: '520px', // dostosuj szerokość do swoich potrzeb
-      height: '250px',
+      width: '510px', // dostosuj szerokość do swoich potrzeb
+      height: '349px',
       data: { studentId, courseId, studentFirstName, studentLastName, }, // przekaż odpowiedź jako dane
     });
   
@@ -169,8 +169,8 @@ openDetailEditGradeDialog(studentId: number, courseId: number, studentFirstName:
   
   openAddFinalGradeDetailDialog(studentId: number, courseId: number, studentFirstName: string, studentLastName: string): void {
     const dialogRef = this.dialog.open(AddFinalGradeDetailComponent, {
-      width: '520px', // dostosuj szerokość do swoich potrzeb
-      height: '250px',
+      width: '450px', // dostosuj szerokość do swoich potrzeb
+      height: '160px',
       data: { studentId, courseId, studentFirstName, studentLastName, }, // przekaż odpowiedź jako dane
     });
   
