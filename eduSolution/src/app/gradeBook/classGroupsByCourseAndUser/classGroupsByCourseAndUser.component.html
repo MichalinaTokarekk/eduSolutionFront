@@ -40,7 +40,7 @@
                             <div class="grade-list" style="white-space: pre;">
                                 <span *ngFor="let grade of gradesByUser[user.id]; let last = last" class="grade-value">
                                     <ng-container *ngIf="grade && !(grade.finalValue)">
-                                        {{ grade.value }}
+                                        {{ grade.value }} 
                                     </ng-container>
                                   <span *ngIf="!last && !grade.finalValue">, </span>    
                                 </span>
@@ -48,12 +48,20 @@
                             </div>
 
                             
-                            <div *ngFor="let grade of gradesByUser[user.id]; let last = last" >
-                              <ng-container *ngIf="grade && grade.finalValue">
-                                  <div class="grade-final-value">Ocena końcowa: {{ grade.value }}</div>
-                              </ng-container>
+                              <div *ngFor="let grade of gradesByUser[user.id]; let last = last" >
+                                <ng-container *ngIf="grade && grade.finalValue">
+                                    <div class="grade-final-value">Ocena końcowa: {{ grade.value }} </div>
+                                </ng-container>
+                              </div>
+
+
+                          <div class="average-section">
+                            Średnia ważona: {{ obliczSredniaWazona(gradesByUser[user.id]) | number: '1.2-2' }}
                           </div>
+                          
                     </div>
+
+                    
               </li>
             </ul>
         </div>

@@ -52,7 +52,6 @@
     border: 1px solid #ccc; /* Przykładowa kreska oddzielająca oceny od nagłówka */
     padding: 10px; /* Dodatkowe wypełnienie wokół całego bloku */
     margin-bottom: 10px; /* Odstęp między blokami grade-section (opcjonalny) */
-    display: flex; 
   }
   
   .grades-header {
@@ -67,15 +66,37 @@
 
   .grade-final-value{
     float: right;
-    margin-right: -1100px;
+    margin-left: -90px;
     font-size: large;
+    margin-top: 90px;
   }
+
 
   .add-grade-button {
     clear: both;
     flex-direction: column;
 
 }
+
+.average-section {
+  font-size: 16px;
+  font-weight: bold;
+  color: #007bff;
+  margin-top: 50px;
+  margin-left: -150px;
+}
+
+.add-grade-button{
+  margin-top: -50px;
+}
+
+.grade-list{
+  margin-left: -200px;
+  padding-left: 10px;
+}
+
+
+
 
   
   

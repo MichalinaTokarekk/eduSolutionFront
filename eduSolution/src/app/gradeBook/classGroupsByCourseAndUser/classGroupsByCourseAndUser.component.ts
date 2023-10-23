@@ -192,6 +192,30 @@ openDetailEditGradeDialog(studentId: number, courseId: number, studentFirstName:
     return false; 
   }
   
+
+  obliczSredniaWazona(oceny: Grade[]): number {
+    let sumaOcen = 0.0;
+    let sumaWag = 0.0;
+
+    for (const ocena of oceny) {
+      if (!ocena.finalValue) {
+        const wagaOceny: TypeOfTestingKnowledge = ocena.typeOfTestingKnowledge;
+        if (wagaOceny) {
+          sumaOcen += ocena.value * wagaOceny.weight;
+          sumaWag += wagaOceny.weight;
+        }
+      }
+    }
+
+    if (sumaWag === 0.0) {
+      return 0.0; // W przypadku braku ocen lub wag ocen
+    } else {
+      return sumaOcen / sumaWag;
+    }
+  }
+
+  
+  
   
 
 }
