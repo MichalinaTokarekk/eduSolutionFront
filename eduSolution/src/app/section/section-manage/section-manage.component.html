@@ -52,6 +52,7 @@
    <input class="newSectionInput" *ngIf="isAddingNewSection" type="text" [(ngModel)]="newSectionName" placeholder="Nowa nazwa sekcji">
    <button class="onSaveNew" *ngIf="isAddingNewSection" (click)="onSaveNew()">Zapisz</button>
    <button class="onSaveNew" *ngIf="isAddingNewSection" (click)="onCloseButton()">Wyjdź</button>
+   <div class="expansion-panel-container">
    <mat-accordion>
     <mat-expansion-panel class="expansionPanel" *ngFor="let section of sectionsByCourse; let srNo = index" (click)="loadEduMaterialsBySectionId(section.id)">
       <mat-expansion-panel-header class="header">
@@ -117,6 +118,7 @@
         
     </mat-expansion-panel>
   </mat-accordion>
+</div>
   
   <!-- Dodaj pole input tylko wtedy, gdy isAddingNewSection jest true -->
   

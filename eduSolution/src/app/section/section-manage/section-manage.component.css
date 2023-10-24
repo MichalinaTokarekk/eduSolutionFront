@@ -130,3 +130,28 @@
   cursor: pointer;
   margin-right: 10px;
 }
+
+.expansion-panel-container {
+  background-color: #f0f0f0;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin: 10px;
+}
+
+mat-expansion-panel {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  margin: 10px 0;
+}
+
+mat-expansion-panel-header {
+  color: white; 
+}
+
+mat-panel-title {
+  padding: 10px;
+  font-weight: bold;
+}
+
