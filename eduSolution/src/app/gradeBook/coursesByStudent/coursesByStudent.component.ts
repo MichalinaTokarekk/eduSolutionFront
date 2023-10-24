@@ -10,6 +10,7 @@ import { LoginService } from 'src/app/authorization_authentication/service/login
 import { GradeService } from 'src/app/grade/grade-service/grade.service';
 import { Grade } from 'src/app/interfaces/grade-interface';
 import { TypeOfTestingKnowledge } from 'src/app/interfaces/typeOfTestingKnowledge-interface';
+import { StudentDetailGradeComponent } from 'src/app/grade/grade-detail/studentDetailGrade.component';
 
 @Component({
   selector: 'courses-by-student',
@@ -153,6 +154,76 @@ export class CoursesByStudentComponent implements OnInit {
       return sumaOcen / sumaWag;
     }
     
+  }
+
+  gradesByUser: { [key: number]: Grade[] } = {}; 
+  teacher: any;
+
+loadGradesByStudentId(studentId: number, courseId: number) {
+    console.log('Kliknięto przycisk Pobierz oceny.');
+    this.gradeService.getGradesByStudentId(studentId, courseId).subscribe((grades) => {
+        console.log('Oceny dla studentId ' + studentId + ':', grades);
+        this.gradesByUser[studentId] = grades as Grade[];
+    });
+}
+
+  openStudentDetailGradeDialog(courseId: number, courseName: string) {
+    const userId = this.loginService.getUserId();
+    if (userId !== null) {
+    this.gradeService.getGradesByStudentId(userId, courseId).subscribe((grades: any) => {
+      const typesOfGrades = grades.map((grade: Grade) => grade.typeOfTestingKnowledge);
+      const token = this.loginService.getToken();
+      const _token = token.split('.')[1];
+      const _atobData = atob(_token);
+      const _finalData = JSON.parse(_atobData);
+      const firstGrade = grades[0];
+
+      if (firstGrade) {
+      const teacherFirstName = firstGrade.teacher.firstName;
+      const teacherLastName = firstGrade.teacher.lastName;
+
+      const dialogRef = this.dialog.open(StudentDetailGradeComponent, {
+        width: '520px',
+        height: '500px',
+        data: {
+          grades,
+          studentId: _finalData.id,
+          courseId,
+          courseName,
+          teacherFirstName,
+          teacherLastName,
+          allTypes: typesOfGrades,
+        },
+      });
+  
+      dialogRef.afterClosed().subscribe(result => {
+        if (result === 'saved') {
+          // Obsługa po zamknięciu dialogu
+        }
+      });
+
+    } else {
+      const dialogRef = this.dialog.open(StudentDetailGradeComponent, {
+        width: '520px',
+        height: '500px',
+        data: {
+          grades,
+          studentId: _finalData.id,
+          courseId,
+          courseName,
+          allTypes: typesOfGrades,
+        },
+      });
+  
+      dialogRef.afterClosed().subscribe(result => {
+        if (result === 'saved') {
+          // Obsługa po zamknięciu dialogu
+        }
+      });
+    }
+
+    });
+  }
   }
 
 }

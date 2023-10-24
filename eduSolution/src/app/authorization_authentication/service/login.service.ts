@@ -2,13 +2,15 @@ import { AppComponent } from './../../app.component';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { JwtHelperService } from '@auth0/angular-jwt';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
   apiUrl = 'http://localhost:9191/auth/authenticate';
-  constructor(private http:HttpClient, private router:Router) { 
+  constructor(private http:HttpClient, private router:Router, private jwtHelperService: JwtHelperService) { 
 
   }
   tokenresp: any; 
@@ -87,7 +89,14 @@ export class LoginService {
     return null; 
   }
   
-  
+  getUserId(): number | null {
+    const token = localStorage.getItem('token'); // Załóżmy, że token JWT jest przechowywany w localStorage
+    if (token) {
+      const tokenPayload = this.jwtHelperService.decodeToken(token);
+      return tokenPayload.id; // Zakładam, że ID użytkownika jest przechowywane w polu 'id' tokenu JWT
+    }
+    return null;
+  }
   
   
 

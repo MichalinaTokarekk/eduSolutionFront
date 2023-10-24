@@ -57,6 +57,10 @@ import { DetailEditGradeComponent } from './grade/grade-detail/detailEditGrade.c
 import { TokenInterceptorService } from './authorization_authentication/service/token-interceptor.service';
 import { AddFinalGradeDetailComponent } from './grade/grade-detail/addFinalGrade.component';
 import { CoursesByStudentComponent } from './gradeBook/coursesByStudent/coursesByStudent.component';
+import { StudentDetailGradeComponent } from './grade/grade-detail/studentDetailGrade.component';
+
+
+import { JwtHelperService, JwtModule } from '@auth0/angular-jwt';
 
 
 
@@ -106,7 +110,8 @@ export class MaterialModule { }
     AddGradeDetailComponent,
     DetailEditGradeComponent,
     AddFinalGradeDetailComponent,
-    CoursesByStudentComponent
+    CoursesByStudentComponent,
+    StudentDetailGradeComponent
   ],
   imports: [
     BrowserModule,
@@ -119,14 +124,21 @@ export class MaterialModule { }
     RouterModule,
     ReactiveFormsModule,
     FormsModule,
-    MatExpansionModule
+    MatExpansionModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: () => {
+          return localStorage.getItem('token');
+        }
+      }
+    })
 
   ],
-  providers: [SemesterService, CourseService, ClassGroupService, LoginService, UserService, SectionService, EduMaterialService, EMFileService,
+  providers: [SemesterService, CourseService, ClassGroupService, LoginService, JwtHelperService, UserService, SectionService, EduMaterialService, EMFileService,
     HomeworkTestService, HTFileService, AnswerService, AFileService, GradeService, TypeOfTestingKnowledgeService,
     {
       provide: HTTP_INTERCEPTORS, useClass: TokenInterceptorService, multi: true
-    }],
+    }], 
   bootstrap: [AppComponent]
 })
 export class AppModule { }
