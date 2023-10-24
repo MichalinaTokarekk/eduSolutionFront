@@ -96,7 +96,6 @@ loadGradesByStudentId(studentId: number, courseId: number) {
         console.log('Oceny dla studentId ' + studentId + ':', grades);
         
         if (Array.isArray(grades)) {
-          // Filtruj oceny, aby wyświetlić tylko te, które mają semestr związaną z wybranym kursem
           const selectedGrades = grades.filter((grade: Grade) => {
             if (this.selectedCourse && grade.semester) {
                 return grade.semester.courses.some(course => course.id === this.selectedCourse.id);
@@ -158,10 +157,14 @@ loadGradesByStudentId(studentId: number, courseId: number) {
 //   }
 
 
-openDetailEditGradeDialog(studentId: number, courseId: number, studentFirstName: string, studentLastName: string, teacherFirstName: string, teacherLastName: string): void {
+openDetailEditGradeDialog(studentId: number, courseId: number, studentFirstName: string, studentLastName: string): void {
     this.gradeService.getGradesByStudentId(studentId, courseId).subscribe((grades: any) => {
       const typesOfGrades = grades.map((grade: Grade) => grade.typeOfTestingKnowledge);
+      const firstGrade = grades[0];
   
+      if (firstGrade) {
+      const teacherFirstName = firstGrade.teacher.firstName;
+      const teacherLastName = firstGrade.teacher.lastName;
       const dialogRef = this.dialog.open(DetailEditGradeComponent, {
         width: '520px',
         height: '500px',
@@ -182,6 +185,26 @@ openDetailEditGradeDialog(studentId: number, courseId: number, studentFirstName:
           // Obsługa po zamknięciu dialogu
         }
       });
+    } else {
+      const dialogRef = this.dialog.open(DetailEditGradeComponent, {
+        width: '520px',
+        height: '500px',
+        data: {
+          grades,
+          studentId,
+          courseId,
+          studentFirstName,
+          studentLastName,
+          allTypes: typesOfGrades,
+        },
+      });
+  
+      dialogRef.afterClosed().subscribe(result => {
+        if (result === 'saved') {
+          // Obsługa po zamknięciu dialogu
+        }
+      });
+    }
     });
   }
   

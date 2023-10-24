@@ -12,6 +12,7 @@
   </div>
    -->
 
+<div class="page-container">
    <div class="course-name">{{ course.name }}</div>
    <div class="expansion-panel-container">
     <mat-accordion>
@@ -66,7 +67,7 @@
                       <h2>Oceny</h2>
                       <button (click)="openAddGradeDetailDialog(user.id, course.id, user.firstName, user.lastName)" class="add-grade-button">Dodaj ocenę</button>
                       <button *ngIf="isFinalGradeAvailable(user) == false" (click)="openAddFinalGradeDetailDialog(user.id, course.id, user.firstName, user.lastName)" class="add-grade-button">Dodaj ocenę końcową</button>
-                      <button (click)="openDetailEditGradeDialog(user.id, course.id, user.firstName, user.lastName, gradesByUser[user.id][0].teacher.firstName, gradesByUser[user.id][0].teacher.lastName)" class="add-grade-button">Pokaż szczegóły</button>
+                      <button (click)="openDetailEditGradeDialog(user.id, course.id, user.firstName, user.lastName)" class="add-grade-button">Pokaż szczegóły</button>
                       
                       <div class="grades">
                           <div class="grade-list">
@@ -104,5 +105,13 @@
       </mat-expansion-panel>
     </mat-accordion>
   </div>
+
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2023 EduSolution. Wszelkie prawa zastrzeżone.</p>
+      <p>Kontakt: kontakt@example.com</p>
+    </div>
+</footer>
+</div>
   
   
