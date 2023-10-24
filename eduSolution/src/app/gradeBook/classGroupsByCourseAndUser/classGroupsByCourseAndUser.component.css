@@ -1,5 +1,4 @@
-/* Styl dla kontenera dodatkowego */
-.expansion-panel-container {
+/* .expansion-panel-container {
     background-color: #f0f0f0;
     padding: 10px;
     border: 1px solid #ccc;
@@ -7,7 +6,6 @@
     margin: 10px;
   }
   
-  /* Styl dla mat-expansion-panel */
   mat-expansion-panel {
     background-color: #fff;
     border: 1px solid #ddd;
@@ -15,25 +13,21 @@
     margin: 10px 0;
   }
   
-  /* Styl dla mat-expansion-panel-header */
   mat-expansion-panel-header {
-    color: white; /* Kolor tekstu w nagłówku */
+    color: white; 
   }
   
-  /* Styl dla mat-panel-title (nagłówek) */
   mat-panel-title {
     padding: 10px;
     font-weight: bold;
   }
   
-  /* Styl dla listy klas */
   .class-list {
     list-style: none;
     padding: 0;
     margin: 0;
   }
   
-  /* Styl dla elementów listy */
   .class-item {
     padding: 10px;
     margin: 5px 0;
@@ -42,21 +36,21 @@
   .course-name {
     font-size: 18px;
     font-weight: bold;
-    color: #292727; /* Przykładowy kolor tekstu */
+    color: #292727; 
     
   }
 
   .grade-section {
     display: flex;
     align-items: center;
-    border: 1px solid #ccc; /* Przykładowa kreska oddzielająca oceny od nagłówka */
-    padding: 10px; /* Dodatkowe wypełnienie wokół całego bloku */
-    margin-bottom: 10px; /* Odstęp między blokami grade-section (opcjonalny) */
+    border: 1px solid #ccc; 
+    padding: 10px; 
+    margin-bottom: 10px; 
   }
   
   .grades-header {
     margin-right: 10px;
-    font-size: 20px; /* Zwiększenie rozmiaru czcionki dla nagłówka (opcjonalny) */
+    font-size: 20px; 
   }
   
   .grade-value {
@@ -101,4 +95,129 @@
   
   
   
-  
+   */
+
+   .grade-section {
+    border: 1px solid #ccc;
+    padding: 20px;
+    background-color: #f5f5f5;
+    border-radius: 5px;
+}
+
+h2, h3 {
+    margin: 0;
+}
+
+.add-grade-button {
+    background-color: #007bff;
+    color: #fff;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 5px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.add-grade-button:hover {
+    background-color: #0056b3;
+}
+
+.grades {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.grade-list, .final-grade, .average-section {
+    flex: 1;
+    padding: 10px;
+    background-color: #fff;
+    margin: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-left: -10px;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+li {
+    margin: 5px 0;
+}
+
+.grade-list {
+    h3 {
+        font-weight: bold;
+    }
+}
+
+.final-grade {
+    h3 {
+        font-weight: bold;
+    }
+}
+
+.average-section {
+    h3 {
+        font-weight: bold;
+    }
+}
+
+.course-name {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.expansion-panel-container {
+  margin-top: 20px;
+}
+
+.class-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+
+
+.user-list {
+  list-style: none;
+  padding: 0;
+  margin-top: 10px;
+}
+
+.user-item {
+  margin-bottom: 5px;
+}
+
+.user-item button {
+  background-color: #007bff;
+  color: #fff;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.user-item button:hover {
+  background-color: #0056b3;
+}
+
+.user-item {
+  margin-bottom: 5px;
+  cursor: pointer;
+  font-size: medium;
+}
+
+.user-name:hover {
+  background-color: #f3f5f8; 
+  border-radius: 8px;
+  font-size: large;
+}
+
+
+
+

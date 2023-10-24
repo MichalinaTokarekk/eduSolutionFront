@@ -28,12 +28,12 @@
         <div *ngIf="users">
             <h3>Użytkownicy przypisani do grupy:</h3>
             <ul class="user-list">
-              <li *ngFor="let user of users" class="user-item">
-                {{ user.firstName }} {{ user.lastName }}
-                <button (click)="loadGradesByStudentId(user.id, course.id)">Pokaż oceny</button>
-                    <div *ngIf="gradesByUser[user.id]" class="grade-section">
+              <li *ngFor="let user of users" class="user-item" (click)="loadGradesByStudentId(user.id, course.id)">
+                <span class="user-name">{{ user.firstName }} {{ user.lastName }}</span>               
+                 <!-- <button (click)="loadGradesByStudentId(user.id, course.id)">Pokaż oceny</button> -->
+                    <!-- <div *ngIf="gradesByUser[user.id]" class="grade-section"> -->
                         <!-- <h4>Oceny:</h4> -->
-                        <button (click)="openAddGradeDetailDialog(user.id, course.id, user.firstName, user.lastName)" class="add-grade-button">Dodaj ocenę</button>
+                        <!-- <button (click)="openAddGradeDetailDialog(user.id, course.id, user.firstName, user.lastName)" class="add-grade-button">Dodaj ocenę</button>
                         <button *ngIf="isFinalGradeAvailable(user) == false" (click)="openAddFinalGradeDetailDialog(user.id, course.id, user.firstName, user.lastName)" class="add-grade-button">Dodaj ocenę końcową</button>
                         <button (click)="openDetailEditGradeDialog(user.id, course.id, user.firstName, user.lastName, gradesByUser[user.id][0].teacher.firstName, gradesByUser[user.id][0].teacher.lastName)" class="add-grade-button">Pokaż szczegóły</button>
                         <br>
@@ -59,7 +59,43 @@
                             Średnia ważona: {{ obliczSredniaWazona(gradesByUser[user.id]) | number: '1.2-2' }}
                           </div>
                           
-                    </div>
+                    </div> -->
+
+                    <br>
+                    <div *ngIf="gradesByUser[user.id]" class="grade-section">
+                      <h2>Oceny</h2>
+                      <button (click)="openAddGradeDetailDialog(user.id, course.id, user.firstName, user.lastName)" class="add-grade-button">Dodaj ocenę</button>
+                      <button *ngIf="isFinalGradeAvailable(user) == false" (click)="openAddFinalGradeDetailDialog(user.id, course.id, user.firstName, user.lastName)" class="add-grade-button">Dodaj ocenę końcową</button>
+                      <button (click)="openDetailEditGradeDialog(user.id, course.id, user.firstName, user.lastName, gradesByUser[user.id][0].teacher.firstName, gradesByUser[user.id][0].teacher.lastName)" class="add-grade-button">Pokaż szczegóły</button>
+                      
+                      <div class="grades">
+                          <div class="grade-list">
+                              <h3>Oceny cząstkowe</h3>
+                              <ul>
+                                  <span *ngFor="let grade of gradesByUser[user.id]; let last = last">
+                                      <ng-container *ngIf="grade && !grade.finalValue">
+                                          {{ grade.value }}
+                                      </ng-container>
+                                      <span *ngIf="!last && !grade.finalValue">, </span>
+                                    </span>
+                              </ul>
+                          </div>
+                          <div *ngFor="let grade of gradesByUser[user.id]; let last = last">
+                              <ng-container *ngIf="grade && grade.finalValue">
+                                  <div class="final-grade">
+                                      <h3>Ocena końcowa</h3>
+                                      {{ grade.value }}
+                                  </div>
+                              </ng-container>
+                          </div>
+                      </div>
+                  
+                      <div class="average-section">
+                          <h3>Średnia ważona</h3>
+                          {{ obliczSredniaWazona(gradesByUser[user.id]) | number: '1.2-2' }}
+                      </div>
+                  </div>
+                  
 
                     
               </li>
