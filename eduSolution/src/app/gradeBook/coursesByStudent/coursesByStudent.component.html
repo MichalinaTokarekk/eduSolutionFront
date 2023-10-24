@@ -16,7 +16,7 @@
                     <th>Lp</th>
                     <th (click)="onNameSort()" style="text-align: left;">Nazwa</th>
                     <th>Oceny</th>
-                    <!-- <th>Średnia ważona</th> -->
+                    <th>Średnia ważona</th>
                     <th>Ocena końcowa</th>
                     <th></th>
                 </tr>
@@ -53,9 +53,10 @@
                         </ng-container>
                     </td>
 
-                    <!-- <td>
-                        {{ obliczSredniaWazona(course.grades) | number: '1.2-2'}}
-                    </td> -->
+                    <td>
+                        {{ course.grades ? (obliczSredniaWazona(course.grades) | number: '1.2-2') : 'Brak ocen' }}
+                    </td>
+                    
                       
 
                     <td>

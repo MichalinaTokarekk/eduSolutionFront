@@ -133,11 +133,11 @@ export class CoursesByStudentComponent implements OnInit {
   }
 
 
-  obliczSredniaWazona(oceny: Grade[]): number {
+  obliczSredniaWazona(grades: Grade[]): number {
     let sumaOcen = 0.0;
     let sumaWag = 0.0;
 
-    for (const ocena of oceny) {
+    for (const ocena of grades) {
       if (!ocena.finalValue) {
         const wagaOceny: TypeOfTestingKnowledge = ocena.typeOfTestingKnowledge;
         if (wagaOceny) {
