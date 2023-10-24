@@ -1,4 +1,5 @@
 import { Course } from "./course-interface";
+import { Semester } from "./semester-interface";
 import { TypeOfTestingKnowledge } from "./typeOfTestingKnowledge-interface";
 import { User } from "./user-interface";
 
@@ -11,4 +12,6 @@ export interface Grade {
     typeOfTestingKnowledge: TypeOfTestingKnowledge;
     course: Course;
     finalValue: boolean;
+    semester: Semester;
 }
+

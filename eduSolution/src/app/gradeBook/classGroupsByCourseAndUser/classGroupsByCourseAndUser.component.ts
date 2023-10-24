@@ -17,6 +17,7 @@ import { User } from 'src/app/interfaces/user-interface';
 import { DetailEditGradeComponent } from 'src/app/grade/grade-detail/detailEditGrade.component';
 import { TypeOfTestingKnowledge } from 'src/app/interfaces/typeOfTestingKnowledge-interface';
 import { AddFinalGradeDetailComponent } from 'src/app/grade/grade-detail/addFinalGrade.component';
+import { Course } from 'src/app/interfaces/course-interface';
 
 
 /**
@@ -88,11 +89,30 @@ ngOnInit(): void {
 
 gradesByUser: { [key: number]: Grade[] } = {}; 
 teacher: any;
-
+  selectedCourse!: Course;
 loadGradesByStudentId(studentId: number, courseId: number) {
     console.log('Kliknięto przycisk Pobierz oceny.');
     this.gradeService.getGradesByStudentId(studentId, courseId).subscribe((grades) => {
         console.log('Oceny dla studentId ' + studentId + ':', grades);
+        
+        if (Array.isArray(grades)) {
+          // Filtruj oceny, aby wyświetlić tylko te, które mają semestr związaną z wybranym kursem
+          const selectedGrades = grades.filter((grade: Grade) => {
+            if (this.selectedCourse && grade.semester) {
+                return grade.semester.courses.some(course => course.id === this.selectedCourse.id);
+            }
+            return false;
+        });
+        
+
+          // Przypisz wynik filtrowania do 'gradesByUser' pod odpowiednim kluczem 'studentId'
+          this.gradesByUser[studentId] = selectedGrades;
+      } else {
+          console.error('grades nie jest tablicą.');
+      }
+
+
+
         this.gradesByUser[studentId] = grades as Grade[];
     });
 }
