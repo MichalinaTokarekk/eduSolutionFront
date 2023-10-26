@@ -399,6 +399,7 @@ isAddingNewSection: boolean = false;
       // Tutaj możesz obsłużyć odpowiedź z serwera, np. zaktualizować dane w komponencie
       console.log('Nowa sekcja została zapisana w bazie danych:', response);
       this.sectionArray.push(response);
+      location.reload();
   
       // Jeśli zapis się powiódł, można wyczyścić pole newSectionName
       this.newSectionName = '';

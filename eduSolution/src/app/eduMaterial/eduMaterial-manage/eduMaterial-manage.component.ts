@@ -161,9 +161,10 @@ onAddFile(eduMaterial: any) {
           
         },
         (uploadError) => {
-          console.error("Błąd podczas przesyłania pliku:", uploadError);
+          // console.error("Błąd podczas przesyłania pliku:", uploadError);
           console.log("fileToUpload:", this.fileToUpload);
           console.log("id:", id);
+          location.reload();
 
         }
       );

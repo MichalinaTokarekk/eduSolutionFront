@@ -175,7 +175,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
         this.isEditing = true;
 
           
-        //   location.reload();
+          location.reload();
     }
 
     openSnackBar(message: string, action: string) {

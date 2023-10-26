@@ -304,10 +304,10 @@ onAddFile(homeworkTest: any) {
           
         },
         (uploadError) => {
-          console.error("Błąd podczas przesyłania pliku:", uploadError);
+          // console.error("Błąd podczas przesyłania pliku:", uploadError);
           console.log("fileToUpload:", this.fileToUpload);
           console.log("id:", id);
-
+          location.reload();
         }
       );
     
@@ -535,7 +535,7 @@ downloadFileById(fileId: number): void {
             
           },
           (uploadError) => {
-            console.error("Błąd podczas przesyłania pliku:", uploadError);
+            // console.error("Błąd podczas przesyłania pliku:", uploadError);
             console.log("aFileToUpload:", this.aFileToUpload);
             // console.log("answerId:", answer.id);
             location.reload();

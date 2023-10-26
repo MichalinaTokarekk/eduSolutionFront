@@ -39,11 +39,7 @@ export class GradeService {
 
   addFinalGrade(grade: any): Observable <any> {
     let result: Observable<Object>;
-    if(grade['href']){
-      result = this.http.put(grade.href, grade)
-    } else {
       result = this.http.post(this.GRADE_API + '/addFinalGrade', grade)
-    }
     return result;
   }
 
