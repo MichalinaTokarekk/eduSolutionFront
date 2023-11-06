@@ -25,6 +25,7 @@ import { CourseService } from 'src/app/course/course-service/course.service';
 import { ClassGroup } from 'src/app/interfaces/classGroup-interface';
 import { UserService } from 'src/app/user/user-service/user.service';
 import { AnswerDetailComponent } from 'src/app/answer/answer-detail/answer-detail.component';
+import { ChangeDetectionStrategy } from '@angular/core';
 
 
 
@@ -147,6 +148,7 @@ ngOnInit(): void {
     //   });
 
     this.userRole = _finalData.role;
+    
   }
 
   filteredClassGroups: ClassGroup[] = [];
@@ -405,6 +407,7 @@ downloadFileById(fileId: number): void {
     });
   }
 
+  
   newAnswerContent: string = '';
   onSaveAnswer() {
     this.route.paramMap.subscribe((params: ParamMap) => {
@@ -420,11 +423,13 @@ downloadFileById(fileId: number): void {
           const _atobData = atob(_token);
           const _finalData = JSON.parse(_atobData);
 
+          
         const answer: Answer = {
             id: 0,
             answerContent: this.newAnswerContent,
             homeworkTest: homeworkTest,
-            user: _finalData.id
+            user: _finalData.id,
+            // answerStatus: this.answer.answerStatus
         };
         
           this.answerService.save(answer).subscribe(savedAnswer => {
@@ -553,7 +558,7 @@ downloadFileById(fileId: number): void {
         console.log("Przesyłanie pliku zakończone.");
         // Tutaj możesz wykonać dodatkowe akcje, które chcesz po zakończeniu przesyłania pliku
         location.reload();
-      }
+    }
         
 
 }

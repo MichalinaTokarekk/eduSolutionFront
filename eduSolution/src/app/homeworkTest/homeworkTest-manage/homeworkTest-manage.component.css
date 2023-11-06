@@ -193,6 +193,19 @@
     overflow-y: scroll; /* Pasek przewijania, jeśli tekst jest dłuższy niż obszar */
   }
 
+  
+  .colored-text.blue-text {
+    color: blue; /* Kolor tekstu dla NIEOCENIONE */
+  }
+  
+  .colored-text.green-text {
+    color: green; /* Kolor tekstu dla ZALICZONE */
+  }
+  
+  .colored-text.red-text {
+    color: red; /* Kolor tekstu dla NIEZALICZONE */
+  }
+  
  
   
 

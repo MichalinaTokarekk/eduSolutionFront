@@ -8,5 +8,5 @@ export interface Answer {
     // comment: string;
     homeworkTest: HomeworkTest;
     user: User;
-    // answerStatus: AnswerStaus
+    // answerStatus: AnswerStaus;
 }
