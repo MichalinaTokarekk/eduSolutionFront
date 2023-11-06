@@ -85,6 +85,36 @@
           <!-- <label for="taskContent">Polecenie:</label> -->
           <textarea class="textarea" id="taskContent" name="taskContent" [(ngModel)]="homeworkTest.taskContent" [readonly]="!homeworkTest.isEdit"></textarea>
         </div>
+
+        
+        <!-- <div style="background-color: lightblue; padding: 10px;">
+          <h3>Termin oddania zadania:</h3>
+          <span style="font-size: 18px;">{{ homeworkTest.deadline | date:'yyyy-MM-dd HH:mm:ss' }}</span>
+        </div> -->
+
+        <div style="background-color: lightblue; padding: 10px;">
+          <h3>Termin oddania zadania:</h3>
+          <ng-container *ngIf="!isEditingDate; else dateEditor">
+            <span (click)="isEditingDate = true">
+              {{ homeworkTest.deadline | date:'yyyy-MM-ddTHH:mm:ss' }}
+            </span>
+            <!-- Dodaj tutaj warunek sprawdzający obecność daty przed pokazaniem przycisku Edytuj -->
+            <button *ngIf="homeworkTest && homeworkTest.deadline" (click)="isEditingDate = true">
+              Edytuj
+            </button>
+          </ng-container>
+          <ng-template #dateEditor>
+            <input type="datetime-local" name="editedDeadline" [(ngModel)]="editedDeadline">
+            <button (click)="saveEditedDeadline()">Zapisz</button>
+            <button (click)="cancelEditDate()">Anuluj</button>
+          </ng-template>
+        </div>
+        
+        
+        
+
+       
+        
     
         <!-- Formularz do dodawania plików -->
         <form (submit)="onAddFile(homeworkTest)" enctype="multipart/form-data">
@@ -116,10 +146,48 @@
           {{ answer.answerContent }}
         </div>
         <p *ngIf="!isAnswerContentVisible"><strong>Status odpowiedzi:</strong> {{ answer.answerStatus }}</p>
+        <p *ngIf="!isAnswerContentVisible"><strong>Utworzono:</strong> {{ answer.createdAt | date:'yyyy-MM-dd HH:mm:ss' }}</p>
+        <p *ngIf="!isAnswerContentVisible"><strong>Ostatnia modyfikacja:</strong> {{ answer.updatedAt | date:'yyyy-MM-dd HH:mm:ss' }}</p>
+        <!-- <p *ngIf="!isAnswerContentVisible"><strong>Dni do deadline'u:</strong> {{ calculateDaysUntilDeadline() }} dni</p> -->
+        <!-- <p>
+          Pozostało: {{ calculateDaysUntilDeadline().days }} dni, {{ calculateDaysUntilDeadline().hours }} godzin, {{ calculateDaysUntilDeadline().minutes }} minut
+        </p> -->
+       
+        <div [ngClass]="{'green-background': calculateTimeDifference().beforeDeadline, 'red-background': !calculateTimeDifference().beforeDeadline}">
+        <p>
+          {{ calculateTimeDifference().beforeDeadline ? 'Zadanie zostało przesłane ' : 'Zadanie zostało przesłane ' }}
+          {{ calculateTimeDifference().days }} dni, {{ calculateTimeDifference().hours }} godzin i {{ calculateTimeDifference().minutes }} minut
+          {{ calculateTimeDifference().beforeDeadline ? 'przed terminem.' : 'po terminie.' }}
+        </p>
+        </div>
+
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <p *ngIf="!calculateDaysUntilDeadline().overdue">
+          Pozostało: {{ calculateDaysUntilDeadline().days }} dni, {{ calculateDaysUntilDeadline().hours }} godzin, {{ calculateDaysUntilDeadline().minutes }} minut
+        </p>
+        
+        <div *ngIf="calculateDaysUntilDeadline().overdue">
+          <p>
+            Termin zadania upłynął {{ calculateDaysUntilDeadline().days }} dni, {{ calculateDaysUntilDeadline().hours }} godzin i {{ calculateDaysUntilDeadline().minutes }} minut temu.
+          </p>
+        </div>
+        
+          
+        
         <div *ngIf="isAnswerContentVisible">
             <!-- Dodaj pole do edycji treści odpowiedzi -->
             <textarea class="textarea" id="answerContent" name="answerContent" [(ngModel)]="answer.answerContent"></textarea><br>
             <p *ngIf="isAnswerContentVisible"><strong>Status odpowiedzi:</strong> {{ answer.answerStatus }}</p>
+            <p *ngIf="isAnswerContentVisible"><strong>Utworzono:</strong> {{ answer.createdAt | date:'yyyy-MM-dd HH:mm:ss' }}</p>
+            <p *ngIf="isAnswerContentVisible"><strong>Ostatnia modyfikacja:</strong> {{ answer.updatedAt | date:'yyyy-MM-dd HH:mm:ss' }}</p>
             <button (click)="onUpdateAnswer()">Zapisz zmiany</button>
             
         <!-- Formularz do dodawania plików -->

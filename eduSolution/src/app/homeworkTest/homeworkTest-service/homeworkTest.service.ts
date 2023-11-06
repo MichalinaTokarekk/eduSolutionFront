@@ -29,6 +29,12 @@ export class HomeworkTestService {
     return result;
   }
 
+  update(homeworkTest: any): Observable<any> {
+    let result: Observable<Object>;
+    result = this.http.put(this.HOMEWORKTEST_API + '/updateHomeworkTest', homeworkTest);
+    return result;
+  }
+
   addSection(eduMaterial: any, sectionId: number) {
     const url = this.HOMEWORKTEST_API +`/addSection?sectionId=${sectionId}`;
     return this.http.post(url, eduMaterial);

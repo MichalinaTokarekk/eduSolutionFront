@@ -110,8 +110,9 @@
               </li>
             </ul>
         </div>
-        <input *ngIf="section.isEdit" class="new-material-input" type="text" [(ngModel)]="newHomeworkTestName" placeholder="Nowy materiał">
-        <button  *ngIf="section.isEdit" class="add-material-button" (click)="onAddHomeworkTest(section)">Dodaj materiał</button>
+        <input *ngIf="section.isEdit" class="new-material-input" type="text" [(ngModel)]="newHomeworkTestName" placeholder="Nowe zadanie">
+        <input *ngIf="section.isEdit" type="datetime-local" [(ngModel)]="newHomeworkTestDeadline">
+        <button  *ngIf="section.isEdit" class="add-material-button" (click)="onAddHomeworkTest(section)">Dodaj zadanie</button>
       </ng-container>
       
       

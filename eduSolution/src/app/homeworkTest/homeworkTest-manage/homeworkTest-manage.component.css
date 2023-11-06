@@ -205,6 +205,16 @@
   .colored-text.red-text {
     color: red; /* Kolor tekstu dla NIEZALICZONE */
   }
+
+  .green-background {
+    background-color: rgb(153, 206, 153);
+    color: white;
+  }
+  
+  .red-background {
+    background-color: rgb(196, 144, 144);
+    color: white;
+  }
   
  
   

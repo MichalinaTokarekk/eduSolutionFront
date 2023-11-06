@@ -559,6 +559,167 @@ downloadFileById(fileId: number): void {
         // Tutaj możesz wykonać dodatkowe akcje, które chcesz po zakończeniu przesyłania pliku
         location.reload();
     }
+
+  //   calculateDaysUntilDeadline(): number {
+  //     const currentDate = new Date();
+      
+  //     if (this.homeworkTest.deadline instanceof Date) {
+  //       // `deadline` jest już obiektem Date, możesz bezpośrednio wywołać getTime()
+  //       const currentDate = new Date();
+  //       const timeDifference = this.homeworkTest.deadline.getTime() - currentDate.getTime();
+  //       const daysRemaining = Math.ceil(timeDifference / (1000 * 3600 * 24));
+  //       return daysRemaining;
+  //     } else if (typeof this.homeworkTest.deadline === 'string') {
+  //       // Jeśli `deadline` jest w formie tekstu, próbuj go sparsować do obiektu Date
+  //       const deadlineDate = new Date(this.homeworkTest.deadline);
+  //       if (!isNaN(deadlineDate.getTime())) {
+  //         // Poprawnie sparsowano `deadline` na obiekt Date
+  //         const currentDate = new Date();
+  //         const timeDifference = deadlineDate.getTime() - currentDate.getTime();
+  //         const daysRemaining = Math.ceil(timeDifference / (1000 * 3600 * 24));
+  //         return daysRemaining;
+  //       }
+  //     }
+      
+  //     // Obsługa błędu - zwracanie wartości domyślnej w przypadku braku daty
+  //     return 0; // lub inną wartość domyślną
+      
+  // }
+
+  // calculateDaysUntilDeadline(): { days: number, hours: number, minutes: number } {
+  //   const currentDate = new Date();
+  //   let deadlineDate: Date;
+  
+  //   if (this.homeworkTest.deadline instanceof Date) {
+  //     deadlineDate = this.homeworkTest.deadline;
+  //   } else if (typeof this.homeworkTest.deadline === 'string') {
+  //     deadlineDate = new Date(this.homeworkTest.deadline);
+  
+  //     if (isNaN(deadlineDate.getTime())) {
+  //       // Obsługa błędu - zwracanie wartości domyślnej w przypadku błędnej daty
+  //       return { days: 0, hours: 0, minutes: 0 };
+  //     }
+  //   } else {
+  //     // Obsługa błędu - zwracanie wartości domyślnej w przypadku braku daty
+  //     return { days: 0, hours: 0, minutes: 0 };
+  //   }
+  
+  //   const timeDifference = deadlineDate.getTime() - currentDate.getTime();
+  //   const totalMinutesRemaining = Math.floor(timeDifference / (1000 * 60));
+  
+  //   const daysRemaining = Math.floor(totalMinutesRemaining / (24 * 60));
+  //   const hoursRemaining = Math.floor((totalMinutesRemaining % (24 * 60)) / 60);
+  //   const minutesRemaining = totalMinutesRemaining % 60;
+  
+  //   return { days: daysRemaining, hours: hoursRemaining, minutes: minutesRemaining };
+  // }
+
+  calculateDaysUntilDeadline(): { days: number, hours: number, minutes: number, overdue: boolean, daysBeforeDeadline: number } {
+    const currentDate = new Date();
+    let deadlineDate: Date;
+    let updatedAtDate: Date;
+  
+    if (this.homeworkTest.deadline instanceof Date) {
+      deadlineDate = this.homeworkTest.deadline;
+    } else if (typeof this.homeworkTest.deadline === 'string') {
+      deadlineDate = new Date(this.homeworkTest.deadline);
+  
+      if (isNaN(deadlineDate.getTime())) {
+        return { days: 0, hours: 0, minutes: 0, overdue: false, daysBeforeDeadline: 0 };
+      }
+    } else {
+      return { days: 0, hours: 0, minutes: 0, overdue: false, daysBeforeDeadline: 0 };
+    }
+  
+    if (this.homeworkTest.updatedAt instanceof Date) {
+      updatedAtDate = this.homeworkTest.updatedAt;
+    } else if (typeof this.homeworkTest.updatedAt === 'string') {
+      updatedAtDate = new Date(this.homeworkTest.updatedAt);
+  
+      if (isNaN(updatedAtDate.getTime())) {
+        return { days: 0, hours: 0, minutes: 0, overdue: false, daysBeforeDeadline: 0 };
+      }
+    } else {
+      return { days: 0, hours: 0, minutes: 0, overdue: false, daysBeforeDeadline: 0 };
+    }
+  
+    const timeDifference = deadlineDate.getTime() - currentDate.getTime();
+    const totalMinutesRemaining = Math.floor(timeDifference / (1000 * 60));
+    const overdue = totalMinutesRemaining < 0;
+  
+    const daysRemaining = Math.floor(Math.abs(totalMinutesRemaining) / (24 * 60));
+    const hoursRemaining = Math.floor((Math.abs(totalMinutesRemaining) % (24 * 60)) / 60);
+    const minutesRemaining = Math.abs(totalMinutesRemaining) % 60;
+  
+    const timeDifferenceBeforeDeadline = deadlineDate.getTime() - updatedAtDate.getTime();
+    const daysBeforeDeadline = Math.floor(timeDifferenceBeforeDeadline / (1000 * 3600 * 24));
+  
+    return { days: daysRemaining, hours: hoursRemaining, minutes: minutesRemaining, overdue, daysBeforeDeadline };
+  }
+
+  
+
+  
+  calculateTimeDifference(): { days: number, hours: number, minutes: number, beforeDeadline: boolean } {
+    const updatedAtDate = new Date(this.answer.updatedAt);
+    const deadlineDate = new Date(this.homeworkTest.deadline);
+    
+    const timeDifference = deadlineDate.getTime() - updatedAtDate.getTime();
+    const beforeDeadline = timeDifference > 0;
+  
+    const totalMinutesDifference = Math.abs(Math.floor(timeDifference / (1000 * 60)));
+    const daysDifference = Math.floor(totalMinutesDifference / (24 * 60));
+    const hoursDifference = Math.floor((totalMinutesDifference % (24 * 60)) / 60);
+    const minutesDifference = totalMinutesDifference % 60;
+  
+    return { days: daysDifference, hours: hoursDifference, minutes: minutesDifference, beforeDeadline };
+  }
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  isEditingDate = false;
+  editedDeadline!: Date;
+
+  saveEditedDeadline() {
+    if (!this.homeworkTest || !this.editedDeadline) {
+      return;
+    }
+  
+    // Tworzy obiekt z zaktualizowanym terminem oddania
+    const updatedHomeworkTest = {
+      id: this.homeworkTest.id,
+      deadline: this.editedDeadline,
+      name: this.homeworkTest.name // Zachowuje nazwę niezmienioną
+    };
+  
+    // Wywołuje serwis do zapisania zaktualizowanego terminu
+    this.homeworkTestService.update(updatedHomeworkTest).subscribe(
+      (response) => {
+        // Tutaj możesz obsłużyć sukces zapisu
+      },
+      (error) => {
+        // Tutaj możesz obsłużyć błąd
+      }
+    );
+  
+    this.isEditingDate = false;
+  }
+  
+  
+  cancelEditDate() {
+    this.editedDeadline = this.homeworkTest.deadline;
+    this.isEditingDate = false;
+  }
+  
+  
+  
+  
         
 
 }

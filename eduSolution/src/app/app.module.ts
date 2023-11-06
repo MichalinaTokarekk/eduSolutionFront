@@ -60,6 +60,10 @@ import { CoursesByStudentComponent } from './gradeBook/coursesByStudent/coursesB
 import { StudentDetailGradeComponent } from './grade/grade-detail/studentDetailGrade.component';
 
 
+
+
+
+
 import { JwtHelperService, JwtModule } from '@auth0/angular-jwt';
 
 
@@ -84,7 +88,8 @@ import { JwtHelperService, JwtModule } from '@auth0/angular-jwt';
 
   ],
   imports: [
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    
   ]
 })
 export class MaterialModule { }

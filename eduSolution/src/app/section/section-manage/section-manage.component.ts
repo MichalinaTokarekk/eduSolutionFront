@@ -491,13 +491,16 @@ isAddingNewSection: boolean = false;
 
 
   sectionHomeworkTests: any[] = [];
+  newHomeworkTestDeadline!: Date;
 
   onAddHomeworkTest(section: any) {
     if (section && section.id) {
       // Utwórz nowy materiał edukacyjny
+      
       const homeworkTest: HomeworkTest = {
         id: 0, // Jeśli ID jest automatycznie generowane przez serwer, pozostaw to jako 0
         name: this.newHomeworkTestName,
+        deadline: this.newHomeworkTestDeadline,
         section: section // Dodaj sekcję do materiału
       };
   
