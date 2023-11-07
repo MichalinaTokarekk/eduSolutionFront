@@ -37,6 +37,12 @@ export class GradeService {
     return result;
   }
 
+  updateGrade(grade: any): Observable <any> {
+    let result: Observable<Object>;
+    result = this.http.put(this.GRADE_API + '/updateGrade', grade);
+    return result;
+  }
+
   addFinalGrade(grade: any): Observable <any> {
     let result: Observable<Object>;
       result = this.http.post(this.GRADE_API + '/addFinalGrade', grade)
@@ -51,6 +57,10 @@ export class GradeService {
 
   remove (id: string):Observable<string> {
     return this.http.delete<string>(this.GRADE_API + '/deleteGrade/' + id);
+  }
+
+  getGradeByAnswerId(answerId: number) {
+    return this.http.get(this.GRADE_API + '/gradeByAnswerId/' + answerId);
   }
 
 }

@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import {Component, ElementRef, OnInit, Renderer2, ViewChild} from '@angular/core';
+import {Component, ElementRef, Input, OnInit, Renderer2, ViewChild} from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import {MatExpansionModule} from '@angular/material/expansion';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -26,6 +26,7 @@ import { ClassGroup } from 'src/app/interfaces/classGroup-interface';
 import { UserService } from 'src/app/user/user-service/user.service';
 import { AnswerDetailComponent } from 'src/app/answer/answer-detail/answer-detail.component';
 import { ChangeDetectionStrategy } from '@angular/core';
+import { Course } from 'src/app/interfaces/course-interface';
 
 
 
@@ -59,6 +60,7 @@ course!: any;
 answer!: any; 
 answerId!: any; 
 userRole!: string;
+private courseId!: number;
 ngOnInit(): void {
     // Pobierz ID materiału edukacyjnego z parametrów routingu
     this.route.paramMap.subscribe((params: ParamMap) => {
@@ -148,6 +150,23 @@ ngOnInit(): void {
     //   });
 
     this.userRole = _finalData.role;
+
+
+    this.route.paramMap.subscribe((params: ParamMap) => {
+      const id = params.get('id');
+      if (id !== null) {
+        this.homeworkTestService.get(id).subscribe((homeworkTest: any) => {
+          this.homeworkTest = homeworkTest;
+          this.courseId = homeworkTest.section.course.id; // Przypisz courseId
+          console.log('courseId', this.courseId);
+        }, error => {
+          console.error(error);
+        });
+      } else {
+        console.log("Nie ma nic");
+      }
+    });
+    
     
   }
 
@@ -184,7 +203,7 @@ getClassGroupId(selectedClassGroupId: number): void {
   openAnswerDetailsDialog(answer: Answer): void {
     const dialogRef = this.dialog.open(AnswerDetailComponent, {
       width: '400px', // dostosuj szerokość do swoich potrzeb
-      data: { answer, aFilesByAnswer: this.aFilesByAnswer, homeworkTest: this.homeworkTest}, // przekaż odpowiedź jako dane
+      data: { answer, aFilesByAnswer: this.aFilesByAnswer, homeworkTest: this.homeworkTest, courseId: this.courseId}, // przekaż odpowiedź jako dane
     });
   
     dialogRef.afterClosed().subscribe(result => {
