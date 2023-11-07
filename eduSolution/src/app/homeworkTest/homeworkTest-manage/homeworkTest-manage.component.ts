@@ -184,7 +184,7 @@ getClassGroupId(selectedClassGroupId: number): void {
   openAnswerDetailsDialog(answer: Answer): void {
     const dialogRef = this.dialog.open(AnswerDetailComponent, {
       width: '400px', // dostosuj szerokość do swoich potrzeb
-      data: { answer, aFilesByAnswer: this.aFilesByAnswer }, // przekaż odpowiedź jako dane
+      data: { answer, aFilesByAnswer: this.aFilesByAnswer, homeworkTest: this.homeworkTest}, // przekaż odpowiedź jako dane
     });
   
     dialogRef.afterClosed().subscribe(result => {

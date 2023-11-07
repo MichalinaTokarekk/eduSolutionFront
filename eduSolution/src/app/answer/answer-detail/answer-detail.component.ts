@@ -20,6 +20,16 @@ import { LoginService } from 'src/app/authorization_authentication/service/login
     <div *ngFor="let aFile of aFilesByAnswer" (click)="loadAFilesByAnswerId(data.answer.id)">
       <a (click)="downloadFileById(aFile.id)" href="javascript:void(0);">{{ aFile.name }}</a>
     </div>
+    <p>Utworzono: {{ data.answer.createdAt | date:'yyyy-MM-dd HH:mm:ss' }}</p>
+    <p>Ostatnia modyfikacja: {{ data.answer.updatedAt | date:'yyyy-MM-dd HH:mm:ss' }}</p>
+    <div [ngClass]="{'green-background': calculateTimeDifference().beforeDeadline, 'red-background': !calculateTimeDifference().beforeDeadline}">
+        <p>
+          {{ calculateTimeDifference().beforeDeadline ? 'Zadanie zostało przesłane ' : 'Zadanie zostało przesłane ' }}
+          {{ calculateTimeDifference().days }} dni, {{ calculateTimeDifference().hours }} godzin i {{ calculateTimeDifference().minutes }} minut
+          {{ calculateTimeDifference().beforeDeadline ? 'przed terminem.' : 'po terminie.' }}
+        </p>
+        </div>
+
     <input [(ngModel)]="editedComment" name="editedComment" placeholder="Edytuj komentarz">
     <input [(ngModel)]="editedAnswerStatus" name="editedAnswerStatus" placeholder="Edytuj status odpowiedzi">
     <button (click)="updateAnswerDetails()">Zapisz zmiany</button>   
@@ -61,6 +71,15 @@ import { LoginService } from 'src/app/authorization_authentication/service/login
   button:hover {
     background-color: #0056b3;
   }
+
+  .green-background {
+  background-color: rgb(153, 206, 153);
+}
+
+.red-background {
+  background-color: rgb(196, 144, 144);
+}
+
 `]
 })
     export class AnswerDetailComponent implements OnInit{
@@ -82,6 +101,7 @@ import { LoginService } from 'src/app/authorization_authentication/service/login
 
     ngOnInit(): void {
         // this.updateAnswerDetails();
+        
     }
 
     aFilesByAnswer!: any;
@@ -150,6 +170,23 @@ import { LoginService } from 'src/app/authorization_authentication/service/login
         console.error('Błąd podczas pobierania pliku', error);
       });
     }
+
+    calculateTimeDifference(): { days: number, hours: number, minutes: number, beforeDeadline: boolean } {
+      const updatedAtDate = new Date(this.data.answer.updatedAt);
+      const deadlineDate = new Date(this.data.homeworkTest.deadline);
+      
+      const timeDifference = deadlineDate.getTime() - updatedAtDate.getTime();
+      const beforeDeadline = timeDifference > 0;
+    
+      const totalMinutesDifference = Math.abs(Math.floor(timeDifference / (1000 * 60)));
+      const daysDifference = Math.floor(totalMinutesDifference / (24 * 60));
+      const hoursDifference = Math.floor((totalMinutesDifference % (24 * 60)) / 60);
+      const minutesDifference = totalMinutesDifference % 60;
+    
+      return { days: daysDifference, hours: hoursDifference, minutes: minutesDifference, beforeDeadline };
+    }
+    
+    
     
 }
 

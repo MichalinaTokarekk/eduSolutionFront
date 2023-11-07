@@ -102,7 +102,16 @@
             <button *ngIf="homeworkTest && homeworkTest.deadline" (click)="isEditingDate = true">
               Edytuj
             </button>
-          </ng-container>
+          </ng-container><br><br>
+          <p *ngIf="!calculateDaysUntilDeadline().overdue">
+            Pozostało: {{ calculateDaysUntilDeadline().days }} dni, {{ calculateDaysUntilDeadline().hours }} godzin, {{ calculateDaysUntilDeadline().minutes }} minut
+          </p>
+          
+          <div *ngIf="calculateDaysUntilDeadline().overdue">
+            <p>
+              Termin zadania upłynął {{ calculateDaysUntilDeadline().days }} dni, {{ calculateDaysUntilDeadline().hours }} godzin i {{ calculateDaysUntilDeadline().minutes }} minut temu.
+            </p>
+          </div>
           <ng-template #dateEditor>
             <input type="datetime-local" name="editedDeadline" [(ngModel)]="editedDeadline">
             <button (click)="saveEditedDeadline()">Zapisz</button>
@@ -170,7 +179,7 @@
         
         
         
-        <p *ngIf="!calculateDaysUntilDeadline().overdue">
+        <!-- <p *ngIf="!calculateDaysUntilDeadline().overdue">
           Pozostało: {{ calculateDaysUntilDeadline().days }} dni, {{ calculateDaysUntilDeadline().hours }} godzin, {{ calculateDaysUntilDeadline().minutes }} minut
         </p>
         
@@ -178,7 +187,7 @@
           <p>
             Termin zadania upłynął {{ calculateDaysUntilDeadline().days }} dni, {{ calculateDaysUntilDeadline().hours }} godzin i {{ calculateDaysUntilDeadline().minutes }} minut temu.
           </p>
-        </div>
+        </div> -->
         
           
         
