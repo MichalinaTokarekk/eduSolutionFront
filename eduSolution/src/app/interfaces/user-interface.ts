@@ -13,6 +13,7 @@ export interface User {
     post: string;
     postCode: string;
     country: string;
+    yearBook: string;
     createdBy: string;
     createdAt: Date;
     updatedBy: string;

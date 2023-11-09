@@ -87,6 +87,7 @@ export class UserInlineCrudComponent implements OnInit {
       "post": "",
       "postCode": "",
       "country": "",
+      "yearBook": "",
       "name": "",
       "isEdit": true
     };

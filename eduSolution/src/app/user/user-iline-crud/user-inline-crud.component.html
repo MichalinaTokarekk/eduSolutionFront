@@ -25,6 +25,7 @@
                     <th (click)="onNameSort()">Poczta</th>
                     <th (click)="onNameSort()">Kod pocztowy</th>
                     <th (click)="onNameSort()">Kraj</th>
+                    <th (click)="onNameSort()">Rocznik</th>
                     <!-- <th>Opis</th>  -->
                     <th></th>
                 </tr>
@@ -182,6 +183,22 @@
                         
                         <div *ngIf="!user.isEdit">
                             {{user.country}}
+                        </div>
+                     
+                    </td>
+
+                    <td>
+                        <div *ngIf="user.isEdit" class="form-group">
+                            <div class="input-container">
+                                <input type="text" class="form-control" [(ngModel)]="user.yearBook" [ngClass]="{'is-invalid': validateUser(user.yearBook) !== ''}">
+                                <div class="text-danger error-message" *ngIf="!user.yearBook">
+                                    {{user.yearBook}}
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div *ngIf="!user.isEdit">
+                            {{user.yearBook}}
                         </div>
                      
                     </td>
