@@ -1,0 +1,10 @@
+
+<ng-container *ngFor="let yearBook of getUsersYearBooks()">
+    <h2>Rocznik {{ yearBook }}</h2>
+    <div *ngFor="let user of getUsersByYearBook(yearBook)">
+      <ng-container *ngIf="user.role === 'STUDENT'">
+        <a [routerLink]="['/yearBookUserDetails', user.id]">{{ user.firstName }} {{ user.lastName }}</a>     
+    </ng-container>
+    </div><br>
+  </ng-container>
+  

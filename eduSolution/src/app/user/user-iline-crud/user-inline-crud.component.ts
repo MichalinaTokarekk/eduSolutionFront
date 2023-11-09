@@ -101,7 +101,7 @@ export class UserInlineCrudComponent implements OnInit {
 }
 
     onUpdate(userObj: any) {
-        // write api call and send obj
+      console.log('Wartość yearBook przed zapisem:', userObj.yearBook);
       if (!userObj.firstName || userObj.firstName.trim() === '') {
         // Jeśli pole "name" jest puste, nie wykonuj aktualizacji
         return;
@@ -118,6 +118,8 @@ export class UserInlineCrudComponent implements OnInit {
                 console.error('Błąd podczas aktualizacji:', error);
             }
           );
+          console.log('Wartość yearBook po zapisie:', userObj.yearBook);
+
         
     }
 

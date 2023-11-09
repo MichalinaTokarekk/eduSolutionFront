@@ -65,6 +65,7 @@ import { StudentDetailGradeComponent } from './grade/grade-detail/studentDetailG
 
 
 import { JwtHelperService, JwtModule } from '@auth0/angular-jwt';
+import { UsersByYearBook } from './usersByYearBook/usersByYearBook.component';
 
 
 
@@ -116,7 +117,8 @@ export class MaterialModule { }
     DetailEditGradeComponent,
     AddFinalGradeDetailComponent,
     CoursesByStudentComponent,
-    StudentDetailGradeComponent
+    StudentDetailGradeComponent,
+    UsersByYearBook
   ],
   imports: [
     BrowserModule,

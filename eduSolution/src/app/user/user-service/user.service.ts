@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpParams } from "@angular/common/http";
 import { Observable } from "rxjs";
+import { Role } from "src/app/interfaces/role-interface";
 
 
 @Injectable()
@@ -48,6 +49,13 @@ export class UserService {
   findUsersByClassGroupId(classGroupId: number) {
     return this.http.get<any>(this.USER_API + '/findUsersByClassGroupId/' + classGroupId);
   }
+
+  getUsersByRole(role: Role): Observable<any[]> {
+    return this.http.get<any[]>(`${this.USER_API}/usersByRole?role=${role}`);
+  }
+  
+  
+  
 
 }
 
