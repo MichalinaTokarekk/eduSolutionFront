@@ -27,6 +27,10 @@ export class GradeService {
     return this.http.get(this.GRADE_API + '/findAllByStudentAndCourse/' + studentId + '/' + courseId);
   }
 
+  findAllByStudentId(studentId: any) {
+    return this.http.get(this.GRADE_API + '/findAllByStudentId/' + studentId);
+  }
+
   save (grade: any) : Observable <any> {
     let result: Observable<Object>;
     if(grade['href']){

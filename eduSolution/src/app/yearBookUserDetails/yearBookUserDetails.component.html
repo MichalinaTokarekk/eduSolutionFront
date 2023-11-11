@@ -1,0 +1,43 @@
+
+
+<!-- <div>
+    <h3>Oceny studenta: {{ userName }}</h3>
+    
+    
+    <ng-container *ngFor="let semester of userGradesBySemester">
+        <h4>{{ semester.semester }}</h4>
+        <ul>
+          <li *ngFor="let grade of semester.grades">
+            {{ grade.value }} - {{ grade.description }} {{ grade.course.name }}
+          </li>
+        </ul>
+      </ng-container>
+  </div> -->
+
+  <div>
+    <h3>Oceny studenta: {{ userName }}</h3>
+  
+    <ng-container *ngFor="let semester of userGradesBySemesterAndCourse">
+      <h4>{{ semester.semester }}</h4>
+      <ng-container *ngFor="let courseGroup of semester.courses">
+        <h5>{{ courseGroup.course }}</h5>
+        <ul>
+          <li *ngFor="let grade of courseGroup.grades">
+            {{ grade.value }} - {{ grade.description }} 
+            <p>Nauczyciel: {{ grade.teacher.firstName }} {{ grade.teacher.lastName }}</p>
+            <p>Data wystawienia: {{ grade.createdAt | date:'yyyy-MM-dd' }}</p>
+            <p>Data edycji: {{ grade.updatedAt | date:'yyyy-MM-dd' }}</p>
+          </li>
+        </ul>
+      </ng-container>
+    </ng-container>
+  </div>
+  
+  
+  
+
+  
+
+
+  
+  

@@ -17,6 +17,7 @@ import { TeachingCoursesComponent } from './gradeBook/teachingCourses/teachingCo
 import { ClassGroupsByCourseAndUser } from './gradeBook/classGroupsByCourseAndUser/classGroupsByCourseAndUser.component';
 import { CoursesByStudentComponent } from './gradeBook/coursesByStudent/coursesByStudent.component';
 import { UsersByYearBook } from './usersByYearBook/usersByYearBook.component';
+import { YearBookUserDetailsComponent } from './yearBookUserDetails/yearBookUserDetails.component';
 
 const routes: Routes = [
   {path: "dashboard", component: DashboardComponent, canActivate:[AuthGuard]},
@@ -36,6 +37,7 @@ const routes: Routes = [
   {path: "classGrioupsByCourseAndUser/:id", component: ClassGroupsByCourseAndUser},
   {path: "coursesByStudent-view", component: CoursesByStudentComponent},
   {path: "usersByYearBook", component: UsersByYearBook},
+  {path: 'yearBookUserDetails/:id', component: YearBookUserDetailsComponent },
   
 ];
 
