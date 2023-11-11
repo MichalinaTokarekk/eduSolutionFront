@@ -94,6 +94,7 @@ export class TeachingCoursesComponent implements OnInit {
         const _atobData = atob(_token);
         const _finalData = JSON.parse(_atobData);
     this.courseService.findCoursesByUserId(_finalData.id).subscribe (data => {
+      console.log('Courses:', data); // Dodaj logi tutaj
         this.courseArray = data as any[];
         this.filteredCourses = data as any[];
 

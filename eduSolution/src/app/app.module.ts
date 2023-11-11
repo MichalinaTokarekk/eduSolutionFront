@@ -68,6 +68,7 @@ import { JwtHelperService, JwtModule } from '@auth0/angular-jwt';
 import { UsersByYearBook } from './usersByYearBook/usersByYearBook.component';
 import { YearBookUserDetailsComponent } from './yearBookUserDetails/yearBookUserDetails.component';
 import { GroupByPipe } from './yearBookUserDetails/groupByPipe.component';
+import { MyAllGradesComponent } from './myAllGrades/myAllGrades.component';
 
 
 
@@ -122,7 +123,8 @@ export class MaterialModule { }
     StudentDetailGradeComponent,
     UsersByYearBook,
     YearBookUserDetailsComponent,
-    GroupByPipe
+    GroupByPipe,
+    MyAllGradesComponent
   ],
   imports: [
     BrowserModule,
