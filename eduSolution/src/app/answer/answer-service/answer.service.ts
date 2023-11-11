@@ -58,6 +58,11 @@ export class AnswerService {
     return this.http.get<Answer>(url);
   }
 
+  findByHomeworkTest(homeworkTestId: number): Observable<Answer> {
+    const url = `${this.ANSWER_API}/findByHomeworkTest/homeworkTest/${homeworkTestId}`;
+    return this.http.get<Answer>(url);
+  }
+
   
 }
 

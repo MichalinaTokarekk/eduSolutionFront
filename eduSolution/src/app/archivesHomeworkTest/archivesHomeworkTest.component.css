@@ -1,0 +1,51 @@
+/* Globalne style */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Style dla formularza */
+  form {
+    margin-bottom: 20px;
+  }
+  
+  /* Style dla odpowiedzi */
+  h2 {
+    color: #333;
+  }
+  
+  h3 {
+    color: #666;
+  }
+  
+  ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  /* Style dla poszczególnych odpowiedzi */
+  .colored-text {
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  .blue-text {
+    color: blue;
+  }
+  
+  .green-text {
+    color: green;
+  }
+  
+  .red-text {
+    color: red;
+  }
+  
+  /* Hover nad linkiem */
+  a:hover {
+    text-decoration: underline;
+    cursor: pointer;
+  }
+  

@@ -69,6 +69,8 @@ import { UsersByYearBook } from './usersByYearBook/usersByYearBook.component';
 import { YearBookUserDetailsComponent } from './yearBookUserDetails/yearBookUserDetails.component';
 import { GroupByPipe } from './yearBookUserDetails/groupByPipe.component';
 import { MyAllGradesComponent } from './myAllGrades/myAllGrades.component';
+import { ArchivesHomeworkTestComponent } from './archivesHomeworkTest/archivesHomeworkTest.component';
+import { ArchivedAnswerDetailComponent } from './archivesHomeworkTest/archivedAnswerDetail.component';
 
 
 
@@ -124,7 +126,9 @@ export class MaterialModule { }
     UsersByYearBook,
     YearBookUserDetailsComponent,
     GroupByPipe,
-    MyAllGradesComponent
+    MyAllGradesComponent,
+    ArchivesHomeworkTestComponent,
+    ArchivedAnswerDetailComponent
   ],
   imports: [
     BrowserModule,

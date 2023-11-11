@@ -19,6 +19,7 @@ import { CoursesByStudentComponent } from './gradeBook/coursesByStudent/coursesB
 import { UsersByYearBook } from './usersByYearBook/usersByYearBook.component';
 import { YearBookUserDetailsComponent } from './yearBookUserDetails/yearBookUserDetails.component';
 import { MyAllGradesComponent } from './myAllGrades/myAllGrades.component';
+import { ArchivesHomeworkTestComponent } from './archivesHomeworkTest/archivesHomeworkTest.component';
 
 const routes: Routes = [
   {path: "dashboard", component: DashboardComponent, canActivate:[AuthGuard]},
@@ -40,6 +41,7 @@ const routes: Routes = [
   {path: "usersByYearBook", component: UsersByYearBook},
   {path: 'yearBookUserDetails/:id', component: YearBookUserDetailsComponent },
   {path: 'myAllGrades', component: MyAllGradesComponent },
+  {path: 'archivesHomeworkTest/:id', component: ArchivesHomeworkTestComponent },
   
 ];
 

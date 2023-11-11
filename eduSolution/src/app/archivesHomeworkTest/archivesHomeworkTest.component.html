@@ -1,0 +1,38 @@
+<!-- Twój istniejący kod HTML -->
+
+<!-- Dodaj poniższy formularz i przycisk do wywołania funkcji -->
+<form (ngSubmit)="processUserGrades()" #gradeForm="ngForm">
+</form>
+
+<!-- Wyświetl odpowiedzi, jeśli zostały pobrane -->
+<div *ngIf="answersByHomeworkTest">
+  <h2>Odpowiedzi:</h2>
+  <ng-container *ngFor="let yearBook of getUniqueYearBooks()">
+    <h3>Rocznik {{ yearBook }}</h3>
+    <ul>
+      <ng-container *ngFor="let answer of answersByHomeworkTest">
+        <ng-container *ngIf="answer.user && answer.user.yearBook === yearBook">
+          <div [ngSwitch]="answer.answerStatus">
+            <div *ngSwitchCase="'NIEOCENIONE'" class="colored-text blue-text">
+              <a (click)="openAnswerDetailsDialog(answer)">{{ answer.user.firstName }} {{ answer.user.lastName }} {{ ' ' }}</a>
+              <span class="blue-text">{{ answer.answerStatus }}</span>
+              <!-- Tutaj możesz dodać dowolne informacje dotyczące odpowiedzi -->
+            </div>
+            <div *ngSwitchCase="'ZALICZONE'" class="colored-text green-text">
+              <a (click)="openAnswerDetailsDialog(answer)">{{ answer.user.firstName }} {{ answer.user.lastName }} {{ ' ' }}</a>
+              <span class="green-text">{{ answer.answerStatus }}</span>
+              <!-- Tutaj możesz dodać dowolne informacje dotyczące odpowiedzi -->
+            </div>
+            <div *ngSwitchCase="'NIEZALICZONE'" class="colored-text red-text">
+              <a (click)="openAnswerDetailsDialog(answer)">{{ answer.user.firstName }} {{ answer.user.lastName }} {{ ' ' }}</a>
+              <span class="red-text">{{ answer.answerStatus }}</span>
+              <!-- Tutaj możesz dodać dowolne informacje dotyczące odpowiedzi -->
+            </div>
+          </div>
+        </ng-container>
+      </ng-container>
+    </ul>
+  </ng-container>
+</div>
+
+  
