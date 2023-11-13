@@ -13,32 +13,9 @@
     <p>No lessons found for the selected semester.</p>
   </ng-template>  -->
 
-
-
-
-  <!-- <ng-container *ngFor="let dayName of getLessonsDayNames()">
-    <h2>{{ dayName }}</h2>
-    <div *ngFor="let lesson of getLessonByDayName(dayName)">
-      <ng-container>
-        <a>{{ lesson.startLessonTime }} {{ lesson.endLessonTime }} {{ lesson.course.name }} ({{ lesson.classGroup.name }}) </a>     
-    </ng-container>
-    </div><br>
-
-    <ng-container *ngFor="let hour of getHoursArray()">
-      <div>{{ hour }}:00</div>
-    
-      <div *ngFor="let lesson of getLessonsByDayAndHour(dayName, hour)">
-        <a *ngIf="lesson.startLessonTime && lesson.endLessonTime">
-          {{ lesson.course.name }} {{ lesson.classGroup.name }}
-          {{ lesson.startLessonTime | date: 'HH:mm' }} - {{ lesson.endLessonTime | date: 'HH:mm' }}
-        </a>
-      </div>
-    </ng-container>
-  </ng-container> -->
-
  
   
-  <table>
+  <!-- <table>
     <thead>
       <tr>
         <th></th>
@@ -58,8 +35,98 @@
         </td>
       </tr>
     </tfoot>
-  </table>
+  </table> -->
   
+
+<!-- W pliku lessonsSchedule.component.html -->
+<!-- <table>
+  <thead>
+    <tr>
+      <th></th>
+      <th *ngFor="let dayName of getLessonsDayNames()">{{ dayName }}</th>
+    </tr>
+  </thead>
+  <tfoot>
+    <tr>
+      <td></td>
+      <td *ngFor="let dayName of getLessonsDayNames()">
+        <ng-container *ngFor="let lesson of getLessonByDayName(dayName)">
+          <div *ngIf="lesson.startLessonTime && lesson.endLessonTime">
+            <div *ngIf="isCourseGrouped(lesson.classGroup.id)">
+              {{ lesson.startLessonTime }} {{ lesson.endLessonTime }}
+            </div>
+            <div [style.background-color]="getCourseColor(lesson.classGroup.id)">
+              {{ lesson.course.name }} 
+              ({{ lesson.classGroup.name }})
+            </div>
+          </div>
+        </ng-container>
+      </td>
+    </tr>
+  </tfoot>
+</table> -->
+
+<table>
+  <thead>
+    <tr>
+      <th [attr.colspan]="getLessonsDayNames().length + 1">Plan lekcji dla {{ getSemesterName() }}</th>
+    </tr>
+    <tr>
+      <th></th>
+      <th *ngFor="let dayName of getLessonsDayNames()">{{ dayName }}</th>
+    </tr>
+  </thead>
+  <tfoot>
+    <tr>
+      <td></td>
+      <td *ngFor="let dayName of getLessonsDayNames()">
+        <ng-container *ngFor="let lesson of getLessonByDayName(dayName)">
+          <div *ngIf="lesson.startLessonTime && lesson.endLessonTime">
+            <div *ngIf="isCourseGrouped(lesson.classGroup.id)">
+              <!-- {{ lesson.startLessonTime }} {{ lesson.endLessonTime }} -->
+              <span class="time">{{ lesson.startLessonTime + '-'}}</span> 
+              <span class="time">{{ lesson.endLessonTime }}</span> 
+            </div>
+            <div [style.background-color]="getCourseColor(lesson.classGroup.id)">
+              <!-- {{ lesson.course.name }} ({{ lesson.classGroup.name }}) -->
+              <span class="course-name">{{ lesson.course.name }}</span> 
+              (<span class="class-group-name">{{ lesson.classGroup.name }}</span>)
+            </div>
+          </div>
+        </ng-container>
+      </td>
+    </tr>
+  </tfoot>
+</table>
+
+
+
+  
+<!-- <table>
+  <thead>
+    <tr>
+      <th></th>
+      <th *ngFor="let dayName of getLessonsDayNames()">{{ dayName }}</th>
+    </tr>
+  </thead>
+  <tfoot>
+    <tr>
+      <td></td>
+      <td *ngFor="let dayName of getLessonsDayNames()">
+        <ng-container *ngFor="let lesson of getLessonByDayName(dayName)">
+          <div *ngIf="lesson.startLessonTime && lesson.endLessonTime">
+            <div *ngIf="isCourseGrouped(lesson.course.name)">
+              {{ lesson.startLessonTime }} {{ lesson.endLessonTime }}
+            </div>
+            <div [style.background-color]="isCourseGrouped(lesson.course.name) ? getCourseColor(lesson.course.name) : ''">
+              {{ lesson.course.name }} ({{ lesson.classGroup.name }})
+            </div>
+          </div>
+        </ng-container>
+      </td>
+    </tr>
+  </tfoot>
+</table> -->
 
   
   
@@ -68,11 +135,9 @@
   
   
   
-  
-  
 
 
-  --------------------------------------------------------------------------------------------------------------------------------------------------
+  <!-- --------------------------------------------------------------------------------------------------------------------------------------------------
 
 
 <ng-container *ngFor="let dayName of getLessonsDayNames()">
@@ -91,7 +156,7 @@
 
     <div *ngIf="!getLessonsByDayAndHour(dayName, hour).length">&nbsp;</div>
   </div>
-</ng-container>
+</ng-container> -->
 
   
   

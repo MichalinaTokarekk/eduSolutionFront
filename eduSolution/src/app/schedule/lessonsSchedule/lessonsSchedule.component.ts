@@ -73,6 +73,14 @@ export class LessonsScheduleComponent implements OnInit {
       });
 
 
+      // const storedColors = localStorage.getItem('courseColors');
+      // if (storedColors) {
+      //   this.courseColors = JSON.parse(storedColors);
+      // }
+
+
+      
+
     }
 
     getLessonByDayName(dayName: string): any[] {
@@ -84,62 +92,66 @@ export class LessonsScheduleComponent implements OnInit {
       // console.log('lekcje', this.lessons);
       return uniqueYearBooks;
     }
+
+
+
+
+
+
       
+    courseColors: { [classGroupId: number]: string } = {};
+    // courseColors: { [classGroupId: number]: string } = {
+    //   1: '#000000', 
+    //   2: '#ffffff', 
+    // };
 
-    
-
-
-
-    getLessonsByDayAndHour(dayName: string, hour: number): any[] {
-      return this.lessons.filter(lesson => 
-        lesson.dayName === dayName &&
-        this.getHourFromTime(lesson.startLessonTime) <= hour &&
-        this.getHourFromTime(lesson.endLessonTime) > hour
-      );
-    }
-    
-    getHourFromTime(time: Time): number {
-      return time && time.hours !== undefined ? time.hours : 0;
-    }
-
-    getHoursArray(): number[] {
-      const hoursArray: number[] = [];
-      for (let i = 8; i <= 18; i++) {
-        hoursArray.push(i);
+    getCourseColor(classGroupId: number): string {
+      // Sprawdź, czy kolor jest już przypisany do danej classGroup
+      if (!this.courseColors[classGroupId]) {
+        // Jeżeli nie, przypisz nowy kolor
+        this.courseColors[classGroupId] = this.getFixedColor();
+        // Zapisz kolory w pamięci lokalnej przeglądarki
+        localStorage.setItem('courseColors', JSON.stringify(this.courseColors));
       }
-      return hoursArray;
+    
+      return this.courseColors[classGroupId];
     }
 
-    convertTimeStringToDate(timeString: string): Date {
-      const [hours, minutes] = timeString.split(':').map(Number);
-      const date = new Date();
-      date.setHours(hours);
-      date.setMinutes(minutes);
-      return date;
+    counter: number = 0;
+    
+    getFixedColor(): string {
+      const colors = ['#ADD8E6', '#D2B48C', '#90EE90']; // Tutaj możesz zdefiniować swoje trzy kolory
+      // Dla przykładu, możesz użyć modulo, aby wybierać kolory cyklicznie
+      const index = this.counter % colors.length;
+      this.counter++; // Zakładając, że masz pole `counter` na poziomie klasy, zainicjowane na początku jako 0.
+      return colors[index];
     }
+    
+    
 
-    getCourseName(course: any): string {
-      return course ? course.name : 'Brak kursu';
-    }
-
-    getClassGroupName(classGroup: any): string {
-      return classGroup ? classGroup.name : 'Brak grupy';
-    }
 
     
-    isLessonStartingAtHour(lesson: any, hour: number): boolean {
-      const lessonStartTime = new Date(lesson.startLessonTime);
-      return lessonStartTime.getHours() === hour;
+    // getRandomColor(): string {
+    //   const letters = '0123456789ABCDEF';
+    //   let color = '#';
+    //   for (let i = 0; i < 6; i++) {
+    //     color += letters[Math.floor(Math.random() * 16)];
+    //   }
+    //   return color;
+    // }
+
+    isCourseGrouped(classGroupId: number): boolean {
+      return this.lessons.filter(lesson => lesson.classGroup.id === classGroupId).length > 1;
     }
+
+    getSemesterName(): string {
+      // Przyjmując, że semestr jest zawsze taki sam dla wszystkich lekcji
+      if (this.lessons.length > 0) {
+        return this.lessons[0].classGroup.semester.name;
+      }
     
-    
-    
-    
-      
-      
-    
-    
-    
-      
+      // Jeśli nie ma lekcji, możesz zwrócić domyślną wartość lub pusty string
+      return 'Brak danych o semestrze';
+    }
     
   }

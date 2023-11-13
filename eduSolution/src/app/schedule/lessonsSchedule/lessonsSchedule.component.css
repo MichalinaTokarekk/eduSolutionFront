@@ -17,3 +17,14 @@ table {
     background-color: #f5f5f5;
   }
   
+.course-name,
+.class-group-name {
+  font-size: large;
+  font-weight: 500;
+}
+
+.time{
+    font-size: large;
+}
+
+
