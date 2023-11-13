@@ -20,6 +20,7 @@ import { UsersByYearBook } from './usersByYearBook/usersByYearBook.component';
 import { YearBookUserDetailsComponent } from './yearBookUserDetails/yearBookUserDetails.component';
 import { MyAllGradesComponent } from './myAllGrades/myAllGrades.component';
 import { ArchivesHomeworkTestComponent } from './archivesHomeworkTest/archivesHomeworkTest.component';
+import { LessonsScheduleComponent } from './schedule/lessonsSchedule/lessonsSchedule.component';
 
 const routes: Routes = [
   {path: "dashboard", component: DashboardComponent, canActivate:[AuthGuard]},
@@ -42,6 +43,7 @@ const routes: Routes = [
   {path: 'yearBookUserDetails/:id', component: YearBookUserDetailsComponent },
   {path: 'myAllGrades', component: MyAllGradesComponent },
   {path: 'archivesHomeworkTest/:id', component: ArchivesHomeworkTestComponent },
+  {path: 'lessonSchedule', component: LessonsScheduleComponent },
   
 ];
 

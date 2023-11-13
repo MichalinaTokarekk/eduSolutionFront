@@ -1,0 +1,124 @@
+
+
+ <!-- <div *ngIf="lessons && lessons.length > 0; else noLessons">
+    <h2>Schedule for {{ groupId }}</h2>
+    <ul>
+      <li *ngFor="let lesson of lessons">
+        {{ lesson.startLessonTime }} - {{ lesson.endLessonTime }}: {{ lesson.course.name }} ({{ lesson.classGroup.name }})
+      </li>
+    </ul>
+  </div>
+  
+  <ng-template #noLessons>
+    <p>No lessons found for the selected semester.</p>
+  </ng-template>  -->
+
+
+
+
+  <!-- <ng-container *ngFor="let dayName of getLessonsDayNames()">
+    <h2>{{ dayName }}</h2>
+    <div *ngFor="let lesson of getLessonByDayName(dayName)">
+      <ng-container>
+        <a>{{ lesson.startLessonTime }} {{ lesson.endLessonTime }} {{ lesson.course.name }} ({{ lesson.classGroup.name }}) </a>     
+    </ng-container>
+    </div><br>
+
+    <ng-container *ngFor="let hour of getHoursArray()">
+      <div>{{ hour }}:00</div>
+    
+      <div *ngFor="let lesson of getLessonsByDayAndHour(dayName, hour)">
+        <a *ngIf="lesson.startLessonTime && lesson.endLessonTime">
+          {{ lesson.course.name }} {{ lesson.classGroup.name }}
+          {{ lesson.startLessonTime | date: 'HH:mm' }} - {{ lesson.endLessonTime | date: 'HH:mm' }}
+        </a>
+      </div>
+    </ng-container>
+  </ng-container> -->
+
+ 
+  
+  <table>
+    <thead>
+      <tr>
+        <th></th>
+        <th *ngFor="let dayName of getLessonsDayNames()">{{ dayName }}</th>
+      </tr>
+    </thead>
+    <tfoot>
+      <tr>
+        <td></td>
+        <td *ngFor="let dayName of getLessonsDayNames()">
+          <div *ngFor="let lesson of getLessonByDayName(dayName)">
+            <ng-container *ngIf="lesson.startLessonTime && lesson.endLessonTime">
+              {{ lesson.startLessonTime }} {{ lesson.endLessonTime }}
+              {{ lesson.course.name }} ({{ lesson.classGroup.name }})
+            </ng-container>
+          </div>
+        </td>
+      </tr>
+    </tfoot>
+  </table>
+  
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+  --------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+<ng-container *ngFor="let dayName of getLessonsDayNames()">
+  <h2>{{ dayName }}</h2>
+  
+  <div *ngFor="let hour of getHoursArray()">
+    <div>{{ hour }}:00</div>
+  
+    <div *ngFor="let lesson of getLessonsByDayAndHour(dayName, hour)">
+      <a *ngIf="lesson.startLessonTime && lesson.endLessonTime">
+        {{ lesson.startLessonTime | date: 'HH:mm' }} - {{ lesson.endLessonTime | date: 'HH:mm' }} 
+        {{ getCourseName(lesson.course) }} ({{ getClassGroupName(lesson.classGroup) }})
+
+      </a>
+    </div>
+
+    <div *ngIf="!getLessonsByDayAndHour(dayName, hour).length">&nbsp;</div>
+  </div>
+</ng-container>
+
+  
+  
+
+
+
+
+
+  
+  
+  
+
+  
+  
+  
+  
+  
+
+   
+  
+  
+  
+  
+  
+
+ 
+  
+
+  
+  

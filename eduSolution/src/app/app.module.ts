@@ -71,6 +71,8 @@ import { GroupByPipe } from './yearBookUserDetails/groupByPipe.component';
 import { MyAllGradesComponent } from './myAllGrades/myAllGrades.component';
 import { ArchivesHomeworkTestComponent } from './archivesHomeworkTest/archivesHomeworkTest.component';
 import { ArchivedAnswerDetailComponent } from './archivesHomeworkTest/archivedAnswerDetail.component';
+import { LessonScheduleService } from './schedule/lessonsSchedule/lessonsSchedule-service/lessonsSchedule.service';
+import { LessonsScheduleComponent } from './schedule/lessonsSchedule/lessonsSchedule.component';
 
 
 
@@ -128,7 +130,8 @@ export class MaterialModule { }
     GroupByPipe,
     MyAllGradesComponent,
     ArchivesHomeworkTestComponent,
-    ArchivedAnswerDetailComponent
+    ArchivedAnswerDetailComponent,
+    LessonsScheduleComponent,
   ],
   imports: [
     BrowserModule,
@@ -152,10 +155,11 @@ export class MaterialModule { }
 
   ],
   providers: [SemesterService, CourseService, ClassGroupService, LoginService, JwtHelperService, UserService, SectionService, EduMaterialService, EMFileService,
-    HomeworkTestService, HTFileService, AnswerService, AFileService, GradeService, TypeOfTestingKnowledgeService,
+    HomeworkTestService, HTFileService, AnswerService, AFileService, GradeService, TypeOfTestingKnowledgeService, LessonScheduleService,
     {
       provide: HTTP_INTERCEPTORS, useClass: TokenInterceptorService, multi: true
-    }], 
+    }],
+    
   bootstrap: [AppComponent]
 })
 export class AppModule { }
