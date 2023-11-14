@@ -73,6 +73,7 @@ import { ArchivesHomeworkTestComponent } from './archivesHomeworkTest/archivesHo
 import { ArchivedAnswerDetailComponent } from './archivesHomeworkTest/archivedAnswerDetail.component';
 import { LessonScheduleService } from './schedule/lessonsSchedule/lessonsSchedule-service/lessonsSchedule.service';
 import { LessonsScheduleComponent } from './schedule/lessonsSchedule/lessonsSchedule.component';
+import { LessonDialogComponent } from './schedule/lessonsSchedule/lessonDialog/lessonDialog.component';
 
 
 
@@ -132,6 +133,7 @@ export class MaterialModule { }
     ArchivesHomeworkTestComponent,
     ArchivedAnswerDetailComponent,
     LessonsScheduleComponent,
+    LessonDialogComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,53 @@
+<!-- <h1>Edycja lekcji</h1>
+
+<div>
+  <p>Day Name: {{ editedLesson.dayName }}</p>
+  <p>Start Lesson Time: {{ editedLesson.startLessonTime }}</p>
+  <p>End Lesson Time: {{ editedLesson.endLessonTime }}</p>
+  <p *ngIf="editedLesson.course && editedLesson.course.name">Kurs: {{ editedLesson.course.name }}</p>
+  <p *ngIf="!editedLesson.course">Nie przypisano kursu</p>
+  
+  <p *ngIf="editedLesson.classGroup && editedLesson.classGroup.name">Grupa lekcyjna: {{ editedLesson.classGroup.name }}</p>
+  <p *ngIf="!editedLesson.classGroup">Nie przypisano grupy lekcyjnej</p>
+
+  <button mat-button (click)="onNoClick()">Anuluj</button>
+  <button mat-button (click)="onSaveClick()">Zapisz zmiany</button>
+</div> -->
+
+
+<h1>Edycja lekcji</h1>
+<div class="container">
+
+
+<form [formGroup]="editedLessonForm">
+  <div>
+    <label for="dayName">Day Name:</label>
+    <input id="dayName" formControlName="dayName" readonly/>
+  </div>
+
+  <div>
+    <label for="startLessonTime">Start Lesson Time:</label>
+    <input id="startLessonTime" formControlName="startLessonTime" />
+  </div>
+
+  <div>
+    <label for="endLessonTime">End Lesson Time:</label>
+    <input id="endLessonTime" formControlName="endLessonTime" />
+  </div>
+
+  <label for="course">Kurs:</label>
+  <select id="course" formControlName="course">
+    <option *ngFor="let course of courses" [value]="course.id">{{ course.name }}</option>
+  </select>
+  
+  <label for="classGroup">Grupa lekcyjna:</label>
+  <select id="classGroup" formControlName="classGroup">
+    <option *ngFor="let classGroup of classGroups" [value]="classGroup.id">{{ classGroup.name }}</option>
+  </select>
+  
+
+  <button mat-button (click)="onNoClick()">Anuluj</button>
+  <button mat-button (click)="onSaveClick()">Zapisz zmiany</button>
+  <button mat-button color="warn" (click)="onDeleteClick()">Usuń</button>
+</form>
+</div>

@@ -3,6 +3,11 @@ import { LessonScheduleService } from './lessonsSchedule-service/lessonsSchedule
 import { LoginService } from 'src/app/authorization_authentication/service/login.service';
 import { Semester } from 'src/app/interfaces/semester-interface';
 import { Time } from '@angular/common';
+import { Lesson } from 'src/app/interfaces/lesson-interface';
+import { ClassGroupService } from 'src/app/classGroup/classGroup-service/classGroup.service';
+import { CourseService } from 'src/app/course/course-service/course.service';
+import { MatDialog } from '@angular/material/dialog';
+import { LessonDialogComponent } from './lessonDialog/lessonDialog.component';
 
 @Component({
   selector: 'app-lessons-schedule',
@@ -17,7 +22,8 @@ export class LessonsScheduleComponent implements OnInit {
   lessonsByDay: { [dayName: string]: any[] } = {}; // Używamy obiektu do przechowywania lekcji dla każdego dnia
 
 
-  constructor(private lessonsScheduleService: LessonScheduleService, private loginService: LoginService) { }
+  constructor(private lessonsScheduleService: LessonScheduleService, private loginService: LoginService, private classGroupService: ClassGroupService, 
+    private courseService: CourseService,  private dialog: MatDialog) { }
 
   ngOnInit(): void {
     const token = this.loginService.getToken();
@@ -79,6 +85,15 @@ export class LessonsScheduleComponent implements OnInit {
       // }
 
 
+      this.classGroupService.getAll().subscribe((classGroups: any) => {
+        this.classGroups = classGroups;
+      });
+  
+      // Pobierz kursy
+      this.courseService.getAll().subscribe((courses: any) => {
+        this.courses = courses;
+      });
+
       
 
     }
@@ -97,6 +112,7 @@ export class LessonsScheduleComponent implements OnInit {
 
 
 
+    //KOLORY LEKCJI 
 
       
     courseColors: { [classGroupId: number]: string } = {};
@@ -153,5 +169,34 @@ export class LessonsScheduleComponent implements OnInit {
       // Jeśli nie ma lekcji, możesz zwrócić domyślną wartość lub pusty string
       return 'Brak danych o semestrze';
     }
+
+
+    //EDYCJA
+
+    classGroups: any[] = [];
+    courses: any[] = [];
+
+    openEditLessonDialog(lesson: any): void {
+      const dialogRef = this.dialog.open(LessonDialogComponent, {
+        width: '400px',
+        data: { lesson, classGroups: this.classGroups, courses: this.courses },
+      });
+  
+      dialogRef.afterClosed().subscribe((result) => {
+        if (result) {
+          // Tutaj możesz obsługiwać zapisane zmiany
+          console.log('Zapisano zmiany:', result);
+  
+          // Aktualizuj lekcję w tablicy lessons po zapisaniu zmian
+          const index = this.lessons.findIndex((l) => l.id === result.id);
+          if (index !== -1) {
+            this.lessons[index] = result;
+          }
+        }
+      });
+    }
+    
+    
+    
     
   }

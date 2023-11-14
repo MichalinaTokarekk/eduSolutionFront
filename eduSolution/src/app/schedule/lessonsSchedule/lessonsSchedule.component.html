@@ -89,8 +89,11 @@
             </div>
             <div [style.background-color]="getCourseColor(lesson.classGroup.id)">
               <!-- {{ lesson.course.name }} ({{ lesson.classGroup.name }}) -->
+              <!-- <a (click)="openEditLessonDialog(lesson)">{{ lesson.course.name }} ({{ lesson.classGroup.name }})</a> -->
+              <a (click)="openEditLessonDialog(lesson)">
               <span class="course-name">{{ lesson.course.name }}</span> 
               (<span class="class-group-name">{{ lesson.classGroup.name }}</span>)
+            </a>
             </div>
           </div>
         </ng-container>
