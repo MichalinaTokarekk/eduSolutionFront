@@ -8,6 +8,7 @@ import { ClassGroupService } from 'src/app/classGroup/classGroup-service/classGr
 import { CourseService } from 'src/app/course/course-service/course.service';
 import { MatDialog } from '@angular/material/dialog';
 import { LessonDialogComponent } from './lessonDialog/lessonDialog.component';
+import { LessonCreateDialogComponent } from './lessonCreateDialog/lessonCreateDialog.component';
 
 @Component({
   selector: 'app-lessons-schedule',
@@ -192,6 +193,20 @@ export class LessonsScheduleComponent implements OnInit {
           if (index !== -1) {
             this.lessons[index] = result;
           }
+        }
+      });
+    }
+
+    openAddLessonDetailDialog(): void {
+      const dialogRef = this.dialog.open(LessonCreateDialogComponent, {
+        width: '400px',
+        data: { lesson: {}, classGroups: this.classGroups, courses: this.courses },
+      });
+    
+      dialogRef.afterClosed().subscribe((result) => {
+        if (result) {
+          // Tutaj możesz obsługiwać zapisane zmiany
+          console.log('Zapisano nowe szczegóły lekcji:', result);
         }
       });
     }

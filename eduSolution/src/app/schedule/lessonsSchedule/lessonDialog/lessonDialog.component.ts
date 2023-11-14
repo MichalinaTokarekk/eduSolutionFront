@@ -51,6 +51,7 @@ export class LessonDialogComponent {
         this.dialogRef.close(editedLesson);
       });
     }
+    location.reload();
   }
 
   onDeleteClick(): void {
@@ -61,6 +62,7 @@ export class LessonDialogComponent {
         this.dialogRef.close();
       });
     }
+    location.reload();
 }
 
 }

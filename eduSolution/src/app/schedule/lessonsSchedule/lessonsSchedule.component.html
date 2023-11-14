@@ -66,10 +66,12 @@
   </tfoot>
 </table> -->
 
+<button (click)="openAddLessonDetailDialog()">Dodaj nową lekcję</button><br><br>
+
 <table>
   <thead>
     <tr>
-      <th [attr.colspan]="getLessonsDayNames().length + 1">Plan lekcji dla {{ getSemesterName() }}</th>
+      <th [attr.colspan]="getLessonsDayNames().length + 1">Plan lekcji dla {{ getSemesterName() }} </th>
     </tr>
     <tr>
       <th></th>

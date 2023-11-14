@@ -1,0 +1,80 @@
+h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333; /* Kolor tekstu */
+  }
+  
+  form {
+    max-width: 400px;
+    margin: 0 auto;
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #555; /* Kolor tekstu labelki */
+  }
+  
+  input,
+  select {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 16px;
+    box-sizing: border-box;
+  }
+  
+  button {
+    margin-right: 8px;
+  }
+  
+  button[color="warn"] {
+    background-color: #ff4081; /* Kolor przycisku Usuń */
+    color: #fff; /* Kolor tekstu na przycisku Usuń */
+  }
+  
+  button[color="warn"]:hover {
+    background-color: #d81b60; /* Kolor przycisku Usuń w stanie hover */
+  }
+  
+  .container {
+    background-color: #f8f8f8; /* Kolor tła kontenera */
+    border: 1px solid #ddd; /* Grubość i kolor obramowania */
+    padding: 20px; /* Wewnętrzny odstęp kontenera */
+    border-radius: 8px; /* Zaokrąglenie narożników */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Cień */
+    max-width: 400px; /* Maksymalna szerokość kontenera */
+    margin: 0 auto; /* Centralizacja kontenera */
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .container label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #555; /* Kolor tekstu labelki */
+  }
+  
+  .container input,
+  .container select {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 16px;
+    box-sizing: border-box;
+  }
+  
+  .container button {
+    margin-right: 8px;
+  }
+  
+  .container button[color="warn"] {
+    background-color: #ff5d40; /* Kolor przycisku Usuń */
+    color: #fff; /* Kolor tekstu na przycisku Usuń */
+  }
+  
+  .container button[color="warn"]:hover {
+    background-color: #d81b60; /* Kolor przycisku Usuń w stanie hover */
+  }
+  
