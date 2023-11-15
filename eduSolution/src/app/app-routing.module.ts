@@ -21,6 +21,7 @@ import { YearBookUserDetailsComponent } from './yearBookUserDetails/yearBookUser
 import { MyAllGradesComponent } from './myAllGrades/myAllGrades.component';
 import { ArchivesHomeworkTestComponent } from './archivesHomeworkTest/archivesHomeworkTest.component';
 import { LessonsScheduleComponent } from './schedule/lessonsSchedule/lessonsSchedule.component';
+import { CalendarViewComponent } from './schedule/eventsSchedule/calendar-view.component';
 
 const routes: Routes = [
   {path: "dashboard", component: DashboardComponent, canActivate:[AuthGuard]},
@@ -44,6 +45,7 @@ const routes: Routes = [
   {path: 'myAllGrades', component: MyAllGradesComponent },
   {path: 'archivesHomeworkTest/:id', component: ArchivesHomeworkTestComponent },
   {path: 'lessonSchedule', component: LessonsScheduleComponent },
+  {path: 'calendar-view', component: CalendarViewComponent },
   
 ];
 

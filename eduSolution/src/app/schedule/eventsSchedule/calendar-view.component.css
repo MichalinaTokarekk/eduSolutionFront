@@ -1,0 +1,15 @@
+/* W pliku styles.css lub styles.scss */
+.custom-calendar-container .fc {
+    margin: 50px;
+    margin-bottom: 40px !important;
+}
+
+.footer {
+    background-color: #333; /* Kolor tła stopki */
+    color: #fff; /* Kolor tekstu w stopce */
+    padding: 20px; /* Wewnętrzny odstęp w stopce */
+    text-align: center; /* Wyrównanie tekstu do środka */
+    margin-top: auto;
+    height: 40px;
+}
+  

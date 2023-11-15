@@ -1,0 +1,41 @@
+<h2>Dodaj Nowe Wydarzenie</h2>
+
+<form (ngSubmit)="onAddClick()" class="event-form">
+  <div class="form-group">
+    <label for="eventName">Nazwa Wydarzenia:</label>
+    <input type="text" id="eventName" name="eventName" [(ngModel)]="data.eventName" required>
+  </div>
+  
+  <div class="form-group">
+    <label for="eventDate">Data Wydarzenia:</label>
+    <input type="date" id="eventDate" name="eventDate" [(ngModel)]="data.eventDate" required>
+  </div>
+  
+  <form name="myForm">
+    <!-- Inne pola formularza -->
+    <mat-form-field>
+      <mat-select multiple id="courses" name="courses" [(ngModel)]="data.courses" required>
+        <mat-option *ngFor="let course of availableCourses" [value]="course.id">{{ course.name }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </form>
+  
+  
+
+  <form name="myForm">
+    <mat-form-field>
+      <mat-select multiple id="courses" name="courses" [(ngModel)]="data.classGroup" required>
+        <mat-option *ngFor="let classGroup of availableClassGroups" [value]="classGroup.id">{{ classGroup.name }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </form>
+  
+  
+  
+  
+
+  <div class="form-actions">
+    <button type="button" (click)="onCancelClick()">Anuluj</button>
+    <button type="submit" >Dodaj</button>
+  </div>
+</form>

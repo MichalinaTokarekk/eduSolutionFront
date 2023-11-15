@@ -76,6 +76,10 @@ import { LessonsScheduleComponent } from './schedule/lessonsSchedule/lessonsSche
 import { LessonDialogComponent } from './schedule/lessonsSchedule/lessonDialog/lessonDialog.component';
 import { LessonCreateDialogComponent } from './schedule/lessonsSchedule/lessonCreateDialog/lessonCreateDialog.component';
 import { EventsScheduleService } from './schedule/eventsSchedule/eventsSchedule-service/eventsSchedule.service';
+import { FullCalendarModule } from '@fullcalendar/angular';
+import { CalendarViewComponent } from './schedule/eventsSchedule/calendar-view.component';
+import { AddEventDialogComponent } from './schedule/eventsSchedule/addEventDialog/addEventDialog.component';
+
 
 
 
@@ -94,12 +98,15 @@ import { EventsScheduleService } from './schedule/eventsSchedule/eventsSchedule-
     FormsModule,
     MatExpansionModule,
     RouterModule,
+    FormsModule
+
   ],
   declarations: [
 
   ],
   imports: [
     BrowserAnimationsModule,
+    // FullCalendarModule 
     
   ]
 })
@@ -136,7 +143,9 @@ export class MaterialModule { }
     ArchivedAnswerDetailComponent,
     LessonsScheduleComponent,
     LessonDialogComponent,
-    LessonCreateDialogComponent
+    LessonCreateDialogComponent,
+    CalendarViewComponent,
+    AddEventDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -156,7 +165,8 @@ export class MaterialModule { }
           return localStorage.getItem('token');
         }
       }
-    })
+    }),
+    FullCalendarModule
 
   ],
   providers: [SemesterService, CourseService, ClassGroupService, LoginService, JwtHelperService, UserService, SectionService, EduMaterialService, EMFileService,
