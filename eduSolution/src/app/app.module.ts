@@ -75,6 +75,7 @@ import { LessonScheduleService } from './schedule/lessonsSchedule/lessonsSchedul
 import { LessonsScheduleComponent } from './schedule/lessonsSchedule/lessonsSchedule.component';
 import { LessonDialogComponent } from './schedule/lessonsSchedule/lessonDialog/lessonDialog.component';
 import { LessonCreateDialogComponent } from './schedule/lessonsSchedule/lessonCreateDialog/lessonCreateDialog.component';
+import { EventsScheduleService } from './schedule/eventsSchedule/eventsSchedule-service/eventsSchedule.service';
 
 
 
@@ -159,7 +160,7 @@ export class MaterialModule { }
 
   ],
   providers: [SemesterService, CourseService, ClassGroupService, LoginService, JwtHelperService, UserService, SectionService, EduMaterialService, EMFileService,
-    HomeworkTestService, HTFileService, AnswerService, AFileService, GradeService, TypeOfTestingKnowledgeService, LessonScheduleService,
+    HomeworkTestService, HTFileService, AnswerService, AFileService, GradeService, TypeOfTestingKnowledgeService, LessonScheduleService, EventsScheduleService,
     {
       provide: HTTP_INTERCEPTORS, useClass: TokenInterceptorService, multi: true
     }],
