@@ -1,10 +1,23 @@
 
-<ng-container *ngFor="let yearBook of getUsersYearBooks()">
+<!-- <ng-container *ngFor="let yearBook of getUsersYearBooks()">
     <h2>Rocznik {{ yearBook }}</h2>
     <div *ngFor="let user of getUsersByYearBook(yearBook)">
       <ng-container *ngIf="user.role === 'STUDENT'">
         <a [routerLink]="['/yearBookUserDetails', user.id]">{{ user.firstName }} {{ user.lastName }}</a>     
     </ng-container>
     </div><br>
-  </ng-container>
+  </ng-container> -->
+  
+
+  <div class="yearbook-container">
+    <div *ngFor="let yearBook of getUsersYearBooks()" class="yearbook">
+      <h2 class="yearbook-title">Rocznik {{ yearBook }}</h2>
+      <div *ngFor="let user of getUsersByYearBook(yearBook)" class="user-list">
+        <ng-container *ngIf="user.role === 'STUDENT'" class="user-item">
+          <a [routerLink]="['/yearBookUserDetails', user.id]" class="user-link">{{ user.firstName }} {{ user.lastName }}</a>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+  
   
