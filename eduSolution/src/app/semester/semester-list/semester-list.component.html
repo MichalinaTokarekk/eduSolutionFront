@@ -34,13 +34,14 @@
 </div>
 <div class="row">
     <div class="col-8">
-        <button class="btn btn-sm btn-primary" (click)="onAdd()">Add New</button>
+        <button class="btn btn-sm btn-primary" (click)="onAdd()">Dodaj nowy</button>
         <table class="table table-bordered ">
             <thead>
                 <tr class="bg-success text-white">
                     <th>Lp</th>
                     <th (click)="onNameSort()">Nazwa</th>
-                    <th>Kursy</th> 
+                    <th>Data rozpoczęcia</th>
+                    <th>Data zakończenia</th> 
                     <th></th>
                 </tr>
             </thead>
@@ -62,23 +63,39 @@
                         </div>
                      
                     </td>
-                    <td> 
-                        <div *ngIf="course.isEdit">
-                            <!-- <input type="text" class="form-control" [(ngModel)]="course.description"> -->
-                        <mat-form-field class="select">
-                            <mat-select [formControl]="courseMultiCtrl" placeholder="Autorzy" [multiple]="true" required="true">
-                                <!-- <mat-select-search [formControl]="genreMultiFilterCtrl"></mat-select-search> -->
-                                    <mat-option *ngFor="let course of filteredCoursesMulti | async" [value]="course">
-                                    {{course.name}}
-                                    </mat-option>
-                              </mat-select>
-                        </mat-form-field>
+
+                    <td>
+                        <div *ngIf="course.isEdit" class="form-group">
+                            <div class="input-container">
+                                <input type="text" class="form-control" [(ngModel)]="course.startDate" [ngClass]="{'is-invalid': validateCourseName(course.startDate) !== ''}">
+                                <div class="text-danger error-message" *ngIf="!course.startDate">
+                                    {{validateCourseName(course.startDate)}}
+                                </div>
+                            </div>
                         </div>
-                        <div  *ngIf="!course.isEdit">
-                            <a *ngFor="let course of course.courses" >{{ course.name}}<br> </a>
-                            <!-- {{course.courses}} -->
+                        
+                        <div *ngIf="!course.isEdit">
+                            {{course.startDate}}
                         </div>
+                     
                     </td>
+
+                    <td>
+                        <div *ngIf="course.isEdit" class="form-group">
+                            <div class="input-container">
+                                <input type="text" class="form-control" [(ngModel)]="course.endDate" [ngClass]="{'is-invalid': validateCourseName(course.endDate) !== ''}">
+                                <div class="text-danger error-message" *ngIf="!course.endDate">
+                                    {{validateCourseName(course.endDate)}}
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div *ngIf="!course.isEdit">
+                            {{course.endDate}}
+                        </div>
+                     
+                    </td>
+                    
 
                     <td class="text-center"> 
                         <div class="text-end" *ngIf="!course.isEdit">

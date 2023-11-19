@@ -7,6 +7,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { CourseService } from 'src/app/course/course-service/course.service';
 import { UserService } from '../user-service/user.service';
+import { forkJoin } from 'rxjs';
+import { LoginService } from 'src/app/authorization_authentication/service/login.service';
 
 @Component({
   selector: 'app-basic-inline-editing',
@@ -19,11 +21,26 @@ export class UserInlineCrudComponent implements OnInit {
   oldUserObj: any;
   searchText: string ='';
   isEditing = false;
-  constructor(private http: HttpClient, private userService: UserService, private router: Router, private dialog: MatDialog, private snackBar: MatSnackBar){
+  classGroups: any;
+  constructor(private http: HttpClient, private userService: UserService, private router: Router, private dialog: MatDialog, private snackBar: MatSnackBar,
+    private loginService: LoginService){
 
   }
   ngOnInit(): void {
     this.loadList();
+    const token = this.loginService.getToken();
+    const _token = token.split('.')[1];
+    const _atobData = atob(_token);
+    const _finalData = JSON.parse(_atobData);
+
+    // Zakładam, że groupIds to tablica stringów
+this.userService.findClassGroupsById(_finalData.id).subscribe((groupIds: string[]) => {
+  this.classGroups = groupIds;
+});
+
+
+    
+    
   }
   onNameSort() {
     const filteredData =  this.filteredUsers.sort((a: any, b: any) =>

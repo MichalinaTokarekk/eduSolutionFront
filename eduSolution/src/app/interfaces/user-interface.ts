@@ -1,5 +1,6 @@
 import { ClassGroup } from "./classGroup-interface";
 import { Role } from "./role-interface";
+import { UserStatus } from "./userStatus-interface";
 
 export interface User {
     id: number;
@@ -17,5 +18,6 @@ export interface User {
     updatedAt: Date;
     role: Role;
     classGroups: ClassGroup;
+    userStatus: UserStatus;
 }
   

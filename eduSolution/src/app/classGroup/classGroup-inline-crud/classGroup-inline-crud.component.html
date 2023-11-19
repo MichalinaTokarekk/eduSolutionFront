@@ -9,12 +9,14 @@
 </div>
 <div class="row">
     <div class="col-8">
-        <button class="btn btn-sm btn-primary" (click)="onAdd()">Add New</button>
+        <button class="btn btn-sm btn-primary" (click)="onAdd()">Dodaj nowe</button>
         <table class="table table-bordered ">
             <thead>
                 <tr class="bg-success text-white">
                     <th>Lp</th>
                     <th (click)="onNameSort()">Nazwa</th>
+                    <th (click)="onNameSort()">Semestr</th>
+                    <th (click)="onNameSort()">Kurs</th>
                     <!-- <th>Opis</th>  -->
                     <th></th>
                 </tr>
@@ -34,6 +36,38 @@
                         
                         <div *ngIf="!course.isEdit">
                             {{course.name}}
+                        </div>
+                     
+                    </td>
+
+                    <td>
+                        <div *ngIf="course.isEdit" class="form-group">
+                            <div class="input-container">
+                                <input type="text" class="form-control" [(ngModel)]="course.semester.name" [ngClass]="{'is-invalid': validateCourseName(course.semester.name) !== ''}">
+                                <div class="text-danger error-message" *ngIf="!course.semester.name">
+                                    {{validateCourseName(course.name)}}
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div *ngIf="!course.isEdit">
+                            {{course.semester.name}}
+                        </div>
+                     
+                    </td>
+
+                    <td>
+                        <div *ngIf="course.isEdit" class="form-group">
+                            <div class="input-container">
+                                <input type="text" class="form-control" [(ngModel)]="course.course.name" [ngClass]="{'is-invalid': validateCourseName(course.course.name) !== ''}">
+                                <div class="text-danger error-message" *ngIf="!course.course.name">
+                                    {{validateCourseName(course.course.name)}}
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div *ngIf="!course.isEdit">
+                            {{course.course.name}}
                         </div>
                      
                     </td>

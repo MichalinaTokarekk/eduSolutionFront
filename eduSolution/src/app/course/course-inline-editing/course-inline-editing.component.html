@@ -9,13 +9,15 @@
 </div>
 <div class="row">
     <div class="col-8">
-        <button class="btn btn-sm btn-primary" (click)="onAdd()">Add New</button>
+        <button class="btn btn-sm btn-primary" (click)="onAdd()">Dodaj nowy</button>
         <table class="table table-bordered ">
             <thead>
                 <tr class="bg-success text-white">
                     <th>Lp</th>
                     <th (click)="onNameSort()">Nazwa</th>
                     <th>Opis</th> 
+                    <th>Kwota</th> 
+                    <th>Zaliczka</th> 
                     <th></th>
                 </tr>
             </thead>
@@ -43,6 +45,24 @@
                         </div>
                         <div  *ngIf="!course.isEdit">
                             {{course.description}}
+                        </div>
+                    </td>
+
+                    <td> 
+                        <div *ngIf="course.isEdit">
+                            <input type="text" class="form-control" [(ngModel)]="course.amountToPay">
+                        </div>
+                        <div  *ngIf="!course.isEdit">
+                            {{course.amountToPay + 'zł'}}
+                        </div>
+                    </td>
+
+                    <td> 
+                        <div *ngIf="course.isEdit">
+                            <input type="text" class="form-control" [(ngModel)]="course.cashAdvance">
+                        </div>
+                        <div  *ngIf="!course.isEdit">
+                            {{course.cashAdvance + 'zł'}}
                         </div>
                     </td>
 

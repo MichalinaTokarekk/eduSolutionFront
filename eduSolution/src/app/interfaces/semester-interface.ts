@@ -4,5 +4,7 @@ export interface Semester {
     id: number;
     name: string; 
     courses: Course[];
+    startDate: string;
+    endDate: string;
 }
 

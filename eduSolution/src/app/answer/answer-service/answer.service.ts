@@ -53,10 +53,6 @@ export class AnswerService {
     return this.http.get<Answer>(url);
   }
 
-  findByHomeworkTestAndClassGroup(homeworkTestId: number): Observable<Answer> {
-    const url = `${this.ANSWER_API}/findByHomeworkTestAndClassGroup/homeworkTest/${homeworkTestId}/classGroup}`;
-    return this.http.get<Answer>(url);
-  }
 
   findByHomeworkTest(homeworkTestId: number): Observable<Answer> {
     const url = `${this.ANSWER_API}/findByHomeworkTest/${homeworkTestId}`;
