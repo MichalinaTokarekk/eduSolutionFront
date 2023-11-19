@@ -48,18 +48,18 @@ export class AnswerService {
     return this.http.get(this.ANSWER_API + '/answersByUserId/' + userId);
   }
   
-  getAnswerByHomeworkTestIdAndUserId(homeworkTestId: number, userId: number): Observable<Answer> {
+  getAnswerByHomeworkTestIdAndUserId(homeworkTestId: string, userId: number): Observable<Answer> {
     const url = `${this.ANSWER_API}/answerByHomeworkTestIdAndUserId/homeworkTest/${homeworkTestId}/user/${userId}`;
     return this.http.get<Answer>(url);
   }
 
-  findByHomeworkTestAndClassGroup(homeworkTestId: number, classGroupId: number): Observable<Answer> {
-    const url = `${this.ANSWER_API}/findByHomeworkTestAndClassGroup/homeworkTest/${homeworkTestId}/classGroup/${classGroupId}`;
+  findByHomeworkTestAndClassGroup(homeworkTestId: number): Observable<Answer> {
+    const url = `${this.ANSWER_API}/findByHomeworkTestAndClassGroup/homeworkTest/${homeworkTestId}/classGroup}`;
     return this.http.get<Answer>(url);
   }
 
   findByHomeworkTest(homeworkTestId: number): Observable<Answer> {
-    const url = `${this.ANSWER_API}/findByHomeworkTest/homeworkTest/${homeworkTestId}`;
+    const url = `${this.ANSWER_API}/findByHomeworkTest/${homeworkTestId}`;
     return this.http.get<Answer>(url);
   }
 

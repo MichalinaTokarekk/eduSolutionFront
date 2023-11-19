@@ -1,0 +1,64 @@
+<!-- answer-detail.component.html -->
+
+<div class="answer-detail-container" style="max-height: 500px; overflow: auto;" *ngIf="data.answer">
+    <h2>Odpowiedź: <p>{{ data.answer?.user?.firstName }} {{ data.answer?.user?.lastName }}</p></h2>
+    <div class="answer-content">
+      {{ data.answer.answerContent }}
+    </div>
+    <div *ngFor="let aFile of aFilesByAnswer" (click)="loadAFilesByAnswerId(data.answer.id)">
+      <a (click)="downloadFileById(aFile.id)" href="javascript:void(0);">{{ aFile.name }}</a>
+    </div>
+    <p>Utworzono: {{ data.answer.createdAt | date:'yyyy-MM-dd HH:mm:ss' }}</p>
+    <p>Ostatnia modyfikacja: {{ data.answer.updatedAt | date:'yyyy-MM-dd HH:mm:ss' }}</p>
+    <div [ngClass]="{'green-background': calculateTimeDifference().beforeDeadline, 'red-background': !calculateTimeDifference().beforeDeadline}">
+      <p>
+        {{ calculateTimeDifference().beforeDeadline ? 'Zadanie zostało przesłane ' : 'Zadanie zostało przesłane ' }}
+        {{ calculateTimeDifference().days }} dni, {{ calculateTimeDifference().hours }} godzin i {{ calculateTimeDifference().minutes }} minut
+        {{ calculateTimeDifference().beforeDeadline ? 'przed terminem.' : 'po terminie.' }}
+      </p>
+    </div>
+  
+    <input [(ngModel)]="editedComment" name="editedComment" placeholder="Edytuj komentarz">
+    <input [(ngModel)]="editedAnswerStatus" name="editedAnswerStatus" placeholder="Edytuj status odpowiedzi">
+  
+    <div *ngIf="!hasGrade" class="grade-input">
+      <div class="input-field">
+        <input class="value-input" [(ngModel)]="newValue" name="newValue" type="number" placeholder="Wartość oceny" required>
+      </div>
+      <div class="input-field">
+        <input class="description-input" [(ngModel)]="newDescription" name="newDescription" type="text" placeholder="Opis oceny">
+      </div>
+      <div class="input-field">
+        <mat-select class="knowledge-select" [(ngModel)]="selectedKnowledge" name="knowledge" placeholder="Wybierz rodzaj oceny">
+          <mat-option *ngFor="let knowledge of allKnowledge" [value]="knowledge.id">{{ knowledge.name }}</mat-option>
+        </mat-select>
+      </div>
+      <button class="add-button" (click)="addNewGrade()">Dodaj ocenę</button>
+    </div>
+  
+    <div *ngIf="hasGrade">
+      <p>Ocena: {{ existingGrade.value }}</p>
+      <p>Opis oceny: {{ existingGrade.description }}</p>
+      <button (click)="startEditing()">Edytuj ocenę</button>
+      <button (click)="deleteGrade()" style="margin-left: 5px;">Usuń ocenę</button>
+  
+      <div *ngIf="isEditing" class="grade-input">
+        <div class="input-field">
+          <input [(ngModel)]="editedGrade.value" name="editedValue" type="number" placeholder="Wartość oceny" required>
+        </div>
+        <div class="input-field">
+          <input [(ngModel)]="editedGrade.description" name="editedDescription" type="text" placeholder="Opis oceny">
+        </div>
+  
+        <button (click)="saveEditedGrade()">Zapisz edycję</button>
+        <button (click)="cancelEditing()">Anuluj edycję</button>
+      </div>
+    </div>
+  
+    <button (click)="updateAnswerDetails()" style="margin-top: 10px;">Zapisz zmiany</button>
+  </div>
+
+  <div *ngIf="!data.answer">
+    <p>Brak odpowiedzi dla tego użytkownika i zadania.</p>
+  </div>
+  

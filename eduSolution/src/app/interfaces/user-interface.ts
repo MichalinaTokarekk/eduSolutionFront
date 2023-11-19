@@ -6,19 +6,16 @@ export interface User {
     email: string;
     firstName: string;
     lastName: string;
-    streetName: string;
-    buildingNumber: number;
-    apartmentNumber: number;
+    address: string;
     city: string;
     post: string;
     postCode: string;
     country: string;
-    yearBook: string;
     createdBy: string;
     createdAt: Date;
     updatedBy: string;
     updatedAt: Date;
     role: Role;
-    teachingClassGroups: ClassGroup;
+    classGroups: ClassGroup;
 }
   

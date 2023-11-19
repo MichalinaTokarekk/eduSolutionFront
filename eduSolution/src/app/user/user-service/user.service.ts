@@ -46,14 +46,18 @@ export class UserService {
     return this.http.get<any>(this.USER_API + '/teachingClassGroups/' + userId);
   }
 
-  findUsersByClassGroupId(classGroupId: number) {
-    return this.http.get<any>(this.USER_API + '/findUsersByClassGroupId/' + classGroupId);
-  }
-
   getUsersByRole(role: Role): Observable<any[]> {
     return this.http.get<any[]>(`${this.USER_API}/usersByRole?role=${role}`);
   }
-  
+
+  findClassGroupsById(userId: number) {
+    return this.http.get<any>(this.USER_API + '/findClassGroupsById/' + userId);
+
+  }
+
+  findUsersByClassGroupId(classGroupId: number) {
+    return this.http.get<any>(this.USER_API + '/findUsersByClassGroupId/' + classGroupId);
+  }
   
   
 

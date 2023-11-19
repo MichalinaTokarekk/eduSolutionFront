@@ -42,8 +42,8 @@ export class SectionService {
     return this.http.delete<string>(this.SECTION_API + '/deleteSection/' + id);
   }
 
-  getSectionsByCourseId(courseId: string): Observable<any[]> {
-    const url = `${this.SECTION_API}/sectionsByCourse/${courseId}`;
+  getSectionsByCourseId(classGroupId: string): Observable<any[]> {
+    const url = `${this.SECTION_API}/sectionsByClassGroupId/${classGroupId}`;
     return this.http.get<any[]>(url);
   }
 

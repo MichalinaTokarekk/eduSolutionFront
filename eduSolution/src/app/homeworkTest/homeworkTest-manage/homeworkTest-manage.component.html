@@ -145,7 +145,7 @@
           </ul>
         </div>
       </form>
-      <div *ngIf="userRole === 'student' || userRole === 'admin'">
+      <div *ngIf="userRole === 'user' || userRole === 'admin'">
       <div *ngIf="answer">
         <h2>Odpowiedź na pracę domową</h2>
         <button (click)="onEditAnswer(answer)">Edytuj odpowiedź</button>
@@ -170,25 +170,7 @@
         </p>
         </div>
 
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        <!-- <p *ngIf="!calculateDaysUntilDeadline().overdue">
-          Pozostało: {{ calculateDaysUntilDeadline().days }} dni, {{ calculateDaysUntilDeadline().hours }} godzin, {{ calculateDaysUntilDeadline().minutes }} minut
-        </p>
-        
-        <div *ngIf="calculateDaysUntilDeadline().overdue">
-          <p>
-            Termin zadania upłynął {{ calculateDaysUntilDeadline().days }} dni, {{ calculateDaysUntilDeadline().hours }} godzin i {{ calculateDaysUntilDeadline().minutes }} minut temu.
-          </p>
-        </div> -->
-        
+      
           
         
         <div *ngIf="isAnswerContentVisible">
@@ -228,68 +210,48 @@
       </div>
     </div>
       
-      <!-- <div *ngFor="let classGroup of filteredClassGroups">
-        <a  href="javascript:void(0);" (click)="loadClassGroupsByCoursesId(course.section.course.id)">{{ classGroup.name }}</a>
-      </div> -->
-
     <div *ngIf="userRole === 'teacher'"> 
-        <h2>Odpowiedzi:</h2>
-        <mat-accordion>
-            <mat-expansion-panel class="expansionPanel" *ngFor="let classGroup of filteredClassGroups; let srNo = index" (click)="getClassGroupId(classGroup.id)">
-            <mat-expansion-panel-header class="header">
-                <mat-panel-title class="matPanelTitle">{{ classGroup.name }}</mat-panel-title>
-            </mat-expansion-panel-header>
-            <!-- <div *ngIf="answersByHomeworkTestAndClassGroup">
-                <div *ngFor="let answer of answersByHomeworkTestAndClassGroup">
-                    <a (click)="openAnswerDetailsDialog(answer)">{{ answer.user.firstName}} {{answer.user.lastName}} </a>
-                    <span *ngIf="answer.answerStatus">{{ answer.answerStatus }}</span> -->
-                    <!-- <a (click)="openAnswerDetailsDialog(answer)"> {{ answer.answerContent }} </a> -->
-                <!-- </div> 
-            </div> -->
+      <h2>Użytkownicy w klasie:</h2>
+    
+      <div *ngFor="let user of usersByClassGroup">
+        <div (click)="openAnswerDetailsDialog(user, homeworkTest)" style="cursor: pointer">
+          {{ user.firstName }} {{ user.lastName }}
+        </div>
+      </div>
+    </div>
+    
 
-            <div *ngIf="answersByHomeworkTestAndClassGroup">
-              <ng-container *ngFor="let answer of answersByHomeworkTestAndClassGroup">
+    <!-- <div *ngIf="userRole === 'teacher'"> 
+        <h2>Odpowiedzi:</h2>
+            <div *ngIf="answersByHomeworkTest">
+              <ng-container *ngFor="let answer of answersByHomeworkTest">
                 <ng-container *ngIf="answer.answerStatus === 'NIEOCENIONE'">
                   <div class="colored-text blue-text">
                     <a (click)="openAnswerDetailsDialog(answer)">{{ answer.user.firstName }} {{ answer.user.lastName }} {{ ' ' }}</a>
                     <span class="blue-text">{{ answer.answerStatus }}</span>
-                    <!-- Tutaj możesz dodać dowolne informacje dotyczące odpowiedzi -->
                   </div>
                 </ng-container>
               </ng-container>
               
-              <ng-container *ngFor="let answer of answersByHomeworkTestAndClassGroup">
+              <ng-container *ngFor="let answer of answersByHomeworkTest">
                 <ng-container *ngIf="answer.answerStatus === 'ZALICZONE'">
                   <div class="colored-text green-text">
                     <a (click)="openAnswerDetailsDialog(answer)">{{ answer.user.firstName }} {{ answer.user.lastName }} {{ ' ' }}</a>
                     <span class="green-text">{{ answer.answerStatus }}</span>
-                    <!-- Tutaj możesz dodać dowolne informacje dotyczące odpowiedzi -->
                   </div>
                 </ng-container>
               </ng-container>
               
-              <ng-container *ngFor="let answer of answersByHomeworkTestAndClassGroup">
+              <ng-container *ngFor="let answer of answersByHomeworkTest">
                 <ng-container *ngIf="answer.answerStatus === 'NIEZALICZONE'">
                   <div class="colored-text red-text">
                     <a (click)="openAnswerDetailsDialog(answer)">{{ answer.user.firstName }} {{ answer.user.lastName }} {{ ' ' }}</a>
                     <span class="red-text">{{ answer.answerStatus }}</span>
-                    <!-- Tutaj możesz dodać dowolne informacje dotyczące odpowiedzi -->
                   </div>
                 </ng-container>
               </ng-container>
             </div>
-
-
-          
-            
-
-            </mat-expansion-panel>
-        </mat-accordion>
-    </div>
-
-    <a [routerLink]="['/archivesHomeworkTest', homeworkTest.id]">Zobacz zarchiwizowane zadania</a> 
-
-      
+    </div> -->
 
     </div>
   </div>

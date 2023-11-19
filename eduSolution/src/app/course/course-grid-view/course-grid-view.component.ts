@@ -6,6 +6,8 @@ import { Router } from '@angular/router';
 import { ConfirmationDialogSemesterComponent } from 'src/app/confirmations/semester/confirmation-dialog-semester.component';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { UserService } from 'src/app/user/user-service/user.service';
+import { LoginService } from 'src/app/authorization_authentication/service/login.service';
 
 @Component({
   selector: 'app-basic-inline-editing',
@@ -19,7 +21,8 @@ export class CourseGridViewComponent implements OnInit {
   searchText: string ='';
   isEditing = false;
   ascendingSort = true;
-  constructor(private http: HttpClient, private courseService: CourseService, private router: Router, private dialog: MatDialog, private snackBar: MatSnackBar){
+  constructor(private http: HttpClient, private courseService: CourseService, private router: Router, private dialog: MatDialog, private snackBar: MatSnackBar,
+    private userService: UserService, private loginService: LoginService){
 
   }
   ngOnInit(): void {
@@ -66,7 +69,13 @@ export class CourseGridViewComponent implements OnInit {
   }
 
   loadList() {
-    this.courseService.getAll().subscribe (data => {
+    const token = this.loginService.getToken();
+    const _token = token.split('.')[1];
+    const _atobData = atob(_token);
+    const _finalData = JSON.parse(_atobData); 
+
+
+    this.userService.findClassGroupsById(_finalData.id).subscribe (data => {
       this.courseArray = data;
       this.filteredCourses = data
 

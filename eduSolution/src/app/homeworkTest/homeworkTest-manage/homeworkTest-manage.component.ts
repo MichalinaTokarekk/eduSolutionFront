@@ -44,12 +44,12 @@ answerDetailComponent!: AnswerDetailComponent;
 
 homeworkTest: any = {};
 classGroupsByUserId: any = {};
-answersByHomeworkTestAndClassGroup: any = {};
+answersByHomeworkTest: any = {};
 htFileIdContainer: any;
 
   constructor(private http: HttpClient, private route: ActivatedRoute, private router: Router, private dialog: MatDialog, private snackBar: MatSnackBar, 
     private homeworkTestService: HomeworkTestService, private htFileService: HTFileService, private answerService: AnswerService, private loginService: LoginService,
-    private aFileService: AFileService, private classGroupService: ClassGroupService, private courseService: CourseService, private userService: UserService){
+    private aFileService: AFileService, private courseService: CourseService, private userService: UserService){
   }
 
 htFilesByHomeworkTest!: Array<any>;
@@ -60,12 +60,14 @@ course!: any;
 answer!: any; 
 answerId!: any; 
 userRole!: string;
-private courseId!: number;
+private classGroupId!: number;
+homeworkTestId!: string;
 ngOnInit(): void {
     // Pobierz ID materiału edukacyjnego z parametrów routingu
     this.route.paramMap.subscribe((params: ParamMap) => {
       const id = params.get('id');
       if (id !== null) {
+        this.homeworkTestId = id;
         // Użyj usługi do pobrania materiału edukacyjnego na podstawie ID
         this.homeworkTestService.get(id).subscribe((homeworkTest: any) => {
           // Zapisz materiał edukacyjny w komponencie
@@ -73,11 +75,9 @@ ngOnInit(): void {
   
           // Pobierz pliki materiałów edukacyjnych po ID materiału edukacyjnego
           this.htFileService.htFilesByHomeworkTestsId(homeworkTest.id).subscribe((htFiles: any) => {
-            // Tutaj możesz wykonać operacje na emFiles, np. przypisać je do właściwości komponentu
             this.htFiles = htFiles;
           }, error => {
             console.error(error);
-            // Obsłuż błąd, jeśli wystąpi
           });
 
 
@@ -98,7 +98,6 @@ ngOnInit(): void {
 
         }, error => {
           console.error(error);
-          // Obsłuż błąd, jeśli wystąpi
         });
       } else {
         console.log("Nie ma nic");
@@ -110,9 +109,6 @@ ngOnInit(): void {
         if (id !== null) {
           this.homeworkTestService.get(id).subscribe((homeworkTest: any) => {
             this.homeworkTest = homeworkTest;
-            console.log('courseId', homeworkTest.section.course.id)
-
-            this.loadClassGroupsByCoursesId(homeworkTest.section.course.id);
       
           }, error => {
             console.error(error);
@@ -123,31 +119,10 @@ ngOnInit(): void {
       });
 
       const token = this.loginService.getToken();
-        const _token = token.split('.')[1];
-        const _atobData = atob(_token);
-        const _finalData = JSON.parse(_atobData);
+      const _token = token.split('.')[1];
+      const _atobData = atob(_token);
+      const _finalData = JSON.parse(_atobData);
 
-      this.userService.getTeachingClassGroupsByUserId(_finalData.id).subscribe(classGroups => {
-        this.classGroupsByUserId = classGroups;
-
-        console.log('Klasy użytkownika:', this.classGroupsByUserId);
-        // console.log('filter', this.filteredClassGroups);
-      }, error => {
-        console.error('Błąd podczas pobierania klas użytkownika:', error);
-      });
-      
-      
-    //   this.answerService.findByHomeworkTestAndClassGroup(this.homeworkTest, this.selectedClassGroupId).subscribe(answersByHomeworkTestAndClassGroup => {
-    //     this.answersByHomeworkTestAndClassGroup = answersByHomeworkTestAndClassGroup;
-
-    //     console.log('odpowiedzi ', this.answersByHomeworkTestAndClassGroup);
-    //     // console.log('filter', this.filteredClassGroups);
-    //   }, error => {
-    //     console.error('Błąd podczas pobierania klas użytkownika:', error);
-    //     console.log('homeworkTestId', this.homeworkTest);
-    //     console.log('classGroupId', this.selectedClassGroupId);
-    //     console.log('answersByHomeworkTestAndClassGroup', this.answersByHomeworkTestAndClassGroup);
-    //   });
 
     this.userRole = _finalData.role;
 
@@ -157,8 +132,10 @@ ngOnInit(): void {
       if (id !== null) {
         this.homeworkTestService.get(id).subscribe((homeworkTest: any) => {
           this.homeworkTest = homeworkTest;
-          this.courseId = homeworkTest.section.course.id; // Przypisz courseId
-          console.log('courseId', this.courseId);
+          this.classGroupId = homeworkTest.section.classGroup.id; // Przypisz courseId
+          console.log('classGroupId', this.classGroupId);
+          this.findUsersByClassGroupId();
+
         }, error => {
           console.error(error);
         });
@@ -167,52 +144,88 @@ ngOnInit(): void {
       }
     });
     
+    // this.findByHomeworkTest();
+
+     if (this.homeworkTest && this.homeworkTestId) {
+      console.log('homeworkTest.id:', this.homeworkTestId);
+    } else {
+      console.error('Błąd: this.homeworkTest jest niezdefiniowane lub nie ma właściwości "id".');
+    }
     
   }
 
-  filteredClassGroups: ClassGroup[] = [];
 
-  filterClassGroups(): void {
-    this.filteredClassGroups = this.classGroupsByCoursesId.filter((courseClassGroup: ClassGroup) => {
-      // Sprawdź, czy classGroup jest obecny w classGroupsByUserId
-      const foundUserClassGroup = this.classGroupsByUserId.find((userClassGroup: ClassGroup) => userClassGroup.id === courseClassGroup.id);
-      
-      return foundUserClassGroup !== undefined;
-    });
-  
-    console.log('filter', this.filteredClassGroups);
-  }
-  
-  selectedClassGroupId!: number;
-//   getClassGroupId(selectedClassGroupId: number): void {
-//     this.selectedClassGroupId = selectedClassGroupId;
-//  }
-  
-getClassGroupId(selectedClassGroupId: number): void {
-    this.selectedClassGroupId = selectedClassGroupId;
-    this.answerService.findByHomeworkTestAndClassGroup(this.homeworkTest.id, this.selectedClassGroupId).subscribe(answersByHomeworkTestAndClassGroup => {
-      this.answersByHomeworkTestAndClassGroup = answersByHomeworkTestAndClassGroup;
-      console.log('odpowiedzi ', this.answersByHomeworkTestAndClassGroup);
-    }, error => {
-      console.error('Błąd podczas pobierania klas użytkownika:', error);
-      console.log('homeworkTestId', this.homeworkTest.id);
-      console.log('classGroupId', this.selectedClassGroupId);
-    });
-  }
 
-  openAnswerDetailsDialog(answer: Answer): void {
-    const dialogRef = this.dialog.open(AnswerDetailComponent, {
-      width: '400px', // dostosuj szerokość do swoich potrzeb
-      data: { answer, aFilesByAnswer: this.aFilesByAnswer, homeworkTest: this.homeworkTest, courseId: this.courseId}, // przekaż odpowiedź jako dane
-    });
-  
-    dialogRef.afterClosed().subscribe(result => {
-      // Tutaj możesz obsłużyć akcje po zamknięciu dialogu, jeśli jest to konieczne
-      if (result === 'saved') {
-        this.answerDetailComponent.updateAnswerDetails();
+  usersByClassGroup: any[] = [];
+  findUsersByClassGroupId(): void {
+    console.log('Przed wywołaniem findUsersByClassGroupId');
+    this.userService.findUsersByClassGroupId(this.classGroupId).subscribe(
+      users => {
+        console.log('Odpowiedź z serwera:', users);
+        this.usersByClassGroup = users;
+        console.log('Użytkownicy przypisani do klasy:', this.usersByClassGroup);
+      },
+      error => {
+        console.error('Błąd podczas pobierania użytkowników:', error);
       }
-    });
+    );
+    console.log('Po wywołaniu findUsersByClassGroupId');
   }
+  
+  
+  
+  // findByHomeworkTest(): void {
+  //   this.answerService.findByHomeworkTest(this.homeworkTest.id).subscribe(answersByHomeworkTest => {
+  //     this.answersByHomeworkTest = answersByHomeworkTest;
+  //     console.log('odpowiedzi ', this.answersByHomeworkTest);
+  //   }, error => {
+  //     console.error('Błąd podczas pobierania klas użytkownika:', error);
+  //     console.log('homeworkTestId', this.homeworkTest.id);
+  //   });
+  // }
+
+  // openAnswerDetailsDialog(answer: Answer): void {
+  //   const dialogRef = this.dialog.open(AnswerDetailComponent, {
+  //     width: '400px', 
+  //     data: { answer, aFilesByAnswer: this.aFilesByAnswer, homeworkTest: this.homeworkTest, courseId: this.classGroupId}, 
+  //   });
+  
+  //   dialogRef.afterClosed().subscribe(result => {
+  //     if (result === 'saved') {
+  //       this.answerDetailComponent.updateAnswerDetails();
+  //     }
+  //   });
+  // }
+
+selectedUser: any | null = null;
+
+openAnswerDetailsDialog(user: any, homeworkTest: any): void {
+  if (homeworkTest && homeworkTest.id) {
+  // Poniższy kod będzie wykonany tylko wtedy, gdy this.homeworkTest jest zdefiniowane i ma właściwość 'id'
+  this.answerService.getAnswerByHomeworkTestIdAndUserId(this.homeworkTestId, user.id).subscribe(answer => {
+    const emptyAnswer = {
+      id: null,
+      userId: null,
+      homeworkTestId: null,
+      comment: '',
+      answerStatus: ''
+      // inne pola, które chcesz mieć puste
+    };
+    const dialogRef = this.dialog.open(AnswerDetailComponent, {
+      width: '400px',
+      data: { user: user, answer: answer || emptyAnswer, homeworkTest: homeworkTest }
+    });
+    console.log('homework', this.homeworkTestId);
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('Okno zamknięte');
+      this.selectedUser = null; // Resetuj wybranego użytkownika po zamknięciu okna dialogowego
+    });
+  });
+} else {
+  console.error('Błąd: this.homeworkTest jest niezdefiniowane lub nie ma właściwości "id".');
+}
+}
   
 
   aFilesByAnswer!: any;
@@ -222,19 +235,6 @@ getClassGroupId(selectedClassGroupId: number): void {
       });
   }
 
-//   classGroupsByCoursesId!: any;
-// classGroupsByCoursesId: any[] = [];
-classGroupsByCoursesId: ClassGroup[] = [];
-  loadClassGroupsByCoursesId(courseId: string): void {
-    this.classGroupService.findClassGroupsByCoursesId(courseId).subscribe(classGroups => {
-        this.classGroupsByCoursesId = classGroups as ClassGroup[];
-        this.filterClassGroups();
-        console.log('classGroupsByCoursesId:', this.classGroupsByCoursesId);
-      });
-      console.log('Została wywołana');
-}
-
-  
   
 
   loadHTFilesByHomeworkTestId(eduMaterialId: string): void {
@@ -579,59 +579,6 @@ downloadFileById(fileId: number): void {
         location.reload();
     }
 
-  //   calculateDaysUntilDeadline(): number {
-  //     const currentDate = new Date();
-      
-  //     if (this.homeworkTest.deadline instanceof Date) {
-  //       // `deadline` jest już obiektem Date, możesz bezpośrednio wywołać getTime()
-  //       const currentDate = new Date();
-  //       const timeDifference = this.homeworkTest.deadline.getTime() - currentDate.getTime();
-  //       const daysRemaining = Math.ceil(timeDifference / (1000 * 3600 * 24));
-  //       return daysRemaining;
-  //     } else if (typeof this.homeworkTest.deadline === 'string') {
-  //       // Jeśli `deadline` jest w formie tekstu, próbuj go sparsować do obiektu Date
-  //       const deadlineDate = new Date(this.homeworkTest.deadline);
-  //       if (!isNaN(deadlineDate.getTime())) {
-  //         // Poprawnie sparsowano `deadline` na obiekt Date
-  //         const currentDate = new Date();
-  //         const timeDifference = deadlineDate.getTime() - currentDate.getTime();
-  //         const daysRemaining = Math.ceil(timeDifference / (1000 * 3600 * 24));
-  //         return daysRemaining;
-  //       }
-  //     }
-      
-  //     // Obsługa błędu - zwracanie wartości domyślnej w przypadku braku daty
-  //     return 0; // lub inną wartość domyślną
-      
-  // }
-
-  // calculateDaysUntilDeadline(): { days: number, hours: number, minutes: number } {
-  //   const currentDate = new Date();
-  //   let deadlineDate: Date;
-  
-  //   if (this.homeworkTest.deadline instanceof Date) {
-  //     deadlineDate = this.homeworkTest.deadline;
-  //   } else if (typeof this.homeworkTest.deadline === 'string') {
-  //     deadlineDate = new Date(this.homeworkTest.deadline);
-  
-  //     if (isNaN(deadlineDate.getTime())) {
-  //       // Obsługa błędu - zwracanie wartości domyślnej w przypadku błędnej daty
-  //       return { days: 0, hours: 0, minutes: 0 };
-  //     }
-  //   } else {
-  //     // Obsługa błędu - zwracanie wartości domyślnej w przypadku braku daty
-  //     return { days: 0, hours: 0, minutes: 0 };
-  //   }
-  
-  //   const timeDifference = deadlineDate.getTime() - currentDate.getTime();
-  //   const totalMinutesRemaining = Math.floor(timeDifference / (1000 * 60));
-  
-  //   const daysRemaining = Math.floor(totalMinutesRemaining / (24 * 60));
-  //   const hoursRemaining = Math.floor((totalMinutesRemaining % (24 * 60)) / 60);
-  //   const minutesRemaining = totalMinutesRemaining % 60;
-  
-  //   return { days: daysRemaining, hours: hoursRemaining, minutes: minutesRemaining };
-  // }
 
   calculateDaysUntilDeadline(): { days: number, hours: number, minutes: number, overdue: boolean, daysBeforeDeadline: number } {
     const currentDate = new Date();
@@ -695,12 +642,7 @@ downloadFileById(fileId: number): void {
   }
   
   
-  
-  
-  
-  
-  
-  
+
   
   isEditingDate = false;
   editedDeadline!: Date;

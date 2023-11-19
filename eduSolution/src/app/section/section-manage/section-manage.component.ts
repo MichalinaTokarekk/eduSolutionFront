@@ -385,16 +385,16 @@ isAddingNewSection: boolean = false;
       return;
     }
     // Pobierz ID kursu wybranego przez użytkownika
-    const courseId = this.route.snapshot.params['courseId'];
+    const classGroupId = this.route.snapshot.params['courseId'];
     const newSection = {
       name: this.newSectionName,
-      course: {
-        id: courseId
+      classGroup: {
+        id: classGroupId
       },
       // Jeśli masz dostęp do właściwości href, możesz ją ustawić tutaj
     };
   
-    newSection.course = courseId;
+    newSection.classGroup = classGroupId;
     this.sectionService.save(newSection).subscribe((response) => {
       // Tutaj możesz obsłużyć odpowiedź z serwera, np. zaktualizować dane w komponencie
       console.log('Nowa sekcja została zapisana w bazie danych:', response);
