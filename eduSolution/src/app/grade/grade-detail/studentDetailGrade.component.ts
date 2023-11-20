@@ -168,7 +168,7 @@ import { TypeOfTestingKnowledgeService } from 'src/app/typeOfTestingKnowledge/ty
 
 ngOnInit(): void {
     console.log('Kliknięto przycisk Pobierz oceny.');
-    this.gradeService.getGradesByStudentId(this.studentId, this.courseId).subscribe((grades) => {
+    this.gradeService.findAllByStudentAndClassGroup(this.studentId, this.courseId).subscribe((grades) => {
         console.log('Oceny dla studentId ' + this.studentId + ':', grades);
         this.gradesByUser[this.studentId] = grades as Grade[];
         

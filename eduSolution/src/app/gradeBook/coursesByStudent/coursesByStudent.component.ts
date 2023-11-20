@@ -11,6 +11,7 @@ import { GradeService } from 'src/app/grade/grade-service/grade.service';
 import { Grade } from 'src/app/interfaces/grade-interface';
 import { TypeOfTestingKnowledge } from 'src/app/interfaces/typeOfTestingKnowledge-interface';
 import { StudentDetailGradeComponent } from 'src/app/grade/grade-detail/studentDetailGrade.component';
+import { UserService } from 'src/app/user/user-service/user.service';
 
 @Component({
   selector: 'courses-by-student',
@@ -25,7 +26,7 @@ export class CoursesByStudentComponent implements OnInit {
   isEditing = false;
   ascendingSort = true;
   constructor(private http: HttpClient, private courseService: CourseService, private router: Router, private dialog: MatDialog, private snackBar: MatSnackBar,
-                private loginService: LoginService, private gradeService: GradeService, private route: ActivatedRoute){
+                private loginService: LoginService, private gradeService: GradeService, private route: ActivatedRoute, private userService: UserService){
 
   }
 
@@ -40,7 +41,7 @@ export class CoursesByStudentComponent implements OnInit {
   
     console.log('courseArray:', this.courseArray);
   
-    this.courseService.findCoursesByStudentId(_finalData.id).subscribe((data: any) => {
+    this.userService.findClassGroupsById(_finalData.id).subscribe((data: any) => {
       this.courseArray = data as any[];
       this.filteredCourses = data as any[];
   
@@ -126,7 +127,7 @@ export class CoursesByStudentComponent implements OnInit {
         const _token = token.split('.')[1];
         const _atobData = atob(_token);
         const _finalData = JSON.parse(_atobData);
-    this.courseService.findCoursesByStudentId(_finalData.id).subscribe (data => {
+    this.userService.findClassGroupsById(_finalData.id).subscribe (data => {
         this.courseArray = data as any[];
         this.filteredCourses = data as any[];
 
@@ -170,7 +171,7 @@ loadGradesByStudentId(studentId: number, courseId: number) {
   openStudentDetailGradeDialog(courseId: number, courseName: string) {
     const userId = this.loginService.getUserId();
     if (userId !== null) {
-    this.gradeService.getGradesByStudentId(userId, courseId).subscribe((grades: any) => {
+    this.gradeService.findAllByStudentAndClassGroup(userId, courseId).subscribe((grades: any) => {
       const typesOfGrades = grades.map((grade: Grade) => grade.typeOfTestingKnowledge);
       const token = this.loginService.getToken();
       const _token = token.split('.')[1];
