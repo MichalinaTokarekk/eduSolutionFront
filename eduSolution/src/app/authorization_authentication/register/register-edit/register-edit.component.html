@@ -68,41 +68,83 @@
   </form>
 </mat-card> -->
 
-    <mat-card>
-      <form #registrationForm="ngForm" (ngSubmit)="save(registrationForm.value)">
-        <mat-card-header>
-          <mat-card-title><h2>Zarejestruj się</h2></mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-          <div class="form-group">
-            <input type="text" class="form-control" placeholder="Nazwa użytkownika" [(ngModel)]="user.username"
-                   required name="username" #usernameInput="ngModel">
-            <mat-error *ngIf="usernameInput.invalid && (usernameInput.dirty || usernameInput.touched)">
-              Nazwa użytkownika jest wymagana.
-            </mat-error>
-          </div>
-          <div class="form-group">
-            <input type="text" class="form-control" placeholder="Podaj adres e-mail" [(ngModel)]="user.email"
-                   required name="email" #emailInput="ngModel" type="email">
-            <mat-error *ngIf="emailInput.invalid && (emailInput.dirty || emailInput.touched)">
-              Wprowadź prawidłowy adres e-mail.
-            </mat-error>
-          </div>
-          <div class="form-group">
-            <input type="password" class="form-control" placeholder="Podaj hasło" [(ngModel)]="user.password"
-                   name="password" #passwordInput="ngModel" required>
-            <mat-error *ngIf="passwordInput.invalid && (passwordInput.dirty || passwordInput.touched)">
-              Hasło jest wymagane.
-            </mat-error>
-          </div>
-        </mat-card-content>
-        <mat-card-actions>
-          <button mat-raised-button color="primary" type="submit"
-                  [disabled]="registrationForm.invalid">Zarejestruj się</button>
-          <a mat-button routerLink="/login">Powrót</a>
-        </mat-card-actions>
-      </form>
-    </mat-card>
+<mat-card>
+  <form #registrationForm="ngForm" (ngSubmit)="save(registrationForm.value)">
+    <mat-card-header>
+      <mat-card-title><h2>Zarejestruj się</h2></mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="form-group">
+        <input type="text" class="form-control" placeholder="Imię" [(ngModel)]="user.firstName"
+               required name="firstName" #firstNameInput="ngModel">
+        <mat-error *ngIf="firstNameInput.invalid && (firstNameInput.dirty || firstNameInput.touched)">
+          Imię jest wymagane.
+        </mat-error>
+      </div>
+      <div class="form-group">
+        <input type="text" class="form-control" placeholder="Nazwisko" [(ngModel)]="user.lastName"
+               required name="lastName" #lastNameInput="ngModel">
+        <mat-error *ngIf="lastNameInput.invalid && (lastNameInput.dirty || lastNameInput.touched)">
+          Nazwisko jest wymagane.
+        </mat-error>
+      </div>
+      <div class="form-group">
+        <input type="text" class="form-control" placeholder="Adres" [(ngModel)]="user.address"
+               required name="address" #addressInput="ngModel">
+        <mat-error *ngIf="addressInput.invalid && (addressInput.dirty || addressInput.touched)">
+          Adres jest wymagany.
+        </mat-error>
+      </div>
+      <div class="form-group">
+        <input type="text" class="form-control" placeholder="Miasto" [(ngModel)]="user.city"
+               required name="city" #cityInput="ngModel">
+        <mat-error *ngIf="cityInput.invalid && (cityInput.dirty || cityInput.touched)">
+          Miasto jest wymagane.
+        </mat-error>
+      </div>
+      <div class="form-group">
+        <input type="text" class="form-control" placeholder="Poczta" [(ngModel)]="user.post"
+               required name="post" #postInput="ngModel">
+        <mat-error *ngIf="postInput.invalid && (postInput.dirty || postInput.touched)">
+          Poczta jest wymagana.
+        </mat-error>
+      </div>
+      <div class="form-group">
+        <input type="text" class="form-control" placeholder="Kod pocztowy" [(ngModel)]="user.postCode"
+               required name="postCode" #postCodeInput="ngModel">
+        <mat-error *ngIf="postCodeInput.invalid && (postCodeInput.dirty || postCodeInput.touched)">
+          Kod pocztowy jest wymagany.
+        </mat-error>
+      </div>
+      <div class="form-group">
+        <input type="text" class="form-control" placeholder="Kraj" [(ngModel)]="user.country"
+               required name="country" #countryInput="ngModel">
+        <mat-error *ngIf="countryInput.invalid && (countryInput.dirty || countryInput.touched)">
+          Kraj jest wymagany.
+        </mat-error>
+      </div>
+      <div class="form-group">
+        <input type="text" class="form-control" placeholder="Podaj adres e-mail" [(ngModel)]="user.email"
+               required name="email" #emailInput="ngModel" type="email">
+        <mat-error *ngIf="emailInput.invalid && (emailInput.dirty || emailInput.touched)">
+          Wprowadź prawidłowy adres e-mail.
+        </mat-error>
+      </div>
+      <div class="form-group">
+        <input type="password" class="form-control" placeholder="Podaj hasło" [(ngModel)]="user.password"
+               name="password" #passwordInput="ngModel" required>
+        <mat-error *ngIf="passwordInput.invalid && (passwordInput.dirty || passwordInput.touched)">
+          Hasło jest wymagane.
+        </mat-error>
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="primary" type="submit" [disabled]="registrationForm.invalid">Zarejestruj się</button>
+      <a mat-button routerLink="/login">Powrót</a>
+    </mat-card-actions>
+  </form>
+</mat-card>
+
   
   
 

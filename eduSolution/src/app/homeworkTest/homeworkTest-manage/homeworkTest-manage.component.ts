@@ -201,6 +201,7 @@ selectedUser: any | null = null;
 
 openAnswerDetailsDialog(user: any, homeworkTest: any): void {
   if (homeworkTest && homeworkTest.id) {
+    const classGroupId = homeworkTest.section.classGroup.id;
   // Poniższy kod będzie wykonany tylko wtedy, gdy this.homeworkTest jest zdefiniowane i ma właściwość 'id'
   this.answerService.getAnswerByHomeworkTestIdAndUserId(this.homeworkTestId, user.id).subscribe(answer => {
     const emptyAnswer = {
@@ -213,7 +214,7 @@ openAnswerDetailsDialog(user: any, homeworkTest: any): void {
     };
     const dialogRef = this.dialog.open(AnswerDetailComponent, {
       width: '400px',
-      data: { user: user, answer: answer || emptyAnswer, homeworkTest: homeworkTest }
+      data: { user: user, answer: answer || emptyAnswer, homeworkTest: homeworkTest, classGroupId: classGroupId}
     });
     console.log('homework', this.homeworkTestId);
 

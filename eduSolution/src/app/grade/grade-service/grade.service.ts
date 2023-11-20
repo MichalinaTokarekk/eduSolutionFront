@@ -23,8 +23,8 @@ export class GradeService {
     return this.http.get(this.GRADE_API + '/findByStudentIdAndCourseId/' + studentId + '/' + courseId);
   }
 
-  findAllByStudentAndCourse(studentId: any, courseId: any) {
-    return this.http.get(this.GRADE_API + '/findAllByStudentAndCourse/' + studentId + '/' + courseId);
+  findAllByStudentAndClassGroup(studentId: any, classGroupId: any) {
+    return this.http.get(this.GRADE_API + '/findAllByStudentAndClassGroup/' + studentId + '/' + classGroupId);
   }
 
   findAllByStudentId(studentId: any) {

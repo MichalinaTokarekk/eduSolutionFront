@@ -5,7 +5,7 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { ConfirmationDialogSemesterComponent } from '../../confirmations/semester/confirmation-dialog-semester.component';
-import { Subscription, catchError, of, switchMap, tap } from 'rxjs';
+import { Subscription, catchError, forkJoin, of, switchMap, tap } from 'rxjs';
 import { ClassGroupService } from 'src/app/classGroup/classGroup-service/classGroup.service';
 import { LoginService } from 'src/app/authorization_authentication/service/login.service';
 import { UserService } from 'src/app/user/user-service/user.service';
@@ -18,6 +18,7 @@ import { DetailEditGradeComponent } from 'src/app/grade/grade-detail/detailEditG
 import { TypeOfTestingKnowledge } from 'src/app/interfaces/typeOfTestingKnowledge-interface';
 import { AddFinalGradeDetailComponent } from 'src/app/grade/grade-detail/addFinalGrade.component';
 import { Course } from 'src/app/interfaces/course-interface';
+import { ClassGroup } from 'src/app/interfaces/classGroup-interface';
 
 
 /**
@@ -29,7 +30,7 @@ import { Course } from 'src/app/interfaces/course-interface';
   styleUrls: ['classGroupsByCourseAndUser.component.css'],
 })
 export class ClassGroupsByCourseAndUser implements OnInit {
-course: any = {};
+classGroup: any = {};
 classGroups!: any[]; 
 users!: any[]; 
 grades!: any[]; 
@@ -47,18 +48,16 @@ ngOnInit(): void {
     this.route.paramMap.subscribe((params: ParamMap) => {
       const id = params.get('id');
       if (id !== null) {
-        this.courseService.get(id).subscribe((course: any) => {
-          this.course = course;
+        this.classGroupService.get(id).subscribe((classGroup: any) => {
+          this.classGroup = classGroup;
 
           const token = this.loginService.getToken();
           const _token = token.split('.')[1];
           const _atobData = atob(_token);
-          const _finalData = JSON.parse(_atobData);
-          this.classGroupService.findClassGroupsByCourseAndUserId(course.id, _finalData.id).subscribe((classGroups: any) => {
-            this.classGroups = classGroups;
-          }, error => {
-            console.error(error);
-          });
+          const _finalData = JSON.parse(_atobData);   
+          
+          this.loadEduMaterialsBySectionId();
+
           
         }, error => {
           console.error(error);
@@ -68,53 +67,52 @@ ngOnInit(): void {
       }
     });
     // this.getTypeOfTestingKnowledge();
+    
+    
   }
   
 
-  loadEduMaterialsBySectionId(classGroupId: number): void {
-    this.userService.findUsersByClassGroupId(classGroupId).subscribe(users => {
-      this.users = users;
-    });
-  }
+loadEduMaterialsBySectionId(): void {
+  this.userService.findUsersByClassGroupId(this.classGroup.id).subscribe(users => {
+    this.users = users;
 
-
-//   loadGradesByStudentId(studentId: number) {
-//     this.gradeService.getGradesByStudentId(studentId).subscribe(grades => {
-//         this.grades = grades as any[];
-//         console.log('oceny', grades);
-//     });
-
-
-//   }
+    this.loadGradesByStudentId(this.classGroup.id);
+  });
+  console.log('classGroup', this.classGroup.id);
+}
 
 gradesByUser: { [key: number]: Grade[] } = {}; 
 teacher: any;
-  selectedCourse!: Course;
-loadGradesByStudentId(studentId: number, courseId: number) {
-    console.log('Kliknięto przycisk Pobierz oceny.');
-    this.gradeService.getGradesByStudentId(studentId, courseId).subscribe((grades) => {
-        console.log('Oceny dla studentId ' + studentId + ':', grades);
-        
+selectedCourse!: ClassGroup;
+
+
+loadGradesByStudentId(courseId: number) {
+  this.users.forEach(user => {
+    this.gradeService.findAllByStudentAndClassGroup(user.id, courseId).subscribe((grades) => {
+        console.log('Oceny dla studentId ' + user.id + ':', grades);
+
         if (Array.isArray(grades)) {
-          const selectedGrades = grades.filter((grade: Grade) => {
-            if (this.selectedCourse && grade.semester) {
-                return grade.semester.courses.some(course => course.id === this.selectedCourse.id);
-            }
-            return false;
-        });
-        
 
-          // Przypisz wynik filtrowania do 'gradesByUser' pod odpowiednim kluczem 'studentId'
-          this.gradesByUser[studentId] = selectedGrades;
-      } else {
-          console.error('grades nie jest tablicą.');
-      }
-
-
-
-        this.gradesByUser[studentId] = grades as Grade[];
+            this.gradesByUser[user.id] = grades;
+        } else {
+            console.error('grades nie jest tablicą.');
+        }
     });
+
+})
 }
+
+mapGradesToString(grades: Grade[]): string {
+  return grades.map(grade => grade.value.toString()).join(', ');
+}
+
+
+
+
+
+
+
+
   
   answerDetailComponent!: AddGradeDetailComponent;
   selectedStudent: User | undefined;
@@ -139,26 +137,9 @@ loadGradesByStudentId(studentId: number, courseId: number) {
     console.log('Pobrane typy ocen:', this.allTypes);
   }
 
-//   openDetailEditGradeDialog(studentId: number, courseId: number, studentFirstName: string, studentLastName: string, teacherFirstName: string, teacherLastName: string): void {
-//   const gradesForStudentInCourse = this.gradeService.getGradesByStudentId(studentId, courseId);
-
-//     const dialogRef = this.dialog.open(DetailEditGradeComponent, {
-//       width: '520px', 
-//       height: '500px',
-//       data: {  grades: this.gradeService.getGradesByStudentId(studentId, courseId), studentId, courseId, studentFirstName, studentLastName, teacherFirstName, teacherLastName, allTypes: this.allTypes}, 
-//     });
-  
-//     dialogRef.afterClosed().subscribe(result => {
-//       if (result === 'saved') {
-//       }
-//     });
-
-//     console.log('types', this.allTypes)
-//   }
-
 
 openDetailEditGradeDialog(studentId: number, courseId: number, studentFirstName: string, studentLastName: string): void {
-    this.gradeService.getGradesByStudentId(studentId, courseId).subscribe((grades: any) => {
+    this.gradeService.findAllByStudentAndClassGroup(studentId, courseId).subscribe((grades: any) => {
       const typesOfGrades = grades.map((grade: Grade) => grade.typeOfTestingKnowledge);
       const firstGrade = grades[0];
   

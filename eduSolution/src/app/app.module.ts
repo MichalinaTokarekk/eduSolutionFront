@@ -79,6 +79,12 @@ import { EventsScheduleService } from './schedule/eventsSchedule/eventsSchedule-
 import { FullCalendarModule } from '@fullcalendar/angular';
 import { CalendarViewComponent } from './schedule/eventsSchedule/calendar-view.component';
 import { AddEventDialogComponent } from './schedule/eventsSchedule/addEventDialog/addEventDialog.component';
+import { MatInputModule } from '@angular/material/input';
+import { RegisterEditComponent } from './authorization_authentication/register/register-edit/register-edit.component';
+import { RegisterService } from './authorization_authentication/register/register-service/register.service';
+
+
+
 
 
 
@@ -98,7 +104,9 @@ import { AddEventDialogComponent } from './schedule/eventsSchedule/addEventDialo
     FormsModule,
     MatExpansionModule,
     RouterModule,
-    FormsModule
+    FormsModule,
+    MatInputModule,
+    MatCardModule
 
   ],
   declarations: [
@@ -145,7 +153,8 @@ export class MaterialModule { }
     LessonDialogComponent,
     LessonCreateDialogComponent,
     CalendarViewComponent,
-    AddEventDialogComponent
+    AddEventDialogComponent,
+    RegisterEditComponent
   ],
   imports: [
     BrowserModule,
@@ -170,7 +179,7 @@ export class MaterialModule { }
 
   ],
   providers: [SemesterService, CourseService, ClassGroupService, LoginService, JwtHelperService, UserService, SectionService, EduMaterialService, EMFileService,
-    HomeworkTestService, HTFileService, AnswerService, AFileService, GradeService, TypeOfTestingKnowledgeService, LessonScheduleService, EventsScheduleService,
+    HomeworkTestService, HTFileService, AnswerService, AFileService, GradeService, TypeOfTestingKnowledgeService, LessonScheduleService, EventsScheduleService, RegisterService,
     {
       provide: HTTP_INTERCEPTORS, useClass: TokenInterceptorService, multi: true
     }],

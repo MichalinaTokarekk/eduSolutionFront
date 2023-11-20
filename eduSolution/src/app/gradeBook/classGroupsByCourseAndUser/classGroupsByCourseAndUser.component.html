@@ -1,73 +1,22 @@
-<!-- <div *ngIf="classGroups">
-    <h3>Klasy przypisane do kursu:</h3>
-    <ul class="class-list">
-      <li *ngFor="let cg of classGroups" class="class-item">
-        {{ cg.name }}
-      </li>
-    </ul>
-  </div>
-  
-  <div *ngIf="!classGroup && !classGroups">
-    <p class="no-data-message">Brak dostępnych danych.</p>
-  </div>
-   -->
 
 <div class="page-container">
-   <div class="course-name">{{ course.name }}</div>
+   <div class="course-name">{{ classGroup.name }}</div>
    <div class="expansion-panel-container">
-    <mat-accordion>
-      <mat-expansion-panel *ngFor="let cg of classGroups" (click)="loadEduMaterialsBySectionId(cg.id)">
-        <mat-expansion-panel-header>
-          <mat-panel-title>
-            <ul class="class-list">
-                <li class="class-item">
-                  {{ cg.name }}
-                </li>
-            </ul>
-          </mat-panel-title>
-        </mat-expansion-panel-header>
-        <div *ngIf="users">
+
+
+        
+        <!-- <div *ngIf="users">
             <h3>Użytkownicy przypisani do grupy:</h3>
             <ul class="user-list">
-              <li *ngFor="let user of users" class="user-item" (click)="loadGradesByStudentId(user.id, course.id)">
+              <li *ngFor="let user of users" class="user-item" (click)="loadGradesByStudentId(user.id, classGroup.id)">
                 <span class="user-name">{{ user.firstName }} {{ user.lastName }}</span>               
-                 <!-- <button (click)="loadGradesByStudentId(user.id, course.id)">Pokaż oceny</button> -->
-                    <!-- <div *ngIf="gradesByUser[user.id]" class="grade-section"> -->
-                        <!-- <h4>Oceny:</h4> -->
-                        <!-- <button (click)="openAddGradeDetailDialog(user.id, course.id, user.firstName, user.lastName)" class="add-grade-button">Dodaj ocenę</button>
-                        <button *ngIf="isFinalGradeAvailable(user) == false" (click)="openAddFinalGradeDetailDialog(user.id, course.id, user.firstName, user.lastName)" class="add-grade-button">Dodaj ocenę końcową</button>
-                        <button (click)="openDetailEditGradeDialog(user.id, course.id, user.firstName, user.lastName, gradesByUser[user.id][0].teacher.firstName, gradesByUser[user.id][0].teacher.lastName)" class="add-grade-button">Pokaż szczegóły</button>
-                        <br>
-                            <div class="grade-list" style="white-space: pre;">
-                                <span *ngFor="let grade of gradesByUser[user.id]; let last = last" class="grade-value">
-                                    <ng-container *ngIf="grade && !(grade.finalValue)">
-                                        {{ grade.value }} 
-                                    </ng-container>
-                                  <span *ngIf="!last && !grade.finalValue">, </span>    
-                                </span>
-
-                            </div>
-
-                            
-                              <div *ngFor="let grade of gradesByUser[user.id]; let last = last" >
-                                <ng-container *ngIf="grade && grade.finalValue">
-                                    <div class="grade-final-value">Ocena końcowa: {{ grade.value }} </div>
-                                </ng-container>
-                              </div>
-
-
-                          <div class="average-section">
-                            Średnia ważona: {{ obliczSredniaWazona(gradesByUser[user.id]) | number: '1.2-2' }}
-                          </div>
-                          
-                    </div> -->
 
                     <br>
                     <div *ngIf="gradesByUser[user.id]" class="grade-section">
                       <h2>Oceny</h2>
-                      <button (click)="openAddGradeDetailDialog(user.id, course.id, user.firstName, user.lastName)" class="add-grade-button">Dodaj ocenę</button>
-                      <button *ngIf="isFinalGradeAvailable(user) == false" (click)="openAddFinalGradeDetailDialog(user.id, course.id, user.firstName, user.lastName)" class="add-grade-button">Dodaj ocenę końcową</button>
-                      <button (click)="openDetailEditGradeDialog(user.id, course.id, user.firstName, user.lastName)" class="add-grade-button">Pokaż szczegóły</button>
+                      <button (click)="openAddGradeDetailDialog(user.id, classGroup.id, user.firstName, user.lastName)" class="add-grade-button">Dodaj ocenę</button>
+                      <button *ngIf="isFinalGradeAvailable(user) == false" (click)="openAddFinalGradeDetailDialog(user.id, classGroup.id, user.firstName, user.lastName)" class="add-grade-button">Dodaj ocenę końcową</button>
+                      <button (click)="openDetailEditGradeDialog(user.id, classGroup.id, user.firstName, user.lastName)" class="add-grade-button">Pokaż szczegóły</button>
                       
                       <div class="grades">
                           <div class="grade-list">
@@ -102,16 +51,68 @@
               </li>
             </ul>
         </div>
-      </mat-expansion-panel>
-    </mat-accordion>
-  </div>
+  </div> -->
 
-  <footer class="footer">
-    <div class="container">
-      <p>&copy; 2023 EduSolution. Wszelkie prawa zastrzeżone.</p>
-      <p>Kontakt: kontakt@example.com</p>
+
+  
+  <div class="row">
+    <div class="col-8">
+      <table class="table table-bordered">
+        <thead>
+          <tr class="bg-success text-white">
+            <th>Lp</th>
+            <th>Użytkownik</th>
+            <th>Oceny Cząstkowe</th>
+            <th>Ocena Końcowa</th>
+            <th>Średnia Ważona</th>
+            <th>Akcje</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of users; let srNo = index">
+            <td>{{ srNo + 1 }}</td>
+            <td>
+              {{ user.firstName }} {{ user.lastName }}
+            </td>
+            <td>
+              <div *ngIf="gradesByUser[user.id]">
+                <div *ngIf="gradesByUser[user.id]">
+                  {{ mapGradesToString(gradesByUser[user.id]) }}
+                </div>
+              </div>
+            </td>
+            <td>
+              <div *ngIf="gradesByUser[user.id]">
+                <div *ngFor="let grade of gradesByUser[user.id]; let last = last">
+                  <ng-container *ngIf="grade && grade.finalValue">
+                    <div class="final-grade">
+                      {{ grade.value }}
+                    </div>
+                  </ng-container>
+                </div>
+              </div>
+            </td>
+            <td>
+              <div *ngIf="gradesByUser[user.id]">
+                <div class="average-section">
+                  {{ obliczSredniaWazona(gradesByUser[user.id]) | number: '1.2-2' }}
+                </div>
+              </div>
+            </td>
+            <button (click)="openAddGradeDetailDialog(user.id, classGroup.id, user.firstName, user.lastName)" class="add-grade-button">Dodaj ocenę</button>
+            <button *ngIf="isFinalGradeAvailable(user) == false" (click)="openAddFinalGradeDetailDialog(user.id, classGroup.id, user.firstName, user.lastName)" class="add-grade-button">Dodaj ocenę końcową</button>
+            <button (click)="openDetailEditGradeDialog(user.id, classGroup.id, user.firstName, user.lastName)" class="add-grade-button">Pokaż szczegóły</button>
+          </tr>
+        </tbody>
+      </table>
     </div>
-</footer>
+  </div>
+ 
 </div>
+
+<!-- <footer class="footer">
+  <p>&copy; 2023 EduSolution. Wszelkie prawa zastrzeżone.</p>
+  <p>Kontakt: kontakt@example.com</p>
+</footer> -->
   
   

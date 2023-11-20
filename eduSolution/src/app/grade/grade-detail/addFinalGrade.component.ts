@@ -147,7 +147,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
             value: this.newValue,
             student: this.data.studentId,
             teacher: _finalData.id,
-            course: this.data.courseId, // Dostosuj do swoich potrzeb
+            classGroup: this.data.courseId, // Dostosuj do swoich potrzeb
           };
           console.log('student', this.data.studentId);
           console.log('student', this.data.courseId);

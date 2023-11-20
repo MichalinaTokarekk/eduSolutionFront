@@ -171,7 +171,7 @@ import { TypeOfTestingKnowledgeService } from 'src/app/typeOfTestingKnowledge/ty
             student: this.data.studentId,
             teacher: _finalData.id,
             typeOfTestingKnowledge: this.selectedKnowledge,
-            course: this.data.courseId, // Dostosuj do swoich potrzeb
+            classGroup: this.data.courseId, // Dostosuj do swoich potrzeb
           };
           console.log('student', this.data.studentId);
           console.log('student', this.data.courseId);

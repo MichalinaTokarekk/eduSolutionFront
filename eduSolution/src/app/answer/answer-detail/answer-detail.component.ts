@@ -153,14 +153,13 @@ import { TypeOfTestingKnowledgeService } from 'src/app/typeOfTestingKnowledge/ty
       // Utwórz nowy obiekt oceny z odpowiednimi wartościami
       const newGrade = {
         value: this.newValue,
-        isFinalValue: false, // Może być false, jeśli to nie jest ostateczna ocena
+        isFinalValue: false, 
         description:  this.newDescription,
         student: this.data.answer.user,
         teacher: _finalData.id,
         typeOfTestingKnowledge: this.selectedKnowledge,
-        // semester,
-        // course: this.data.courseId,
-        answer: this.data.answer // Przypisz ocenę do odpowiedzi, w której jesteś
+        classGroup: this.data.classGroupId,
+        answer: this.data.answer 
       };
     
       this.gradeService.save(newGrade).subscribe(addedGrade => {

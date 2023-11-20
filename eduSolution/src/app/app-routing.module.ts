@@ -22,6 +22,7 @@ import { MyAllGradesComponent } from './myAllGrades/myAllGrades.component';
 import { ArchivesHomeworkTestComponent } from './archivesHomeworkTest/archivesHomeworkTest.component';
 import { LessonsScheduleComponent } from './schedule/lessonsSchedule/lessonsSchedule.component';
 import { CalendarViewComponent } from './schedule/eventsSchedule/calendar-view.component';
+import { RegisterEditComponent } from './authorization_authentication/register/register-edit/register-edit.component';
 
 const routes: Routes = [
   {path: "dashboard", component: DashboardComponent, canActivate:[AuthGuard]},
@@ -46,6 +47,8 @@ const routes: Routes = [
   {path: 'archivesHomeworkTest/:id', component: ArchivesHomeworkTestComponent },
   {path: 'lessonSchedule', component: LessonsScheduleComponent },
   {path: 'calendar-view', component: CalendarViewComponent },
+  {path: 'register-edit',component: RegisterEditComponent},
+
   
 ];
 

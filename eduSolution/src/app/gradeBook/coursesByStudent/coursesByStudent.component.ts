@@ -46,7 +46,7 @@ export class CoursesByStudentComponent implements OnInit {
   
       if (this.courseArray && this.courseArray.length > 0) {
         this.courseArray.forEach((course) => {
-          this.gradeService.findAllByStudentAndCourse(_finalData.id, course.id).subscribe(
+          this.gradeService.findAllByStudentAndClassGroup(_finalData.id, course.id).subscribe(
             (gradesData: any) => {
               // Przypisz oceny do kursu
               course.grades = gradesData;
