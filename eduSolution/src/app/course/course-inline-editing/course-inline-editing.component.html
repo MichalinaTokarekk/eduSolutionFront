@@ -16,6 +16,7 @@
                     <th>Lp</th>
                     <th (click)="onNameSort()">Nazwa</th>
                     <th>Opis</th> 
+                    <th>Poziom</th> 
                     <th>Kwota</th> 
                     <th>Zaliczka</th> 
                     <th></th>
@@ -39,12 +40,22 @@
                         </div>
                      
                     </td>
+                    
                     <td> 
                         <div *ngIf="course.isEdit">
                             <input type="text" class="form-control" [(ngModel)]="course.description">
                         </div>
                         <div  *ngIf="!course.isEdit">
                             {{course.description}}
+                        </div>
+                    </td>
+
+                    <td> 
+                        <div *ngIf="course.isEdit">
+                            <input type="text" class="form-control" [(ngModel)]="course.difficultyLevel">
+                        </div>
+                        <div  *ngIf="!course.isEdit">
+                            {{course.difficultyLevel}}
                         </div>
                     </td>
 

@@ -15,10 +15,15 @@
                 <tr class="bg-success text-white">
                     <th>Lp</th>
                     <th (click)="onNameSort()">Nazwa</th>
+                    <th (click)="onNameSort()">Opis</th>
+                    <th (click)="onNameSort()">Limit studentów</th>
+                    <th (click)="onNameSort()">Rok</th>
+                    <th (click)="onNameSort()">Adres</th>
+                    <th (click)="onNameSort()">Tryb</th>
                     <th (click)="onNameSort()">Semestr</th>
                     <th (click)="onNameSort()">Kurs</th>
-                    <!-- <th>Opis</th>  -->
-                    <th></th>
+                    <th></th> 
+                    <!-- <th></th> -->
                 </tr>
             </thead>
             <tbody>
@@ -36,6 +41,87 @@
                         
                         <div *ngIf="!course.isEdit">
                             {{course.name}}
+                        </div>
+                     
+                    </td>
+
+                    <td>
+                        <div *ngIf="course.isEdit" class="form-group">
+                            <div class="input-container">
+                                <input type="text" class="form-control" [(ngModel)]="course.description" [ngClass]="{'is-invalid': validateCourseName(course.description) !== ''}">
+                                <div class="text-danger error-message" *ngIf="!course.description">
+                                    {{validateCourseName(course.description)}}
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div *ngIf="!course.isEdit">
+                            {{course.description}}
+                        </div>
+                     
+                    </td>
+
+
+                    <td>
+                        <div *ngIf="course.isEdit" class="form-group">
+                            <div class="input-container">
+                                <input type="text" class="form-control" [(ngModel)]="course.studentsLimit" [ngClass]="{'is-invalid': validateCourseName(course.studentsLimit) !== ''}">
+                                <div class="text-danger error-message" *ngIf="!course.studentsLimit">
+                                    {{validateCourseName(course.studentsLimit)}}
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div *ngIf="!course.isEdit">
+                            {{course.studentsLimit}}
+                        </div>
+                     
+                    </td>
+
+                    <td>
+                        <div *ngIf="course.isEdit" class="form-group">
+                            <div class="input-container">
+                                <input type="text" class="form-control" [(ngModel)]="course.year" [ngClass]="{'is-invalid': validateCourseName(course.year) !== ''}">
+                                <div class="text-danger error-message" *ngIf="!course.year">
+                                    {{validateCourseName(course.year)}}
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div *ngIf="!course.isEdit">
+                            {{course.year}}
+                        </div>
+                     
+                    </td>
+
+                    <td>
+                        <div *ngIf="course.isEdit" class="form-group">
+                            <div class="input-container">
+                                <input type="text" class="form-control" [(ngModel)]="course.address" [ngClass]="{'is-invalid': validateCourseName(course.address) !== ''}">
+                                <div class="text-danger error-message" *ngIf="!course.address">
+                                    {{validateCourseName(course.address)}}
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div *ngIf="!course.isEdit">
+                            {{course.address}}
+                        </div>
+                     
+                    </td>
+
+                    <td>
+                        <div *ngIf="course.isEdit" class="form-group">
+                            <div class="input-container">
+                                <input type="text" class="form-control" [(ngModel)]="course.mode" [ngClass]="{'is-invalid': validateCourseName(course.mode) !== ''}">
+                                <div class="text-danger error-message" *ngIf="!course.mode">
+                                    {{validateCourseName(course.mode)}}
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div *ngIf="!course.isEdit">
+                            {{course.mode}}
                         </div>
                      
                     </td>
@@ -67,7 +153,7 @@
                         </div>
                         
                         <div *ngIf="!course.isEdit">
-                            {{course.course.name}}
+                            {{course.course.name}} {{course.course.difficultyLevel}}
                         </div>
                      
                     </td>
