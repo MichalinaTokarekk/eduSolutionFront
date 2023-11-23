@@ -173,23 +173,26 @@
                      
                     </td>
 
-                    <td>
-                        <div *ngIf="user.isEdit" class="form-group">
-                            <div class="input-container">
-                                <input type="text" class="form-control" [(ngModel)]="user.classGroups"
-                                    [ngClass]="{'is-invalid': validateUser(user.classGroups) !== ''}">
-                                <div class="text-danger error-message" *ngIf="!user.classGroups">
-                                    {{user.classGroups}}
-                                </div>
+                   <td>
+                    <div *ngIf="user.isEdit" class="form-group">
+                        <div class="input-container">
+                            <!-- Użyj osobnej zmiennej do edycji grup -->
+                            <input type="text" class="form-control" [(ngModel)]="editedUserClassGroups"
+                                [ngClass]="{'is-invalid': validateUser(editedUserClassGroups) !== ''}">
+                            <div class="text-danger error-message" *ngIf="!editedUserClassGroups">
+                                {{editedUserClassGroups}}
                             </div>
                         </div>
+                    </div>
                     
-                        <div *ngIf="!user.isEdit">
-                            <div *ngFor="let group of classGroups">
-                                {{ group.name }}
-                            </div>
+                    <div *ngIf="!user.isEdit">
+                        <!-- Użyj oryginalnej zmiennej do wyświetlania grup -->
+                        <div *ngFor="let group of user.classGroups">
+                            {{ group.name }}
                         </div>
-                    </td>
+                    </div>
+                </td>
+
                     
                     
 

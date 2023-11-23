@@ -22,6 +22,7 @@ export class UserInlineCrudComponent implements OnInit {
   searchText: string ='';
   isEditing = false;
   classGroups: any;
+  editedUserClassGroups: string = '';
   constructor(private http: HttpClient, private userService: UserService, private router: Router, private dialog: MatDialog, private snackBar: MatSnackBar,
     private loginService: LoginService){
 
@@ -123,7 +124,7 @@ this.userService.findClassGroupsById(_finalData.id).subscribe((groupIds: string[
         // Jeśli pole "name" jest puste, nie wykonuj aktualizacji
         return;
       }
-      this.userService.save(userObj)
+      this.userService.updateUser(userObj)
           .subscribe(
             (data) => {
                 // Obsłuż dane po udanej aktualizacji

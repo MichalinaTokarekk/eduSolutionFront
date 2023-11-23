@@ -83,6 +83,7 @@ import { MatInputModule } from '@angular/material/input';
 import { RegisterEditComponent } from './authorization_authentication/register/register-edit/register-edit.component';
 import { RegisterService } from './authorization_authentication/register/register-service/register.service';
 import { OfferPageComponent } from './offer/offerPage/offerPage.component';
+import { ClassGroupsInCourseComponent } from './offer/classGroupsInCourse/classGroupsInCourse.component';
 
 
 
@@ -156,7 +157,8 @@ export class MaterialModule { }
     CalendarViewComponent,
     AddEventDialogComponent,
     RegisterEditComponent,
-    OfferPageComponent
+    OfferPageComponent,
+    ClassGroupsInCourseComponent
   ],
   imports: [
     BrowserModule,
