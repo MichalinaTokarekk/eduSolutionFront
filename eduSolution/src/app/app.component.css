@@ -1,0 +1,13 @@
+  img {
+    /* Styl domyślny dla obrazka */
+    height: 80px;
+    margin-top: -15px;
+    margin-left: -15px;
+    margin-bottom: -20px;
+    transition: transform 0.3s ease; /* Dodaj płynne przejście dla efektu smooth */
+  }
+
+  img:hover {
+    /* Efekt po najechaniu myszką */
+    transform: scale(1.1); /* Przykładowa transformacja, w tym przypadku, powiększenie obrazka o 10% */
+  }

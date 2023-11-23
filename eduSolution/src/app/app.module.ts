@@ -82,6 +82,7 @@ import { AddEventDialogComponent } from './schedule/eventsSchedule/addEventDialo
 import { MatInputModule } from '@angular/material/input';
 import { RegisterEditComponent } from './authorization_authentication/register/register-edit/register-edit.component';
 import { RegisterService } from './authorization_authentication/register/register-service/register.service';
+import { OfferPageComponent } from './offer/offerPage/offerPage.component';
 
 
 
@@ -154,7 +155,8 @@ export class MaterialModule { }
     LessonCreateDialogComponent,
     CalendarViewComponent,
     AddEventDialogComponent,
-    RegisterEditComponent
+    RegisterEditComponent,
+    OfferPageComponent
   ],
   imports: [
     BrowserModule,
