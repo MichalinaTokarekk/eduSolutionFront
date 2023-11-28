@@ -47,37 +47,30 @@ export class LessonsScheduleComponent implements OnInit {
           this.groupId = _finalData.id.teachingClassGroups[0].groupId;
         }
       }
-      
-
-    // console.log(_finalData.id);
-    // console.log(this.groupId);
-    // this.lessonsScheduleService.findByClassGroupOrTeachingClassGroups(this.groupId, _finalData.id)
-    // .subscribe((lessons: any) => {
-    //   this.lessons = lessons;
-    // });
+    
 
 
-    this.lessonsScheduleService.findByClassGroupOrTeachingClassGroups(_finalData.id)
-      .subscribe((lessons: any) => {
-        this.lessons = lessons;
-        console.log('Lessons:', this.lessons);
+    // this.lessonsScheduleService.findByClassGroupOrTeachingClassGroups(_finalData.id)
+    //   .subscribe((lessons: any) => {
+    //     this.lessons = lessons;
+    //     console.log('Lessons:', this.lessons);
 
-        this.lessons.sort((a, b) => {
-          const dayOrder = ['Poniedziałek', 'Wtorek', 'Środa', 'Czwartek', 'Piątek'];
-          const dayA = dayOrder.indexOf(a.dayName);
-          const dayB = dayOrder.indexOf(b.dayName);
+    //     this.lessons.sort((a, b) => {
+    //       const dayOrder = ['Poniedziałek', 'Wtorek', 'Środa', 'Czwartek', 'Piątek'];
+    //       const dayA = dayOrder.indexOf(a.dayName);
+    //       const dayB = dayOrder.indexOf(b.dayName);
 
-          if (dayA !== dayB) {
-            return dayA - dayB;
-          }
+    //       if (dayA !== dayB) {
+    //         return dayA - dayB;
+    //       }
 
-          const timeA = new Date(`1970-01-01T${a.startLessonTime}`);
-          const timeB = new Date(`1970-01-01T${b.startLessonTime}`);
-          return timeA.getTime() - timeB.getTime();
-        });
+    //       const timeA = new Date(`1970-01-01T${a.startLessonTime}`);
+    //       const timeB = new Date(`1970-01-01T${b.startLessonTime}`);
+    //       return timeA.getTime() - timeB.getTime();
+    //     });
 
         
-      });
+    //   });
 
 
       // const storedColors = localStorage.getItem('courseColors');

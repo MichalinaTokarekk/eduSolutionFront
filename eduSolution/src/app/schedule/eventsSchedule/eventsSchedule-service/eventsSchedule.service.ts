@@ -38,6 +38,8 @@ export class EventsScheduleService {
   remove (id: string):Observable<string> {
     return this.http.delete<string>(this.EVENT_API + '/deleteEvent/' + id);
   }
+
+  
 }
 
 

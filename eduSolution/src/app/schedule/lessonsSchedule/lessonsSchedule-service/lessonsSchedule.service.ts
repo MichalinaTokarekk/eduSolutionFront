@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { Observable, throwError } from "rxjs";
+import { Lesson } from "src/app/interfaces/lesson-interface";
 
 
 @Injectable()
@@ -39,13 +40,15 @@ export class LessonScheduleService {
     return this.http.delete<string>(this.LESSON_API + '/deleteLesson/' + id);
   }
 
-  // findByClassGroupOrTeachingClassGroups(groupId: number, userId: number) {
-  //   return this.http.get(this.LESSON_API + '/findByClassGroupOrTeachingClassGroups/' + groupId + '/' + userId);
-  // }
-
-  findByClassGroupOrTeachingClassGroups(userId: number) {
-    return this.http.get(this.LESSON_API + '/findByClassGroupOrTeachingClassGroups/' + userId);
+  findLessonsForUserInClassGroups(userId: number): Observable<Lesson[]> {
+    return this.http.get<Lesson[]>(this.LESSON_API + '/findLessonsForUserInClassGroups/' + userId);
   }
+
+  // findByClassGroupIds(classGroupIds: number[]): Observable<Lesson[]> {
+  //   const queryParams = classGroupIds.join(',');
+  //   return this.http.get<Lesson[]>(`${this.LESSON_API}/findByClassGroupIds?classGroupIds=${queryParams}`);
+  // }
+  
 }
 
 
