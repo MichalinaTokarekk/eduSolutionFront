@@ -25,6 +25,7 @@ import { CalendarViewComponent } from './schedule/eventsSchedule/calendar-view.c
 import { RegisterEditComponent } from './authorization_authentication/register/register-edit/register-edit.component';
 import { OfferPageComponent } from './offer/offerPage/offerPage.component';
 import { ClassGroupsInCourseComponent } from './offer/classGroupsInCourse/classGroupsInCourse.component';
+import { EventDetailPageComponent } from './schedule/eventsSchedule/eventDetailPage/eventDetailPage.component';
 
 const routes: Routes = [
   {path: "dashboard", component: DashboardComponent, canActivate:[AuthGuard]},
@@ -52,6 +53,7 @@ const routes: Routes = [
   {path: 'register-edit',component: RegisterEditComponent},
   {path: 'offerPage',component: OfferPageComponent},
   {path: 'classGroupsInCourse/:courseId',component: ClassGroupsInCourseComponent},
+  {path: 'eventDetailPage/:eventId',component: EventDetailPageComponent},
 
   
 ];

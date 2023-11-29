@@ -39,6 +39,15 @@ export class EventsScheduleService {
     return this.http.delete<string>(this.EVENT_API + '/deleteEvent/' + id);
   }
 
+  private eventId!: string;
+  setEventId(eventId: string) {
+    this.eventId = eventId;
+  }
+
+  getEventId() {
+    return this.eventId;
+  }
+
   
 }
 

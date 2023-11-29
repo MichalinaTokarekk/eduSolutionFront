@@ -84,6 +84,7 @@ import { RegisterEditComponent } from './authorization_authentication/register/r
 import { RegisterService } from './authorization_authentication/register/register-service/register.service';
 import { OfferPageComponent } from './offer/offerPage/offerPage.component';
 import { ClassGroupsInCourseComponent } from './offer/classGroupsInCourse/classGroupsInCourse.component';
+import { EventDetailPageComponent } from './schedule/eventsSchedule/eventDetailPage/eventDetailPage.component';
 
 
 
@@ -158,7 +159,8 @@ export class MaterialModule { }
     AddEventDialogComponent,
     RegisterEditComponent,
     OfferPageComponent,
-    ClassGroupsInCourseComponent
+    ClassGroupsInCourseComponent,
+    EventDetailPageComponent
   ],
   imports: [
     BrowserModule,

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { CalendarOptions } from '@fullcalendar/core'; // useful for typechecking
+import { CalendarOptions, EventClickArg } from '@fullcalendar/core'; // useful for typechecking
 import dayGridPlugin from '@fullcalendar/daygrid';
 import { EventsScheduleService } from './eventsSchedule-service/eventsSchedule.service';
 import { MatDialog } from '@angular/material/dialog';
@@ -13,6 +13,7 @@ import { LoginService } from 'src/app/authorization_authentication/service/login
 import { Lesson } from 'src/app/interfaces/lesson-interface';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
+import { Router } from '@angular/router';
 
 
 
@@ -23,6 +24,10 @@ import interactionPlugin from '@fullcalendar/interaction';
 })
 export class CalendarViewComponent {
   calendarOptions: CalendarOptions = {
+    eventClick: (eventClickArg: EventClickArg) => {
+      const eventId = eventClickArg.event.id;
+      this.handleEventClick(eventId);
+    },
     initialView: 'dayGridMonth',
     plugins: [dayGridPlugin, timeGridPlugin, interactionPlugin],
     locale: 'pl', 
@@ -36,25 +41,35 @@ export class CalendarViewComponent {
 
 
   constructor(private eventService: EventsScheduleService, private dialog: MatDialog, private courseService: CourseService, 
-    private lessonsScheduleService: LessonScheduleService, private loginService: LoginService) {}
+    private lessonsScheduleService: LessonScheduleService, private loginService: LoginService, private router: Router) {}
 
   ngOnInit() {
-    this.loadEvents();
+    this.loadEvent();
   }
 
-  loadEvents() {
+  handleEventClick(eventId: any) {
+    // Sprawdź, czy kliknięto w nazwę zdarzenia
+    console.log('eventId:::', eventId);
+    this.router.navigate(['/eventDetailPage/', eventId]);
+  }
+  
+  
+
+  loadEvent() {
     this.eventService.getAll().subscribe(
       (events) => {
         // Mapowanie pól z backendu na oczekiwane przez FullCalendar
-        const mappedEvents = events.map((event: { name: any; eventDate: any; }) => {
+        const mappedEvents = events.map((event: {id: any; name: any; eventDate: any; }) => {
           // Przekształć datę do formatu FullCalendar
           const startDateTime = new Date(event.eventDate);
+
+          const eventType = 'event';
   
           return {
+            id: event.id,
             title: event.name,
             start: startDateTime,
-            // Dodaj inne właściwości według potrzeb
-            // color: 'green', // Przykładowe ustawienie koloru
+            extendedProps: { type: eventType },
           };
         });
   
@@ -66,6 +81,7 @@ export class CalendarViewComponent {
         console.error('Błąd podczas pobierania wydarzeń', error);
       }
     );
+    
   }
 
 
@@ -123,7 +139,7 @@ export class CalendarViewComponent {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.loadEvents();
+        this.loadEvent();
       }
     });
   }
