@@ -44,10 +44,9 @@ export class LessonScheduleService {
     return this.http.get<Lesson[]>(this.LESSON_API + '/findLessonsForUserInClassGroups/' + userId);
   }
 
-  // findByClassGroupIds(classGroupIds: number[]): Observable<Lesson[]> {
-  //   const queryParams = classGroupIds.join(',');
-  //   return this.http.get<Lesson[]>(`${this.LESSON_API}/findByClassGroupIds?classGroupIds=${queryParams}`);
-  // }
+  getAllWeekDays() {
+    return this.http.get<Lesson[]>(this.LESSON_API + '/weekDays');
+  }
   
 }
 

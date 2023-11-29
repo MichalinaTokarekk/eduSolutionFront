@@ -20,7 +20,6 @@ export class LessonsScheduleComponent implements OnInit {
   groupId: number = 0;
 
   lessons: any[] = [];
-  lessonsByDay: { [dayName: string]: any[] } = {}; // Używamy obiektu do przechowywania lekcji dla każdego dnia
 
 
   constructor(private lessonsScheduleService: LessonScheduleService, private loginService: LoginService, private classGroupService: ClassGroupService, 
@@ -33,74 +32,34 @@ export class LessonsScheduleComponent implements OnInit {
       const _finalData = JSON.parse(_atobData); 
 
 
-      if (_finalData.id.classGroup) {
-        this.groupId = _finalData.id.classGroup.id;
-      } else if (_finalData.id.teachingClassGroups && _finalData.id.teachingClassGroups.length > 0) {
-        // Szukaj teachingClassGroup przypisanego do zalogowanego użytkownika
-        const userTeachingClassGroup = _finalData.id.teachingClassGroups.find(
-          (teachingClassGroup: any) => teachingClassGroup.userId === _finalData.id
-        );
-  
-        if (userTeachingClassGroup) {
-          this.groupId = userTeachingClassGroup.groupId;
-        } else {
-          this.groupId = _finalData.id.teachingClassGroups[0].groupId;
-        }
-      }
-    
 
-
-    // this.lessonsScheduleService.findByClassGroupOrTeachingClassGroups(_finalData.id)
-    //   .subscribe((lessons: any) => {
-    //     this.lessons = lessons;
-    //     console.log('Lessons:', this.lessons);
-
-    //     this.lessons.sort((a, b) => {
-    //       const dayOrder = ['Poniedziałek', 'Wtorek', 'Środa', 'Czwartek', 'Piątek'];
-    //       const dayA = dayOrder.indexOf(a.dayName);
-    //       const dayB = dayOrder.indexOf(b.dayName);
-
-    //       if (dayA !== dayB) {
-    //         return dayA - dayB;
-    //       }
-
-    //       const timeA = new Date(`1970-01-01T${a.startLessonTime}`);
-    //       const timeB = new Date(`1970-01-01T${b.startLessonTime}`);
-    //       return timeA.getTime() - timeB.getTime();
-    //     });
-
-        
-    //   });
-
-
-      // const storedColors = localStorage.getItem('courseColors');
-      // if (storedColors) {
-      //   this.courseColors = JSON.parse(storedColors);
-      // }
-
-
-      this.classGroupService.getAll().subscribe((classGroups: any) => {
-        this.classGroups = classGroups;
-      });
-  
-      // Pobierz kursy
-      this.courseService.getAll().subscribe((courses: any) => {
-        this.courses = courses;
+      this.lessonsScheduleService.getAllWeekDays().subscribe((weekDays: any) => {
+        this.weekDays = weekDays;
       });
 
+      this.lessonsScheduleService.findLessonsForUserInClassGroups(_finalData.id).subscribe((lessons) => {
+        this.lessons = lessons;
+        console.log('Lessons:', this.lessons);
+      });
       
 
     }
 
-    getLessonByDayName(dayName: string): any[] {
-      return this.lessons.filter(lesson => lesson.dayName === dayName);
-    }
+    timeSlots: string[] = ['11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00'];
 
-    getLessonsDayNames(): string[] {
-      const uniqueYearBooks = [...new Set(this.lessons.map(lesson => lesson.dayName))];
-      // console.log('lekcje', this.lessons);
-      return uniqueYearBooks;
-    }
+isLessonInTimeSlot(lesson: any, timeSlot: string): boolean {
+  const [startHour, startMinute] = lesson.startLessonTime.split(':');
+  const [endHour, endMinute] = lesson.endLessonTime.split(':');
+  const [slotHour, slotMinute] = timeSlot.split(':');
+
+  const lessonStart = new Date(0, 0, 0, +startHour, +startMinute);
+  const lessonEnd = new Date(0, 0, 0, +endHour, +endMinute);
+  const slotTime = new Date(0, 0, 0, +slotHour, +slotMinute);
+
+  return lessonStart <= slotTime && slotTime < lessonEnd;
+}
+
+
 
 
 
@@ -169,6 +128,7 @@ export class LessonsScheduleComponent implements OnInit {
 
     classGroups: any[] = [];
     courses: any[] = [];
+    weekDays: any[] = [];
 
     openEditLessonDialog(lesson: any): void {
       const dialogRef = this.dialog.open(LessonDialogComponent, {

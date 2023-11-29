@@ -1,168 +1,56 @@
 
 
- <!-- <div *ngIf="lessons && lessons.length > 0; else noLessons">
-    <h2>Schedule for {{ groupId }}</h2>
-    <ul>
-      <li *ngFor="let lesson of lessons">
-        {{ lesson.startLessonTime }} - {{ lesson.endLessonTime }}: {{ lesson.course.name }} ({{ lesson.classGroup.name }})
-      </li>
-    </ul>
-  </div>
-  
-  <ng-template #noLessons>
-    <p>No lessons found for the selected semester.</p>
-  </ng-template>  -->
-
- 
-  
-  <!-- <table>
-    <thead>
-      <tr>
-        <th></th>
-        <th *ngFor="let dayName of getLessonsDayNames()">{{ dayName }}</th>
-      </tr>
-    </thead>
-    <tfoot>
-      <tr>
-        <td></td>
-        <td *ngFor="let dayName of getLessonsDayNames()">
-          <div *ngFor="let lesson of getLessonByDayName(dayName)">
-            <ng-container *ngIf="lesson.startLessonTime && lesson.endLessonTime">
-              {{ lesson.startLessonTime }} {{ lesson.endLessonTime }}
-              {{ lesson.course.name }} ({{ lesson.classGroup.name }})
-            </ng-container>
-          </div>
-        </td>
-      </tr>
-    </tfoot>
-  </table> -->
-  
-
-<!-- W pliku lessonsSchedule.component.html -->
-<!-- <table>
-  <thead>
-    <tr>
-      <th></th>
-      <th *ngFor="let dayName of getLessonsDayNames()">{{ dayName }}</th>
-    </tr>
-  </thead>
-  <tfoot>
-    <tr>
-      <td></td>
-      <td *ngFor="let dayName of getLessonsDayNames()">
-        <ng-container *ngFor="let lesson of getLessonByDayName(dayName)">
-          <div *ngIf="lesson.startLessonTime && lesson.endLessonTime">
-            <div *ngIf="isCourseGrouped(lesson.classGroup.id)">
-              {{ lesson.startLessonTime }} {{ lesson.endLessonTime }}
-            </div>
-            <div [style.background-color]="getCourseColor(lesson.classGroup.id)">
-              {{ lesson.course.name }} 
-              ({{ lesson.classGroup.name }})
-            </div>
-          </div>
-        </ng-container>
-      </td>
-    </tr>
-  </tfoot>
-</table> -->
-
 <button (click)="openAddLessonDetailDialog()">Dodaj nową lekcję</button><br><br>
+
+<!-- <div *ngFor="let day of weekDays">
+  <h3>{{ day }}</h3>
+  <ul>
+    <li *ngFor="let lesson of lessons">
+      <ng-container *ngIf="lesson.dayName.toLowerCase() === day.toLowerCase()">
+        {{ lesson.name }} - {{ lesson.startLessonTime }} - {{ lesson.endLessonTime }}
+      </ng-container>
+    </li>
+  </ul>
+</div> -->
+
 
 <table>
   <thead>
     <tr>
-      <th [attr.colspan]="getLessonsDayNames().length + 1">Plan lekcji dla {{ getSemesterName() }} </th>
-    </tr>
-    <tr>
       <th></th>
-      <th *ngFor="let dayName of getLessonsDayNames()">{{ dayName }}</th>
+      <th *ngFor="let day of weekDays">{{ day }}</th>
     </tr>
   </thead>
-  <tfoot>
-    <tr>
-      <td></td>
-      <td *ngFor="let dayName of getLessonsDayNames()">
-        <ng-container *ngFor="let lesson of getLessonByDayName(dayName)">
-          <div *ngIf="lesson.startLessonTime && lesson.endLessonTime">
-            <div *ngIf="isCourseGrouped(lesson.classGroup.id)">
-              <!-- {{ lesson.startLessonTime }} {{ lesson.endLessonTime }} -->
-              <span class="time">{{ lesson.startLessonTime + '-'}}</span> 
-              <span class="time">{{ lesson.endLessonTime }}</span> 
-            </div>
-            <div [style.background-color]="getCourseColor(lesson.classGroup.id)">
-              <!-- {{ lesson.course.name }} ({{ lesson.classGroup.name }}) -->
-              <!-- <a (click)="openEditLessonDialog(lesson)">{{ lesson.course.name }} ({{ lesson.classGroup.name }})</a> -->
-              <a (click)="openEditLessonDialog(lesson)">
-              <span class="course-name">{{ lesson.course.name }}</span> 
-              (<span class="class-group-name">{{ lesson.classGroup.name }}</span>)
-            </a>
-            </div>
-          </div>
-        </ng-container>
-      </td>
-    </tr>
-  </tfoot>
+  <tbody>
+    <ng-container *ngFor="let timeSlot of timeSlots">
+      <tr>
+        <td>{{ timeSlot }}</td>
+        <td *ngFor="let day of weekDays">
+          <ng-container *ngFor="let lesson of lessons">
+            <ng-container *ngIf="lesson.dayName.toLowerCase() === day.toLowerCase() && isLessonInTimeSlot(lesson, timeSlot)">
+              {{ lesson.name }} {{ lesson.startLessonTime }} - {{ lesson.endLessonTime }}
+            </ng-container>
+          </ng-container>
+        </td>
+      </tr>
+    </ng-container>
+  </tbody>
 </table>
 
 
 
-  
-<!-- <table>
-  <thead>
-    <tr>
-      <th></th>
-      <th *ngFor="let dayName of getLessonsDayNames()">{{ dayName }}</th>
-    </tr>
-  </thead>
-  <tfoot>
-    <tr>
-      <td></td>
-      <td *ngFor="let dayName of getLessonsDayNames()">
-        <ng-container *ngFor="let lesson of getLessonByDayName(dayName)">
-          <div *ngIf="lesson.startLessonTime && lesson.endLessonTime">
-            <div *ngIf="isCourseGrouped(lesson.course.name)">
-              {{ lesson.startLessonTime }} {{ lesson.endLessonTime }}
-            </div>
-            <div [style.background-color]="isCourseGrouped(lesson.course.name) ? getCourseColor(lesson.course.name) : ''">
-              {{ lesson.course.name }} ({{ lesson.classGroup.name }})
-            </div>
-          </div>
-        </ng-container>
-      </td>
-    </tr>
-  </tfoot>
-</table> -->
-
-  
-  
-  
-  
-  
-  
-  
 
 
-  <!-- --------------------------------------------------------------------------------------------------------------------------------------------------
 
 
-<ng-container *ngFor="let dayName of getLessonsDayNames()">
-  <h2>{{ dayName }}</h2>
+
+
+
+
+
+
+
   
-  <div *ngFor="let hour of getHoursArray()">
-    <div>{{ hour }}:00</div>
-  
-    <div *ngFor="let lesson of getLessonsByDayAndHour(dayName, hour)">
-      <a *ngIf="lesson.startLessonTime && lesson.endLessonTime">
-        {{ lesson.startLessonTime | date: 'HH:mm' }} - {{ lesson.endLessonTime | date: 'HH:mm' }} 
-        {{ getCourseName(lesson.course) }} ({{ getClassGroupName(lesson.classGroup) }})
-
-      </a>
-    </div>
-
-    <div *ngIf="!getLessonsByDayAndHour(dayName, hour).length">&nbsp;</div>
-  </div>
-</ng-container> -->
-
   
   
 

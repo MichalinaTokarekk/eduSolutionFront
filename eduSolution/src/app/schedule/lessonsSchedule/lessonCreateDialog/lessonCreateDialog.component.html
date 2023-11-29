@@ -16,13 +16,6 @@
     <label for="endLessonTime">End Lesson Time:</label>
     <input id="endLessonTime" formControlName="endLessonTime" />
   </div>
-
-  <div>
-    <label for="course">Kurs:</label>
-    <select id="course" formControlName="courseId">
-      <option *ngFor="let course of courses" [value]="+course.id">{{ course.name }}</option>
-    </select>
-  </div>
   
   <div>
     <label for="classGroup">Grupa lekcyjna:</label>
