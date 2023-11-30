@@ -31,9 +31,10 @@ export class EventsScheduleService {
 
   update(lesson: any): Observable<any> {
     let result: Observable<Object>;
-    result = this.http.put(this.EVENT_API + '/updateEvent', lesson);
+    result = this.http.put(this.EVENT_API + '/updateEvent', lesson, { headers: { 'Content-Type': 'application/json' } });
     return result;
   }
+  
 
   remove (id: string):Observable<string> {
     return this.http.delete<string>(this.EVENT_API + '/deleteEvent/' + id);

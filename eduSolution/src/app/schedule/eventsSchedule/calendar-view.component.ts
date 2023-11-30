@@ -47,11 +47,60 @@ export class CalendarViewComponent {
     this.loadEvent();
   }
 
+  // handleEventClick(eventId: any) {
+  //   // Sprawdź, czy kliknięto w nazwę zdarzenia
+  //   console.log('eventId:::', eventId);
+  //   this.router.navigate(['/eventDetailPage/', eventId]);
+  // }
+
+  // handleEventClick(eventId: any) {
+  //   // Sprawdź, czy kliknięto w nazwę zdarzenia
+  //   console.log('eventId:::', eventId);
+  
+  //   // Pobierz kliknięty event na podstawie jego ID
+  //   const clickedEvent = (this.calendarOptions.events as any).find((event: any) => event.id.toString() === eventId.toString());
+  
+  //   // Loguj strukturę klikniętego eventu
+  //   console.log('clickedEvent:', clickedEvent);
+  
+  //   // Sprawdź, czy to jest event
+  //   if (clickedEvent && clickedEvent.extendedProps && clickedEvent.extendedProps.type === 'event') {
+  //     // Jeśli to jest event, przekieruj do szczegółów wydarzenia
+  //     this.router.navigate(['/eventDetailPage/', eventId]);
+  //   } else {
+  //     console.log('To nie jest event lub event jest undefined.');
+  //     // Możesz obsłużyć inny przypadek, na przykład, jeśli kliknięto lekcję lub coś innego
+  //   }
+  // }
+
   handleEventClick(eventId: any) {
     // Sprawdź, czy kliknięto w nazwę zdarzenia
     console.log('eventId:::', eventId);
-    this.router.navigate(['/eventDetailPage/', eventId]);
+  
+    // Pobierz kliknięty event na podstawie jego ID
+    const clickedEvent = (this.calendarOptions.events as any).find((event: any) => {
+      return event.id && event.id.toString() === eventId.toString();
+    });
+  
+    // Loguj strukturę klikniętego eventu
+    console.log('clickedEvent:', clickedEvent);
+  
+    // Sprawdź, czy to jest event
+    if (clickedEvent && clickedEvent.extendedProps && clickedEvent.extendedProps.type === 'event') {
+      // Jeśli to jest event, przekieruj do szczegółów wydarzenia
+      this.router.navigate(['/eventDetailPage/', eventId]);
+    } else {
+      console.log('To nie jest event lub event jest undefined.');
+      // Możesz obsłużyć inny przypadek, na przykład, jeśli kliknięto lekcję lub coś innego
+    }
   }
+  
+  
+  
+  
+  
+  
+  
   
   
 
