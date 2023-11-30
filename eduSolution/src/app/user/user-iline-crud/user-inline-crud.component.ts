@@ -196,13 +196,11 @@ export class UserInlineCrudComponent implements OnInit {
       // Przygotuj dane do zapisu
       const userData = { ...userObj };
     
-      // Wybierz odpowiedni serwis w zależności od operacji
       const saveService = userObj.id ? this.userService : this.registerService;
     
       saveService.save(userData)
         .subscribe(
           (data) => {
-            // Obsłuż dane po udanej aktualizacji
             console.log('Aktualizacja zakończona sukcesem:', data);
             userObj.isEdit = false;
           },

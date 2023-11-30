@@ -55,7 +55,9 @@
           <td *ngFor="let day of weekDays">
             <ng-container *ngFor="let lesson of entry.value">
               <ng-container *ngIf="lesson.dayName.toLowerCase() === day.toLowerCase() && isLessonInTimeSlot(lesson, timeSlot)">
-                {{ lesson.name }} {{ lesson.startLessonTime }} - {{ lesson.endLessonTime }}
+                <div (click)="openEditLessonDialog(lesson)">
+                  {{ lesson.name }} {{ lesson.startLessonTime }} - {{ lesson.endLessonTime }}
+                </div>
               </ng-container>
             </ng-container>
           </td>

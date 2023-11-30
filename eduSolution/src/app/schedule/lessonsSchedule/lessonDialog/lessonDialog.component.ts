@@ -2,6 +2,7 @@ import { Component, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { LessonScheduleService } from '../lessonsSchedule-service/lessonsSchedule.service';
+import { ClassGroupService } from 'src/app/classGroup/classGroup-service/classGroup.service';
 
 @Component({
   selector: 'app-lesson-dialog',
@@ -11,31 +12,40 @@ import { LessonScheduleService } from '../lessonsSchedule-service/lessonsSchedul
 export class LessonDialogComponent {
   editedLesson: any;
   editedLessonForm: FormGroup;
-  courses: any[] = [];
   classGroups: any[] = [];
 
   constructor(
     public dialogRef: MatDialogRef<LessonDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private formBuilder: FormBuilder,
-    private lessonService: LessonScheduleService
+    private lessonService: LessonScheduleService, private classGroupService: ClassGroupService
   ) {
     // Sprawdź, czy data.lesson istnieje, a jeśli nie, zainicjalizuj pusty obiekt
     this.editedLesson = data.lesson || {};
     
+    this.loadData(); 
     this.editedLessonForm = this.formBuilder.group({
+      name: [this.editedLesson?.name || '', Validators.required],
       dayName: [this.editedLesson?.dayName || '', Validators.required],
       startLessonTime: [this.editedLesson?.startLessonTime || '', Validators.required],
       endLessonTime: [this.editedLesson?.endLessonTime || '', Validators.required],
-      course: [data.lesson?.course ? data.lesson.course.id : null],
-      classGroup: [data.lesson?.classGroup ? data.lesson.classGroup.id : null],
+      dates: [this.editedLesson?.dates || '', Validators.required],
+      classGroup: [this.editedLesson?.classGroup ? this.editedLesson.classGroup.id : null],
     });
 
-    this.courses = data.courses || [];
-    this.classGroups = data.classGroups || [];
+    
   }
 
-
+  loadData(): void {
+    this.classGroupService.getAll().subscribe(
+      (data) => {
+        this.classGroups = data || [];
+      },
+      (error) => {
+        console.error('Błąd podczas pobierania danych z classGroupService:', error);
+      }
+    );
+  }
 
   onNoClick(): void {
     this.dialogRef.close();
@@ -64,5 +74,18 @@ export class LessonDialogComponent {
     }
     location.reload();
 }
+
+// Dodaj do klasy LessonDialogComponent
+updateDates(event: any): void {
+  const datesString = this.editedLessonForm.get('dates')?.value;
+  const datesArray = datesString.split(',').map((date: string) => date.trim());
+
+  this.editedLessonForm.patchValue({
+    dates: datesArray
+  });
+}
+
+
+
 
 }

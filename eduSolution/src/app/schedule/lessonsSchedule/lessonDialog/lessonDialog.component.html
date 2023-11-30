@@ -21,29 +21,34 @@
 
 <form [formGroup]="editedLessonForm">
   <div>
-    <label for="dayName">Day Name:</label>
+    <label for="dayName">Nazwa:</label>
+    <input id="dayName" formControlName="dayName" readonly/>
+  </div>
+  <div>
+    <label for="dayName">Dzień:</label>
     <input id="dayName" formControlName="dayName" readonly/>
   </div>
 
   <div>
-    <label for="startLessonTime">Start Lesson Time:</label>
+    <label for="startLessonTime">Godzina rozpoczęcia:</label>
     <input id="startLessonTime" formControlName="startLessonTime" />
   </div>
 
   <div>
-    <label for="endLessonTime">End Lesson Time:</label>
+    <label for="endLessonTime">Godzina zakończenia:</label>
     <input id="endLessonTime" formControlName="endLessonTime" />
   </div>
 
-  <label for="course">Kurs:</label>
-  <select id="course" formControlName="course">
-    <option *ngFor="let course of courses" [value]="course.id">{{ course.name }}</option>
-  </select>
+  <div>
+    <label for="dates">Daty:</label>
+    <input id="dates" formControlName="dates" (change)="updateDates($event)" />
+  </div>
   
-  <label for="classGroup">Grupa lekcyjna:</label>
+  
+  <!-- <label for="classGroup">Grupa lekcyjna:</label>
   <select id="classGroup" formControlName="classGroup">
     <option *ngFor="let classGroup of classGroups" [value]="classGroup.id">{{ classGroup.name }}</option>
-  </select>
+  </select> -->
   
 
   <button mat-button (click)="onNoClick()">Anuluj</button>

@@ -70,7 +70,7 @@ export class LessonsScheduleComponent implements OnInit {
 
     }
     timeSlot: string = '';
-    timeSlots: string[] = ['11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00'];
+    timeSlots: string[] = ['09:00','10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00'];
     // timeSlots: string[] = ['11:00', '11:30', '12:00', '12:30', '13:00', '13:30', '14:00', '14:30', '15:00', '15:30', '16:00', '16:30', '17:00', '17:30', '18:00', '18:30', '19:00'];
 
 
@@ -83,11 +83,10 @@ isLessonInTimeSlot(lesson: any, timeSlot: string): boolean {
   const lessonEnd = new Date(0, 0, 0, +endHour, +endMinute);
   const slotTime = new Date(0, 0, 0, +slotHour, +slotMinute);
 
-  return lessonStart <= slotTime && slotTime < lessonEnd;
+  const isStartMatching = lessonStart <= slotTime && slotTime < lessonEnd && lessonStart.getHours() === slotTime.getHours() && lessonStart.getMinutes() === slotTime.getMinutes();
+
+  return isStartMatching;
 }
-
-
-
 
 
 
@@ -96,10 +95,6 @@ isLessonInTimeSlot(lesson: any, timeSlot: string): boolean {
 
       
     courseColors: { [classGroupId: number]: string } = {};
-    // courseColors: { [classGroupId: number]: string } = {
-    //   1: '#000000', 
-    //   2: '#ffffff', 
-    // };
 
     getCourseColor(classGroupId: number): string {
       // Sprawdź, czy kolor jest już przypisany do danej classGroup
@@ -165,10 +160,8 @@ isLessonInTimeSlot(lesson: any, timeSlot: string): boolean {
   
       dialogRef.afterClosed().subscribe((result) => {
         if (result) {
-          // Tutaj możesz obsługiwać zapisane zmiany
           console.log('Zapisano zmiany:', result);
   
-          // Aktualizuj lekcję w tablicy lessons po zapisaniu zmian
           const index = this.lessons.findIndex((l) => l.id === result.id);
           if (index !== -1) {
             this.lessons[index] = result;
@@ -185,13 +178,9 @@ isLessonInTimeSlot(lesson: any, timeSlot: string): boolean {
     
       dialogRef.afterClosed().subscribe((result) => {
         if (result) {
-          // Tutaj możesz obsługiwać zapisane zmiany
           console.log('Zapisano nowe szczegóły lekcji:', result);
         }
       });
     }
-    
-    
-    
     
   }

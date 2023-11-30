@@ -3,19 +3,30 @@
 <div class="container">
 <form [formGroup]="lessonForm">
   <div>
-    <label for="dayName">Day Name:</label>
+    <label for="name">Nazwa:</label>
+    <input id="name" formControlName="name"/>
+  </div>
+
+  <div>
+    <label for="dayName">Dzień:</label>
     <input id="dayName" formControlName="dayName"/>
   </div>
 
   <div>
-    <label for="startLessonTime">Start Lesson Time:</label>
+    <label for="startLessonTime">Godzina rozpoczęcia:</label>
     <input id="startLessonTime" formControlName="startLessonTime" />
   </div>
 
   <div>
-    <label for="endLessonTime">End Lesson Time:</label>
+    <label for="endLessonTime">Godzina zakończenia:</label>
     <input id="endLessonTime" formControlName="endLessonTime" />
   </div>
+
+  <div>
+    <label for="dates">Daty:</label>
+    <input id="dates" formControlName="dates" (change)="updateDates($event)" />
+  </div>
+  
   
   <div>
     <label for="classGroup">Grupa lekcyjna:</label>
