@@ -13,7 +13,7 @@
   </ul>
 </div> -->
 
-
+<!-- 
 <table>
   <thead>
     <tr>
@@ -35,7 +35,38 @@
       </tr>
     </ng-container>
   </tbody>
-</table>
+</table> -->
+
+
+
+<ng-container *ngFor="let entry of lessonsByClassGroup | keyvalue">
+  <h2>{{ entry.key }}</h2>
+  <table>
+    <thead>
+      <tr>
+        <th></th>
+        <th *ngFor="let day of weekDays">{{ day }}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <ng-container *ngFor="let timeSlot of timeSlots">
+        <tr>
+          <td>{{ timeSlot }}</td>
+          <td *ngFor="let day of weekDays">
+            <ng-container *ngFor="let lesson of entry.value">
+              <ng-container *ngIf="lesson.dayName.toLowerCase() === day.toLowerCase() && isLessonInTimeSlot(lesson, timeSlot)">
+                {{ lesson.name }} {{ lesson.startLessonTime }} - {{ lesson.endLessonTime }}
+              </ng-container>
+            </ng-container>
+          </td>
+        </tr>
+      </ng-container>
+    </tbody>
+  </table>
+</ng-container>
+
+
+
 
 
 

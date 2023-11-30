@@ -20,6 +20,7 @@ export class LessonsScheduleComponent implements OnInit {
   groupId: number = 0;
 
   lessons: any[] = [];
+  lessonsByClassGroup!: Map<string, any[]>;
 
 
   constructor(private lessonsScheduleService: LessonScheduleService, private loginService: LoginService, private classGroupService: ClassGroupService, 
@@ -30,6 +31,7 @@ export class LessonsScheduleComponent implements OnInit {
       const _token = token.split('.')[1];
       const _atobData = atob(_token);
       const _finalData = JSON.parse(_atobData); 
+      this.lessonsByClassGroup = new Map<string, any[]>(); // Mapa do przechowywania lekcji dla każdej klasy
 
 
 
@@ -40,12 +42,37 @@ export class LessonsScheduleComponent implements OnInit {
       this.lessonsScheduleService.findLessonsForUserInClassGroups(_finalData.id).subscribe((lessons) => {
         this.lessons = lessons;
         console.log('Lessons:', this.lessons);
+
+        this.lessons.forEach((lesson: any) => {
+          const classGroup = lesson.classGroupName || 'Unknown';
+        
+          if (!lesson.classGroupName) {
+            console.log('Lesson with undefined classGroupName:', lesson);
+          }
+        
+          if (this.lessonsByClassGroup.has(classGroup)) {
+            const classLessons = this.lessonsByClassGroup.get(classGroup);
+            if (classLessons) {
+              classLessons.push(lesson);
+            }
+          } else {
+            this.lessonsByClassGroup.set(classGroup, [lesson]);
+          }
+        });
+        
+        console.log('Lessons with undefined classGroupName:', this.lessons.filter(lesson => !lesson.classGroupName));
+        console.log('Lessons:', this.lessonsByClassGroup);
+        
+        
+        
       });
       
 
     }
-
+    timeSlot: string = '';
     timeSlots: string[] = ['11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00'];
+    // timeSlots: string[] = ['11:00', '11:30', '12:00', '12:30', '13:00', '13:30', '14:00', '14:30', '15:00', '15:30', '16:00', '16:30', '17:00', '17:30', '18:00', '18:30', '19:00'];
+
 
 isLessonInTimeSlot(lesson: any, timeSlot: string): boolean {
   const [startHour, startMinute] = lesson.startLessonTime.split(':');

@@ -38,6 +38,25 @@ a:hover {
   a:hover .class-group-name {
     font-weight:initial; 
   }
+
+  .schedule {
+    display: grid;
+    grid-template-columns: auto repeat(7, 1fr); /* Pierwsza kolumna dla czasu, reszta dla dni */
+    gap: 5px;
+  }
+
+  .time-slot {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+  }
+
+  .lesson {
+    background-color: #a0d8ff; /* Kolor tła dla lekcji */
+    padding: 5px;
+    margin: 2px;
+    border-radius: 5px;
+  }
   
 
 
