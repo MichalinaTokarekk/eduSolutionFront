@@ -183,18 +183,13 @@ export class UserInlineCrudComponent implements OnInit {
       console.log('Wartość yearBook przed zapisem:', userObj.yearBook);
     
       // Jeśli nowy użytkownik, ustaw domyślne hasło
-      if (!userObj.id) {
+      // if (!userObj.id) {
         userObj.password = '1234';
-      }
+      // }
     
       if (!userObj.firstName || userObj.firstName.trim() === '') {
         // Jeśli pole "name" jest puste, nie wykonuj aktualizacji
         return;
-      }
-    
-      // Jeśli email jest pusty, pomiń to pole podczas aktualizacji
-      if (userObj.email === '') {
-        delete userObj.email;
       }
       
     
