@@ -19,6 +19,7 @@
                     <th (click)="onNameSort()">Limit studentów</th>
                     <th (click)="onNameSort()">Rok</th>
                     <th (click)="onNameSort()">Adres</th>
+                    <th (click)="onNameSort()">Status</th>
                     <th (click)="onNameSort()">Tryb</th>
                     <th (click)="onNameSort()">Semestr</th>
                     <th (click)="onNameSort()">Kurs</th>
@@ -50,7 +51,7 @@
                             <div class="input-container">
                                 <input type="text" class="form-control" [(ngModel)]="course.description" [ngClass]="{'is-invalid': validateCourseName(course.description) !== ''}">
                                 <div class="text-danger error-message" *ngIf="!course.description">
-                                    {{validateCourseName(course.description)}}
+                                    {{course.description}}
                                 </div>
                             </div>
                         </div>
@@ -113,6 +114,22 @@
                     <td>
                         <div *ngIf="course.isEdit" class="form-group">
                             <div class="input-container">
+                                <input type="text" class="form-control" [(ngModel)]="course.classGroupStatus" [ngClass]="{'is-invalid': validateCourseName(course.classGroupStatus) !== ''}">
+                                <div class="text-danger error-message" *ngIf="!course.classGroupStatus">
+                                    {{validateCourseName(course.classGroupStatus)}}
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div *ngIf="!course.isEdit">
+                            {{course.classGroupStatus}}
+                        </div>
+                     
+                    </td>
+
+                    <td>
+                        <div *ngIf="course.isEdit" class="form-group">
+                            <div class="input-container">
                                 <input type="text" class="form-control" [(ngModel)]="course.mode" [ngClass]="{'is-invalid': validateCourseName(course.mode) !== ''}">
                                 <div class="text-danger error-message" *ngIf="!course.mode">
                                     {{validateCourseName(course.mode)}}
@@ -126,7 +143,7 @@
                      
                     </td>
 
-                    <td>
+                    <!-- <td>
                         <div *ngIf="course.isEdit" class="form-group">
                             <div class="input-container">
                                 <input type="text" class="form-control" [(ngModel)]="course.semester.name" [ngClass]="{'is-invalid': validateCourseName(course.semester.name) !== ''}">
@@ -156,7 +173,45 @@
                             {{course.course.name}} {{course.course.difficultyLevel}}
                         </div>
                      
-                    </td>
+                    </td> -->
+
+                    <td>
+                        <div *ngIf="course.isEdit" class="form-group">
+                          <div class="input-container">
+                            <mat-select [ngModel]="course.semester" (ngModelChange)="course.semester = $event" [ngClass]="{'is-invalid': !course.semester}">
+                                <mat-option *ngFor="let semester of semesters" [value]="semester">{{semester.name}}</mat-option>
+                              </mat-select>
+                              
+                            <div class="text-danger error-message" *ngIf="!course.semester?.name">
+                              {{course.semester?.name}}
+                            </div>
+                          </div>
+                        </div>
+                        
+                        <div *ngIf="!course.isEdit">
+                          {{course.semester?.name}}
+                        </div>
+                      </td>
+                      
+                      
+                      <td>
+                        <div *ngIf="course.isEdit" class="form-group">
+                          <div class="input-container">
+                            <mat-select [ngModel]="course.course" (ngModelChange)="course.course = $event" [ngClass]="{'is-invalid': !course.course}">
+                                <mat-option *ngFor="let availableCourse of availableCourses" [value]="availableCourse">{{availableCourse.name}}</mat-option>
+                              </mat-select>                              
+                            <div class="text-danger error-message" *ngIf="!course.course?.name">
+                              {{course.course?.name}}
+                            </div>
+                          </div>
+                        </div>
+                        
+                        <div *ngIf="!course.isEdit">
+                          {{course.course?.name}} {{course.course?.difficultyLevel}}
+                        </div>
+                      </td>
+                      
+                      
 
 
                     <td class="text-center"> 

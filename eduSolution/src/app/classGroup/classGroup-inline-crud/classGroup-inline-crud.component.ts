@@ -7,6 +7,9 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { CourseService } from 'src/app/course/course-service/course.service';
 import { ClassGroupService } from '../classGroup-service/classGroup.service';
+import { SemesterService } from 'src/app/semester/semester-service/semester.service';
+import { Semester } from 'src/app/interfaces/semester-interface';
+import { Course } from 'src/app/interfaces/course-interface';
 
 @Component({
   selector: 'app-basic-inline-editing',
@@ -19,11 +22,16 @@ export class ClassGroupInlineCrudComponent implements OnInit {
   oldUserObj: any;
   searchText: string ='';
   isEditing = false;
-  constructor(private http: HttpClient, private classGroupService: ClassGroupService, private router: Router, private dialog: MatDialog, private snackBar: MatSnackBar){
+  semesters!: Semester[];
+  availableCourses!: Course[];
+  constructor(private http: HttpClient, private classGroupService: ClassGroupService, private router: Router, private dialog: MatDialog, private snackBar: MatSnackBar,
+    private semesterService: SemesterService, private courseService: CourseService){
 
   }
   ngOnInit(): void {
     this.loadList();
+    this.loadSemesters();
+    this.loadAvailableCourses();
   }
   onNameSort() {
     const filteredData =  this.filteredClassGroups.sort((a: any, b: any) =>
@@ -88,53 +96,30 @@ export class ClassGroupInlineCrudComponent implements OnInit {
     }
 }
 
-    onUpdate(userObj: any) {
-        // write api call and send obj
-      if (!userObj.name || userObj.name.trim() === '') {
-        // Jeśli pole "name" jest puste, nie wykonuj aktualizacji
-        return;
-      }
-      this.classGroupService.save(userObj)
-          .subscribe(
-            (data) => {
-                // Obsłuż dane po udanej aktualizacji
-                console.log('Aktualizacja zakończona sukcesem:', data);
-                userObj.isEdit = false;
-
-            },
-            (error) => {
-                console.error('Błąd podczas aktualizacji:', error);
-            }
-          );
-        
+  onUpdate(userObj: any) {
+      // write api call and send obj
+    if (!userObj.name || userObj.name.trim() === '') {
+      // Jeśli pole "name" jest puste, nie wykonuj aktualizacji
+      return;
     }
+    this.classGroupService.save(userObj)
+        .subscribe(
+          (data) => {
+              // Obsłuż dane po udanej aktualizacji
+              console.log('Aktualizacja zakończona sukcesem:', data);
+              userObj.isEdit = false;
 
-    // onUpdate(userObj: any) {
-    //     // Wywołanie metody save z CourseService do aktualizacji danych lub zapisania nowego kursu
-    //     this.courseService.save(userObj).subscribe(
-    //       (data) => {
-    //         // Obsłuż dane po udanej aktualizacji lub dodaniu nowego kursu
-    //         console.log('Aktualizacja/zapis zakończony sukcesem:', data);
-    
-    //         // Jeśli serwer zwrócił nowy identyfikator (typowe dla dodawania), zaktualizuj go w kursie
-    //         if (data.id) {
-    //           userObj.id = data.id;
-    //         }
-    
-    //         // Jeśli obiekt nie ma identyfikatora, oznacza to, że to nowy kurs, dodaj go do listy
-    //         if (!userObj.id) {
-    //           this.courseArray.unshift(userObj);
-    //         }
-    
-    //         // Zakończ tryb edycji
-    //         userObj.isEdit = false;
-    //       },
-    //       (error) => {
-    //         // Obsłuż błąd
-    //         console.error('Błąd podczas aktualizacji/zapisu:', error);
-    //       }
-    //     );
-    //   }
+          },
+          (error) => {
+              console.error('Błąd podczas aktualizacji:', error);
+          }
+        );
+      
+  }
+
+  
+  
+  
     
 
 
@@ -151,23 +136,6 @@ export class ClassGroupInlineCrudComponent implements OnInit {
 
   }
   }
-
-//    onDelete(obj: any) {
-//     this.courseService.remove(obj.id)
-//       .subscribe(
-//         () => {
-//         //   Po udanym usunięciu, usuń kurs z tablicy
-//           const index = this.courseArray.indexOf(obj);
-//           if (index !== -1) {
-//             this.courseArray.splice(index, 1);
-//           }
-          
-//         },
-//         (error) => {
-//           console.error('Błąd podczas usuwania kursu:', error);
-//         }
-//       );
-//   }
 
 
 onDelete(obj: any) {
@@ -210,6 +178,25 @@ onDelete(obj: any) {
         this.isNameEmpty = false;
         return "";
     }
-}
+  }
+
+  loadSemesters() {
+    this.semesterService.getAll().subscribe((semesters: Semester[]) => {
+      console.log('Semesters:', semesters);
+      this.semesters = semesters; // bez używania .map()
+    });
+  }
+  
+
+  loadAvailableCourses() {
+    this.courseService.getAll().subscribe((courses: Course[]) => {
+      this.availableCourses = courses;
+    });
+  }
+  
+
+
+  
+  
 
 }

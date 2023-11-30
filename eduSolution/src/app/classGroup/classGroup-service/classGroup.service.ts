@@ -30,6 +30,12 @@ export class ClassGroupService {
     return result;
   }
 
+  update(classGroup: any): Observable<any> {
+    let result: Observable<Object>;
+    result = this.http.put(this.CLASSGROUP_API + '/updateGroup', classGroup);
+    return result;
+  }
+
   remove (id: string):Observable<string> {
     return this.http.delete<string>(this.CLASSGROUP_API + '/deleteGroup/' + id);
   }
