@@ -173,10 +173,9 @@
                      
                     </td>
 
-                   <td>
+                   <!-- <td>
                     <div *ngIf="user.isEdit" class="form-group">
                         <div class="input-container">
-                            <!-- Użyj osobnej zmiennej do edycji grup -->
                             <input type="text" class="form-control" [(ngModel)]="editedUserClassGroups"
                                 [ngClass]="{'is-invalid': validateUser(editedUserClassGroups) !== ''}">
                             <div class="text-danger error-message" *ngIf="!editedUserClassGroups">
@@ -186,12 +185,33 @@
                     </div>
                     
                     <div *ngIf="!user.isEdit">
-                        <!-- Użyj oryginalnej zmiennej do wyświetlania grup -->
                         <div *ngFor="let group of user.classGroups">
                             {{ group.name }}
                         </div>
                     </div>
-                </td>
+                </td> -->
+
+                <td>
+                    <div *ngIf="user.isEdit" class="form-group">
+                      <mat-form-field appearance="fill" class="input-container">
+                        <mat-label>Wybierz grupy</mat-label>
+                        <mat-select multiple [(ngModel)]="user.classGroups" name="classGroups">
+                          <mat-option *ngFor="let group of allClassGroups" [value]="group.id">{{ group.name }}</mat-option>
+                        </mat-select>
+                        <div class="text-danger error-message" *ngIf="validateUser(user.classGroups) !== ''">
+                          {{ validateUser(user.classGroups) }}
+                        </div>
+                      </mat-form-field>
+                    </div>
+                  
+                    <div *ngIf="!user.isEdit">
+                      <div *ngFor="let group of user.classGroups">
+                        {{ group.name }}
+                      </div>
+                    </div>
+                  </td>
+                  
+                  
 
                     
                     

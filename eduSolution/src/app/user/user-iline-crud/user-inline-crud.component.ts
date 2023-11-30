@@ -9,6 +9,8 @@ import { CourseService } from 'src/app/course/course-service/course.service';
 import { UserService } from '../user-service/user.service';
 import { forkJoin } from 'rxjs';
 import { LoginService } from 'src/app/authorization_authentication/service/login.service';
+import { ClassGroupService } from 'src/app/classGroup/classGroup-service/classGroup.service';
+import { RegisterService } from 'src/app/authorization_authentication/register/register-service/register.service';
 
 @Component({
   selector: 'app-basic-inline-editing',
@@ -23,8 +25,10 @@ export class UserInlineCrudComponent implements OnInit {
   isEditing = false;
   classGroups: any;
   editedUserClassGroups: string = '';
+  allClassGroups: any[] = [];
+  selectedClassGroups: number[] = [];
   constructor(private http: HttpClient, private userService: UserService, private router: Router, private dialog: MatDialog, private snackBar: MatSnackBar,
-    private loginService: LoginService){
+    private loginService: LoginService, private classGroupService: ClassGroupService, private registerService: RegisterService){
 
   }
   ngOnInit(): void {
@@ -35,10 +39,16 @@ export class UserInlineCrudComponent implements OnInit {
     const _finalData = JSON.parse(_atobData);
 
     // Zakładam, że groupIds to tablica stringów
-this.userService.findClassGroupsById(_finalData.id).subscribe((groupIds: string[]) => {
-  this.classGroups = groupIds;
-});
+    this.userService.findClassGroupsById(_finalData.id).subscribe((groupIds: string[]) => {
+      this.classGroups = groupIds;
+    });
 
+    this.classGroupService.getAll().subscribe(groups => {
+      this.allClassGroups = groups;
+    });
+
+
+    
 
     
     
@@ -118,28 +128,101 @@ this.userService.findClassGroupsById(_finalData.id).subscribe((groupIds: string[
     }
 }
 
+    // onUpdate(userObj: any) {
+    //   console.log('Wartość yearBook przed zapisem:', userObj.yearBook);
+    //   if (!userObj.firstName || userObj.firstName.trim() === '') {
+    //     // Jeśli pole "name" jest puste, nie wykonuj aktualizacji
+    //     return;
+    //   }
+    //   this.registerService.save(userObj)
+    //       .subscribe(
+    //         (data) => {
+    //             // Obsłuż dane po udanej aktualizacji
+    //             console.log('Aktualizacja zakończona sukcesem:', data);
+    //             userObj.isEdit = false;
+
+    //         },
+    //         (error) => {
+    //             console.error('Błąd podczas aktualizacji:', error);
+    //         }
+    //       );
+    //       console.log('Wartość yearBook po zapisie:', userObj.yearBook);
+
+        
+    // }
+
+    // onUpdate(userObj: any) {
+    //   console.log('Wartość yearBook przed zapisem:', userObj.yearBook);
+    
+    //   // Jeśli nowy użytkownik, ustaw domyślne hasło
+    //   if (!userObj.id) {
+    //     userObj.password = '1234';
+    //   }
+    
+    //   if (!userObj.firstName || userObj.firstName.trim() === '') {
+    //     // Jeśli pole "name" jest puste, nie wykonuj aktualizacji
+    //     return;
+    //   }
+    
+    //   this.registerService.save(userObj)
+    //     .subscribe(
+    //       (data) => {
+    //         // Obsłuż dane po udanej aktualizacji
+    //         console.log('Aktualizacja zakończona sukcesem:', data);
+    //         userObj.isEdit = false;
+    //       },
+    //       (error) => {
+    //         console.error('Błąd podczas aktualizacji:', error);
+    //       }
+    //     );
+    
+    //   console.log('Wartość yearBook po zapisie:', userObj.yearBook);
+    // }
+
     onUpdate(userObj: any) {
       console.log('Wartość yearBook przed zapisem:', userObj.yearBook);
+    
+      // Jeśli nowy użytkownik, ustaw domyślne hasło
+      if (!userObj.id) {
+        userObj.password = '1234';
+      }
+    
       if (!userObj.firstName || userObj.firstName.trim() === '') {
         // Jeśli pole "name" jest puste, nie wykonuj aktualizacji
         return;
       }
-      this.userService.updateUser(userObj)
-          .subscribe(
-            (data) => {
-                // Obsłuż dane po udanej aktualizacji
-                console.log('Aktualizacja zakończona sukcesem:', data);
-                userObj.isEdit = false;
-
-            },
-            (error) => {
-                console.error('Błąd podczas aktualizacji:', error);
-            }
-          );
-          console.log('Wartość yearBook po zapisie:', userObj.yearBook);
-
-        
+    
+      // Jeśli email jest pusty, pomiń to pole podczas aktualizacji
+      if (userObj.email === '') {
+        delete userObj.email;
+      }
+      
+    
+      // Przygotuj dane do zapisu
+      const userData = { ...userObj };
+    
+      // Wybierz odpowiedni serwis w zależności od operacji
+      const saveService = userObj.id ? this.userService : this.registerService;
+    
+      saveService.save(userData)
+        .subscribe(
+          (data) => {
+            // Obsłuż dane po udanej aktualizacji
+            console.log('Aktualizacja zakończona sukcesem:', data);
+            userObj.isEdit = false;
+          },
+          (error) => {
+            console.error('Błąd podczas aktualizacji:', error);
+          }
+        );
+    
+      console.log('Wartość yearBook po zapisie:', userObj.yearBook);
     }
+    
+    
+    
+    
+    
 
 
   onCancel(obj:any) {
