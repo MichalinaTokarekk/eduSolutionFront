@@ -85,6 +85,7 @@ import { RegisterService } from './authorization_authentication/register/registe
 import { OfferPageComponent } from './offer/offerPage/offerPage.component';
 import { ClassGroupsInCourseComponent } from './offer/classGroupsInCourse/classGroupsInCourse.component';
 import { EventDetailPageComponent } from './schedule/eventsSchedule/eventDetailPage/eventDetailPage.component';
+import { SearchPipe } from './classGroup/search.pipe';
 
 
 
@@ -160,7 +161,8 @@ export class MaterialModule { }
     RegisterEditComponent,
     OfferPageComponent,
     ClassGroupsInCourseComponent,
-    EventDetailPageComponent
+    EventDetailPageComponent,
+    SearchPipe
   ],
   imports: [
     BrowserModule,

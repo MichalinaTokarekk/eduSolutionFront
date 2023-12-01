@@ -20,7 +20,7 @@ export class ClassGroupInlineCrudComponent implements OnInit {
   classGroupArray: any[] = [];
   filteredClassGroups: any []= [];
   oldUserObj: any;
-  searchText: string ='';
+  searchText ='';
   isEditing = false;
   semesters!: Semester[];
   availableCourses!: Course[];
@@ -37,23 +37,6 @@ export class ClassGroupInlineCrudComponent implements OnInit {
     const filteredData =  this.filteredClassGroups.sort((a: any, b: any) =>
     a.name.localeCompare(b.name));
     this.filteredClassGroups = filteredData;
-  }
-
-  filter(event: any) {
-    this.filteredClassGroups = this.classGroupArray.filter((searchData:any) => {
-      let search = event;
-      let values = Object.values(searchData);
-      let flag = false
-      values.forEach((val: any) => {
-        if (val.toString().toLowerCase().indexOf(search) > -1) {
-          flag = true;
-          return;
-        }
-      })
-      if (flag) {
-        return searchData
-      }
-    });
   }
 
   loadAllUser() {
