@@ -87,6 +87,7 @@ import { ClassGroupsInCourseComponent } from './offer/classGroupsInCourse/classG
 import { EventDetailPageComponent } from './schedule/eventsSchedule/eventDetailPage/eventDetailPage.component';
 import { SearchPipe } from './classGroup/search.pipe';
 import { CourseGridViewComponent } from './course/course-grid-view/course-grid-view.component';
+import { MyProfileComponent } from './myProfile/myProfile.component';
 
 
 
@@ -164,7 +165,8 @@ export class MaterialModule { }
     ClassGroupsInCourseComponent,
     EventDetailPageComponent,
     SearchPipe,
-    CourseGridViewComponent
+    CourseGridViewComponent,
+    MyProfileComponent
   ],
   imports: [
     BrowserModule,

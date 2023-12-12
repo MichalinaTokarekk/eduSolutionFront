@@ -27,6 +27,7 @@ import { ClassGroupsInCourseComponent } from './offer/classGroupsInCourse/classG
 import { EventDetailPageComponent } from './schedule/eventsSchedule/eventDetailPage/eventDetailPage.component';
 import { ClassGroupGridViewComponent } from './course/classGroup-grid-view/classGroup-grid-view.component';
 import { CourseGridViewComponent } from './course/course-grid-view/course-grid-view.component';
+import { MyProfileComponent } from './myProfile/myProfile.component';
 
 const routes: Routes = [
   {path: "dashboard", component: DashboardComponent, canActivate:[AuthGuard]},
@@ -56,6 +57,7 @@ const routes: Routes = [
   {path: 'classGroupsInCourse/:courseId',component: ClassGroupsInCourseComponent},
   {path: 'eventDetailPage/:eventId',component: EventDetailPageComponent},
   {path: 'course-grid-view',component: CourseGridViewComponent},
+  {path: 'myProfile',component: MyProfileComponent},
 
   
 ];

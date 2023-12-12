@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { Role } from "src/app/interfaces/role-interface";
+import { ChangePassword } from "src/app/interfaces/changePassword-interface";
 
 
 @Injectable()
@@ -63,6 +64,10 @@ export class UserService {
 
   findUsersByClassGroupId(classGroupId: number) {
     return this.http.get<any>(this.USER_API + '/findUsersByClassGroupId/' + classGroupId);
+  }
+
+  changePassword(changePassword: ChangePassword): Observable<any> {
+    return this.http.put(`${this.USER_API}/changePassword`, changePassword);
   }
   
   

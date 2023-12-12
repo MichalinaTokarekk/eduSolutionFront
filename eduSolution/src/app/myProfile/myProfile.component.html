@@ -1,0 +1,37 @@
+
+<div>
+    <h2>Informacje o użytkowniku</h2>
+    <p *ngIf="!isEditing"><strong>Nazwa użytkownika:</strong> {{ user?.username }}</p>
+    <p *ngIf="!isEditing"><strong>Email:</strong> {{ user?.email }}</p>
+    <p *ngIf="!isEditing"><strong>Adres:</strong> {{ user?.address }}</p>
+    <p *ngIf="!isEditing"><strong>Miasto:</strong> {{ user?.city }}</p>
+    <p *ngIf="!isEditing"><strong>Poczta:</strong> {{ user?.post }}</p>
+    <p *ngIf="!isEditing"><strong>Kod pocztowy:</strong> {{ user?.postCode }}</p>
+    <p *ngIf="!isEditing"><strong>Kraj:</strong> {{ user?.country }}</p>
+  
+    <!-- <button (click)="toggleEdit()">{{ isEditing ? 'Zapisz' : 'Edytuj' }}</button> -->
+  </div>
+
+  <div *ngIf="user">
+    <h2>Zmień hasło</h2>
+    
+    <div *ngIf="isEditingPassword">
+      <label for="oldPassword">Stare hasło</label>
+      <input type="text" id="oldPassword" [(ngModel)]="user.changePassword.oldPassword" />
+      
+      <label for="newPassword">Nowe hasło:</label>
+      <input type="text" id="newPassword" [(ngModel)]="user.changePassword.newPassword" />
+
+      <label for="newPasswordConfirm">Nowe hasło (potwierdź):</label>
+      <input type="text" id="newPasswordConfirm" [(ngModel)]="user.changePassword.newPasswordConfirm" />
+    </div>
+  
+    <!-- <button (click)="toggleEditPassword(); changePassword(user.id)">{{ isEditingPassword ? 'Zapisz' : 'Edytuj' }}</button> -->
+    <button (click)="isEditingPassword ? changePassword(user.changePassword) : toggleEditPassword()">
+      {{ isEditingPassword ? 'Zapisz' : 'Edytuj' }}
+    </button>
+    
+  </div>
+
+  
+  
