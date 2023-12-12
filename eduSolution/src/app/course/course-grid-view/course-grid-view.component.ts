@@ -1,16 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { CourseService } from '../course-service/course.service';
-import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ConfirmationDialogSemesterComponent } from 'src/app/confirmations/semester/confirmation-dialog-semester.component';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { UserService } from 'src/app/user/user-service/user.service';
 import { LoginService } from 'src/app/authorization_authentication/service/login.service';
+import { CourseService } from 'src/app/course/course-service/course.service';
 
 @Component({
-  selector: 'app-basic-inline-editing',
+  selector: 'app-basic-course-grid-view',
   templateUrl: './course-grid-view.component.html',
   styleUrls: ['./course-grid-view.component.css']
 })
@@ -26,13 +24,9 @@ export class CourseGridViewComponent implements OnInit {
 
   }
   ngOnInit(): void {
-    this.loadList();
+    this.loadAllCourse();
   }
   onNameSort() {
-    // const filteredData =  this.filteredCourses.sort((a: any, b: any) =>
-    // a.name.localeCompare(b.name));
-    // this.filteredCourses = filteredData;
-
     const sortedData = this.filteredCourses.sort((a: any, b: any) => {
       if (this.ascendingSort) {
         return a.name.localeCompare(b.name);
@@ -62,31 +56,20 @@ export class CourseGridViewComponent implements OnInit {
   }
 
   loadAllCourse() {
-    this.courseService.getAll().subscribe((res: any)=>{
+    const token = this.loginService.getToken();
+    const _token = token.split('.')[1];
+    const _atobData = atob(_token);
+    const _finalData = JSON.parse(_atobData);
+    this.courseService.findCoursesByUserId(_finalData.id).subscribe((res: any)=>{
       this.courseArray = res;
       this.filteredCourses= res;
     })
   }
 
-  loadList() {
-    const token = this.loginService.getToken();
-    const _token = token.split('.')[1];
-    const _atobData = atob(_token);
-    const _finalData = JSON.parse(_atobData); 
-
-
-    this.userService.findClassGroupsById(_finalData.id).subscribe (data => {
-      this.courseArray = data;
-      this.filteredCourses = data
-
-    })
-  }
-
-  // W CourseGridViewComponent
     onCourseSelection(courseId: number) {
-        // Przekazanie ID do SectionManage
-        this.router.navigate(['/section-manage', courseId]);
-  }
+    // Przekazanie ID do SectionManage
+    this.router.navigate(['/section-manage', courseId]);
+}
   
 
 }

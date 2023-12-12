@@ -35,7 +35,7 @@ import { LoginComponent } from './authorization_authentication/login/login.compo
 import { UserService } from './user/user-service/user.service';
 import { UserInlineCrudComponent } from './user/user-iline-crud/user-inline-crud.component';
 import { AdminPanelComponent } from './admin-panel/admin-panel.component';
-import { CourseGridViewComponent } from './course/course-grid-view/course-grid-view.component';
+import { ClassGroupGridViewComponent } from './course/classGroup-grid-view/classGroup-grid-view.component';
 import { SectionManage } from './section/section-manage/section-manage.component';
 import { SectionService } from './section/section-service/section.service';
 import { MatExpansionModule } from '@angular/material/expansion';
@@ -86,6 +86,7 @@ import { OfferPageComponent } from './offer/offerPage/offerPage.component';
 import { ClassGroupsInCourseComponent } from './offer/classGroupsInCourse/classGroupsInCourse.component';
 import { EventDetailPageComponent } from './schedule/eventsSchedule/eventDetailPage/eventDetailPage.component';
 import { SearchPipe } from './classGroup/search.pipe';
+import { CourseGridViewComponent } from './course/course-grid-view/course-grid-view.component';
 
 
 
@@ -135,7 +136,7 @@ export class MaterialModule { }
     LoginComponent,
     UserInlineCrudComponent,
     AdminPanelComponent,
-    CourseGridViewComponent,
+    ClassGroupGridViewComponent,
     SectionManage,
     EduMaterialManage,
     HomeworkTestManage,
@@ -162,7 +163,8 @@ export class MaterialModule { }
     OfferPageComponent,
     ClassGroupsInCourseComponent,
     EventDetailPageComponent,
-    SearchPipe
+    SearchPipe,
+    CourseGridViewComponent
   ],
   imports: [
     BrowserModule,

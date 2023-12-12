@@ -51,6 +51,11 @@ export class ClassGroupService {
   findByCourseId(courseId: number) {
     return this.http.get(this.CLASSGROUP_API + '/findByCourseId/' + courseId);
   }
+
+  findClassGroupsByCourseAndUser(courseId: number, userId: number) {
+    return this.http.get<ClassGroup[]>(`${this.CLASSGROUP_API}/findClassGroupsByCourseAndUser/${courseId}/${userId}`);
+
+  }
 }
 
 

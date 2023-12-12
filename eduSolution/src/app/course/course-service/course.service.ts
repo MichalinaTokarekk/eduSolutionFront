@@ -21,12 +21,7 @@ export class CourseService {
   }
 
   findCoursesByUserId(userId: number) {
-    return this.http.get(this.COURSE_API + '/findCoursesByUserId/' + userId); 
-  }
-
-  findCoursesByStudentId(userId: number) {
-    return this.http.get(this.COURSE_API + '/findCoursesByStudentId/' + userId); 
-
+    return this.http.get(this.COURSE_API + '/findCoursesByUserId/' + userId);
   }
 
   save (course: any) : Observable <any> {
