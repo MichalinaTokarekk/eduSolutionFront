@@ -62,6 +62,9 @@ export class ClassGroupGridViewComponent implements OnInit {
     });
   }
 
+  pendingClassGroups: any[] = [];
+  inProgressClassGroups: any[] = [];
+  completedClassGroups: any[] = [];
   courseId!: number;
   selectedCourseName: string = '';
   loadAllCourse() {
@@ -75,7 +78,11 @@ export class ClassGroupGridViewComponent implements OnInit {
             this.courseArray = res;
             this.filteredCourses= res;
             this.selectedCourseName = res.length > 0 ? res[0].course.name : '';
-        })
+
+            this.pendingClassGroups = this.courseArray.filter(group => group.classGroupStatus === 'OCZEKUJĄCY');
+            this.inProgressClassGroups = this.courseArray.filter(group => group.classGroupStatus === 'WTRAKCIE');
+            this.completedClassGroups = this.courseArray.filter(group => group.classGroupStatus === 'ZAKOŃCZONY');
+        });
     });
    
   }
