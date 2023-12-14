@@ -48,7 +48,6 @@ import { HTFileService } from './htFile/htFile-service/htFile.service';
 import { AnswerService } from './answer/answer-service/answer.service';
 import { AFileService } from './aFile/aFile-service/aFile.service';
 import { AnswerDetailComponent } from './answer/answer-detail/answer-detail.component';
-import { TeachingCoursesComponent } from './gradeBook/teachingCourses/teachingCourses.component';
 import { ClassGroupsByCourseAndUser } from './gradeBook/classGroupsByCourseAndUser/classGroupsByCourseAndUser.component';
 import { GradeService } from './grade/grade-service/grade.service';
 import { TypeOfTestingKnowledgeService } from './typeOfTestingKnowledge/typeOfTestingKnowledge-service/typeOfTestingKnowledge.service';
@@ -88,6 +87,8 @@ import { EventDetailPageComponent } from './schedule/eventsSchedule/eventDetailP
 import { SearchPipe } from './classGroup/search.pipe';
 import { CourseGridViewComponent } from './course/course-grid-view/course-grid-view.component';
 import { MyProfileComponent } from './myProfile/myProfile.component';
+import { TeachingClassGroupsComponent } from './gradeBook/teachingClassGroups/teachingClassGroups.component';
+import { TeachingCoursesComponent } from './gradeBook/teachingCourses/teachingCourses.component';
 
 
 
@@ -142,7 +143,7 @@ export class MaterialModule { }
     EduMaterialManage,
     HomeworkTestManage,
     AnswerDetailComponent,
-    TeachingCoursesComponent,
+    TeachingClassGroupsComponent,
     ClassGroupsByCourseAndUser,
     AddGradeDetailComponent,
     DetailEditGradeComponent,
@@ -166,7 +167,8 @@ export class MaterialModule { }
     EventDetailPageComponent,
     SearchPipe,
     CourseGridViewComponent,
-    MyProfileComponent
+    MyProfileComponent,
+    TeachingCoursesComponent
   ],
   imports: [
     BrowserModule,
