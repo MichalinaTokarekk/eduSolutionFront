@@ -107,12 +107,6 @@ mapGradesToString(grades: Grade[]): string {
 }
 
 
-
-
-
-
-
-
   
   answerDetailComponent!: AddGradeDetailComponent;
   selectedStudent: User | undefined;

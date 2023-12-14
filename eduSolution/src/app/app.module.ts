@@ -55,7 +55,7 @@ import { AddGradeDetailComponent } from './grade/grade-detail/add-Grade-detail.c
 import { DetailEditGradeComponent } from './grade/grade-detail/detailEditGrade.component';
 import { TokenInterceptorService } from './authorization_authentication/service/token-interceptor.service';
 import { AddFinalGradeDetailComponent } from './grade/grade-detail/addFinalGrade.component';
-import { CoursesByStudentComponent } from './gradeBook/coursesByStudent/coursesByStudent.component';
+import { ClassGroupsByStudentComponent } from './gradeBook/classGroupsByStudent/classGroupsByStudent.component';
 import { StudentDetailGradeComponent } from './grade/grade-detail/studentDetailGrade.component';
 
 
@@ -89,6 +89,7 @@ import { CourseGridViewComponent } from './course/course-grid-view/course-grid-v
 import { MyProfileComponent } from './myProfile/myProfile.component';
 import { TeachingClassGroupsComponent } from './gradeBook/teachingClassGroups/teachingClassGroups.component';
 import { TeachingCoursesComponent } from './gradeBook/teachingCourses/teachingCourses.component';
+import { CoursesByStudentComponent } from './gradeBook/coursesByStudent/coursesByStudent.component';
 
 
 
@@ -148,7 +149,7 @@ export class MaterialModule { }
     AddGradeDetailComponent,
     DetailEditGradeComponent,
     AddFinalGradeDetailComponent,
-    CoursesByStudentComponent,
+    ClassGroupsByStudentComponent,
     StudentDetailGradeComponent,
     UsersByYearBook,
     YearBookUserDetailsComponent,
@@ -168,7 +169,8 @@ export class MaterialModule { }
     SearchPipe,
     CourseGridViewComponent,
     MyProfileComponent,
-    TeachingCoursesComponent
+    TeachingCoursesComponent,
+    CoursesByStudentComponent
   ],
   imports: [
     BrowserModule,

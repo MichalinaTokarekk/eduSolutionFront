@@ -13,7 +13,7 @@ import { SectionManage } from './section/section-manage/section-manage.component
 import { EduMaterialManage } from './eduMaterial/eduMaterial-manage/eduMaterial-manage.component';
 import { HomeworkTestManage } from './homeworkTest/homeworkTest-manage/homeworkTest-manage.component';
 import { ClassGroupsByCourseAndUser } from './gradeBook/classGroupsByCourseAndUser/classGroupsByCourseAndUser.component';
-import { CoursesByStudentComponent } from './gradeBook/coursesByStudent/coursesByStudent.component';
+import { ClassGroupsByStudentComponent } from './gradeBook/classGroupsByStudent/classGroupsByStudent.component';
 import { UsersByYearBook } from './usersByYearBook/usersByYearBook.component';
 import { YearBookUserDetailsComponent } from './yearBookUserDetails/yearBookUserDetails.component';
 import { MyAllGradesComponent } from './myAllGrades/myAllGrades.component';
@@ -29,6 +29,7 @@ import { CourseGridViewComponent } from './course/course-grid-view/course-grid-v
 import { MyProfileComponent } from './myProfile/myProfile.component';
 import { TeachingClassGroupsComponent } from './gradeBook/teachingClassGroups/teachingClassGroups.component';
 import { TeachingCoursesComponent } from './gradeBook/teachingCourses/teachingCourses.component';
+import { CoursesByStudentComponent } from './gradeBook/coursesByStudent/coursesByStudent.component';
 
 const routes: Routes = [
   {path: "dashboard", component: DashboardComponent, canActivate:[AuthGuard]},
@@ -46,7 +47,7 @@ const routes: Routes = [
   {path: "homeworkTest-manage/:id", component: HomeworkTestManage},
   {path: "teachingClassGroups-view/:courseId", component: TeachingClassGroupsComponent},
   {path: "classGroupsByCourseAndUser/:id", component: ClassGroupsByCourseAndUser},
-  {path: "coursesByStudent-view", component: CoursesByStudentComponent},
+  {path: "classGroupsByStudent-view/:courseId", component: ClassGroupsByStudentComponent},
   {path: "usersByYearBook", component: UsersByYearBook},
   {path: 'yearBookUserDetails/:id', component: YearBookUserDetailsComponent },
   {path: 'myAllGrades', component: MyAllGradesComponent },
@@ -60,6 +61,7 @@ const routes: Routes = [
   {path: 'course-grid-view',component: CourseGridViewComponent},
   {path: 'myProfile',component: MyProfileComponent},
   {path: 'teachingCourses',component: TeachingCoursesComponent},
+  {path: 'coursesByStudent-view',component: CoursesByStudentComponent},
 
   
 ];

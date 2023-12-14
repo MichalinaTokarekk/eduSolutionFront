@@ -113,21 +113,7 @@ i {
 
 
 
-.footer {
-    background-color: #333; /* Kolor tła stopki */
-    color: #fff; /* Kolor tekstu w stopce */
-    padding: 20px; /* Wewnętrzny odstęp w stopce */
-    text-align: center; /* Wyrównanie tekstu do środka */
-    margin-top: auto;
-    height: 40px;
-}
 
-.page-container {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-  }
-  
 
 
 
