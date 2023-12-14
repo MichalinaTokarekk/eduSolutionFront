@@ -17,13 +17,13 @@
     
     <div *ngIf="isEditingPassword">
       <label for="oldPassword">Stare hasło</label>
-      <input type="text" id="oldPassword" [(ngModel)]="user.changePassword.oldPassword" />
+      <input type="password" id="oldPassword" [(ngModel)]="user.changePassword.oldPassword" />
       
       <label for="newPassword">Nowe hasło:</label>
-      <input type="text" id="newPassword" [(ngModel)]="user.changePassword.newPassword" />
+      <input type="password" id="newPassword" [(ngModel)]="user.changePassword.newPassword" />
 
       <label for="newPasswordConfirm">Nowe hasło (potwierdź):</label>
-      <input type="text" id="newPasswordConfirm" [(ngModel)]="user.changePassword.newPasswordConfirm" />
+      <input type="password" id="newPasswordConfirm" [(ngModel)]="user.changePassword.newPasswordConfirm" />
     </div>
   
     <!-- <button (click)="toggleEditPassword(); changePassword(user.id)">{{ isEditingPassword ? 'Zapisz' : 'Edytuj' }}</button> -->

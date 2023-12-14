@@ -39,6 +39,71 @@ export class ClassGroupInlineCrudComponent implements OnInit {
     this.filteredClassGroups = filteredData;
   }
 
+  onDescriptionSort() {
+    this.filteredClassGroups = this.sortByDescription(this.filteredClassGroups);
+  }
+
+  onYearSort() {
+    this.filteredClassGroups = this.sortByYear(this.filteredClassGroups);
+  }
+
+  onAddressSort() {
+    this.filteredClassGroups = this.sortByAddress(this.filteredClassGroups);
+  }
+
+  onStatusSort() {
+    this.filteredClassGroups = this.sortByStatus(this.filteredClassGroups);
+  }
+
+  onModeSort() {
+    this.filteredClassGroups = this.sortByMode(this.filteredClassGroups);
+  }
+
+  onSemesterSort() {
+    this.filteredClassGroups = this.sortBySemester(this.filteredClassGroups);
+  }
+
+  onCourseSort() {
+    this.filteredClassGroups = this.sortByCourse(this.filteredClassGroups);
+  }
+
+  onLimitStudentsSort() {
+    this.filteredClassGroups = this.sortByLimitStudents(this.filteredClassGroups);
+  }
+
+  private sortByYear(data: any[]): any[] {
+    return data.sort((a: any, b: any) => a.year - b.year);
+  }
+
+  private sortByDescription(data: any[]): any[] {
+    return data.sort((a: any, b: any) => a.description.localeCompare(b.description));
+  }
+
+  private sortByAddress(data: any[]): any[] {
+    return data.sort((a: any, b: any) => a.address.localeCompare(b.address));
+  }
+
+  private sortByStatus(data: any[]): any[] {
+    return data.sort((a: any, b: any) => a.status.localeCompare(b.status));
+  }
+
+  private sortByMode(data: any[]): any[] {
+    return data.sort((a: any, b: any) => a.mode.localeCompare(b.mode));
+  }
+
+  private sortBySemester(data: any[]): any[] {
+    return data.sort((a: any, b: any) => a.semester.localeCompare(b.semester));
+  }
+
+  private sortByCourse(data: any[]): any[] {
+    return data.sort((a: any, b: any) => a.course.localeCompare(b.course));
+  }
+
+  private sortByLimitStudents(data: any[]): any[] {
+    return data.sort((a: any, b: any) => a.limitStudents - b.limitStudents);
+  }
+  
+
   loadAllUser() {
     this.classGroupService.getAll().subscribe((res: any)=>{
       this.classGroupArray = res;

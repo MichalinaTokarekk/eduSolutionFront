@@ -35,18 +35,21 @@
 <div class="row">
     <div class="col-8">
         <button class="btn btn-sm btn-primary" (click)="onAdd()">Dodaj nowy</button>
+        <div class="col-6">
+            <input type="text" [(ngModel)]="searchText" placeholder="Szukaj" class="form-control custom-search-input">
+        </div><br>
         <table class="table table-bordered ">
             <thead>
                 <tr class="bg-success text-white">
                     <th>Lp</th>
-                    <th (click)="onNameSort()">Nazwa</th>
+                    <th >Nazwa</th>
                     <th>Data rozpoczęcia</th>
                     <th>Data zakończenia</th> 
                     <th></th>
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let course of courseArray;let srNo = index">
+                <tr *ngFor="let course of courseArray | search: searchText;let srNo = index">
                     <td>{{srNo+1}}</td>
                     <td>
                         <div *ngIf="course.isEdit" class="form-group">

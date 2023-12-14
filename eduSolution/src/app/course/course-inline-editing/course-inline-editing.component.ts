@@ -26,19 +26,9 @@ export class CourseInlineEditingComponent implements OnInit {
     this.loadList();
   }
   onNameSort() {
-    // const filteredData =  this.filteredCourses.sort((a: any, b: any) =>
-    // a.name.localeCompare(b.name));
-    // this.filteredCourses = filteredData;
-
-    const sortedData = this.filteredCourses.sort((a: any, b: any) => {
-      if (this.ascendingSort) {
-        return a.name.localeCompare(b.name);
-      } else {
-        return b.name.localeCompare(a.name); // Sortowanie malejąco
-      }
-    });
-    this.filteredCourses = sortedData;
-    this.ascendingSort = !this.ascendingSort; // Zmień kierunek sortowania
+    const filteredData =  this.filteredCourses.sort((a: any, b: any) =>
+    a.name.localeCompare(b.name));
+    this.filteredCourses = filteredData;
   }
 
 

@@ -10,6 +10,9 @@
 <div class="row">
     <div class="col-8">
         <button class="btn btn-sm btn-primary" (click)="onAdd()">Dodaj nowego</button>
+        <div class="col-6">
+            <input type="text" [(ngModel)]="searchText" placeholder="Szukaj" class="form-control custom-search-input">
+        </div><br>
         <table class="table table-bordered ">
             <thead>
                 <tr class="bg-success text-white">
@@ -30,7 +33,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let user of userArray;let srNo = index">
+                <tr *ngFor="let user of userArray | search: searchText;let srNo = index">
                     <td>{{srNo+1}}</td>
                     <td>
                         <div *ngIf="user.isEdit" class="form-group">

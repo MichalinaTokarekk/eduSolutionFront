@@ -96,7 +96,7 @@ i {
     cursor: pointer; /* Kształt kursora po najechaniu na przycisk */
     font-size: 20px; /* Rozmiar czcionki */
     border-radius: 10px;
-    margin-left: 5px;
+    margin-left: 10px;
     margin-top: 15px;
     margin-bottom: 10px;
 }
@@ -124,3 +124,14 @@ i {
     right: 5px;
     color: red; /* Kolor czerwony */
 }
+
+
+.custom-search-input {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 5px;
+    margin-left: 6px;
+    width: 500px;
+    height: 20px;
+}
+

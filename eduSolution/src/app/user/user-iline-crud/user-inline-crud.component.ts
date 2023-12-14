@@ -128,56 +128,7 @@ export class UserInlineCrudComponent implements OnInit {
     }
 }
 
-    // onUpdate(userObj: any) {
-    //   console.log('Wartość yearBook przed zapisem:', userObj.yearBook);
-    //   if (!userObj.firstName || userObj.firstName.trim() === '') {
-    //     // Jeśli pole "name" jest puste, nie wykonuj aktualizacji
-    //     return;
-    //   }
-    //   this.registerService.save(userObj)
-    //       .subscribe(
-    //         (data) => {
-    //             // Obsłuż dane po udanej aktualizacji
-    //             console.log('Aktualizacja zakończona sukcesem:', data);
-    //             userObj.isEdit = false;
 
-    //         },
-    //         (error) => {
-    //             console.error('Błąd podczas aktualizacji:', error);
-    //         }
-    //       );
-    //       console.log('Wartość yearBook po zapisie:', userObj.yearBook);
-
-        
-    // }
-
-    // onUpdate(userObj: any) {
-    //   console.log('Wartość yearBook przed zapisem:', userObj.yearBook);
-    
-    //   // Jeśli nowy użytkownik, ustaw domyślne hasło
-    //   if (!userObj.id) {
-    //     userObj.password = '1234';
-    //   }
-    
-    //   if (!userObj.firstName || userObj.firstName.trim() === '') {
-    //     // Jeśli pole "name" jest puste, nie wykonuj aktualizacji
-    //     return;
-    //   }
-    
-    //   this.registerService.save(userObj)
-    //     .subscribe(
-    //       (data) => {
-    //         // Obsłuż dane po udanej aktualizacji
-    //         console.log('Aktualizacja zakończona sukcesem:', data);
-    //         userObj.isEdit = false;
-    //       },
-    //       (error) => {
-    //         console.error('Błąd podczas aktualizacji:', error);
-    //       }
-    //     );
-    
-    //   console.log('Wartość yearBook po zapisie:', userObj.yearBook);
-    // }
 
     onUpdate(userObj: any) {
       console.log('Wartość yearBook przed zapisem:', userObj.yearBook);

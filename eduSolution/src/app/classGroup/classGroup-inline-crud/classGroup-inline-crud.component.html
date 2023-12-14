@@ -1,26 +1,29 @@
 <div class="row">
-    <div class="col-6">
+    <!-- <div class="col-6">
         <input class="form-control" type="text" placeholder="Search" [(ngModel)]="searchText">
-    </div>
+    </div> -->
     
     
 </div>
 <div class="row">
     <div class="col-8">
         <button class="btn btn-sm btn-primary" (click)="onAdd()">Dodaj nowe</button>
+        <div class="col-6">
+            <input type="text" [(ngModel)]="searchText" placeholder="Szukaj" class="form-control custom-search-input">
+        </div><br>
         <table class="table table-bordered ">
             <thead>
                 <tr class="bg-success text-white">
                     <th>Lp</th>
                     <th (click)="onNameSort()">Nazwa</th>
-                    <th (click)="onNameSort()">Opis</th>
-                    <th (click)="onNameSort()">Limit studentów</th>
-                    <th (click)="onNameSort()">Rok</th>
-                    <th (click)="onNameSort()">Adres</th>
-                    <th (click)="onNameSort()">Status</th>
-                    <th (click)="onNameSort()">Tryb</th>
-                    <th (click)="onNameSort()">Semestr</th>
-                    <th (click)="onNameSort()">Kurs</th>
+                    <th (click)="onDescriptionSort()">Opis</th>
+                    <th (click)="onLimitStudentsSort()">Limit studentów</th>
+                    <th (click)="onYearSort()">Rok</th>
+                    <th (click)="onAddressSort()">Adres</th>
+                    <th (click)="onStatusSort()">Status</th>
+                    <th (click)="onModeSort()">Tryb</th>
+                    <th (click)="onSemesterSort()">Semestr</th>
+                    <th (click)="onCourseSort()">Kurs</th>
                     <th></th> 
                     <!-- <th></th> -->
                 </tr>
