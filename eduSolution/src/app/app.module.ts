@@ -90,6 +90,7 @@ import { MyProfileComponent } from './myProfile/myProfile.component';
 import { TeachingClassGroupsComponent } from './gradeBook/teachingClassGroups/teachingClassGroups.component';
 import { TeachingCoursesComponent } from './gradeBook/teachingCourses/teachingCourses.component';
 import { CoursesByStudentComponent } from './gradeBook/coursesByStudent/coursesByStudent.component';
+import { CertificateConfirmationService } from './certificateConfirmation/certificateConfirmation-service/certificateConfirmation.service';
 
 
 
@@ -195,7 +196,7 @@ export class MaterialModule { }
 
   ],
   providers: [SemesterService, CourseService, ClassGroupService, LoginService, JwtHelperService, UserService, SectionService, EduMaterialService, EMFileService,
-    HomeworkTestService, HTFileService, AnswerService, AFileService, GradeService, TypeOfTestingKnowledgeService, LessonScheduleService, EventsScheduleService, RegisterService,
+    HomeworkTestService, HTFileService, AnswerService, AFileService, GradeService, TypeOfTestingKnowledgeService, LessonScheduleService, EventsScheduleService, RegisterService, CertificateConfirmationService,
     {
       provide: HTTP_INTERCEPTORS, useClass: TokenInterceptorService, multi: true
     }],

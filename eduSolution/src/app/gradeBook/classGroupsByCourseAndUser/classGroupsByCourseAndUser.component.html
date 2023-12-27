@@ -65,7 +65,8 @@
             <th>Oceny Cząstkowe</th>
             <th>Ocena Końcowa</th>
             <th>Średnia Ważona</th>
-            <th>Akcje</th>
+            <th>Certyfikat</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
@@ -98,6 +99,24 @@
                   {{ obliczSredniaWazona(gradesByUser[user.id]) | number: '1.2-2' }}
                 </div>
               </div>
+            </td>
+            <td>
+
+              <div *ngIf="certificates[user.id]">
+                <p>{{ certificates[user.id].gained ? 'Zaliczony' : 'Niezaliczony' }}</p>
+              </div>
+            
+              <div *ngIf="!certificates[user.id]">
+                <p>Brak podejścia do egzaminu</p>
+              </div>
+              
+              
+              
+              
+              
+     
+              
+              
             </td>
             <button (click)="openAddGradeDetailDialog(user.id, classGroup.id, user.firstName, user.lastName)" class="add-grade-button">Dodaj ocenę</button>
             <button *ngIf="isFinalGradeAvailable(user) == false" (click)="openAddFinalGradeDetailDialog(user.id, classGroup.id, user.firstName, user.lastName)" class="add-grade-button">Dodaj ocenę końcową</button>

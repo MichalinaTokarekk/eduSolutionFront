@@ -19,6 +19,8 @@ import { TypeOfTestingKnowledge } from 'src/app/interfaces/typeOfTestingKnowledg
 import { AddFinalGradeDetailComponent } from 'src/app/grade/grade-detail/addFinalGrade.component';
 import { Course } from 'src/app/interfaces/course-interface';
 import { ClassGroup } from 'src/app/interfaces/classGroup-interface';
+import { CertificateConfirmationService } from 'src/app/certificateConfirmation/certificateConfirmation-service/certificateConfirmation.service';
+import { CertificateConfirmation } from 'src/app/interfaces/certificateConfirmation-interface';
 
 
 /**
@@ -37,12 +39,13 @@ grades!: any[];
 
 constructor(private http: HttpClient, private route: ActivatedRoute, private router: Router, private dialog: MatDialog, private snackBar: MatSnackBar, 
             private classGroupService: ClassGroupService, private loginService: LoginService, private userService: UserService, private courseService: CourseService,
-            private gradeService: GradeService){
+            private gradeService: GradeService, private certificateConfirmationService: CertificateConfirmationService){
                 this.grades = []; 
 
                 
             }
 
+            
 
 ngOnInit(): void {
     this.route.paramMap.subscribe((params: ParamMap) => {
@@ -51,14 +54,11 @@ ngOnInit(): void {
         this.classGroupService.get(id).subscribe((classGroup: any) => {
           this.classGroup = classGroup;
 
-          const token = this.loginService.getToken();
-          const _token = token.split('.')[1];
-          const _atobData = atob(_token);
-          const _finalData = JSON.parse(_atobData);   
+          
           
           this.loadEduMaterialsBySectionId();
 
-          
+          this.getCertificateConfirmation();
         }, error => {
           console.error(error);
         });
@@ -66,10 +66,73 @@ ngOnInit(): void {
         console.log("Nie ma nic");
       }
     });
-    // this.getTypeOfTestingKnowledge();
-    
+
+
+    // this.getTypeOfTestingKnowledge();    
     
   }
+
+gained: boolean = false;
+certificateByUser: { [key: number]: CertificateConfirmation } = {};
+certificates: any[] = [];
+
+
+
+getCertificateConfirmation() {
+  this.route.paramMap.subscribe((params: ParamMap) => {
+    const classGroupId = params.get('id');
+    if (classGroupId !== null) {
+      console.log('Checking 1');
+
+      this.userService.findUsersByClassGroupId(parseInt(classGroupId, 10)).subscribe(
+        (users: any[]) => {
+          const observables = users.map((user) =>
+            this.certificateConfirmationService.findCertificateConfirmationByUserIdAndClassGroupId(user.id, parseInt(classGroupId, 10)).pipe(
+              catchError((error) => {
+                console.error('Error in certificateConfirmationService:', error);
+                throw error;
+              })
+            )
+          );
+
+          forkJoin(observables).subscribe(
+            (certificates: any[]) => {
+              // Here you can iterate through the users and their associated certificates
+              for (let i = 0; i < users.length; i++) {
+                const user = users[i];
+                const userCertificates = certificates[i];
+
+                console.log('User ID:', user.id);
+                console.log('User Certificates:', userCertificates);
+
+                // Przechowaj informacje o certyfikatach dla danego użytkownika
+                this.certificates[user.id] = userCertificates;
+
+                // Aktualizuj flagę gained
+                if (userCertificates && userCertificates.gained) {
+                  this.gained = true;
+                }
+              }
+            },
+            (error) => {
+              console.error('Error while fetching certificates:', error);
+              // Handle error
+            }
+          );
+        },
+        (error) => {
+          console.error('Error while fetching users:', error);
+          // Handle error
+        }
+      );
+    }
+  });
+}
+  
+  
+  
+  
+
   
 
 loadEduMaterialsBySectionId(): void {
