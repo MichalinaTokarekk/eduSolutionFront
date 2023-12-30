@@ -27,6 +27,8 @@ export class ClassGroupsInCourseComponent implements OnInit {
   }
   ngOnInit(): void {
     this.loadAllCourse();
+
+    
    
   }
   onNameSort() {
@@ -106,6 +108,7 @@ export class ClassGroupsInCourseComponent implements OnInit {
         }
       );
 
+      location.reload();
         
     }
   

@@ -11,3 +11,24 @@
     /* Efekt po najechaniu myszką */
     transform: scale(1.1); /* Przykładowa transformacja, w tym przypadku, powiększenie obrazka o 10% */
   }
+
+
+/* Włączanie kółka Bootstrapa z żółtym tłem */
+.badge-warning {
+  background-color: rgb(241, 174, 74);
+  color: black; /* Możesz dostosować kolor tekstu, aby był czytelny na tle żółtym */
+  width: 20px; /* Dostosuj szerokość kółka według preferencji */
+  display: inline-block; /* Zapewnia, że szerokość jest respektowana */
+  text-align: center; /* Wyrównuje tekst na środek kółka */
+  line-height: 20px; /* Dopasowuje wysokość kółka, aby tekst był wyśrodkowany w pionie */
+  margin-left: -25px;
+}
+
+/* Opcjonalne: Zaokrąglenie rogów */
+.badge-pill {
+  border-radius: 10px; /* Możesz dostosować promień, aby uzyskać pożądany efekt zaokrąglenia */
+  margin-left: -35px;
+}
+
+
+

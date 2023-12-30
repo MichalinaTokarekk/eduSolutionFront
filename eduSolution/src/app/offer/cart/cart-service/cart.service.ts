@@ -45,6 +45,9 @@ export class CartService {
 //     return this.http.get<boolean>(this.CART_API + `/isClassGroupAssignedToUser/${classGroupId}/${userId}`);
 //   }
   
+    countByUserId(userId: number) {
+        return this.http.get<string>(this.CART_API + '/countByUserId/' + userId);
+    }
 }
 
 
