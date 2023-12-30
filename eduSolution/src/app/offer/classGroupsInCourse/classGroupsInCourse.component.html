@@ -1,10 +1,12 @@
 <mat-grid-list cols="3" rowHeight="1:1" class="custom-grid-list">
     <p>{{ selectedCourseDescription }}</p>
     <h2>Dostępne grupy w kursie: {{selectedCourseName}}</h2>
-    <mat-grid-tile *ngFor="let course of courseArray" class="custom-grid-tile">
-      <a href="">
-        <img src="assets/images/ksiazka2.jpg" [alt]="course.name" class="course-image"/> 
-         <p></p><a [routerLink]="['/']" style="color: rgb(8, 8, 8);">{{ course.name }}</a>
+    <mat-grid-tile *ngFor="let classGroup of classGroupArray" class="custom-grid-tile">
+      <a>
+        <img src="assets/images/ksiazka2.jpg" [alt]="classGroup.name" class="course-image"/> 
+         <p></p><a [routerLink]="['/']" style="color: rgb(8, 8, 8);">{{ classGroup.name }}</a><br>
+         <button type="button" class="btn btn-outline-primary">Kup</button>
+         <button type="button" class="btn btn-outline-primary" (click)="addToCart(classGroup)">Dodaj do koszyka</button>
       </a>
     </mat-grid-tile>
   </mat-grid-list>

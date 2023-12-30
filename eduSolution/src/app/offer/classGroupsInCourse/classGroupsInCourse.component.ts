@@ -7,6 +7,7 @@ import { UserService } from 'src/app/user/user-service/user.service';
 import { LoginService } from 'src/app/authorization_authentication/service/login.service';
 import { CourseService } from 'src/app/course/course-service/course.service';
 import { ClassGroupService } from 'src/app/classGroup/classGroup-service/classGroup.service';
+import { CartService } from '../cart/cart-service/cart.service';
 
 @Component({
   selector: 'app-classGroupsInCourse',
@@ -14,13 +15,14 @@ import { ClassGroupService } from 'src/app/classGroup/classGroup-service/classGr
   styleUrls: ['./classGroupsInCourse.component.css']
 })
 export class ClassGroupsInCourseComponent implements OnInit {
-  courseArray: any[] = [];
+  classGroupArray: any[] = [];
   filteredCourses: any []= [];
   oldUserObj: any;
   searchText: string ='';
   isEditing = false;
   ascendingSort = true;
-  constructor(private http: HttpClient, private courseService: CourseService, private router: Router, private route: ActivatedRoute, private classGroupService: ClassGroupService){
+  constructor(private http: HttpClient, private courseService: CourseService, private router: Router, private route: ActivatedRoute, 
+    private classGroupService: ClassGroupService, private loginService: LoginService, private cartService: CartService){
 
   }
   ngOnInit(): void {
@@ -40,7 +42,7 @@ export class ClassGroupsInCourseComponent implements OnInit {
   }
 
   filter(event: any) {
-    this.filteredCourses = this.courseArray.filter((searchData:any) => {
+    this.filteredCourses = this.classGroupArray.filter((searchData:any) => {
       let search = event;
       let values = Object.values(searchData);
       let flag = false
@@ -63,7 +65,7 @@ export class ClassGroupsInCourseComponent implements OnInit {
     this.route.params.subscribe(params => {
         this.courseId = params['courseId'];
         this.classGroupService.findByCourseId(this.courseId).subscribe((res: any)=>{
-            this.courseArray = res;
+            this.classGroupArray = res;
             this.filteredCourses= res;
             this.selectedCourseName = res.length > 0 ? res[0].course.name : '';
             this.selectedCourseDescription = res.length > 0 ? res[0].course.description : '';
@@ -75,6 +77,36 @@ export class ClassGroupsInCourseComponent implements OnInit {
     onCourseSelection(courseId: number) {
         // Przekazanie ID do SectionManage
         this.router.navigate(['/section-manage', courseId]);
+    }
+
+
+
+
+    // ----------------------------------------------------------------------------------------------------------
+
+    addToCart(classGroup: any) {
+      console.log('Przed wysłaniem żądania do koszyka:', classGroup);
+      const token = this.loginService.getToken();
+      const _token = token.split('.')[1];
+      const _atobData = atob(_token);
+      const _finalData = JSON.parse(_atobData);
+      const cartItem = {
+        classGroup: classGroup.id,
+        user: _finalData.id,
+      };
+  
+      
+      this.cartService.save(cartItem).subscribe(
+        (response) => {
+          console.log('Odpowiedź od serwera:', response);
+          
+        },
+        (error) => {
+          console.error('Błąd podczas dodawania do koszyka:', error);
+        }
+      );
+
+        
     }
   
 
