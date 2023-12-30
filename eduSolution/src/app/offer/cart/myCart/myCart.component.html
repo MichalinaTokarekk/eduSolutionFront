@@ -1,0 +1,116 @@
+
+<!-- <h2>Twój koszyk</h2>
+
+<div *ngIf="productsInMyCartArray.length === 0">
+  <p>Koszyk jest pusty.</p>
+</div>
+
+<div *ngFor="let cartItem of productsInMyCartArray">
+  <div class="cart-item">
+    <div>
+      <h3>{{ cartItem.classGroup.name }}</h3>
+      <p>{{ cartItem.classGroup.description }}</p>
+    </div>
+    <div>
+      <p>Cena: {{ cartItem.classGroup.course.amountToPay | currency:'PLN':'symbol':'1.2-2' }}</p>
+      <button (click)="removeFromCart(cartItem.id)">Usuń z koszyka</button>
+    </div>
+  </div>
+</div> -->
+
+
+<!-- <h2>Twój koszyk</h2>
+
+<div *ngIf="productsInMyCartArray.length === 0">
+  <p class="empty-cart-message">Koszyk jest pusty.</p>
+</div>
+
+<div *ngFor="let cartItem of productsInMyCartArray">
+  <div class="cart-item">
+    <div class="item-details">
+      <h3>{{ cartItem.classGroup.name }}</h3>
+      <p class="item-description">{{ cartItem.classGroup.description }}</p>
+    </div>
+    <div class="item-actions">
+      <p class="item-price">Cena: {{ cartItem.classGroup.course.amountToPay | currency:'PLN':'symbol':'1.2-2' }}</p>
+      <button class="remove-button" (click)="removeFromCart(cartItem.id)">Usuń z koszyka</button>
+    </div>
+  </div>
+</div> -->
+
+
+<div class="container">
+    <div class="row">
+      <!-- Left column: Cart Information -->
+      <div class="col-md-8">
+        <h2>Twój koszyk</h2>
+  
+        <div *ngIf="productsInMyCartArray.length === 0">
+          <p class="empty-cart-message">Koszyk jest pusty.</p>
+        </div>
+  
+        <div *ngFor="let cartItem of productsInMyCartArray">
+          <div class="cart-item">
+            <div class="item-details">
+              <h3>{{ cartItem.classGroup.name }}</h3>
+              <p class="item-description">{{ cartItem.classGroup.description }}</p>
+            </div>
+            <div class="item-actions">
+              <p class="item-price">Cena: {{ cartItem.classGroup.course.amountToPay | currency:'PLN':'symbol':'1.2-2' }}</p>
+              <p class="item-price">Zaliczka: {{ cartItem.classGroup.course.cashAdvance | currency:'PLN':'symbol':'1.2-2' }}</p>
+              <button class="remove-button" (click)="removeFromCart(cartItem.id)">Usuń z koszyka</button>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Right column: Payment Section -->
+      <div class="col-md-4">
+        <div class="payment-section">
+          <h3>Wybierz metodę płatności</h3>
+          <form>
+            <div class="payment-option">
+              <input type="radio" id="visa" name="paymentMethod" value="visa" [(ngModel)]="selectedPaymentMethod" />
+              <label for="visa">Visa</label>
+            </div>
+  
+            <div class="payment-option">
+              <input type="radio" id="blik" name="paymentMethod" value="blik" [(ngModel)]="selectedPaymentMethod" />
+              <label for="blik">BLIK</label>
+            </div>
+  
+            <!-- Fields for credit card information -->
+            <div *ngIf="selectedPaymentMethod === 'visa'">
+              <div class="form-outline mb-4">
+                <input type="text" id="cardNumber" class="form-control" placeholder="Numer karty" />
+                <label class="form-label" for="cardNumber">Numer karty</label>
+              </div>
+  
+              <div class="form-outline mb-4">
+                <input type="text" id="expiryDate" class="form-control" placeholder="MM/YY" />
+                <label class="form-label" for="expiryDate">Data ważności</label>
+              </div>
+  
+              <div class="form-outline mb-4">
+                <input type="password" id="cvv" class="form-control" placeholder="CVV" />
+                <label class="form-label" for="cvv">CVV</label>
+              </div>
+            </div>
+  
+            <div class="total-amount">
+              <p>Suma do zapłaty: {{ getTotalAmount() | currency:'PLN':'symbol':'1.2-2' }}</p>
+            </div>
+  
+            <button type="button" class="btn btn-primary">Zapłać</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+
+
+
+
+  
+

@@ -92,6 +92,8 @@ import { TeachingCoursesComponent } from './gradeBook/teachingCourses/teachingCo
 import { CoursesByStudentComponent } from './gradeBook/coursesByStudent/coursesByStudent.component';
 import { CertificateConfirmationService } from './certificateConfirmation/certificateConfirmation-service/certificateConfirmation.service';
 import { CartService } from './offer/cart/cart-service/cart.service';
+import { MatMenuModule } from '@angular/material/menu';
+import { MyCartComponent } from './offer/cart/myCart/myCart.component';
 
 
 
@@ -116,7 +118,8 @@ import { CartService } from './offer/cart/cart-service/cart.service';
     RouterModule,
     FormsModule,
     MatInputModule,
-    MatCardModule
+    MatCardModule,
+    MatMenuModule
 
   ],
   declarations: [
@@ -172,7 +175,9 @@ export class MaterialModule { }
     CourseGridViewComponent,
     MyProfileComponent,
     TeachingCoursesComponent,
-    CoursesByStudentComponent
+    CoursesByStudentComponent,
+    AppComponent,
+    MyCartComponent
   ],
   imports: [
     BrowserModule,

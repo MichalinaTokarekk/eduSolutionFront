@@ -30,6 +30,7 @@ import { MyProfileComponent } from './myProfile/myProfile.component';
 import { TeachingClassGroupsComponent } from './gradeBook/teachingClassGroups/teachingClassGroups.component';
 import { TeachingCoursesComponent } from './gradeBook/teachingCourses/teachingCourses.component';
 import { CoursesByStudentComponent } from './gradeBook/coursesByStudent/coursesByStudent.component';
+import { MyCartComponent } from './offer/cart/myCart/myCart.component';
 
 const routes: Routes = [
   {path: "dashboard", component: DashboardComponent, canActivate:[AuthGuard]},
@@ -62,6 +63,7 @@ const routes: Routes = [
   {path: 'myProfile',component: MyProfileComponent},
   {path: 'teachingCourses',component: TeachingCoursesComponent},
   {path: 'coursesByStudent-view',component: CoursesByStudentComponent},
+  {path: 'myCart',component: MyCartComponent},
 
   
 ];

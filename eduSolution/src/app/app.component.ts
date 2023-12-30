@@ -30,6 +30,7 @@ export class AppComponent {
 }
 
 cartItemCount!: number;
+cartItems: any[] = [];
 ngOnInit(): void {
   const token = this.loginService.getToken();
   const _token = token.split('.')[1];
@@ -37,6 +38,11 @@ ngOnInit(): void {
   const _finalData = JSON.parse(_atobData);
   this.cartService.countByUserId(_finalData.id).subscribe((count) => {
     this.cartItemCount = parseInt(count, 10); // lub parseFloat(count) dla liczb dziesiętnych
+  });
+
+  this.cartService.cartsByUserId(_finalData.id).subscribe(items => {
+    this.cartItems = items as any[];
+
   });
 }
 }
