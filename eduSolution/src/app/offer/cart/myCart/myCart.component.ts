@@ -22,9 +22,15 @@ export class MyCartComponent implements OnInit {
     private classGroupService: ClassGroupService, private loginService: LoginService, private cartService: CartService){
 
   }
+
+  cashAdvances: number[] = [];
   ngOnInit(): void {
     this.loadAllProductsInMyCart();
     console.log('Total Amount:', this.getTotalAmount());
+
+     this.productsInMyCartArray.forEach(cartItem => {
+    this.cashAdvances.push(cartItem.classGroup.course.cashAdvance);
+  });
   }
 
 
@@ -54,6 +60,9 @@ export class MyCartComponent implements OnInit {
     return this.productsInMyCartArray.reduce((total, cartItem) => total + cartItem.classGroup.course.amountToPay, 0);
   }
   
+  calculateTotalCashAdvance(): number {
+    return this.cashAdvances.reduce((sum, value) => sum + (value || 0), 0);
+  }
   
   
 

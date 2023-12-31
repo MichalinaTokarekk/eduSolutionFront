@@ -73,5 +73,105 @@ body {
   
 
 
+  /* ----------------------------------------------------------------------------------------------------------- */
+  /* Styl dla kontenera głównego */
+.cart-item-container {
+    margin-bottom: 20px;
+  }
+  
+  /* Styl dla formularza */
+  .form-outline {
+    margin-bottom: 10px;
+  }
+  
+  /* Styl dla pola wejściowego typu number */
+  .form-control {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+  }
+  
+  /* Styl dla komunikatu o błędzie */
+  .text-danger {
+    color: red;
+  }
+  
+  /* Styl dla pola wejściowego typu text */
+  .form-control-total {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+    background-color: #f8f9fa; /* Kolor tła */
+    cursor: not-allowed; /* Kursor niedostępny */
+  }
 
+  
+  /* --------------------------------------------------------------------------------------------------------------------- */
+
+  /* Styl dla kontenera sekcji płatności */
+.payment-section {
+    background-color: #f8f9fa; /* Kolor tła */
+    padding: 20px;
+    border-radius: 8px;
+  }
+  
+  /* Styl dla nagłówka sekcji płatności */
+  .payment-section h3 {
+    color: #007bff; /* Kolor tekstu */
+  }
+  
+  /* Styl dla opcji płatności */
+  .payment-option {
+    margin-bottom: 10px;
+  }
+  
+  /* Styl dla etykiety opcji płatności */
+  .payment-option label {
+    margin-left: 5px;
+  }
+  
+  /* Styl dla pól wejściowych dotyczących karty kredytowej */
+  .payment-fields {
+    margin-top: 15px;
+  }
+  
+  /* Styl dla pól wejściowych dla karty Visa (ukryte domyślnie) */
+  .payment-fields.visa {
+    display: none;
+  }
+  
+  /* Styl dla pola wejściowego numeru karty */
+  .payment-fields input#cardNumber,
+  .payment-fields input#expiryDate,
+  .payment-fields input#cvv {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+  }
+  
+  /* Styl dla etykiet pól wejściowych dotyczących karty kredytowej */
+  .payment-fields label {
+    margin-bottom: 5px;
+    display: block;
+  }
+  
+  /* Styl dla sekcji sumy do zapłaty */
+  .total-amount {
+    margin-top: 20px;
+  }
+  
+  /* Styl dla przycisku płatności */
+  .payment-section button.btn-primary {
+    background-color: #007bff; /* Kolor tła */
+    color: #fff; /* Kolor tekstu */
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .payment-section button.btn-primary:hover {
+    background-color: #0056b3; /* Kolor tła po najechaniu myszką */
+  }
   

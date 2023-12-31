@@ -64,6 +64,43 @@
         </div>
       </div>
   
+      <!-- Dodaj pola dla każdego produktu w koszyku -->
+    <!-- <div *ngFor="let cartItem of productsInMyCartArray; let i = index">
+        <div class="form-outline mb-4">
+          <input type="text" class="form-control" [placeholder]="'Cash Advance za ' + cartItem.classGroup.name" />
+        </div>
+      </div> -->
+
+      <!-- <div *ngFor="let cartItem of productsInMyCartArray; let i = index">
+        <div class="form-outline mb-4">
+          <input type="number" class="form-control" 
+                 [placeholder]="'Cash Advance za ' + cartItem.classGroup.name"
+                 [(ngModel)]="cashAdvances[i]"
+                 [min]="cartItem.classGroup.course.cashAdvance" />
+        </div>
+      </div> -->
+
+      <div *ngFor="let cartItem of productsInMyCartArray; let i = index">
+        <div class="form-outline mb-4">
+          <input type="number" class="form-control" 
+                 [placeholder]="'Cash Advance za ' + cartItem.classGroup.name"
+                 [(ngModel)]="cashAdvances[i]"
+                 [min]="cartItem.classGroup.course.cashAdvance"
+                 required />
+          <div *ngIf="cashAdvances[i] !== undefined && cashAdvances[i] < cartItem.classGroup.course.cashAdvance" class="text-danger">
+            Kwota nie może być mniejsza niż {{ cartItem.classGroup.course.cashAdvance }}
+          </div>
+        </div>
+      </div>
+      
+      
+      
+      <!-- Dodaj pole dla sumy cashAdvance wszystkich produktów -->
+      <div class="form-outline mb-4">
+        <input type="text" class="form-control" placeholder="Suma Cash Advance" [value]="calculateTotalCashAdvance()" disabled />
+      </div>
+
+      
       <!-- Right column: Payment Section -->
       <div class="col-md-4">
         <div class="payment-section">
@@ -98,7 +135,7 @@
             </div>
   
             <div class="total-amount">
-              <p>Suma do zapłaty: {{ getTotalAmount() | currency:'PLN':'symbol':'1.2-2' }}</p>
+              <p>Suma do zapłaty: {{ calculateTotalCashAdvance() | currency:'PLN':'symbol':'1.2-2' }}</p>
             </div>
   
             <button type="button" class="btn btn-primary">Zapłać</button>
