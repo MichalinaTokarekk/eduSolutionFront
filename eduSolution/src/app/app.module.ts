@@ -95,6 +95,8 @@ import { CartService } from './offer/cart/cart-service/cart.service';
 import { MatMenuModule } from '@angular/material/menu';
 import { MyCartComponent } from './offer/cart/myCart/myCart.component';
 
+import { ToastrModule } from 'ngx-toastr';
+
 
 
 
@@ -128,6 +130,7 @@ import { MyCartComponent } from './offer/cart/myCart/myCart.component';
   imports: [
     BrowserAnimationsModule,
     // FullCalendarModule 
+    ToastrModule.forRoot(),
     
   ]
 })
