@@ -24,6 +24,7 @@ export class ClassGroupInlineCrudComponent implements OnInit {
   isEditing = false;
   semesters!: Semester[];
   availableCourses!: Course[];
+  ascendingSort = true;
   constructor(private http: HttpClient, private classGroupService: ClassGroupService, private router: Router, private dialog: MatDialog, private snackBar: MatSnackBar,
     private semesterService: SemesterService, private courseService: CourseService){
 
@@ -39,70 +40,44 @@ export class ClassGroupInlineCrudComponent implements OnInit {
     this.filteredClassGroups = filteredData;
   }
 
-  onDescriptionSort() {
-    this.filteredClassGroups = this.sortByDescription(this.filteredClassGroups);
-  }
-
-  onYearSort() {
-    this.filteredClassGroups = this.sortByYear(this.filteredClassGroups);
-  }
-
-  onAddressSort() {
-    this.filteredClassGroups = this.sortByAddress(this.filteredClassGroups);
-  }
-
-  onStatusSort() {
-    this.filteredClassGroups = this.sortByStatus(this.filteredClassGroups);
-  }
-
-  onModeSort() {
-    this.filteredClassGroups = this.sortByMode(this.filteredClassGroups);
-  }
-
-  onSemesterSort() {
-    this.filteredClassGroups = this.sortBySemester(this.filteredClassGroups);
-  }
-
-  onCourseSort() {
-    this.filteredClassGroups = this.sortByCourse(this.filteredClassGroups);
-  }
-
-  onLimitStudentsSort() {
-    this.filteredClassGroups = this.sortByLimitStudents(this.filteredClassGroups);
-  }
-
-  private sortByYear(data: any[]): any[] {
-    return data.sort((a: any, b: any) => a.year - b.year);
-  }
-
-  private sortByDescription(data: any[]): any[] {
-    return data.sort((a: any, b: any) => a.description.localeCompare(b.description));
-  }
-
-  private sortByAddress(data: any[]): any[] {
-    return data.sort((a: any, b: any) => a.address.localeCompare(b.address));
-  }
-
-  private sortByStatus(data: any[]): any[] {
-    return data.sort((a: any, b: any) => a.status.localeCompare(b.status));
-  }
-
-  private sortByMode(data: any[]): any[] {
-    return data.sort((a: any, b: any) => a.mode.localeCompare(b.mode));
-  }
-
-  private sortBySemester(data: any[]): any[] {
-    return data.sort((a: any, b: any) => a.semester.localeCompare(b.semester));
-  }
-
-  private sortByCourse(data: any[]): any[] {
-    return data.sort((a: any, b: any) => a.course.localeCompare(b.course));
-  }
-
-  private sortByLimitStudents(data: any[]): any[] {
-    return data.sort((a: any, b: any) => a.limitStudents - b.limitStudents);
-  }
+  onLpSort() {
+    // Filtruj dane, aby pominięte były undefined wartości
+    const filteredAndParsedData = this.filteredClassGroups
+      .filter((classGroup: any) => classGroup.srNo !== undefined)
+      .map((classGroup: any) => ({
+        ...classGroup,
+        srNo: Number(classGroup.srNo)
+      }));
   
+    const sortedData = filteredAndParsedData.sort((a: any, b: any) => {
+      if (this.ascendingSort) {
+        return a.srNo - b.srNo; // Sortowanie rosnące liczb
+      } else {
+        return b.srNo - a.srNo; // Sortowanie malejąco liczb
+      }
+    });
+  
+    this.filteredClassGroups = sortedData;
+    this.ascendingSort = !this.ascendingSort;
+  }
+
+  filter(event: any) {
+    this.filteredClassGroups = this.classGroupArray.filter((searchData:any) => {
+      let search = event;
+      let values = Object.values(searchData);
+      let flag = false
+      values.forEach((val: any) => {
+        if (val.toString().toLowerCase().indexOf(search) > -1) {
+          flag = true;
+          return;
+        }
+      })
+      if (flag) {
+        return searchData
+      }
+    });
+  }
+
 
   loadAllUser() {
     this.classGroupService.getAll().subscribe((res: any)=>{

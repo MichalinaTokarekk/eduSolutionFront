@@ -28,6 +28,8 @@ import { Pipe, PipeTransform } from "@angular/core";
 })
 export class SearchPipe implements PipeTransform {
   transform(value: any, args?: any): any {
+    // console.log('value', value);
+    // console.log('args', args);
     if (!value) return null;
     if (!args) return value;
 
@@ -48,15 +50,18 @@ export class SearchPipe implements PipeTransform {
       args = args.toLowerCase();
 
       return value.filter((item: any) => {
-        if (item.hasOwnProperty('difficultyLevel')) {
-            return this.itemContainsSearchTermForCourse(item, args);
-          } else if(item.hasOwnProperty('startDate')) {
-            return this.itemContainsSearchTermForSemester(item, args);
-          } else if(item.hasOwnProperty('address')) {
-            return this.itemContainsSearchTermForUser(item, args);
-          } else {
-            return this.itemContainsSearchTerm(item, args);
-          } 
+        if (item.hasOwnProperty('mode')) {
+          console.log('Entered the block for "mode" property');
+          return this.itemContainsSearchTermForClassGroup(item, args);
+        } else if (item.hasOwnProperty('difficultyLevel')) {
+          return this.itemContainsSearchTermForCourse(item, args);
+        } else if (item.hasOwnProperty('startDate')) {
+          return this.itemContainsSearchTermForSemester(item, args);
+        } else if (item.hasOwnProperty('address')) {
+          return this.itemContainsSearchTermForUser(item, args);
+        } else {
+          return null;
+        }
       });
     }
 
@@ -70,11 +75,15 @@ private isAuditField(field: string): boolean {
     return auditFields.includes(field);
   }
   
-  private itemContainsSearchTerm(item: any, searchTerm: string): boolean {
+  private itemContainsSearchTermForClassGroup(item: any, searchTerm: string): boolean {
+    console.log('item:', item);
+  console.log('searchTerm:', searchTerm);
+  console.log('Searching for classGroup:', item, 'with search term:', searchTerm);
+
     const searchableFields = ['name', 'description', 'studentsLimit', 'year', 'address', 'classGroupStatus', 'mode', 'semester', 'course'];
     const searchTerms = searchTerm.split(' ').filter(term => term.trim() !== '');
   
-    return searchTerms.every(term => {
+      return searchTerms.every(term => {
       return searchableFields.some(field => {
         if (this.isAuditField(field)) {
           return true; // Ignorujemy audytowe pola
@@ -89,13 +98,13 @@ private isAuditField(field: string): boolean {
         } else if (typeof columnValue === 'object' && columnValue !== null) {
           // Obsługa enumów (np. status, mode)
           const objectKeys = Object.keys(columnValue) as any[];
-return objectKeys.some(key => {
-  const value = columnValue[key];
-  if (typeof value === 'string' || typeof value === 'number') {
-    return value.toString().toLowerCase().includes(term.toLowerCase());
-  }
-  return false;
-});
+        return objectKeys.some(key => {
+          const value = columnValue[key];
+          if (typeof value === 'string' || typeof value === 'number') {
+            return value.toString().toLowerCase().includes(term.toLowerCase());
+          }
+          return false;
+        });
 
         } else {
           return false;
@@ -106,13 +115,11 @@ return objectKeys.some(key => {
   
 
 
-  
- 
-
 
 
 
   private itemContainsSearchTermForCourse(item: any, searchTerm: string): boolean {
+    console.log('item:', item);
     const searchableFields = ['name', 'amountToPay', 'cashAdvance', 'difficultyLevel', 'description'];
     const searchTerms = searchTerm.split(' ').filter(term => term.trim() !== '');
   
@@ -205,22 +212,7 @@ return objectKeys.some(key => {
     });
   }
   
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
+
   
   
 }

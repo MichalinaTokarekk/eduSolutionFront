@@ -11,21 +11,21 @@
             <thead>
                 <tr class="bg-success text-white">
                     <th>Lp</th>
-                    <th (click)="onNameSort()">Nazwa</th>
-                    <th (click)="onDescriptionSort()">Opis</th>
-                    <th (click)="onLimitStudentsSort()">Limit studentów</th>
-                    <th (click)="onYearSort()">Rok</th>
-                    <th (click)="onAddressSort()">Adres</th>
-                    <th (click)="onStatusSort()">Status</th>
-                    <th (click)="onModeSort()">Tryb</th>
-                    <th (click)="onSemesterSort()">Semestr</th>
-                    <th (click)="onCourseSort()">Kurs</th>
+                    <th>Nazwa</th>
+                    <th>Opis</th>
+                    <th>Limit studentów</th>
+                    <th>Rok</th>
+                    <th>Adres</th>
+                    <th>Status</th>
+                    <th>Tryb</th>
+                    <th>Semestr</th>
+                    <th>Kurs</th>
                     <th></th> 
                     <!-- <th></th> -->
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let course of classGroupArray | search: searchText;let srNo = index">
+                <tr *ngFor="let course of classGroupArray | search: searchText; let srNo = index">
                     <td>{{srNo+1}}</td>
                     <td>
                         <div *ngIf="course.isEdit" class="form-group">
