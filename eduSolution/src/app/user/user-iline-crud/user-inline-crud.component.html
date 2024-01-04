@@ -196,9 +196,12 @@
                     <div *ngIf="user.isEdit" class="form-group">
                       <mat-form-field appearance="fill" class="input-container">
                         <mat-label>Wybierz grupy</mat-label>
-                        <mat-select multiple [(ngModel)]="user.classGroups" name="classGroups">
-                          <mat-option *ngFor="let group of allClassGroups" [value]="group.id">{{ group.name }}</mat-option>
-                        </mat-select>
+                        <mat-select [(ngModel)]="user.classGroups" name="classGroups" multiple [compareWith]="compareFn">
+                            <mat-option *ngFor="let group of allClassGroups" [value]="group">
+                              {{ group.name }}
+                            </mat-option>
+                          </mat-select>
+                          
                         <div class="text-danger error-message" *ngIf="validateUser(user.classGroups) !== ''">
                           {{ validateUser(user.classGroups) }}
                         </div>

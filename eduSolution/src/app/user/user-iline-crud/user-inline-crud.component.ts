@@ -31,6 +31,8 @@ export class UserInlineCrudComponent implements OnInit {
     private loginService: LoginService, private classGroupService: ClassGroupService, private registerService: RegisterService){
 
   }
+
+  selectedGroups: { [groupId: number]: boolean } = {};
   ngOnInit(): void {
     this.loadList();
     const token = this.loginService.getToken();
@@ -48,11 +50,34 @@ export class UserInlineCrudComponent implements OnInit {
     });
 
 
-    
+    if (this.isEditing) {
+      this.userArray.forEach(user => {
+        user.classGroups.forEach((group: { id: number }) => {
+
+          this.selectedGroups[group.id] = true;
+        });
+      });
+    }
 
     
     
   }
+
+  compareFn(group1: any, group2: any): boolean {
+    return group1 && group2 ? group1.id === group2.id : group1 === group2;
+  }
+  
+
+  isSelected(group: any): boolean {
+    return this.selectedGroups[group.id] === true;
+  }
+  
+  onGroupSelectionChange(group: any): void {
+    this.selectedGroups[group.id] = !this.selectedGroups[group.id];
+  }
+
+
+
   onNameSort() {
     const filteredData =  this.filteredUsers.sort((a: any, b: any) =>
     a.name.localeCompare(b.name));
@@ -224,5 +249,11 @@ onDelete(obj: any) {
         return "";
     }
 }
+
+isGroupSelected(classGroups: any[], group: any): boolean {
+  return classGroups && classGroups.some(selectedGroup => selectedGroup.id === group.id);
+}
+
+
 
 }

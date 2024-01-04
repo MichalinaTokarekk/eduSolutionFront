@@ -96,9 +96,8 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MyCartComponent } from './offer/cart/myCart/myCart.component';
 
 import { ToastrModule } from 'ngx-toastr';
-
-
-
+import { MatOptionModule } from '@angular/material/core';
+import { MatIconModule } from '@angular/material/icon';
 
 
 
@@ -121,7 +120,9 @@ import { ToastrModule } from 'ngx-toastr';
     FormsModule,
     MatInputModule,
     MatCardModule,
-    MatMenuModule
+    MatMenuModule,
+    MatOptionModule,
+    MatIconModule
 
   ],
   declarations: [
