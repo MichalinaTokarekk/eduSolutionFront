@@ -133,3 +133,20 @@ i {
     width: 500px;
     height: 20px;
 }
+
+.col-6 {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #76787a;
+    padding: 10px;
+    color: rgb(20, 20, 20);
+    /* border-radius: 2px; */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .col-6 h2 {
+    margin: 0;
+    font-size: 24px;
+    font-weight: bold;
+  }

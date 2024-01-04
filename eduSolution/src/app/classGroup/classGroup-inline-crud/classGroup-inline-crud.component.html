@@ -1,10 +1,12 @@
 <div class="row">
-    <h2>Lista grup zajęciowych</h2>
-</div>
+    <div class="col-6">
+        <h2>Lista grup zajęciowych</h2>
+    </div>
+</div><br>
 <div class="row">
     <div class="col-8">
         <button class="btn btn-sm btn-primary" (click)="onAdd()">Dodaj nowe</button>
-        <div class="col-6">
+        <div class="col-7">
             <input type="text" [(ngModel)]="searchText" placeholder="Szukaj" class="form-control custom-search-input">
         </div><br>
         <table class="table table-bordered ">

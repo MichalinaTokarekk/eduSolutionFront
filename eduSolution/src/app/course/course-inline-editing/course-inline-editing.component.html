@@ -4,11 +4,11 @@
     </div>
 
     
-</div>
+</div><br>
 <div class="row">
     <div class="col-8">
         <button class="btn btn-sm btn-primary" (click)="onAdd()">Dodaj nowy</button>
-        <div class="col-6">
+        <div class="col-7">
             <input type="text" [(ngModel)]="searchText" placeholder="Szukaj" class="form-control custom-search-input">
         </div><br>
         <table class="table table-bordered ">
@@ -19,7 +19,6 @@
                     <th>Opis</th> 
                     <th>Poziom</th> 
                     <th>Kwota</th> 
-                    <th>Zaliczka</th> 
                     <th></th>
                 </tr>
             </thead>
@@ -66,15 +65,6 @@
                         </div>
                         <div  *ngIf="!course.isEdit">
                             {{course.amountToPay + 'zł'}}
-                        </div>
-                    </td>
-
-                    <td> 
-                        <div *ngIf="course.isEdit">
-                            <input type="text" class="form-control" [(ngModel)]="course.cashAdvance">
-                        </div>
-                        <div  *ngIf="!course.isEdit">
-                            {{course.cashAdvance + 'zł'}}
                         </div>
                     </td>
 
