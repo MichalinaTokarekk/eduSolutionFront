@@ -57,7 +57,7 @@
             </div>
             <div class="item-actions">
               <p class="item-price">Cena: {{ cartItem.classGroup.course.amountToPay | currency:'PLN':'symbol':'1.2-2' }}</p>
-              <p class="item-price">Zaliczka: {{ cartItem.classGroup.course.cashAdvance | currency:'PLN':'symbol':'1.2-2' }}</p>
+              <!-- <p class="item-price">Zaliczka: {{ cartItem.classGroup.course.cashAdvance | currency:'PLN':'symbol':'1.2-2' }}</p> -->
               <button class="remove-button" (click)="removeFromCart(cartItem.id)">Usuń z koszyka</button>
             </div>
           </div>
@@ -80,7 +80,7 @@
         </div>
       </div> -->
 
-      <div *ngFor="let cartItem of productsInMyCartArray; let i = index">
+      <!-- <div *ngFor="let cartItem of productsInMyCartArray; let i = index">
         <div class="form-outline mb-4">
           <input type="number" class="form-control" 
                  [placeholder]="'Cash Advance za ' + cartItem.classGroup.name"
@@ -91,14 +91,13 @@
             Kwota nie może być mniejsza niż {{ cartItem.classGroup.course.cashAdvance }}
           </div>
         </div>
-      </div>
+      </div> -->
       
       
       
-      <!-- Dodaj pole dla sumy cashAdvance wszystkich produktów -->
-      <div class="form-outline mb-4">
+      <!-- <div class="form-outline mb-4">
         <input type="text" class="form-control" placeholder="Suma Cash Advance" [value]="calculateTotalCashAdvance()" disabled />
-      </div>
+      </div> -->
 
       
       <!-- Right column: Payment Section -->
@@ -135,7 +134,7 @@
             </div>
   
             <div class="total-amount">
-              <p>Suma do zapłaty: {{ calculateTotalCashAdvance() | currency:'PLN':'symbol':'1.2-2' }}</p>
+              <p>Suma do zapłaty: {{ getTotalAmount() | currency:'PLN':'symbol':'1.2-2' }}</p>
             </div>
   
             <button type="button" class="btn btn-primary">Zapłać</button>
