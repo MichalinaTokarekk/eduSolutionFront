@@ -13,6 +13,8 @@ import { catchError, of, tap } from 'rxjs';
 import { HomeworkTestService } from 'src/app/homeworkTest/homeworkTest-service/homeworkTest.service';
 import { HomeworkTest } from 'src/app/interfaces/homeworkTest-interface';
 import { ClassGroupService } from 'src/app/classGroup/classGroup-service/classGroup.service';
+import { Location } from '@angular/common';
+
 
 
 /**
@@ -35,7 +37,7 @@ export class SectionManage implements OnInit {
   ascendingSort = true;
   constructor(private http: HttpClient, private route: ActivatedRoute, private sectionService: SectionService, private router: Router, 
     private dialog: MatDialog, private snackBar: MatSnackBar, private eduMaterialService: EduMaterialService, private homeworkTestService: HomeworkTestService,
-    private classGroupService: ClassGroupService){
+    private classGroupService: ClassGroupService, private location: Location){
     this.route.params.subscribe(params => {
       const courseId = params['courseId'];
       // Teraz możesz wykorzystać courseId w swoim kodzie, np. w żądaniach HTTP
@@ -114,7 +116,7 @@ export class SectionManage implements OnInit {
   }
 
   goBack() {
-    this.router.navigate(['/course-grid-view']);
+    this.location.back();
   }
 
   // loadList() {
