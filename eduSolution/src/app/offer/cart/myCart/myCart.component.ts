@@ -26,7 +26,7 @@ export class MyCartComponent implements OnInit {
   cashAdvances: number[] = [];
   ngOnInit(): void {
     this.loadAllProductsInMyCart();
-    console.log('Total Amount:', this.getTotalAmount());
+    // console.log('Total Amount:', this.getTotalAmount());
 
      this.productsInMyCartArray.forEach(cartItem => {
     this.cashAdvances.push(cartItem.classGroup.course.cashAdvance);
