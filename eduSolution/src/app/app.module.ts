@@ -98,6 +98,8 @@ import { MyCartComponent } from './offer/cart/myCart/myCart.component';
 import { ToastrModule } from 'ngx-toastr';
 import { MatOptionModule } from '@angular/material/core';
 import { MatIconModule } from '@angular/material/icon';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+
 
 
 
@@ -122,7 +124,8 @@ import { MatIconModule } from '@angular/material/icon';
     MatCardModule,
     MatMenuModule,
     MatOptionModule,
-    MatIconModule
+    MatIconModule,
+    MatButtonToggleModule
 
   ],
   declarations: [

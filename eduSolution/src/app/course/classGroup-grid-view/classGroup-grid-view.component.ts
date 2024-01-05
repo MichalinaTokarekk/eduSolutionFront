@@ -22,6 +22,7 @@ export class ClassGroupGridViewComponent implements OnInit {
   searchText: string ='';
   isEditing = false;
   ascendingSort = true;
+  selectedStatus: string | null = null;
   constructor(private http: HttpClient, private courseService: CourseService, private router: Router, private dialog: MatDialog, private snackBar: MatSnackBar,
     private userService: UserService, private loginService: LoginService, private route: ActivatedRoute, private classGroupService: ClassGroupService){
 
@@ -29,6 +30,21 @@ export class ClassGroupGridViewComponent implements OnInit {
   ngOnInit(): void {
     this.loadAllCourse();
   }
+
+  filterClassGroupsByStatus(status: string): void {
+    this.selectedStatus = status;
+  
+    // Jeśli status to "Wszystkie", wyświetl wszystkie classGroups
+    if (status === 'Wszystkie') {
+      this.filteredCourses = this.courseArray;
+    } else {
+      // W przeciwnym razie, wybierz classGroups o wybranym statusie
+      this.filteredCourses = this.courseArray.filter(
+        (classGroup) => classGroup.classGroupStatus === status
+      );
+    }
+  }
+  
   onNameSort() {
     // const filteredData =  this.filteredCourses.sort((a: any, b: any) =>
     // a.name.localeCompare(b.name));
