@@ -56,6 +56,11 @@ export class ClassGroupService {
     return this.http.get<ClassGroup[]>(`${this.CLASSGROUP_API}/findClassGroupsByCourseAndUser/${courseId}/${userId}`);
 
   }
+
+  findNameById(id: string): Observable<string> {
+    return this.http.get<string>(this.CLASSGROUP_API + '/findNameById/' + id, { responseType: 'text' as 'json' });
+  }
+  
 }
 
 
