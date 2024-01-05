@@ -44,6 +44,11 @@ export class ClassGroupGridViewComponent implements OnInit {
       );
     }
   }
+
+  goBack() {
+    this.router.navigate(['/course-grid-view']);
+  }
+  
   
   onNameSort() {
     // const filteredData =  this.filteredCourses.sort((a: any, b: any) =>
