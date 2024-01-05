@@ -1,10 +1,9 @@
 <div class="row">
     <div class="col-6">
         <h2>Lista użytkowników</h2>
-    </div>
-    
-    
+    </div> 
 </div><br>
+
 <div class="row">
     <div class="col-8">
         <button class="btn btn-sm btn-primary" (click)="onAdd()">Dodaj nowego</button>
@@ -202,9 +201,7 @@
                             </mat-option>
                           </mat-select>
                           
-                        <div class="text-danger error-message" *ngIf="validateUser(user.classGroups) !== ''">
-                          {{ validateUser(user.classGroups) }}
-                        </div>
+                        
                       </mat-form-field>
                     </div>
                   
@@ -238,3 +235,10 @@
         </table>
     </div>
 </div>
+
+
+ <!-- <footer class="footer">
+      <p>&copy; 2023 EduSolution. Wszelkie prawa zastrzeżone.</p>
+      <p>Kontakt: kontakt@example.com</p>
+  </footer>
+   -->

@@ -22,7 +22,8 @@ import { ChangePassword } from '../interfaces/changePassword-interface';
 
 })
 export class MyProfileComponent implements OnInit{
-  constructor (private userService: UserService, private loginService: LoginService, private router: Router, private snackBar: MatSnackBar, private dialogg: MatDialog) {}
+  constructor (private userService: UserService, private loginService: LoginService, private router: Router, private snackBar: MatSnackBar, 
+    private dialogg: MatDialog) {}
   user!: any
   version = VERSION;
   booleanValue!: boolean;
@@ -90,6 +91,20 @@ export class MyProfileComponent implements OnInit{
     changePassword.id = this.user.id;
     this.userService.changePassword(changePassword).subscribe(() => {
       this.isEditingPassword = !this.isEditingPassword;
+      this.openSnackBar('Hasło zostało pomyślnie zmienione');
+
+      setTimeout(() => {
+        location.reload();
+      }, 3000);
+    });
+    
+  }
+
+  openSnackBar(message: string) {
+    this.snackBar.open(message, 'Zamknij', {
+      duration: 3000, // Czas trwania okna (w milisekundach)
+      horizontalPosition: 'center',
+      verticalPosition: 'top',
     });
   }
   

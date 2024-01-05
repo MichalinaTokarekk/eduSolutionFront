@@ -15,7 +15,7 @@
   <div *ngIf="user">
     <h2>Zmień hasło</h2>
     
-    <div *ngIf="isEditingPassword">
+    <div >
       <label for="oldPassword">Stare hasło</label>
       <input type="password" id="oldPassword" [(ngModel)]="user.changePassword.oldPassword" />
       
@@ -27,8 +27,12 @@
     </div>
   
     <!-- <button (click)="toggleEditPassword(); changePassword(user.id)">{{ isEditingPassword ? 'Zapisz' : 'Edytuj' }}</button> -->
-    <button (click)="isEditingPassword ? changePassword(user.changePassword) : toggleEditPassword()">
+    <!-- <button (click)="isEditingPassword ? changePassword(user.changePassword) : toggleEditPassword()">
       {{ isEditingPassword ? 'Zapisz' : 'Edytuj' }}
+    </button> -->
+
+    <button (click)="changePassword(user.changePassword)">
+      Zapisz
     </button>
     
   </div>
