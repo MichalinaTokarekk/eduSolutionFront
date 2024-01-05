@@ -177,32 +177,38 @@
                     <td>
                         <div *ngIf="course.isEdit" class="form-group">
                           <div class="input-container">
-                            <select [(ngModel)]="course.semester" class="form-control" name="semester" [ngClass]="{'is-invalid': !course.semester}">
-                              <option *ngFor="let semester of semesters" [value]="semester">
-                                {{ semester.name }}
-                              </option>
-                            </select>
+                            <mat-select [ngModel]="course.semester" (ngModelChange)="course.semester = $event" [ngClass]="{'is-invalid': !course.semester}">
+                                <mat-option *ngFor="let semester of semesters" [value]="semester">{{semester.name}}</mat-option>
+                              </mat-select>
+                              <!-- <select [(ngModel)]="course.semester" class="form-control" name="semester" [ngClass]="{'is-invalid': !course.semesterId}">
+                                <option *ngFor="let semester of semesters" [value]="semester.id">
+                                  {{ semester.name }}
+                                </option>
+                              </select> -->
+                              
+                           
                             <div class="text-danger error-message" *ngIf="!course.semester?.name">
-                              {{ course.semester?.name }}
+                              {{course.semester?.name}}
                             </div>
                           </div>
                         </div>
                         
                         <div *ngIf="!course.isEdit">
-                          {{ course.semester?.name }}
+                          {{course.semester?.name}}
                         </div>
                       </td>
-                      
-                      
                       
                       <td>
                         <div *ngIf="course.isEdit" class="form-group">
                           <div class="input-container">
-                            <select [(ngModel)]="course.course" class="form-control" name="course" [ngClass]="{'is-invalid': !course.course}">
-                              <option *ngFor="let availableCourse of availableCourses" [value]="availableCourse">
-                                {{ availableCourse.name }}
-                              </option>
-                            </select>
+                            <!-- <mat-select [ngModel]="course.course" (ngModelChange)="course.course = $event" [ngClass]="{'is-invalid': !course.course}">
+                                <mat-option *ngFor="let availableCourse of availableCourses" [value]="availableCourse">{{availableCourse.name}}</mat-option>
+                              </mat-select>                               -->
+                              <select [(ngModel)]="course.course" class="form-control" name="course" [ngClass]="{'is-invalid': !course.courseId}">
+                                <option *ngFor="let availableCourse of availableCourses" [value]="availableCourse.id">
+                                  {{ availableCourse.name }}
+                                </option>
+                              </select>
                             <div class="text-danger error-message" *ngIf="!course.course?.name">
                               {{ course.course?.name }}
                             </div>
@@ -213,6 +219,9 @@
                           {{ course.course?.name }} {{ course.course?.difficultyLevel }}
                         </div>
                       </td>
+                      
+                      
+  
                       
                       
                       

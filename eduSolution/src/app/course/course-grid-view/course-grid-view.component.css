@@ -16,4 +16,46 @@
   .custom-grid-tile{
     margin-bottom: 100px;
   }
+
+  .col-6 {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #76787a;
+    padding: 10px;
+    color: rgb(27, 27, 27);
+    /* border-radius: 2px; */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .col-6 h2 {
+    margin: 0;
+    font-size: 24px;
+    font-weight: bold;
+  }
+  
+  .footer {
+    background-color: #333; /* Kolor tła stopki */
+    color: #fff; /* Kolor tekstu w stopce */
+    padding: 20px; /* Wewnętrzny odstęp w stopce */
+    text-align: center; /* Wyrównanie tekstu do środka */
+  }
+
+ /* Dla pewności, żeby podkreślenie zostało usunięte */
+a {
+  text-decoration: none !important;
+}
+
+.no-underline {
+  text-decoration: none !important;
+  color: black;
+  font-size: medium;
+  align-items: center;
+}
+
+a:hover {
+  transform: scale(1.05); 
+}
+
+
   

@@ -1,13 +1,48 @@
-<h2>Moje grupy zajeciowe w kursie: {{ selectedCourseName }}</h2>
+<div class="col-6">
+  <h2>Moje grupy zajeciowe w kursie: {{ selectedCourseName }}</h2>
+</div><br>
+
+
+<!-- <mat-grid-list cols="3" rowHeight="1:1" class="custom-grid-list">
+    <mat-grid-tile *ngFor="let course of courseArray" class="custom-grid-tile">
+      <a [routerLink]="['/section-manage', { courseId: course.id }]">
+        <img src="assets/images/ksiazka2.jpg" [alt]="course.name" class="course-image"/>  -->
+         <!-- <p></p><a [routerLink]="['/section-manage', { courseId: course.id }]" style="color: rgb(8, 8, 8);">{{ course.name }}</a> -->
+         <!-- <p style="display: flex; align-items: center;">
+          <a [routerLink]="['/section-manage', { courseId: course.id }]" class="no-underline" style="color: rgb(8, 8, 8); font-size: 16px; text-decoration: none; transition: transform 0.3s;">
+            {{ course.name }}
+          </a>
+        </p>
+      </a>
+
+      
+    </mat-grid-tile>
+</mat-grid-list> -->
+
 
 <mat-grid-list cols="3" rowHeight="1:1" class="custom-grid-list">
-    <mat-grid-tile *ngFor="let course of courseArray" class="custom-grid-tile">
-      <a href="">
-        <img src="assets/images/ksiazka2.jpg" [alt]="course.name" class="course-image"/> 
-         <p></p><a [routerLink]="['/section-manage', { courseId: course.id }]" style="color: rgb(8, 8, 8);">{{ course.name }}</a>
+  <mat-grid-tile *ngFor="let course of courseArray" class="custom-grid-tile">
+    <div class="tile-container">
+      <a [routerLink]="['/section-manage', { courseId: course.id }]" class="no-underline">
+        <img src="assets/images/ksiazka2.jpg" [alt]="course.name" class="course-image"/>
+        <p>
+          <a [routerLink]="['/section-manage', { courseId: course.id }]" class="no-underline" style="color: rgb(8, 8, 8); font-size: 16px; text-decoration: none; transition: transform 0.3s;">
+            {{ course.name }}
+          </a>
+        </p>
       </a>
-    </mat-grid-tile>
-  </mat-grid-list>
+    </div>
+  </mat-grid-tile>
+</mat-grid-list>
+
+
+<footer class="footer">
+  <div class="container">
+    <p>&copy; 2023 EduSolution. Wszelkie prawa zastrzeżone.</p>
+    <p>Kontakt: kontakt@example.com</p>
+  </div>
+</footer>
+  
   
 
   

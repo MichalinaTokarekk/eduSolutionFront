@@ -141,11 +141,24 @@ export class ClassGroupInlineCrudComponent implements OnInit {
   }
 
   
+  getCourseName(courseId: number): string {
+    if (this.availableCourses && this.availableCourses.length > 0) {
+      const course = this.availableCourses.find(c => c.id === courseId);
+      return course ? course.name : '';
+    }
+    return '';
+  }
+
+  
+  getSemestereName(semesterId: number): string {
+    if (this.semesters && this.semesters.length > 0) {
+      const semester = this.semesters.find(c => c.id === semesterId);
+      return semester ? semester.name : '';
+    }
+    return '';
+  }
   
   
-    
-
-
 
   onCancel(obj:any) {
     if (this.oldUserObj) {

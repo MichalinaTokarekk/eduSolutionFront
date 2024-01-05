@@ -16,4 +16,81 @@
   .custom-grid-tile{
     margin-bottom: 100px;
   }
+
+  .footer {
+    background-color: #333; /* Kolor tła stopki */
+    color: #fff; /* Kolor tekstu w stopce */
+    padding: 20px; /* Wewnętrzny odstęp w stopce */
+    text-align: center; /* Wyrównanie tekstu do środka */
+  }
+
+  .col-6 {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #76787a;
+    padding: 10px;
+    color: rgb(27, 27, 27);
+    /* border-radius: 2px; */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
   
+  .col-6 h2 {
+    margin: 0;
+    font-size: 24px;
+    font-weight: bold;
+  }
+
+  a {
+    text-decoration: none !important;
+  }
+  
+  .no-underline {
+    text-decoration: none !important;
+    color: black;
+    font-size: medium;
+    align-items: center;
+  }
+  
+  a:hover {
+    transform: scale(1.05); 
+  }
+
+
+
+
+
+  
+  .custom-grid-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap; /* Dodaje przejście do nowego wiersza, gdy brakuje miejsca w poziomie */
+  }
+
+  .custom-grid-tile {
+    flex: 0 0 30%; /* Ustawia szerokość każdej kratki na 30% szerokości kontenera */
+    margin: 10px;
+  }
+
+  .tile-container {
+    background-color: #f7f5f3;
+    padding: 20px;
+    text-align: center;
+    border-radius: 7px;
+    border: 2px solid #c0bdba;
+    height: 260px;
+    width: 200px;
+  }
+
+  .course-image {
+    max-width: 100%;
+  }
+
+  .no-underline {
+    text-decoration: none;
+  }
+
+  .no-underline:hover {
+    text-decoration: none;
+  }
