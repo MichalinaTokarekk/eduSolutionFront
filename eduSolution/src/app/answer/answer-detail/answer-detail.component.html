@@ -1,6 +1,6 @@
 <!-- answer-detail.component.html -->
 
-<div class="answer-detail-container" style="max-height: 500px; overflow: auto;" *ngIf="data.answer">
+<div class="answer-detail-container" style="max-height: 500px; overflow: auto;" *ngIf="data.answer.user">
     <h2>Odpowiedź: <p>{{ data.answer?.user?.firstName }} {{ data.answer?.user?.lastName }}</p></h2>
     <div class="answer-content">
       {{ data.answer.answerContent }}
@@ -39,8 +39,8 @@
     <div *ngIf="hasGrade">
       <p>Ocena: {{ existingGrade.value }}</p>
       <p>Opis oceny: {{ existingGrade.description }}</p>
-      <button (click)="startEditing()">Edytuj ocenę</button>
-      <button (click)="deleteGrade()" style="margin-left: 5px;">Usuń ocenę</button>
+      <button (click)="startEditing()" style="border-radius: 10px;">Edytuj ocenę</button>
+      <button (click)="deleteGrade()" style="margin-left: 5px; border-radius: 10px;">Usuń ocenę</button>
   
       <div *ngIf="isEditing" class="grade-input">
         <div class="input-field">
@@ -50,15 +50,15 @@
           <input [(ngModel)]="editedGrade.description" name="editedDescription" type="text" placeholder="Opis oceny">
         </div>
   
-        <button (click)="saveEditedGrade()">Zapisz edycję</button>
-        <button (click)="cancelEditing()">Anuluj edycję</button>
+        <button (click)="saveEditedGrade()" style="border-radius: 10px;">Zapisz edycję</button>
+        <button (click)="cancelEditing()" style="border-radius: 10px;">Anuluj edycję</button>
       </div>
-    </div>
+    </div><br>
   
-    <button (click)="updateAnswerDetails()" style="margin-top: 10px;">Zapisz zmiany</button>
+    <button (click)="updateAnswerDetails()" style="margin-top: 10px; border-radius: 10px;">Zapisz zmiany</button>
   </div>
 
-  <div *ngIf="!data.answer">
-    <p>Brak odpowiedzi dla tego użytkownika i zadania.</p>
+  <div *ngIf="!data.answer.user">
+    <!-- <p>Brak odpowiedzi dla tego użytkownika i zadania.</p> -->
   </div>
   

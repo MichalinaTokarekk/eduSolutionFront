@@ -202,6 +202,7 @@ selectedUser: any | null = null;
 openAnswerDetailsDialog(user: any, homeworkTest: any): void {
   if (homeworkTest && homeworkTest.id) {
     const classGroupId = homeworkTest.section.classGroup.id;
+    console.log('Hejo');
   // Poniższy kod będzie wykonany tylko wtedy, gdy this.homeworkTest jest zdefiniowane i ma właściwość 'id'
   this.answerService.getAnswerByHomeworkTestIdAndUserId(this.homeworkTestId, user.id).subscribe(answer => {
     const emptyAnswer = {
@@ -223,10 +224,18 @@ openAnswerDetailsDialog(user: any, homeworkTest: any): void {
       this.selectedUser = null; // Resetuj wybranego użytkownika po zamknięciu okna dialogowego
     });
   });
-} else {
+} else if (!(homeworkTest && homeworkTest.id) && !this.answerService.getAnswerByHomeworkTestIdAndUserId(homeworkTest.id, user.id)) {
+  console.log('Showing snackbar');
+  this.openSnackBarAnswer('Brak odpowiedzi dla tego użytkownika i zadania.');
+  return;
+}
+
+else {
   console.error('Błąd: this.homeworkTest jest niezdefiniowane lub nie ma właściwości "id".');
 }
 }
+
+
   
 
   aFilesByAnswer!: any;
@@ -370,6 +379,13 @@ onAddFile(homeworkTest: any) {
         duration: 5000, // Czas wyświetlania powiadomienia (w milisekundach)
       });
     }
+
+    openSnackBarAnswer(message: string): void {
+      console.log('Snackbar message:', message);
+      this.snackBar.open(message, 'Close', { duration: 3000 });
+    }
+    
+  
 
 
 

@@ -9,6 +9,7 @@ import { LoginService } from 'src/app/authorization_authentication/service/login
 import { GradeService } from 'src/app/grade/grade-service/grade.service';
 import { TypeOfTestingKnowledge } from 'src/app/interfaces/typeOfTestingKnowledge-interface';
 import { TypeOfTestingKnowledgeService } from 'src/app/typeOfTestingKnowledge/typeOfTestingKnowledge-service/typeOfTestingKnowledge.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-answer-detail',
@@ -22,10 +23,13 @@ import { TypeOfTestingKnowledgeService } from 'src/app/typeOfTestingKnowledge/ty
 
       constructor(@Inject(MAT_DIALOG_DATA) public data: any, public dialogRef: MatDialogRef<AnswerDetailComponent>, private answerService: AnswerService, private router: Router,
       private route: ActivatedRoute, private aFileService: AFileService, private homeworkTestService: HomeworkTestService, private htFileService: HTFileService,
-      private loginService: LoginService, private gradeService: GradeService, private typeOfTestingKnowledgeService: TypeOfTestingKnowledgeService) {
+      private loginService: LoginService, private gradeService: GradeService, private typeOfTestingKnowledgeService: TypeOfTestingKnowledgeService, private snackBar: MatSnackBar) {
       this.editedComment = data.answer?.comment || ''; // Dodano sprawdzenie, czy data.answer jest zdefiniowane
       this.editedAnswerStatus = data.answer?.answerStatus || '';
-      this.loadAFilesByAnswerId(data.answer.id);
+
+      if(data.answer.user) {
+        this.loadAFilesByAnswerId(data.answer.id);
+      }
     }
     homeworkTest: any = {};
     htFiles!: any[]; 
@@ -43,13 +47,15 @@ import { TypeOfTestingKnowledgeService } from 'src/app/typeOfTestingKnowledge/ty
           this.allKnowledge = knowledge;
       });
 
-      this.gradeService.getGradeByAnswerId(this.data.answer.id).subscribe((grade: any) => {
-        if (grade) {
-          this.hasGrade = true;
-          this.existingGrade = grade;
-          this.editedGrade = { ...grade };
-        }
-      });
+      if(this.data.answer.user) {
+        this.gradeService.getGradeByAnswerId(this.data.answer.id).subscribe((grade: any) => {
+          if (grade) {
+            this.hasGrade = true;
+            this.existingGrade = grade;
+            this.editedGrade = { ...grade };
+          }
+        });
+    }
       
       
     }
@@ -216,5 +222,12 @@ import { TypeOfTestingKnowledgeService } from 'src/app/typeOfTestingKnowledge/ty
       }
     }
 
+
+    openSnackBar() {
+      this.snackBar.open('Brak odpowiedzi dla tego użytkownika i zadania.', 'Zamknij', {
+        duration: 3000, // czas wyświetlania snackbara w milisekundach
+      });
+  }
+  
 }
 
