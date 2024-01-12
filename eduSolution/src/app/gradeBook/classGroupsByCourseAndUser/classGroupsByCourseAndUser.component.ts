@@ -21,6 +21,7 @@ import { Course } from 'src/app/interfaces/course-interface';
 import { ClassGroup } from 'src/app/interfaces/classGroup-interface';
 import { CertificateConfirmationService } from 'src/app/certificateConfirmation/certificateConfirmation-service/certificateConfirmation.service';
 import { CertificateConfirmation } from 'src/app/interfaces/certificateConfirmation-interface';
+import { Location } from '@angular/common';
 
 
 /**
@@ -39,7 +40,7 @@ grades!: any[];
 
 constructor(private http: HttpClient, private route: ActivatedRoute, private router: Router, private dialog: MatDialog, private snackBar: MatSnackBar, 
             private classGroupService: ClassGroupService, private loginService: LoginService, private userService: UserService, private courseService: CourseService,
-            private gradeService: GradeService, private certificateConfirmationService: CertificateConfirmationService){
+            private gradeService: GradeService, private certificateConfirmationService: CertificateConfirmationService, private location: Location){
                 this.grades = []; 
 
                 
@@ -296,7 +297,9 @@ openDetailEditGradeDialog(studentId: number, courseId: number, studentFirstName:
   }
 
   
-  
+  goBack() {
+    this.location.back();
+  }
   
 
 }

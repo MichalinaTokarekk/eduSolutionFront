@@ -9,6 +9,7 @@ import { CourseService } from 'src/app/course/course-service/course.service';
 import { LoginService } from 'src/app/authorization_authentication/service/login.service';
 import { UserService } from 'src/app/user/user-service/user.service';
 import { ClassGroupService } from 'src/app/classGroup/classGroup-service/classGroup.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-basic-inline-editing',
@@ -23,7 +24,8 @@ export class TeachingClassGroupsComponent implements OnInit {
   isEditing = false;
   ascendingSort = true;
   constructor(private http: HttpClient, private courseService: CourseService, private router: Router, private dialog: MatDialog, private snackBar: MatSnackBar,
-                private loginService: LoginService, private userService: UserService, private route: ActivatedRoute, private classGroupService: ClassGroupService){
+                private loginService: LoginService, private userService: UserService, private route: ActivatedRoute, private classGroupService: ClassGroupService,
+                private location: Location){
 
   }
   ngOnInit(): void {
@@ -92,6 +94,7 @@ export class TeachingClassGroupsComponent implements OnInit {
 
   courseId!: number;
   selectedCourseName: string = '';
+  selectedCourseDifficultyLevel: string = '';
   loadAllCourse() {
     const token = this.loginService.getToken();
     const _token = token.split('.')[1];
@@ -103,11 +106,31 @@ export class TeachingClassGroupsComponent implements OnInit {
             this.courseArray = res;
             this.filteredCourses= res;
             this.selectedCourseName = res.length > 0 ? res[0].course.name : '';
+            this.selectedCourseDifficultyLevel = res.length > 0 ? res[0].course.difficultyLevel : '';
         })
     });
    
   }
 
 
+  selectedStatus: string | null = null;
+  filterClassGroupsByStatus(status: string): void {
+    this.selectedStatus = status;
+  
+    // Jeśli status to "Wszystkie", wyświetl wszystkie classGroups
+    if (status === 'Wszystkie') {
+      this.filteredCourses = this.courseArray;
+    } else {
+      // W przeciwnym razie, wybierz classGroups o wybranym statusie
+      this.filteredCourses = this.courseArray.filter(
+        (classGroup) => classGroup.classGroupStatus === status
+      );
+    }
+  }
+
+
+  goBack() {
+    this.location.back();
+  }
 
 }
