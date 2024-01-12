@@ -37,6 +37,23 @@ export class LoginService {
     this.tokenresp = JSON.parse(atob(_token));
     return this.tokenresp.role;
   }
+
+  getRoleByToken2(): string | null {
+    const token = this.getToken();
+    
+    if (token) {
+      const _token = token.split('.')[1];
+      const _atobData = atob(_token);
+      const _finalData = JSON.parse(_atobData);
+  
+      if (_finalData.role) {
+        return _finalData.role;
+      }
+    }
+  
+    return null;
+  }
+  
   
   haveAccess(){
     var logginToken=localStorage.getItem('token')||'';
@@ -97,6 +114,9 @@ export class LoginService {
     }
     return null;
   }
+
+
+  
   
   
 

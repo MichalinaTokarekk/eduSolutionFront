@@ -71,17 +71,17 @@ import { MatSnackBar } from '@angular/material/snack-bar';
     updateAnswerDetails() {
       this.data.answer.comment = this.editedComment;
       this.data.answer.answerStatus = this.editedAnswerStatus;
-     
+      const previousUpdatedAt = this.data.answer.updatedAt;
         this.answerService.updateAnswer(this.data.answer).subscribe(updatedAnswer => {
             console.log('Odpowiedź została zaktualizowana.');
             console.log('editedComment:', this.editedComment);
             console.log('editedAnswerStatus:', this.editedAnswerStatus);
+            this.data.answer.updatedAt = previousUpdatedAt;
           }, error => {
             console.error('Błąd podczas aktualizacji odpowiedzi:', error);
           });
           location.reload();
 
-          
     }
       
     downloadFileById(fileId: number): void {
