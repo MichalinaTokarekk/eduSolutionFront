@@ -1,0 +1,16 @@
+<div class="additional-block">
+    <h3 class="add-grade-heading">Dodaj wynik certyfikatu dla {{ studentFirstName }} {{ studentLastName }}</h3>
+    <div class="grade-input">
+        <div class="input-field">
+            <select class="value-input" [(ngModel)]="newGained" name="newGained" required>
+              <option value="true">Zaliczone</option>
+              <option value="false">Niezaliczone</option>
+            </select>
+          </div>
+          
+      <div class="input-field">
+        <input class="value-input" [(ngModel)]="newPercentageScore" name="newPercentageScore" type="number" placeholder="Wynik" required>
+      </div>
+      <button class="add-button" (click)="addNewCertificateConfirmation()">Dodaj</button>
+    </div>
+  </div>

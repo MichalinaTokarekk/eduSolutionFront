@@ -110,7 +110,7 @@
             <td>
 
               <div *ngIf="certificates[user.id]">
-                <p>{{ certificates[user.id].gained ? 'Zaliczony' : 'Niezaliczony' }}</p>
+                <p>{{certificates[user.id].percentageScore}}% {{ certificates[user.id].gained ? 'Zaliczony' : 'Niezaliczony' }}  </p>
               </div>
             
               <div *ngIf="!certificates[user.id]">
@@ -128,6 +128,7 @@
             <button (click)="openAddGradeDetailDialog(user.id, classGroup.id, user.firstName, user.lastName)" class="add-grade-button">Dodaj ocenę</button>
             <button *ngIf="isFinalGradeAvailable(user) == false" (click)="openAddFinalGradeDetailDialog(user.id, classGroup.id, user.firstName, user.lastName)" class="add-grade-button">Dodaj ocenę końcową</button>
             <button (click)="openDetailEditGradeDialog(user.id, classGroup.id, user.firstName, user.lastName)" class="add-grade-button">Pokaż szczegóły</button>
+            <button *ngIf="!certificates[user.id]" (click)="openAddCertificateCConfirmationDetailDialog(user.id, classGroup.id, user.firstName, user.lastName)" class="add-grade-button">Dodaj wynik certyfikatu</button>
           </tr>
         </tbody>
       </table>

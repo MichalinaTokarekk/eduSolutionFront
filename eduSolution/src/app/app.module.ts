@@ -99,6 +99,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { MatOptionModule } from '@angular/material/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { AddCertificateConfirmationDetailComponent } from './certificateConfirmation/addCertificateConfirmationDetail/addCertificateConfirmationDetail.component';
 
 
 
@@ -184,7 +185,8 @@ export class MaterialModule { }
     TeachingCoursesComponent,
     CoursesByStudentComponent,
     AppComponent,
-    MyCartComponent
+    MyCartComponent,
+    AddCertificateConfirmationDetailComponent
   ],
   imports: [
     BrowserModule,

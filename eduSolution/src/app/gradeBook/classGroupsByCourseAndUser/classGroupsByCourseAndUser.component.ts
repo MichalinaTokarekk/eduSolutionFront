@@ -22,6 +22,7 @@ import { ClassGroup } from 'src/app/interfaces/classGroup-interface';
 import { CertificateConfirmationService } from 'src/app/certificateConfirmation/certificateConfirmation-service/certificateConfirmation.service';
 import { CertificateConfirmation } from 'src/app/interfaces/certificateConfirmation-interface';
 import { Location } from '@angular/common';
+import { AddCertificateConfirmationDetailComponent } from 'src/app/certificateConfirmation/addCertificateConfirmationDetail/addCertificateConfirmationDetail.component';
 
 
 /**
@@ -246,6 +247,22 @@ openDetailEditGradeDialog(studentId: number, courseId: number, studentFirstName:
     }
     });
   }
+
+
+
+  openAddCertificateCConfirmationDetailDialog(studentId: number, courseId: number, studentFirstName: string, studentLastName: string): void {
+    const dialogRef = this.dialog.open(AddCertificateConfirmationDetailComponent, {
+      width: '510px', // dostosuj szerokość do swoich potrzeb
+      height: '349px',
+      data: { studentId, courseId, studentFirstName, studentLastName, }, // przekaż odpowiedź jako dane
+    });
+  
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === 'saved') {
+        // this.answerDetailComponent.updateAnswerDetails();
+      }
+    });
+  }
   
   
   
@@ -273,6 +290,9 @@ openDetailEditGradeDialog(studentId: number, courseId: number, studentFirstName:
     }
     return false; 
   }
+
+
+
   
 
   obliczSredniaWazona(oceny: Grade[]): number {
