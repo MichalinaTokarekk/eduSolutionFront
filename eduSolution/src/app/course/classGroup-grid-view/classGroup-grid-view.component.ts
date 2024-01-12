@@ -45,6 +45,9 @@ export class ClassGroupGridViewComponent implements OnInit {
     }
   }
 
+
+  
+
   goBack() {
     this.router.navigate(['/course-grid-view']);
   }
