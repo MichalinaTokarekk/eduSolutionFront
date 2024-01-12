@@ -27,6 +27,7 @@ import { UserService } from 'src/app/user/user-service/user.service';
 import { AnswerDetailComponent } from 'src/app/answer/answer-detail/answer-detail.component';
 import { ChangeDetectionStrategy } from '@angular/core';
 import { Course } from 'src/app/interfaces/course-interface';
+import { Location } from '@angular/common';
 
 
 
@@ -49,7 +50,7 @@ htFileIdContainer: any;
 
   constructor(private http: HttpClient, private route: ActivatedRoute, private router: Router, private dialog: MatDialog, private snackBar: MatSnackBar, 
     private homeworkTestService: HomeworkTestService, private htFileService: HTFileService, private answerService: AnswerService, private loginService: LoginService,
-    private aFileService: AFileService, private courseService: CourseService, private userService: UserService){
+    private aFileService: AFileService, private courseService: CourseService, private userService: UserService, private location: Location){
   }
 
 htFilesByHomeworkTest!: Array<any>;
@@ -696,7 +697,10 @@ downloadFileById(fileId: number): void {
   }
   
   
-  
+  goBack() {
+    this.location.back();
+  }
+
   
         
 

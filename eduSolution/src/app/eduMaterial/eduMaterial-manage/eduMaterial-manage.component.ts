@@ -11,6 +11,7 @@ import { EduMaterial } from 'src/app/interfaces/eduMaterial-interface';
 import { Subscription, catchError, of, switchMap, tap } from 'rxjs';
 import { EMFile } from 'src/app/interfaces/emFile-interface';
 import { EMFileService } from 'src/app/emFile/emFile-service/emFile.service';
+import { Location } from '@angular/common';
 
 
 /**
@@ -26,7 +27,7 @@ eduMaterial: any = {};
   emFileIdContainer: any;
 
   constructor(private http: HttpClient, private route: ActivatedRoute, private router: Router, private dialog: MatDialog, private snackBar: MatSnackBar, 
-    private eduMaterialService: EduMaterialService, private emFileService: EMFileService){
+    private eduMaterialService: EduMaterialService, private emFileService: EMFileService, private location: Location){
   }
 
   emFilesByEduMaterial!: Array<any>;
@@ -310,7 +311,9 @@ downloadFileById(fileId: number): void {
   }
 
 
-
+  goBack() {
+    this.location.back();
+  }
   
   
 

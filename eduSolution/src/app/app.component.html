@@ -353,12 +353,12 @@
 
     <button mat-icon-button>
       <a [routerLink]="isLoggedIn() ? 'login' : 'login'" class="menulink">
-        {{ isLoggedIn() ? 'Log out' : 'Log in' }}
+        {{ isLoggedIn() ? 'Wyloguj się' : 'Zaloguj się' }}
       </a>
     </button>
 
     <button mat-icon-button *ngIf="!isLoggedIn()">
-      <a [routerLink]="['/register-edit']" class="registerlink">Sign up</a>
+      <a [routerLink]="['/register-edit']" class="registerlink">Zarejestruj się</a>
   </button>
 
   <button mat-icon-button *ngIf="isLoggedIn()">
