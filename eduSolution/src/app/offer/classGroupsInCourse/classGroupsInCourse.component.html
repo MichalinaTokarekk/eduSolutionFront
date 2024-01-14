@@ -1,4 +1,4 @@
-<mat-grid-list cols="3" rowHeight="1:1" class="custom-grid-list">
+<!-- <mat-grid-list cols="3" rowHeight="1:1" class="custom-grid-list">
     <p>{{ selectedCourseDescription }}</p>
     <h2>Dostępne grupy w kursie: {{selectedCourseName}}</h2>
     <mat-grid-tile *ngFor="let classGroup of classGroupArray" class="custom-grid-tile">
@@ -8,6 +8,24 @@
          <button type="button" class="btn btn-outline-primary">Kup</button>
          <button type="button" class="btn btn-outline-primary" (click)="addToCart(classGroup)">Dodaj do koszyka</button>
       </a>
+    </mat-grid-tile>
+  </mat-grid-list> -->
+
+  <h1>Wybrane grupy zajęciowe w kursie {{ selectedCourseName }}</h1><br><br>
+  
+  
+  <mat-grid-list cols="3" rowHeight="1:1" class="custom-grid-list">
+    <mat-grid-tile *ngFor="let course of filteredCourses" class="custom-grid-tile">
+      <div class="tile-container">
+        <a [routerLink]="['/section-manage', { courseId: course.id }]" class="no-underline">
+          <img src="assets/images/ksiazka2.jpg" [alt]="course.name" class="course-image"/>
+          <p>
+            <a [routerLink]="['/section-manage', { courseId: course.id }]" class="no-underline" style="color: rgb(8, 8, 8); font-size: 16px; text-decoration: none; transition: transform 0.3s;">
+              {{ course.name }}
+            </a>
+          </p>
+        </a>
+      </div>
     </mat-grid-tile>
   </mat-grid-list>
   

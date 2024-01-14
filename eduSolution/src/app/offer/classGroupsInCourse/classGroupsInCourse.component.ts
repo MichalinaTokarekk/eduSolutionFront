@@ -63,6 +63,9 @@ export class ClassGroupsInCourseComponent implements OnInit {
   courseId!: number;
   selectedCourseName: string = '';
   selectedCourseDescription: string = '';
+  pendingClassGroups: any[] = [];
+  inProgressClassGroups: any[] = [];
+  completedClassGroups: any[] = [];
   loadAllCourse() {
     this.route.params.subscribe(params => {
         this.courseId = params['courseId'];
@@ -71,6 +74,10 @@ export class ClassGroupsInCourseComponent implements OnInit {
             this.filteredCourses= res;
             this.selectedCourseName = res.length > 0 ? res[0].course.name : '';
             this.selectedCourseDescription = res.length > 0 ? res[0].course.description : '';
+
+            this.pendingClassGroups = this.classGroupArray.filter(group => group.classGroupStatus === 'OCZEKUJĄCY');
+            this.inProgressClassGroups = this.classGroupArray.filter(group => group.classGroupStatus === 'WTRAKCIE');
+            this.completedClassGroups = this.classGroupArray.filter(group => group.classGroupStatus === 'ZAKOŃCZONY');
         })
     });
    
@@ -112,5 +119,20 @@ export class ClassGroupsInCourseComponent implements OnInit {
         
     }
   
+
+    selectedStatus: string | null = null;
+    filterClassGroupsByStatus(status: string): void {
+      this.selectedStatus = status;
+    
+      // Jeśli status to "Wszystkie", wyświetl wszystkie classGroups
+      if (status === 'Wszystkie') {
+        this.filteredCourses = this.classGroupArray;
+      } else {
+        // W przeciwnym razie, wybierz classGroups o wybranym statusie
+        this.filteredCourses = this.classGroupArray.filter(
+          (classGroup) => classGroup.classGroupStatus === status
+        );
+      }
+    }
 
 }

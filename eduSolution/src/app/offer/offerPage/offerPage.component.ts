@@ -55,10 +55,13 @@ export class OfferPageComponent implements OnInit {
     });
   }
 
+  uniqueCourseNames: string[] = []; 
   loadAllCourse() {
     this.courseService.getAll().subscribe((res: any)=>{
       this.courseArray = res;
       this.filteredCourses= res;
+      const uniqueCourseNamesSet = new Set(this.courseArray.map((course) => course.name));
+      this.uniqueCourseNames = Array.from(uniqueCourseNamesSet);
     })
   }
 
@@ -67,5 +70,22 @@ export class OfferPageComponent implements OnInit {
     this.router.navigate(['/section-manage', courseId]);
 }
   
+
+selectedCourseName: string | null = null;
+  filterClassGroupsByStatus(status: string): void {
+    // console.log('Przed filtrowaniem:', this.courseArray);
+    this.selectedCourseName = status;
+
+    // Jeśli status to "Wszystkie", wyświetl wszystkie classGroups
+    if (status === 'Wszystkie') {
+      this.filteredCourses = this.courseArray;
+    } else {
+      // W przeciwnym razie, wybierz classGroups o wybranym statusie
+      this.filteredCourses = this.courseArray.filter(
+        (course) => course.name === status
+      );
+    }
+    // console.log('Po filtrowaniu:', this.filteredCourses);
+  }
 
 }
