@@ -139,3 +139,38 @@ i {
     font-size: 24px;
     font-weight: bold;
   }
+
+  /* Przyciski dla dodawania oceny, szczegółów, itp. */
+.add-grade-button {
+  background-color: #d3d3d3; /* Jasnoszary kolor tła */
+  color: #333; /* Ciemny kolor tekstu */
+  border: none;
+  padding: 5px 12px; /* Mniejsze paddingi dla mniejszego przycisku */
+  margin-right: -15px; /* Mniejsze marginesy */
+  cursor: pointer;
+  border-radius: 3px; /* Lekko zaokrąglone rogi */
+  margin-top: 10px;
+  margin-left: 18px;
+}
+
+.add-grade-button:hover {
+  background-color: #c0c0c0; /* Jaśniejszy szary po najechaniu myszką */
+}
+
+/* Przycisk dla dodawania oceny końcowej */
+.add-grade-button.final-grade {
+  background-color: #FFA07A; /* Kolor tła dla oceny końcowej */
+}
+
+.add-grade-button.final-grade:hover {
+  background-color: #FF7F50; /* Kolor tła po najechaniu myszką */
+}
+
+/* Przycisk dla dodawania wyniku certyfikatu */
+.add-grade-button.add-certificate {
+  background-color: #98FB98; /* Kolor tła dla wyniku certyfikatu */
+}
+
+.add-grade-button.add-certificate:hover {
+  background-color: #90EE90; /* Kolor tła po najechaniu myszką */
+}

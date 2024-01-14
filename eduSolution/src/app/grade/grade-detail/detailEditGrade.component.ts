@@ -309,18 +309,15 @@ saveChanges() {
 
     deleteCertificate() {
       if (this.certificateByUser && this.certificateByUser.length > 0) {
-        const certificateId = this.certificateByUser[0].id; // Załóżmy, że istnieje pole id w Twoim certyfikacie
+        const certificateId = this.certificateByUser[0].id; 
   
-        // Wywołaj metodę usunięcia certyfikatu z serwisu lub innego miejsca
         this.certificateService.remove(certificateId).subscribe(
           response => {
             console.log('Certyfikat został usunięty.');
-            // Tutaj możesz dodać dodatkowe kroki po usunięciu, np. przekierowanie, odświeżenie danych itp.
           },
           error => {
             console.error('Błąd podczas usuwania certyfikatu', error);
             location.reload();
-            // Obsłuż błąd, np. wyświetl komunikat dla użytkownika
           }
         );
       }

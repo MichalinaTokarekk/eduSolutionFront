@@ -63,7 +63,7 @@ const routes: Routes = [
   {path: 'myProfile',component: MyProfileComponent},
   {path: 'teachingCourses',component: TeachingCoursesComponent},
   {path: 'coursesByStudent-view',component: CoursesByStudentComponent},
-  {path: 'myCart',component: MyCartComponent},
+  // {path: 'myCart',component: MyCartComponent},
 
   
 ];

@@ -29,6 +29,7 @@ export class CoursesByStudentComponent implements OnInit {
     this.loadAllCourse();
   }  
 
+  uniqueCourseNames: string[] = []; 
   loadAllCourse() {
     const token = this.loginService.getToken();
     const _token = token.split('.')[1];
@@ -37,7 +38,26 @@ export class CoursesByStudentComponent implements OnInit {
     this.courseService.findCoursesByUserId(_finalData.id).subscribe((res: any)=>{
       this.courseArray = res;
       this.filteredCourses= res;
+      const uniqueCourseNamesSet = new Set(this.courseArray.map((course) => course.name));
+      this.uniqueCourseNames = Array.from(uniqueCourseNamesSet);
     })
+  }
+
+  selectedCourseName: string | null = null;
+  filterClassGroupsByStatus(status: string): void {
+    // console.log('Przed filtrowaniem:', this.courseArray);
+    this.selectedCourseName = status;
+
+    // Jeśli status to "Wszystkie", wyświetl wszystkie classGroups
+    if (status === 'Wszystkie') {
+      this.filteredCourses = this.courseArray;
+    } else {
+      // W przeciwnym razie, wybierz classGroups o wybranym statusie
+      this.filteredCourses = this.courseArray.filter(
+        (course) => course.name === status
+      );
+    }
+    // console.log('Po filtrowaniu:', this.filteredCourses);
   }
 
 

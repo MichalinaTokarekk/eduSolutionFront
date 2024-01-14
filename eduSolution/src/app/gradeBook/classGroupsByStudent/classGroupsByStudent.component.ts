@@ -13,6 +13,7 @@ import { TypeOfTestingKnowledge } from 'src/app/interfaces/typeOfTestingKnowledg
 import { StudentDetailGradeComponent } from 'src/app/grade/grade-detail/studentDetailGrade.component';
 import { UserService } from 'src/app/user/user-service/user.service';
 import { ClassGroupService } from 'src/app/classGroup/classGroup-service/classGroup.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'courses-by-student',
@@ -28,7 +29,7 @@ export class ClassGroupsByStudentComponent implements OnInit {
   ascendingSort = true;
   constructor(private http: HttpClient, private courseService: CourseService, private router: Router, private dialog: MatDialog, private snackBar: MatSnackBar,
                 private loginService: LoginService, private gradeService: GradeService, private route: ActivatedRoute, private userService: UserService, 
-                private classGroupService: ClassGroupService){
+                private classGroupService: ClassGroupService, private location: Location){
 
   }
 
@@ -65,6 +66,7 @@ export class ClassGroupsByStudentComponent implements OnInit {
   }
 
   selectedCourseName: string = '';
+  selectedCourseDifficultyLevel: string = '';
   loadAllCourse() {
     const token = this.loginService.getToken();
     const _token = token.split('.')[1];
@@ -76,6 +78,7 @@ export class ClassGroupsByStudentComponent implements OnInit {
             this.courseArray = res;
             this.filteredCourses= res;
             this.selectedCourseName = res.length > 0 ? res[0].course.name : '';
+            this.selectedCourseDifficultyLevel = res.length > 0 ? res[0].course.difficultyLevel : '';
         })
     });
    
@@ -174,4 +177,27 @@ loadGradesByStudentId(studentId: number, courseId: number) {
   }
   }
 
+
+  selectedStatus: string | null = null;
+  filterClassGroupsByStatus(status: string): void {
+    this.selectedStatus = status;
+  
+    // Jeśli status to "Wszystkie", wyświetl wszystkie classGroups
+    if (status === 'Wszystkie') {
+      this.filteredCourses = this.courseArray;
+    } else {
+      // W przeciwnym razie, wybierz classGroups o wybranym statusie
+      this.filteredCourses = this.courseArray.filter(
+        (classGroup) => classGroup.classGroupStatus === status
+      );
+    }
+  }
+
+
+  goBack() {
+    this.location.back();
+  }
+
+  
+  
 }
