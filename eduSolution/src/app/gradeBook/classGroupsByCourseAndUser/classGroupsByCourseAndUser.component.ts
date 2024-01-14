@@ -198,7 +198,7 @@ mapGradesToString(grades: Grade[]): string {
 
 
 openDetailEditGradeDialog(studentId: number, courseId: number, studentFirstName: string, studentLastName: string): void {
-    this.gradeService.findAllByStudentAndClassGroup(studentId, courseId).subscribe((grades: any) => {
+  this.gradeService.findAllByStudentAndClassGroup(studentId, courseId).subscribe((grades: any) => {
       const typesOfGrades = grades.map((grade: Grade) => grade.typeOfTestingKnowledge);
       const firstGrade = grades[0];
   
@@ -217,6 +217,7 @@ openDetailEditGradeDialog(studentId: number, courseId: number, studentFirstName:
           teacherFirstName,
           teacherLastName,
           allTypes: typesOfGrades,
+          
         },
       });
   
@@ -254,7 +255,7 @@ openDetailEditGradeDialog(studentId: number, courseId: number, studentFirstName:
     const dialogRef = this.dialog.open(AddCertificateConfirmationDetailComponent, {
       width: '480px', // dostosuj szerokość do swoich potrzeb
       height: '260px',
-      data: { studentId, courseId, studentFirstName, studentLastName, }, // przekaż odpowiedź jako dane
+      data: { studentId, courseId, studentFirstName, studentLastName}, // przekaż odpowiedź jako dane
     });
   
     dialogRef.afterClosed().subscribe(result => {

@@ -38,7 +38,7 @@ export class CertificateConfirmationService {
     return result;
   }
 
-  remove (id: string):Observable<string> {
+  remove (id: number):Observable<string> {
     return this.http.delete<string>(this.CERTIFICATIONCONFIRMATION_API + '/deleteCertificateConfirmation/' + id);
   }
 

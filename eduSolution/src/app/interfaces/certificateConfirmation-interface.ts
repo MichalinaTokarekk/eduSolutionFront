@@ -6,4 +6,5 @@ export interface CertificateConfirmation {
     gained: boolean;
     user: User;
     classGroup: ClassGroup;
+    percentageScore: number;
 }

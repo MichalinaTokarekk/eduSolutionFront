@@ -9,6 +9,8 @@ import { GradeService } from '../grade-service/grade.service';
 import { TypeOfTestingKnowledge } from 'src/app/interfaces/typeOfTestingKnowledge-interface';
 import { Grade } from 'src/app/interfaces/grade-interface';
 import { TypeOfTestingKnowledgeService } from 'src/app/typeOfTestingKnowledge/typeOfTestingKnowledge-service/typeOfTestingKnowledge.service';
+import { CertificateConfirmation } from 'src/app/interfaces/certificateConfirmation-interface';
+import { CertificateConfirmationService } from 'src/app/certificateConfirmation/certificateConfirmation-service/certificateConfirmation.service';
 
 @Component({
   selector: 'app-answer-detail',
@@ -72,7 +74,34 @@ import { TypeOfTestingKnowledgeService } from 'src/app/typeOfTestingKnowledge/ty
       <button (click)="deleteGrade(i)" class="delete-button">Usuń</button>
     </div>
   </ng-container>
+
+
+  <h4>Certyfikat:</h4>
+<ng-container *ngIf="certificateByUser && certificateByUser.length > 0">
+  <div class="grade-item" *ngIf="certificateByUser[0]">
+    <label for="percentageScore">Wynik:</label>
+    <input type="number" id="percentageScore" [(ngModel)]="certificateByUser[0].percentageScore" /><br>
+
+    <label for="gained">Status:</label>
+    <input type="checkbox" id="gained" [(ngModel)]="certificateByUser[0].gained" />
+    <span *ngIf="certificateByUser[0].gained; else notGained">Zaliczony</span>
+    <ng-template #notGained>Niezaliczony</ng-template><br>
+
+    <button (click)="saveChanges()">Zapisz zmiany</button>
+    <button (click)="deleteCertificate()">Usuń</button>
+  </div>
+</ng-container>
+
+
+
+
+  
 </div>
+
+
+
+
+
 
 
 
@@ -150,13 +179,14 @@ import { TypeOfTestingKnowledgeService } from 'src/app/typeOfTestingKnowledge/ty
     typeOfTestingKnowledge: TypeOfTestingKnowledge[] = [];
     allKnowledge: TypeOfTestingKnowledge[] = [];
     selectedKnowledge: number[] = [];
-
+    certificateByUser: CertificateConfirmation[] = [];
 
 
     
     constructor(@Inject(MAT_DIALOG_DATA) public data: any, public dialogRef: MatDialogRef<DetailEditGradeComponent>, private router: Router,
                         private route: ActivatedRoute, private aFileService: AFileService, private homeworkTestService: HomeworkTestService, private htFileService: HTFileService,
-                        private loginService: LoginService, private gradeService: GradeService, private typeOfTestingKnowledgeService: TypeOfTestingKnowledgeService) {
+                        private loginService: LoginService, private gradeService: GradeService, private typeOfTestingKnowledgeService: TypeOfTestingKnowledgeService,
+                        private certificateService: CertificateConfirmationService) {
         this.grades = data.grades;
         this.studentFirstName = data.studentFirstName;
         this.studentLastName = data.studentLastName;
@@ -182,6 +212,53 @@ ngOnInit(): void {
     this.typeOfTestingKnowledgeService.getAll().subscribe((knowledge: TypeOfTestingKnowledge[]) => {
         this.allKnowledge = knowledge;
     });
+
+    // this.certificateService.findCertificateConfirmationByUserIdAndClassGroupId(this.studentId, this.courseId).subscribe(
+    //   (certificates: CertificateConfirmation | CertificateConfirmation[]) => {
+    //     if (Array.isArray(certificates)) {
+    //       this.certificateByUser = certificates.filter(certificate => 
+    //         certificate.user.id === this.studentId && certificate.classGroup.id === this.courseId
+    //       );
+    
+    //       console.log('Certificates for user:', this.certificateByUser);
+    //     } else {
+    //       console.error('Invalid response: Expected an array of certificates, but received:', certificates);
+    //     }
+    //   },
+    //   (error) => {
+    //     console.error('Error fetching certificates:', error);
+    //   }
+    // );
+    
+
+    this.certificateService.findCertificateConfirmationByUserIdAndClassGroupId(this.studentId, this.courseId).subscribe(
+      (certificate: CertificateConfirmation | CertificateConfirmation[]) => {
+        if (Array.isArray(certificate)) {
+          this.certificateByUser = certificate;
+        } else {
+          this.certificateByUser = [certificate];
+        }
+        console.log('Certificate for user:', this.certificateByUser);
+      },
+      (error) => {
+        console.error('Error fetching certificate:', error);
+      }
+    );
+    
+    
+    
+    
+}
+
+saveChanges() {
+  this.certificateService.update(this.certificateByUser[0]).subscribe(
+    response => {
+      console.log('Zapisano zmiany');
+    },
+    error => {
+      console.error('Błąd podczas zapisywania zmian', error);
+    }
+  );
 }
 
 
@@ -192,6 +269,11 @@ ngOnInit(): void {
     toggleEditing(index: number) {
         this.isEditing[index] = !this.isEditing[index];
       }
+
+      isCertificate(value: any): value is CertificateConfirmation {
+        return value && value.gained !== undefined;
+      }
+      
    
 
     saveEditing(index: number) {
@@ -223,6 +305,25 @@ ngOnInit(): void {
             this.gradesByUser[this.studentId].splice(index, 1); // Usuń ocenę z lokalnej tablicy
         });
         location.reload();
+    }
+
+    deleteCertificate() {
+      if (this.certificateByUser && this.certificateByUser.length > 0) {
+        const certificateId = this.certificateByUser[0].id; // Załóżmy, że istnieje pole id w Twoim certyfikacie
+  
+        // Wywołaj metodę usunięcia certyfikatu z serwisu lub innego miejsca
+        this.certificateService.remove(certificateId).subscribe(
+          response => {
+            console.log('Certyfikat został usunięty.');
+            // Tutaj możesz dodać dodatkowe kroki po usunięciu, np. przekierowanie, odświeżenie danych itp.
+          },
+          error => {
+            console.error('Błąd podczas usuwania certyfikatu', error);
+            location.reload();
+            // Obsłuż błąd, np. wyświetl komunikat dla użytkownika
+          }
+        );
+      }
     }
       
 }

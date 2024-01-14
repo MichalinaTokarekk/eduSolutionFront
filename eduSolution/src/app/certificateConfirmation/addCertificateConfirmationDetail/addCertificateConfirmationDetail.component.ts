@@ -9,6 +9,7 @@ import { Course } from 'src/app/interfaces/course-interface';
 import { TypeOfTestingKnowledge } from 'src/app/interfaces/typeOfTestingKnowledge-interface';
 import { TypeOfTestingKnowledgeService } from 'src/app/typeOfTestingKnowledge/typeOfTestingKnowledge-service/typeOfTestingKnowledge.service';
 import { CertificateConfirmationService } from '../certificateConfirmation-service/certificateConfirmation.service';
+import { CertificateConfirmation } from 'src/app/interfaces/certificateConfirmation-interface';
 
 @Component({
   selector: 'app-certificate-confirmation-detail',
@@ -24,6 +25,7 @@ import { CertificateConfirmationService } from '../certificateConfirmation-servi
         allKnowledge: TypeOfTestingKnowledge[] = [];
         studentFirstName: any;
         studentLastName: any;
+        
 
 
     constructor(@Inject(MAT_DIALOG_DATA) public data: any, public dialogRef: MatDialogRef<AddCertificateConfirmationDetailComponent>, private router: Router,
@@ -33,6 +35,8 @@ import { CertificateConfirmationService } from '../certificateConfirmation-servi
 
         this.studentFirstName = data.studentFirstName;
         this.studentLastName = data.studentLastName;
+        
+
         
     }
   
