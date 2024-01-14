@@ -65,7 +65,6 @@ import { TypeOfTestingKnowledgeService } from 'src/app/typeOfTestingKnowledge/ty
   text-align: center;
 }
 
-/* Styl dla nagłówka */
 .add-grade-heading {
   font-size: 20px;
   margin-bottom: 10px;
@@ -108,14 +107,14 @@ import { TypeOfTestingKnowledgeService } from 'src/app/typeOfTestingKnowledge/ty
 
 /* Styl dla przycisku Dodaj ocenę */
 .add-button {
-  background-color: #007bff;
+  background-color: #3498db;
   color: #fff;
   padding: 10px 20px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
   font-size: 16px;
-  margin-left: -340px;
+  margin-left: -343px;
 }
 
 .add-button:hover {

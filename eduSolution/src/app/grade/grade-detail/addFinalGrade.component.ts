@@ -84,7 +84,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 
 /* Styl dla przycisku Dodaj ocenę */
 .add-button {
-  background-color: #007bff;
+  background-color: #3498db;
   color: #fff;
   padding: 10px 20px;
   border: none;

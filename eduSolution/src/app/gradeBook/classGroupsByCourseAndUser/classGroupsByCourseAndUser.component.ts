@@ -178,8 +178,8 @@ mapGradesToString(grades: Grade[]): string {
 
   openAddGradeDetailDialog(studentId: number, courseId: number, studentFirstName: string, studentLastName: string): void {
     const dialogRef = this.dialog.open(AddGradeDetailComponent, {
-      width: '510px', // dostosuj szerokość do swoich potrzeb
-      height: '349px',
+      width: '501px', // dostosuj szerokość do swoich potrzeb
+      height: '359px',
       data: { studentId, courseId, studentFirstName, studentLastName, }, // przekaż odpowiedź jako dane
     });
   
@@ -252,8 +252,8 @@ openDetailEditGradeDialog(studentId: number, courseId: number, studentFirstName:
 
   openAddCertificateCConfirmationDetailDialog(studentId: number, courseId: number, studentFirstName: string, studentLastName: string): void {
     const dialogRef = this.dialog.open(AddCertificateConfirmationDetailComponent, {
-      width: '510px', // dostosuj szerokość do swoich potrzeb
-      height: '349px',
+      width: '480px', // dostosuj szerokość do swoich potrzeb
+      height: '260px',
       data: { studentId, courseId, studentFirstName, studentLastName, }, // przekaż odpowiedź jako dane
     });
   
@@ -268,8 +268,8 @@ openDetailEditGradeDialog(studentId: number, courseId: number, studentFirstName:
   
   openAddFinalGradeDetailDialog(studentId: number, courseId: number, studentFirstName: string, studentLastName: string): void {
     const dialogRef = this.dialog.open(AddFinalGradeDetailComponent, {
-      width: '450px', // dostosuj szerokość do swoich potrzeb
-      height: '160px',
+      width: '441px', // dostosuj szerokość do swoich potrzeb
+      height: '163px',
       data: { studentId, courseId, studentFirstName, studentLastName, }, // przekaż odpowiedź jako dane
     });
   
