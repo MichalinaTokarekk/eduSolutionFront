@@ -2,6 +2,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ClassGroupService } from 'src/app/classGroup/classGroup-service/classGroup.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-offer-description',
@@ -12,7 +13,7 @@ export class OfferDescriptionComponent implements OnInit {
   classGroupId: number | undefined;
   classGroup: any; // Tu możesz przechowywać dane klasy
 
-  constructor(private route: ActivatedRoute, private classGroupService: ClassGroupService) { }
+  constructor(private route: ActivatedRoute, private classGroupService: ClassGroupService, private location: Location) { }
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
@@ -35,4 +36,10 @@ export class OfferDescriptionComponent implements OnInit {
         }
       });
   }
+
+  
+  goBack() {
+    this.location.back();
+  }
+
 }
