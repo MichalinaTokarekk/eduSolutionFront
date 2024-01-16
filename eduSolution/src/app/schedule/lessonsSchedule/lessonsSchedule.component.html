@@ -1,6 +1,6 @@
 
 
-<button (click)="openAddLessonDetailDialog()">Dodaj nową lekcję</button><br><br>
+<button (click)="openAddLessonDetailDialog()" class="add-button">Dodaj nową lekcję</button><br><br>
 
 <!-- <div *ngFor="let day of weekDays">
   <h3>{{ day }}</h3>
@@ -39,7 +39,7 @@
 
 
 
-<ng-container *ngFor="let entry of lessonsByClassGroup | keyvalue">
+<!-- <ng-container *ngFor="let entry of lessonsByClassGroup | keyvalue">
   <h2>{{ entry.key }}</h2>
   <table>
     <thead>
@@ -65,11 +65,37 @@
       </ng-container>
     </tbody>
   </table>
-</ng-container>
+</ng-container> -->
 
 
 
 
+<table>
+  <thead>
+    <tr>
+      <th></th>
+      <th *ngFor="let day of weekDays">{{ day }}</th>
+    </tr>
+  </thead>
+  <tbody>
+    <ng-container *ngFor="let timeSlot of timeSlots">
+      <tr>
+        <td>{{ timeSlot }}</td>
+        <td *ngFor="let day of weekDays">
+          <ng-container *ngFor="let entry of lessonsByClassGroup | keyvalue">
+            <ng-container *ngFor="let lesson of entry.value">
+              <ng-container *ngIf="lesson.dayName.toLowerCase() === day.toLowerCase() && isLessonInTimeSlot(lesson, timeSlot)">
+                <div (click)="openEditLessonDialog(lesson)">
+                  {{ lesson.name }} {{ lesson.startLessonTime }} - {{ lesson.endLessonTime }}
+                </div>
+              </ng-container>
+            </ng-container>
+          </ng-container>
+        </td>
+      </tr>
+    </ng-container>
+  </tbody>
+</table>
 
 
 

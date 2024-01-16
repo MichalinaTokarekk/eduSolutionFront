@@ -66,6 +66,8 @@ export class LessonsScheduleComponent implements OnInit {
         
         
       });
+
+      
       
 
     }
@@ -73,6 +75,20 @@ export class LessonsScheduleComponent implements OnInit {
     timeSlots: string[] = ['09:00','10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00'];
     // timeSlots: string[] = ['11:00', '11:30', '12:00', '12:30', '13:00', '13:30', '14:00', '14:30', '15:00', '15:30', '16:00', '16:30', '17:00', '17:30', '18:00', '18:30', '19:00'];
 
+
+// isLessonInTimeSlot(lesson: any, timeSlot: string): boolean {
+//   const [startHour, startMinute] = lesson.startLessonTime.split(':');
+//   const [endHour, endMinute] = lesson.endLessonTime.split(':');
+//   const [slotHour, slotMinute] = timeSlot.split(':');
+
+//   const lessonStart = new Date(0, 0, 0, +startHour, +startMinute);
+//   const lessonEnd = new Date(0, 0, 0, +endHour, +endMinute);
+//   const slotTime = new Date(0, 0, 0, +slotHour, +slotMinute);
+
+//   const isStartMatching = lessonStart <= slotTime && slotTime < lessonEnd && lessonStart.getHours() === slotTime.getHours() && lessonStart.getMinutes() === slotTime.getMinutes();
+
+//   return isStartMatching;
+// }
 
 isLessonInTimeSlot(lesson: any, timeSlot: string): boolean {
   const [startHour, startMinute] = lesson.startLessonTime.split(':');
@@ -83,10 +99,17 @@ isLessonInTimeSlot(lesson: any, timeSlot: string): boolean {
   const lessonEnd = new Date(0, 0, 0, +endHour, +endMinute);
   const slotTime = new Date(0, 0, 0, +slotHour, +slotMinute);
 
-  const isStartMatching = lessonStart <= slotTime && slotTime < lessonEnd && lessonStart.getHours() === slotTime.getHours() && lessonStart.getMinutes() === slotTime.getMinutes();
+  const isStartMatching =
+    (lessonStart >= slotTime && slotTime < lessonEnd) &&
+    ((lessonStart.getHours() === slotTime.getHours() && lessonStart.getMinutes() === slotTime.getMinutes()) ||
+     (lessonStart.getHours() === slotTime.getHours() && lessonStart.getMinutes() === slotTime.getMinutes() + 30) ||
+     (lessonStart.getHours() === slotTime.getHours() - 1 && lessonStart.getMinutes() === 30 && slotTime.getMinutes() === 0));
 
   return isStartMatching;
 }
+
+
+
 
 
 
@@ -182,5 +205,14 @@ isLessonInTimeSlot(lesson: any, timeSlot: string): boolean {
         }
       });
     }
+
+    
+    getRowspan(lessons: any[]): number {
+      // Tutaj dodaj logikę obliczania rowspan
+      // ...
+      // Na przykład:
+      return lessons ? lessons.length : 1;
+    }
+
     
   }
