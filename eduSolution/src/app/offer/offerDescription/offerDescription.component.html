@@ -1,0 +1,16 @@
+<h1>Opis oferty</h1>
+<div class="description-container">
+    <div *ngIf="classGroup">
+        <p>Limit studentów: {{ classGroup.studentsLimit }}</p>
+        <p>Rok: {{ classGroup.year }}</p>
+        <p>Adres: {{ classGroup.address }}</p>
+        <p>Tryb: {{ classGroup.mode }}</p>
+        <p>Status: {{ classGroup.classGroupStatus }}</p>
+        <p>Semestr: {{ classGroup.semester?.name }}</p>
+        <p>Kurs: {{ classGroup.course?.name }}</p><br>
+
+        <p class="description-text">{{ classGroup?.description }}</p>
+
+    </div>
+</div>
+  

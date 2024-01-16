@@ -100,6 +100,7 @@ import { MatOptionModule } from '@angular/material/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { AddCertificateConfirmationDetailComponent } from './certificateConfirmation/addCertificateConfirmationDetail/addCertificateConfirmationDetail.component';
+import { OfferDescriptionComponent } from './offer/offerDescription/offerDescription.component';
 
 
 
@@ -186,7 +187,8 @@ export class MaterialModule { }
     CoursesByStudentComponent,
     AppComponent,
     MyCartComponent,
-    AddCertificateConfirmationDetailComponent
+    AddCertificateConfirmationDetailComponent,
+    OfferDescriptionComponent
   ],
   imports: [
     BrowserModule,
