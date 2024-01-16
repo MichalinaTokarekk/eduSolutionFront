@@ -132,17 +132,16 @@ export class UserInlineCrudComponent implements OnInit {
       "firstName": "",
       "lastName": "",
       "email": "",
-      "role": "",
-      "streetName": "",
-      "buildingNumber": "",
-      "apartmentNumber": "",
+      "role": "USER",
+      "address": "",
       "city": "",
       "post": "",
       "postCode": "",
       "country": "",
-      "yearBook": "",
-      "name": "",
-      "isEdit": true
+      "userStatus": "AKTYWNY",
+      "isEdit": true,
+      classGroups: Object.keys(this.selectedGroups).map(Number)
+
     };
     this.userArray.unshift(obj);
   }
@@ -160,7 +159,7 @@ export class UserInlineCrudComponent implements OnInit {
     
       // Jeśli nowy użytkownik, ustaw domyślne hasło
       // if (!userObj.id) {
-        userObj.password = '1234';
+        // userObj.password = '1234';
       // }
     
       if (!userObj.firstName || userObj.firstName.trim() === '') {
@@ -174,7 +173,7 @@ export class UserInlineCrudComponent implements OnInit {
     
       const saveService = userObj.id ? this.userService : this.registerService;
     
-      this.registerService.save2(userData)
+      saveService.save(userData)
         .subscribe(
           (data) => {
             console.log('Aktualizacja zakończona sukcesem:', data);
@@ -182,6 +181,10 @@ export class UserInlineCrudComponent implements OnInit {
           },
           (error) => {
             console.error('Błąd podczas aktualizacji:', error);
+            console.log('Wysyłane dane:', userData);
+            console.log('Błąd przetwarzania:', error.error);
+    console.log('Błąd przetwarzania (JSON):', JSON.parse(JSON.stringify(error.error)));
+
           }
         );
     

@@ -26,12 +26,6 @@ export class RegisterService {
     return result;
   }
 
-  save2 (user: any) : Observable <any> {
-    let result: Observable<Object>;
-      result = this.http.post(this.AUTH_API + '/registerCreate', user)
-    return result;
-  }
-
   remove (id: string):Observable<string> {
     return this.http.delete<string>(this.AUTH_API + '/deleteUser/' + id);
   }

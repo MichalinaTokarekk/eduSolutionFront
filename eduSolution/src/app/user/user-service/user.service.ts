@@ -33,7 +33,7 @@ export class UserService {
         result = this.http.put(this.USER_API + '/updateUser', user)
 
       }else
-      result = this.http.post(this.REGISTER_API + '/register', user)
+      result = this.http.post(this.REGISTER_API + '/registerCreate', user)
     }
     return result;
   }
