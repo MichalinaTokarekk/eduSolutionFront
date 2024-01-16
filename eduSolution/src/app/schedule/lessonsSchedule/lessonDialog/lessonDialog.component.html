@@ -15,7 +15,7 @@
 </div> -->
 
 
-<h1>Edycja lekcji</h1>
+<h1 *ngIf="userRole === 'admin' || userRole === 'teacher'">Edycja lekcji</h1>
 <div class="container">
 
 
@@ -31,18 +31,31 @@
 
   <div>
     <label for="startLessonTime">Godzina rozpoczęcia:</label>
-    <input id="startLessonTime" formControlName="startLessonTime" />
+    <input id="startLessonTime" formControlName="startLessonTime" [readonly]="isUser()"/>
   </div>
 
   <div>
     <label for="endLessonTime">Godzina zakończenia:</label>
-    <input id="endLessonTime" formControlName="endLessonTime" />
+    <input id="endLessonTime" formControlName="endLessonTime" [readonly]="isUser()"/>
   </div>
 
   <div>
     <label for="dates">Daty:</label>
-    <input id="dates" formControlName="dates" (change)="updateDates($event)" />
+    <input id="dates" formControlName="dates" (change)="updateDates($event)" [readonly]="isUser()"/>
   </div>
+
+
+  <div *ngIf="editedLesson.classGroup">
+    <p>Grupa zajęciowa: {{ editedLesson.classGroup.name }}</p>
+  </div>
+  
+  <!-- <div *ngIf="editedLesson.classGroup">
+    <label for="classGroup">Grupa zajęciowa:</label>
+    <input id="classGroup" formControlName="classGroup" readonly [value]="getClassName()" />
+  </div> -->
+  
+  
+  
   
   
   <!-- <label for="classGroup">Grupa lekcyjna:</label>
@@ -51,8 +64,12 @@
   </select> -->
   
 
-  <button mat-button (click)="onNoClick()">Anuluj</button>
-  <button mat-button (click)="onSaveClick()">Zapisz zmiany</button>
-  <button mat-button color="warn" (click)="onDeleteClick()">Usuń</button>
+  
+<div *ngIf="userRole === 'admin' || userRole === 'teacher'">
+  <button class="save-button" mat-button (click)="onSaveClick()">Zapisz zmiany</button>
+  <button class="delete-button" mat-button color="warn" (click)="onDeleteClick()">Usuń</button>
+  <button class="cancel-button" mat-button (click)="onNoClick()">Anuluj</button>
+</div>
+
 </form>
 </div>

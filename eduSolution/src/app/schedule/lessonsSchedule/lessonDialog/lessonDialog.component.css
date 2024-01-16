@@ -74,7 +74,33 @@ h1 {
     color: #fff; /* Kolor tekstu na przycisku Usuń */
   }
   
-  .container button[color="warn"]:hover {
-    background-color: #d81b60; /* Kolor przycisku Usuń w stanie hover */
-  }
+  /* .container button[color="warn"]:hover {
+    background-color: #d81b60;
+  } */
   
+button.save-button {
+  background-color: #3498db;
+    color: #fff;
+    padding: 7px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button.delete-button {
+  background-color: #e21d16;
+    color: #fff;
+    padding: 7px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button.cancel-button {
+  background-color: rgb(119, 121, 122);
+    color: #fff;
+    padding: 7px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}

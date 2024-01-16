@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { LessonScheduleService } from '../lessonsSchedule-service/lessonsSchedule.service';
 import { ClassGroupService } from 'src/app/classGroup/classGroup-service/classGroup.service';
+import { LoginService } from 'src/app/authorization_authentication/service/login.service';
 
 @Component({
   selector: 'app-lesson-dialog',
@@ -13,12 +14,13 @@ export class LessonDialogComponent {
   editedLesson: any;
   editedLessonForm: FormGroup;
   classGroups: any[] = [];
+  userRole!: string;
 
   constructor(
     public dialogRef: MatDialogRef<LessonDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private formBuilder: FormBuilder,
-    private lessonService: LessonScheduleService, private classGroupService: ClassGroupService
+    private lessonService: LessonScheduleService, private classGroupService: ClassGroupService, private loginService: LoginService
   ) {
     // Sprawdź, czy data.lesson istnieje, a jeśli nie, zainicjalizuj pusty obiekt
     this.editedLesson = data.lesson || {};
@@ -32,6 +34,7 @@ export class LessonDialogComponent {
       dates: [this.editedLesson?.dates || '', Validators.required],
       classGroup: [this.editedLesson?.classGroup ? this.editedLesson.classGroup.id : null],
     });
+    this.extractUserRole();
 
     
   }
@@ -40,6 +43,8 @@ export class LessonDialogComponent {
     this.classGroupService.getAll().subscribe(
       (data) => {
         this.classGroups = data || [];
+        // console.log('editedLesson.classGroup.name', this.editedLesson.classGroup.name);
+
       },
       (error) => {
         console.error('Błąd podczas pobierania danych z classGroupService:', error);
@@ -83,6 +88,28 @@ updateDates(event: any): void {
   this.editedLessonForm.patchValue({
     dates: datesArray
   });
+}
+
+extractUserRole() {
+  const token = this.loginService.getToken();
+  
+  if (token) {
+    const _token = token.split('.')[1];
+    const _atobData = atob(_token);
+    const _finalData = JSON.parse(_atobData);
+    
+    // Zakładając, że rola znajduje się w polu 'role' obiektu danych
+    this.userRole = _finalData.role;
+    console.log('role', this.userRole);
+  }
+}
+
+getClassName(): string {
+  return this.classGroups.find(group => group.id === this.editedLesson.classGroup)?.name || '';
+}
+
+isUser(): boolean {
+  return this.userRole === 'user';
 }
 
 
