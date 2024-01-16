@@ -8,7 +8,9 @@ import { LoginService } from '../authorization_authentication/service/login.serv
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent {
-    constructor(private router: Router, private loginService: LoginService) {}
+    constructor(private router: Router, private loginService: LoginService) {
+      this.extractUserRole();
+    }
 
     panelVisible = false;
 
@@ -30,4 +32,20 @@ export class DashboardComponent {
           }
           return false
     }
+
+
+    userRole!: string;
+extractUserRole() {
+  const token = this.loginService.getToken();
+  
+  if (token) {
+    const _token = token.split('.')[1];
+    const _atobData = atob(_token);
+    const _finalData = JSON.parse(_atobData);
+    
+    // Zakładając, że rola znajduje się w polu 'role' obiektu danych
+    this.userRole = _finalData.role;
+    console.log('role', this.userRole);
+  }
+}
 }
