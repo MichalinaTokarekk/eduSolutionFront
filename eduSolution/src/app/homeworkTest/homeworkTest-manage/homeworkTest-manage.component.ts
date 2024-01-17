@@ -401,48 +401,91 @@ onAddFile(homeworkTest: any) {
     }
   }
   
+// downloadFileById(fileId: number): void {
+//     this.htFileService.downloadFileById(fileId).subscribe((blob: Blob) => {
+//       // Tworzymy link do pobierania pliku
+
+    
+//       const contentType  = blob.type;
+    
+//       let fileName = `${fileId}.pdf`;
+  
+//       if (contentType) {
+//         // Sprawdzenie, czy Content-Type wskazuje na plik PDF
+//         if (contentType === 'application/pdf') {
+//           fileName = `${fileId}.pdf`;
+//         } else if (contentType === 'image/png') {
+//           // Jeśli to obraz PNG, nadaj rozszerzenie .png
+//           fileName = `${fileId}.png`;
+//         } else {
+//           // Obsłuż inne typy plików i nadaj odpowiednie rozszerzenia
+//           // np. contentType === 'image/jpeg' dla obrazów JPEG
+//         }
+//       }
+
+
+//       const url = window.URL.createObjectURL(blob);
+  
+//       // Tworzymy element <a> i nadajemy mu atrybuty, aby otworzyć pobrany plik w nowej karcie
+//       const a = document.createElement('a');
+//       document.body.appendChild(a);
+//       a.style.display = 'none';
+//       a.href = url;
+//       a.download = fileName; // Zmień nazwę pliku na coś sensownego lub korzystając z informacji o pliku
+  
+//       // Klikamy na ten element, aby rozpocząć pobieranie pliku
+//       a.click();
+  
+//       // Po pobraniu pliku usuwamy link i element <a>
+//       window.URL.revokeObjectURL(url);
+//       document.body.removeChild(a);
+//     }, error => {
+//       console.error('Błąd podczas pobierania pliku', error);
+//     });
+//   }
+
 downloadFileById(fileId: number): void {
-    this.htFileService.downloadFileById(fileId).subscribe((blob: Blob) => {
-      // Tworzymy link do pobierania pliku
+  this.aFileService.downloadFileById(fileId).subscribe((blob: Blob) => {
+    // Tworzymy link do pobierania pliku
 
-    
-      const contentType  = blob.type;
-    
-      let fileName = `${fileId}.pdf`;
   
-      if (contentType) {
-        // Sprawdzenie, czy Content-Type wskazuje na plik PDF
-        if (contentType === 'application/pdf') {
-          fileName = `${fileId}.pdf`;
-        } else if (contentType === 'image/png') {
-          // Jeśli to obraz PNG, nadaj rozszerzenie .png
-          fileName = `${fileId}.png`;
-        } else {
-          // Obsłuż inne typy plików i nadaj odpowiednie rozszerzenia
-          // np. contentType === 'image/jpeg' dla obrazów JPEG
-        }
+    const contentType  = blob.type;
+  
+    let fileName = `${fileId}.pdf`;
+
+    if (contentType) {
+      // Sprawdzenie, czy Content-Type wskazuje na plik PDF
+      if (contentType === 'application/pdf') {
+        fileName = `${fileId}.pdf`;
+      } else if (contentType === 'image/png') {
+        // Jeśli to obraz PNG, nadaj rozszerzenie .png
+        fileName = `${fileId}.png`;
+      } else {
+        // Obsłuż inne typy plików i nadaj odpowiednie rozszerzenia
+        // np. contentType === 'image/jpeg' dla obrazów JPEG
       }
+    }
 
 
-      const url = window.URL.createObjectURL(blob);
-  
-      // Tworzymy element <a> i nadajemy mu atrybuty, aby otworzyć pobrany plik w nowej karcie
-      const a = document.createElement('a');
-      document.body.appendChild(a);
-      a.style.display = 'none';
-      a.href = url;
-      a.download = fileName; // Zmień nazwę pliku na coś sensownego lub korzystając z informacji o pliku
-  
-      // Klikamy na ten element, aby rozpocząć pobieranie pliku
-      a.click();
-  
-      // Po pobraniu pliku usuwamy link i element <a>
-      window.URL.revokeObjectURL(url);
-      document.body.removeChild(a);
-    }, error => {
-      console.error('Błąd podczas pobierania pliku', error);
-    });
-  }
+    const url = window.URL.createObjectURL(blob);
+
+    // Tworzymy element <a> i nadajemy mu atrybuty, aby otworzyć pobrany plik w nowej karcie
+    const a = document.createElement('a');
+    document.body.appendChild(a);
+    a.style.display = 'none';
+    a.href = url;
+    a.download = fileName; // Zmień nazwę pliku na coś sensownego lub korzystając z informacji o pliku
+
+    // Klikamy na ten element, aby rozpocząć pobieranie pliku
+    a.click();
+
+    // Po pobraniu pliku usuwamy link i element <a>
+    window.URL.revokeObjectURL(url);
+    document.body.removeChild(a);
+  }, error => {
+    console.error('Błąd podczas pobierania pliku', error);
+  });
+}
 
   
   newAnswerContent: string = '';

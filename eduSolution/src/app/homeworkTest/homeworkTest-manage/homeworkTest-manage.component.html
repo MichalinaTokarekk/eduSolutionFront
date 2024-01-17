@@ -198,6 +198,7 @@
         </form>
             </div>
 
+            <h3>Załączniki:</h3>
             <div *ngFor="let aFile of aFilesByAnswer" (click)="loadAFilesByAnswerId(answer.id)">
                 <a (click)="downloadFileById(aFile.id)" href="javascript:void(0);">{{ aFile.name }}</a>
                 <i class="fa fa-trash-o" aria-hidden="true" (click)="onDeleteAFile(aFile)"></i>
@@ -214,17 +215,44 @@
             <button (click)="onSaveAnswer()">Zapisz odpowiedź</button>
           </div>
       </div>
-    </div>
+    </div><br>
       
-    <div *ngIf="userRole === 'teacher'"> 
-      <h2>Użytkownicy w klasie:</h2>
+    <!-- <div *ngIf="userRole === 'teacher'"> 
+      <h2>Uczniowe w grupie zajęciowej:</h2>
     
       <div *ngFor="let user of usersByClassGroup">
-        <div (click)="openAnswerDetailsDialog(user, homeworkTest)" style="cursor: pointer">
+        <div class="studentsInGroup" (click)="openAnswerDetailsDialog(user, homeworkTest)" style="cursor: pointer">
           {{ user.firstName }} {{ user.lastName }}
-        </div>
+        </div><br>
       </div>
+    </div> -->
+
+    <div *ngIf="userRole === 'teacher'">
+      <h2>Uczniowie w grupie zajęciowej:</h2>
+    
+      <table mat-table [dataSource]="usersByClassGroup" class="mat-elevation-z8">
+    
+        <!-- Nazwa kolumny -->
+        <ng-container matColumnDef="fullName">
+          <th mat-header-cell *matHeaderCellDef> Imię i nazwisko </th>
+          <td mat-cell *matCellDef="let user">{{ user.firstName }} {{ user.lastName }}</td>
+        </ng-container>
+    
+        <!-- Dodaj kolumnę z przyciskiem do otwierania dialogu -->
+        <ng-container matColumnDef="detailsButton">
+          <th mat-header-cell *matHeaderCellDef></th>
+          <td mat-cell *matCellDef="let user">
+            <button mat-icon-button (click)="openAnswerDetailsDialog(user, homeworkTest)">
+              <mat-icon>visibility</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+    
+        <tr mat-header-row *matHeaderRowDef="['fullName', 'detailsButton']"></tr>
+        <tr mat-row *matRowDef="let row; columns: ['fullName', 'detailsButton'];"></tr>
+      </table>
     </div>
+    
     
 
     <!-- <div *ngIf="userRole === 'teacher'"> 

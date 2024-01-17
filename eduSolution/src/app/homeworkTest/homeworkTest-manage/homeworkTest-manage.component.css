@@ -268,6 +268,11 @@
     height: 24px;
     border-radius: 5px;
   }
+
+  .studentsInGroup{
+    font-size: large;
+    font-weight: bold;
+  }
   
 
   
