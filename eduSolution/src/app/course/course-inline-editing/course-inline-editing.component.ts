@@ -227,6 +227,7 @@ onDelete(obj: any) {
   }
 
   isNameEmpty = false;
+  isDifficultyLevelEmpty = false;
 
 
   validateCourseName(name: string) {
@@ -237,6 +238,16 @@ onDelete(obj: any) {
         this.isNameEmpty = false;
         return "";
     }
+}
+
+validateCourseDifficultyLevel(difficultyLevel: string) {
+  if (!difficultyLevel) {
+      this.isDifficultyLevelEmpty = true;
+      return "Pole wymagane";
+  } else {
+      this.isDifficultyLevelEmpty = false;
+      return "";
+  }
 }
 
 }

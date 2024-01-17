@@ -29,6 +29,16 @@ export class AppComponent {
     return false
 }
 
+actionsAdmin(){
+  if(this.loginService.getToken()!=''){
+    let _currentRole = this.loginService.getRoleByToken(this.loginService.getToken());
+    if(_currentRole=='admin'){
+      return true;
+    }
+  }
+  return false
+}
+
 cartItemCount!: number;
 cartItems: any[] = [];
 ngOnInit(): void {

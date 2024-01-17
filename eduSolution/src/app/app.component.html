@@ -317,7 +317,7 @@
   <!-- <span style="margin-left: 10px;"><a [routerLink]="['/main-page']" style="color: white; font-size: large;" >Strona główna</a></span> -->
   <span style="margin-left: 10px;"><a [routerLink]="['/offerPage']" style="color: white; font-size: large;" *ngIf="actions()">Oferta</a></span>
   <span style="margin-left: 10px;"><a [routerLink]="['/dashboard']" style="color: white; font-size: large;" *ngIf="actions()">Kokpit</a></span>
-  <span style="margin-left: 10px;"><a [routerLink]="['/admin-panel']" style="color: white; font-size: large;" *ngIf="userRole === 'admin'">Panel admina</a></span>
+  <span style="margin-left: 10px;"><a [routerLink]="['/admin-panel']" style="color: white; font-size: large;" *ngIf="actionsAdmin()">Panel admina</a></span>
     <div class="spacer"></div>
 
     <!-- <a *ngIf="actions()" class="basket-icon" [matMenuTriggerFor]="basketMenu">
