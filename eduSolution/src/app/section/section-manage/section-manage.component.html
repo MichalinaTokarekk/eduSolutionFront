@@ -76,7 +76,8 @@
           <button *ngIf="!section.isEdit" class="edit-button" (click)="onEdit(section)">Edytuj</button>
           <button *ngIf="section.isEdit" (click)="onSave(section)">Zapisz zmiany</button>
           <button *ngIf="section.isEdit" (click)="onBackButton(section)">Wyjdź z edycji</button>
-          <i class="fa fa-trash-o trash-icon" aria-hidden="true" (click)="onDelete(section)"></i>
+          <!-- <i class="fa fa-trash-o trash-icon" aria-hidden="true" (click)="onDelete(section)"></i> -->
+          <button class="delete-button" (click)="onDelete(section)">Usuń</button>
         </mat-panel-title>
       </mat-expansion-panel-header>
       <p *ngIf="!section.isEdit">This is the content of section {{ srNo + 1 }}</p>
@@ -92,7 +93,7 @@
         <div *ngFor="let eduMaterial of eduMaterialsBySection" class="panelfiles">
             <ul>
               <li >
-                <a [routerLink]="['/eduMaterial-manage', eduMaterial.id]">{{ eduMaterial.name }}</a>
+                <a [routerLink]="['/eduMaterial-manage', eduMaterial.id, section.id]">{{ eduMaterial.name }}</a>
                 <i class="fa fa-trash-o" aria-hidden="true" (click)="onDeleteEduMaterial(eduMaterial)"></i>
               </li>
             </ul>
@@ -109,7 +110,7 @@
       <br>
 
       <ng-container>
-        <h2>Zadania domowe/zaliczenia</h2>
+        <h2>Zadania</h2>
         <div *ngFor="let homeworkTest of homeworkTestsBySection" class="panelfiles">
             <ul>
               <li >
@@ -128,6 +129,13 @@
     </mat-expansion-panel>
   </mat-accordion>
 </div>
+
+<!-- <footer class="footer">
+  <div class="container">
+    <p>&copy; 2023 EduSolution. Wszelkie prawa zastrzeżone.</p>
+    <p>Kontakt: kontakt@example.com</p>
+  </div>
+</footer> -->
   
   <!-- Dodaj pole input tylko wtedy, gdy isAddingNewSection jest true -->
   

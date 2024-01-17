@@ -25,7 +25,7 @@
   <mat-grid-list cols="3" rowHeight="1:1" class="custom-grid-list">
     <mat-grid-tile *ngFor="let course of filteredCourses" class="custom-grid-tile">
       <div class="tile-container">
-        <a [routerLink]="['/section-manage', { courseId: course.id }]" class="no-underline">
+        <a [routerLink]="['/offer-description', course.id ]" class="no-underline">
           <img src="assets/images/ksiazka2.jpg" [alt]="course.name" class="course-image"/>
           <p>
             <a [routerLink]="['/offer-description',  course.id ]" class="no-underline" style="color: rgb(8, 8, 8); font-size: 16px; text-decoration: none; transition: transform 0.3s;">
@@ -37,3 +37,9 @@
     </mat-grid-tile>
   </mat-grid-list>
   
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2023 EduSolution. Wszelkie prawa zastrzeżone.</p>
+      <p>Kontakt: kontakt@example.com</p>
+    </div>
+  </footer>

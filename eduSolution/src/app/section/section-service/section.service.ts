@@ -52,6 +52,10 @@ export class SectionService {
     return this.http.get(this.EDUMATERIAL_API + '/eduMaterialsBySectionId/' + sectionId);
     // return this.http.get<any[]>(url);
   }
+
+  findNameById(id: string): Observable<string> {
+    return this.http.get<string>(this.SECTION_API + '/findNameById/' + id, { responseType: 'text' as 'json' });
+  }
   
 }
 

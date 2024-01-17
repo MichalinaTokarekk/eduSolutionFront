@@ -45,7 +45,7 @@ const routes: Routes = [
   {path: "classGroup-grid-view/:courseId", component: ClassGroupGridViewComponent},
   {path: "section-manage", component: SectionManage},
   {path: "section-manage/:courseId", component: SectionManage},
-  {path: "eduMaterial-manage/:id", component: EduMaterialManage},
+  {path: "eduMaterial-manage/:id/:sectionId", component: EduMaterialManage},
   {path: "homeworkTest-manage/:id", component: HomeworkTestManage},
   {path: "teachingClassGroups-view/:courseId", component: TeachingClassGroupsComponent},
   {path: "classGroupsByCourseAndUser/:id", component: ClassGroupsByCourseAndUser},

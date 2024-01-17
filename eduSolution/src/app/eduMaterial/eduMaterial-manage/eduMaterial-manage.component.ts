@@ -12,6 +12,7 @@ import { Subscription, catchError, of, switchMap, tap } from 'rxjs';
 import { EMFile } from 'src/app/interfaces/emFile-interface';
 import { EMFileService } from 'src/app/emFile/emFile-service/emFile.service';
 import { Location } from '@angular/common';
+import { SectionService } from 'src/app/section/section-service/section.service';
 
 
 /**
@@ -27,7 +28,7 @@ eduMaterial: any = {};
   emFileIdContainer: any;
 
   constructor(private http: HttpClient, private route: ActivatedRoute, private router: Router, private dialog: MatDialog, private snackBar: MatSnackBar, 
-    private eduMaterialService: EduMaterialService, private emFileService: EMFileService, private location: Location){
+    private eduMaterialService: EduMaterialService, private emFileService: EMFileService, private location: Location, private sectionService: SectionService){
   }
 
   emFilesByEduMaterial!: Array<any>;
@@ -52,9 +53,12 @@ eduMaterial: any = {};
 //   }
 
 emFiles!: any[]; 
+selectedSectionName: string = '';
+sectionId: string | null = null;
 ngOnInit(): void {
     // Pobierz ID materiału edukacyjnego z parametrów routingu
     this.route.paramMap.subscribe((params: ParamMap) => {
+      this.sectionId = params.get('sectionId');
       const id = params.get('id');
       if (id !== null) {
         // Użyj usługi do pobrania materiału edukacyjnego na podstawie ID
@@ -66,6 +70,12 @@ ngOnInit(): void {
           this.emFileService.emFilesByEduMaterialId(eduMaterial.id).subscribe((emFiles: any) => {
             // Tutaj możesz wykonać operacje na emFiles, np. przypisać je do właściwości komponentu
             this.emFiles = emFiles;
+            if (this.sectionId !== null) {
+              this.sectionService.findNameById(this.sectionId).subscribe((sectionName) => {
+                this.selectedSectionName = sectionName;
+                console.log('sectionId', this.sectionId);
+              });
+            }
           }, error => {
             console.error(error);
             // Obsłuż błąd, jeśli wystąpi
@@ -74,6 +84,7 @@ ngOnInit(): void {
           console.error(error);
           // Obsłuż błąd, jeśli wystąpi
         });
+       
       } else {
         console.log("Nie ma nic");
       }
@@ -315,6 +326,10 @@ downloadFileById(fileId: number): void {
     this.location.back();
   }
   
+  onCloseButton() {
+    this.eduMaterial.isEdit = false;
+    location.reload();
+  }
   
 
 }

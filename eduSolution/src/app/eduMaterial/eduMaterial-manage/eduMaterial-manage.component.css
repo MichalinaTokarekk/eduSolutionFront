@@ -92,7 +92,7 @@ ul {
   /* Styl dla przycisku "Prześlij plik" */
   .panelfiles form button[type="submit"] {
     padding: 5px 10px;
-    background-color: #3498db;
+    background-color: #375aca;
     color: #fff;
     border: none;
     border-radius: 5px;
@@ -102,7 +102,7 @@ ul {
   
   /* Styl dla przycisku "Prześlij plik" po najechaniu myszą */
   .panelfiles form button[type="submit"]:hover {
-    background-color: #3498db;
+    background-color: #516fd3;
   }
 
   /* Styl ikony kosza */
@@ -115,8 +115,8 @@ ul {
   .editButton{
     margin-left: 10px;
     margin-top: 10px;
-    background-color: #929296; /* Kolor tła */
-    color: #fff; /* Kolor tekstu */
+    background-color: #dbdbd9; /* Kolor tła */
+    color: #212529; /* Kolor tekstu */
     border: none;
     padding: 5px 10px;
     border-radius: 5px;
@@ -126,8 +126,19 @@ ul {
   .saveButton{
     margin-left: 10px;
     margin-top: 10px;
-    background-color: #3498db; /* Kolor tła */
+    background-color: #375aca; /* Kolor tła */
     color: #fff; /* Kolor tekstu */
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .closeButton{
+    margin-left: 5px;
+    margin-top: 10px;
+    background-color: #dbdbd9; /* Kolor tła */
+    color: #212529; /* Kolor tekstu */
     border: none;
     padding: 5px 10px;
     border-radius: 5px;

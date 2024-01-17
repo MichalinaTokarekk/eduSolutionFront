@@ -5,11 +5,11 @@
 .add-section-button{
   margin-top: 10px;
   margin-bottom: 10px;
-  margin-left: 5px;
+  margin-left: 9px;
   background-color: #3498db; /* Kolor tła */
   color: #fff; /* Kolor tekstu */
   border: none;
-  padding: 5px 10px;
+  padding: 7px 10px;
   border-radius: 5px;
   cursor: pointer;
 }
@@ -88,6 +88,16 @@
   padding: 5px 10px;
   border-radius: 5px;
   cursor: pointer;
+}
+
+.delete-button{
+  background-color: #d46868; /* Kolor przycisku edycji */
+  color: #212529; /* Kolor tekstu na przycisku */
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-left: 5px;
 }
 
 
@@ -169,4 +179,11 @@ mat-panel-title {
   margin: 0;
   font-size: 24px;
   font-weight: bold;
+}
+
+.footer {
+  background-color: #333; /* Kolor tła stopki */
+  color: #fff; /* Kolor tekstu w stopce */
+  padding: 20px; /* Wewnętrzny odstęp w stopce */
+  text-align: center; /* Wyrównanie tekstu do środka */
 }

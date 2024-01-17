@@ -8,16 +8,17 @@
   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16" (click)="goBack()">
     <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"/>
   </svg>
-  <h2 style="margin-left: 10px;"></h2>
+  <h2 style="margin-left: 10px;">{{ selectedSectionName }}</h2>
 </div><br>
 
 <form (submit)="submitForm()">
     <div>
       <label for="name"></label>
-      <input *ngIf="eduMaterial.isEdit" class="input" type="text" id="name" name="name" [(ngModel)]="eduMaterial.name">
-      <span class="input" *ngIf="!eduMaterial.isEdit">{{ eduMaterial.name }}</span>
+      <input style="font-size: large;" *ngIf="eduMaterial.isEdit" class="input" type="text" id="name" name="name" [(ngModel)]="eduMaterial.name">
+      <span style="font-size: large;" class="input" *ngIf="!eduMaterial.isEdit">{{ eduMaterial.name }}</span>
       <button class="editButton" *ngIf="!eduMaterial.isEdit" (click)="onEdit(eduMaterial)">Edytuj</button>
-      <button class="saveButton" *ngIf="eduMaterial.isEdit"  type="submit">Zapisz zmiany</button>
+      <button class="saveButton" *ngIf="eduMaterial.isEdit" type="submit">Zapisz zmiany</button>
+      <button class="closeButton" *ngIf="eduMaterial.isEdit" (click)="onCloseButton()">Anuluj</button>
     </div>
     <div>
       <label for="description"></label>
@@ -25,7 +26,7 @@
       <!-- <span class="input" *ngIf="!eduMaterial.isEdit">{{ eduMaterial.description }}</span> -->
     </div>
     <!-- <button *ngIf="eduMaterial.isEdit" type="submit">Zapisz zmiany</button> -->
-  </form>
+  </form><br>
 
 <div class="panelfiles">
   <h2>Panel do dodawania plików</h2>
