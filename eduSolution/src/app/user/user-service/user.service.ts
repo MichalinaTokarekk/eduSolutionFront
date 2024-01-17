@@ -44,6 +44,12 @@ export class UserService {
     return result;
   }
 
+  updateUserClassGroup(user: any) {
+    let result: Observable<Object>;
+    result = this.http.put(this.USER_API + '/updateUserClassGroup', user)
+    return result;
+  }
+
   remove (id: string):Observable<string> {
     return this.http.delete<string>(this.USER_API + '/deleteUser/' + id);
   }

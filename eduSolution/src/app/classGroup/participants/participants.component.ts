@@ -26,6 +26,8 @@ export class ParticipantsComponent implements OnInit {
   
       // Sprawdź, czy id nie jest null
       if (id !== null) {
+        this.classGroupId = +id;
+        console.log('this.classGroupId:', this.classGroupId);
         console.log('Przed wywołaniem findUsersByClassGroupId');
         this.userService.findUsersByClassGroupId2(id).subscribe(
           users => {
@@ -68,5 +70,49 @@ export class ParticipantsComponent implements OnInit {
     this.selectedGroups[group.id] = !this.selectedGroups[group.id];
   }
 
+
+onSubmit() {
+    console.log('Submit button clicked');
+    console.log('Selected users:', this.usersByClassGroup);
+  
+    // Sprawdź, czy classGroup został zainicjowany
+    if (!this.classGroupId) {
+      console.error('Błąd: Brak zdefiniowanej grupy lub identyfikatora grupy.');
+      return;
+    }
+  
+    // Aktualizuj użytkowników w bazie danych
+    for (const user of this.usersByClassGroup) {
+      // Sprawdź, czy użytkownik posiada tablicę classGroups
+      if (!user.classGroups) {
+        user.classGroups = [];
+      }
+  
+      // Sprawdź, czy classGroupId już nie istnieje w tablicy, aby uniknąć duplikatów
+      if (!user.classGroups.includes(this.classGroupId)) {
+        user.classGroups.push(this.classGroupId);
+      }
+  
+      // Aktualizuj użytkownika w bazie danych
+      this.userService.updateUserClassGroup(user).subscribe(
+        response => {
+          console.log('Zaktualizowano użytkownika:', response);
+        },
+        error => {
+          console.error('Błąd podczas aktualizacji użytkownika:', error);
+  
+          // Dodaj poniższy console.log, aby wyświetlić dokładną treść błędu
+          console.log('Treść błędu:', error);
+  
+          // Opcjonalnie, możesz dodać alert, aby łatwiej zauważyć błąd
+          alert('Błąd podczas aktualizacji użytkownika. Sprawdź konsolę dla więcej informacji.');
+        }
+      );
+    }
+  }
+
+
+  
+  
 
 }
