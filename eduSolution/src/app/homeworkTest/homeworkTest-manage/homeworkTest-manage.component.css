@@ -135,7 +135,7 @@
   /* Styl dla przycisku "Prześlij plik" */
   .panelfiles form button[type="submit"] {
     padding: 5px 10px;
-    background-color: #007bff;
+    background-color: #375aca;
     color: #fff;
     border: none;
     border-radius: 5px;
@@ -208,12 +208,12 @@
 
   .green-background {
     background-color: rgb(153, 206, 153);
-    color: white;
+    color: rgb(19, 18, 18);
   }
   
   .red-background {
     background-color: rgb(196, 144, 144);
-    color: white;
+    color: rgb(19, 18, 18);
   }
 
 
@@ -232,8 +232,42 @@
     font-weight: bold;
   }
   
+  .editButton{
+    background-color: #dbdbd9; /* Kolor przycisku edycji */
+    color: #212529; /* Kolor tekstu na przycisku */
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 5px;
+  }
+
+  .editButton-answer{
+    background-color: #dbdbd9; /* Kolor przycisku edycji */
+    color: #212529; /* Kolor tekstu na przycisku */
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: -1px;
+    margin-bottom: 5px;
+    margin-right: 5px;
+  }
+
+  .deleteButton-answer{
+    background-color: #d46868; /* Kolor przycisku edycji */
+    color: #212529; /* Kolor tekstu na przycisku */
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
   
- 
+  .datetime-local{
+    margin-right: 10px;
+    height: 24px;
+    border-radius: 5px;
+  }
   
 
   
