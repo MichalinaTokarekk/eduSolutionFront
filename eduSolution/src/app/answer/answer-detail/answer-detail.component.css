@@ -24,7 +24,7 @@
     width: 100%;
     padding: 5px;
     margin: 5px 0;
-    max-width: 346px;
+    /* max-width: 346px; */
   }
   
   button {
@@ -36,7 +36,7 @@
   }
   
   button:hover {
-    background-color: #0056b3;
+    background-color: #d46868;
   }
   
   .green-background {
@@ -46,4 +46,30 @@
   .red-background {
     background-color: rgb(196, 144, 144);
   }
+
+  .saveChanges-button{
+    margin-left: 355px;
+    background-color: #0056b3; 
+  }
+
+  .editGrade-button{
+    padding: 5px 10px;
+    background-color: #0056b3; /* Kolor przycisku edycji */
+    color: #f2f3f5;
+    margin-top: 8px;
+  }
+
+  .deleteGrade-button{
+    padding: 5px 10px;
+    background-color: #d46868; /* Kolor przycisku edycji */
+    color: #212529;
+    margin-top: 8px
+  }
+
+  .comment{
+    height: 40px;
+    display: block;
+  }
+
+  
   

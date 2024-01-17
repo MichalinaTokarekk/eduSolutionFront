@@ -215,7 +215,7 @@ openAnswerDetailsDialog(user: any, homeworkTest: any): void {
       // inne pola, które chcesz mieć puste
     };
     const dialogRef = this.dialog.open(AnswerDetailComponent, {
-      width: '400px',
+      width: '540px',
       data: { user: user, answer: answer || emptyAnswer, homeworkTest: homeworkTest, classGroupId: classGroupId}
     });
     console.log('homework', this.homeworkTestId);

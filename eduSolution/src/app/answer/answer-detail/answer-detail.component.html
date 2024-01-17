@@ -1,13 +1,13 @@
 <!-- answer-detail.component.html -->
 
-<div class="answer-detail-container" style="max-height: 500px; overflow: auto;" *ngIf="data.answer.user">
+<div class="answer-detail-container" style="max-height: 500px; width: 500px; overflow: auto;" *ngIf="data.answer.user">
     <h2>Odpowiedź: <p>{{ data.answer?.user?.firstName }} {{ data.answer?.user?.lastName }}</p></h2>
     <div class="answer-content">
       {{ data.answer.answerContent }}
     </div>
     <div *ngFor="let aFile of aFilesByAnswer" (click)="loadAFilesByAnswerId(data.answer.id)">
       <a (click)="downloadFileById(aFile.id)" href="javascript:void(0);">{{ aFile.name }}</a>
-    </div>
+    </div><br>
     <p>Utworzono: {{ data.answer.createdAt | date:'yyyy-MM-dd HH:mm:ss' }}</p>
     <p>Ostatnia modyfikacja: {{ data.answer.updatedAt | date:'yyyy-MM-dd HH:mm:ss' }}</p>
     <div [ngClass]="{'green-background': calculateTimeDifference().beforeDeadline, 'red-background': !calculateTimeDifference().beforeDeadline}">
@@ -18,8 +18,10 @@
       </p>
     </div>
   
-    <input [(ngModel)]="editedComment" name="editedComment" placeholder="Edytuj komentarz">
-    <input [(ngModel)]="editedAnswerStatus" name="editedAnswerStatus" placeholder="Edytuj status odpowiedzi">
+    <label for="editedValue">Komentarz:</label><br>
+    <input class="comment" [(ngModel)]="editedComment" name="editedComment" placeholder="Edytuj komentarz"><br>
+    <label for="editedValue">Status odpowiedzi:</label><br>
+    <input class="answerStatus" [(ngModel)]="editedAnswerStatus" name="editedAnswerStatus" placeholder="Edytuj status odpowiedzi">
   
     <div *ngIf="!hasGrade" class="grade-input">
       <div class="input-field">
@@ -32,15 +34,15 @@
         <mat-select class="knowledge-select" [(ngModel)]="selectedKnowledge" name="knowledge" placeholder="Wybierz rodzaj oceny">
           <mat-option *ngFor="let knowledge of allKnowledge" [value]="knowledge.id">{{ knowledge.name }}</mat-option>
         </mat-select>
-      </div>
+      </div><br>
       <button class="add-button" (click)="addNewGrade()">Dodaj ocenę</button>
     </div>
   
-    <div *ngIf="hasGrade">
+    <!-- <div *ngIf="hasGrade">
       <p>Ocena: {{ existingGrade.value }}</p>
       <p>Opis oceny: {{ existingGrade.description }}</p>
-      <button (click)="startEditing()" style="border-radius: 10px;">Edytuj ocenę</button>
-      <button (click)="deleteGrade()" style="margin-left: 5px; border-radius: 10px;">Usuń ocenę</button>
+      <button class="editGrade-button"  (click)="startEditing()" style="border-radius: 10px;">Edytuj ocenę</button>
+      <button class="deleteGrade-button" (click)="deleteGrade()" style="margin-left: 5px; border-radius: 10px;">Usuń ocenę</button>
   
       <div *ngIf="isEditing" class="grade-input">
         <div class="input-field">
@@ -50,12 +52,40 @@
           <input [(ngModel)]="editedGrade.description" name="editedDescription" type="text" placeholder="Opis oceny">
         </div>
   
-        <button (click)="saveEditedGrade()" style="border-radius: 10px;">Zapisz edycję</button>
-        <button (click)="cancelEditing()" style="border-radius: 10px;">Anuluj edycję</button>
+        <button class="editGrade-button"  (click)="saveEditedGrade()" style="border-radius: 10px;">Zapisz edycję</button>
+        <button class="deleteGrade-button"  (click)="cancelEditing()" style="margin-left: 5px; border-radius: 10px;">Anuluj</button>
       </div>
-    </div><br>
+    </div><br> -->
+
+    <div class="grade-info">
+      <ng-container *ngIf="!isEditing; else editingTemplate">
+        <div class="info-field">
+          <label>Ocena: </label>
+          <span>{{ existingGrade?.value }}</span>
+        </div>
+        <div class="info-field">
+          <label>Opis: </label>
+          <span>{{ existingGrade?.description }}</span>
+        </div>
+      </ng-container>
+      <ng-template #editingTemplate>
+        <div class="input-field">
+          <label for="editedValue">Ocena:</label><br>
+          <input [(ngModel)]="editedGrade.value" name="editedValue" type="number" placeholder="Wartość oceny" required>
+        </div>
+        <div class="input-field">
+          <label for="editedDescription">Opis:</label><br>
+          <input [(ngModel)]="editedGrade.description" name="editedDescription" type="text" placeholder="Opis oceny">
+        </div>
+        <button class="editGrade-button" (click)="saveEditedGrade()" style="border-radius: 10px;">Zapisz zmiany</button>
+        <button class="deleteGrade-button" (click)="cancelEditing()" style="margin-left: 5px; border-radius: 10px;">Anuluj</button>
+      </ng-template>
+      <button class="editGrade-button" *ngIf="!isEditing" (click)="startEditing()" style="border-radius: 10px;">Edytuj ocenę</button>
+      <button class="deleteGrade-button" *ngIf="!isEditing" (click)="deleteGrade()" style="margin-left: 5px; border-radius: 10px;">Usuń ocenę</button>
+    </div>
+    
   
-    <button (click)="updateAnswerDetails()" style="margin-top: 10px; border-radius: 10px;">Zapisz zmiany</button>
+    <button class="saveChanges-button" (click)="updateAnswerDetails()" style="margin-top: 10px; border-radius: 10px;">Zapisz zmiany</button>
   </div>
 
   <div *ngIf="!data.answer.user">
