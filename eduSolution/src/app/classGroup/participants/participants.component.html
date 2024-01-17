@@ -1,5 +1,18 @@
 <div>
     <h2>Uczniowie w grupie zajęciowej:</h2>
+
+    <td>
+      <div class="form-group">
+        <mat-form-field appearance="fill" class="input-container">
+          <mat-label>Wybierz grupy</mat-label>
+          <mat-select [(ngModel)]="usersByClassGroup" name="classGroups" multiple [compareWith]="compareFn">
+              <mat-option *ngFor="let group of allUsers" [value]="group">
+                {{ group.firstName }} {{ group.lastName }}
+              </mat-option>
+            </mat-select>
+        </mat-form-field>
+      </div>
+    </td>
   
     <table mat-table [dataSource]="usersByClassGroup" class="mat-elevation-z8">
   

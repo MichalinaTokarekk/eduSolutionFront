@@ -14,7 +14,8 @@ export class ParticipantsComponent implements OnInit {
   classGroupId: number | undefined;
   classGroup: any; 
   usersByClassGroup: any[] = [];
-
+  allUsers: any[] = [];
+  selectedGroups: { [groupId: number]: boolean } = {};
   
 
   constructor(private route: ActivatedRoute, private classGroupService: ClassGroupService, private location: Location, private userService: UserService) { }
@@ -41,6 +42,12 @@ export class ParticipantsComponent implements OnInit {
         console.error('classGroupId jest null');
       }
     });
+
+    this.userService.getAll().subscribe(
+        (data) => {
+            this.allUsers = data;
+        }
+    )
   }
 
   
@@ -48,19 +55,18 @@ export class ParticipantsComponent implements OnInit {
     this.location.back();
   }
 
-//   findUsersByClassGroupId(): void {
-//     console.log('Przed wywołaniem findUsersByClassGroupId');
-//     this.userService.findUsersByClassGroupId(this.id).subscribe(
-//       users => {
-//         console.log('Odpowiedź z serwera:', users);
-//         this.usersByClassGroup = users;
-//         console.log('Użytkownicy przypisani do klasy:', this.usersByClassGroup);
-//       },
-//       error => {
-//         console.error('Błąd podczas pobierania użytkowników:', error);
-//       }
-//     );
-//     console.log('Po wywołaniu findUsersByClassGroupId');
-//   }
+  compareFn(group1: any, group2: any): boolean {
+    return group1 && group2 ? group1.id === group2.id : group1 === group2;
+  }
+  
+
+  isSelected(group: any): boolean {
+    return this.selectedGroups[group.id] === true;
+  }
+  
+  onGroupSelectionChange(group: any): void {
+    this.selectedGroups[group.id] = !this.selectedGroups[group.id];
+  }
+
 
 }
