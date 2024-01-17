@@ -5,8 +5,8 @@
 .add-section-button{
   margin-top: 10px;
   margin-bottom: 10px;
-  margin-left: 9px;
-  background-color: #3498db; /* Kolor tła */
+  margin-left: 11px;
+  background-color: #375aca; /* Kolor tła */
   color: #fff; /* Kolor tekstu */
   border: none;
   padding: 7px 10px;
@@ -15,8 +15,10 @@
 }
 
 .newSectionInput{
-  margin-left: 5px;
+  margin-left: 11px;
   margin-bottom: 10px;
+  height: 23px;
+  border-radius: 5px;
 }
 
 /* Styl dla listy materiałów edukacyjnych */
@@ -66,7 +68,7 @@
 
 /* Styl dla przycisku "Dodaj materiał" */
 .add-material-button {
-  background-color: #28a745; /* Kolor zielony */
+  background-color: #375aca; /* Kolor zielony */
   color: #fff;
   border: none;
   padding: 5px 10px;
@@ -186,4 +188,62 @@ mat-panel-title {
   color: #fff; /* Kolor tekstu w stopce */
   padding: 20px; /* Wewnętrzny odstęp w stopce */
   text-align: center; /* Wyrównanie tekstu do środka */
+}
+
+.onSaveNew{
+  background-color: #375aca; /* Kolor przycisku edycji */
+  color: #fff; /* Kolor tekstu na przycisku */
+  border: none;
+  padding: 6px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.onCancelNew{
+  background-color: #dbdbd9; /* Kolor przycisku edycji */
+  color: #212529; /* Kolor tekstu na przycisku */
+  border: none;
+  padding: 6px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.editEduMaterial{
+  margin-left: -10px;
+  margin-right: 5px;
+  margin-bottom: 10px;
+  height: 23px;
+  border-radius: 5px;
+}
+
+.onEditEduMaterial{
+  background-color: #375aca; /* Kolor przycisku edycji */
+  color: #fff; /* Kolor tekstu na przycisku */
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-left: 5px;
+  margin-right: 5px;
+  margin-top: -10px;
+}
+
+.onCancelEditEduMaterial{
+  background-color: #dbdbd9; /* Kolor przycisku edycji */
+  color: #212529; /* Kolor tekstu na przycisku */
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-left: 5px;
+  margin-right: 5px;
+  margin-top: -10px;
+}
+
+.datetime-local{
+  margin-right: 10px;
+  height: 24px;
+  border-radius: 5px;
 }

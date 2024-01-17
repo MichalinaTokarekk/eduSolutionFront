@@ -59,13 +59,13 @@
    <button  class="add-section-button" (click)="onAddSection()">Dodaj nowy panel</button><br>
    <input class="newSectionInput" *ngIf="isAddingNewSection" type="text" [(ngModel)]="newSectionName" placeholder="Nowa nazwa sekcji">
    <button class="onSaveNew" *ngIf="isAddingNewSection" (click)="onSaveNew()">Zapisz</button>
-   <button class="onSaveNew" *ngIf="isAddingNewSection" (click)="onCloseButton()">Wyjdź</button>
+   <button class="onCancelNew" *ngIf="isAddingNewSection" (click)="onCloseButton()">Anuluj</button>
    <div class="expansion-panel-container">
    <mat-accordion>
     <mat-expansion-panel class="expansionPanel" *ngFor="let section of sectionsByCourse; let srNo = index" (click)="loadEduMaterialsBySectionId(section.id)">
       <mat-expansion-panel-header class="header">
         <mat-panel-title class="matPanelTitle">
-          <input
+          <input class="editEduMaterial"
             *ngIf="section.isEdit || section.isNewSection" 
             type="text"
             [(ngModel)]="section.name"
@@ -74,10 +74,10 @@
           >
           <span class="section-name" *ngIf="!section.isEdit && !section.isNewSection">{{ section.name }}</span>
           <button *ngIf="!section.isEdit" class="edit-button" (click)="onEdit(section)">Edytuj</button>
-          <button *ngIf="section.isEdit" (click)="onSave(section)">Zapisz zmiany</button>
-          <button *ngIf="section.isEdit" (click)="onBackButton(section)">Wyjdź z edycji</button>
+          <button class="onEditEduMaterial" *ngIf="section.isEdit" (click)="onSave(section)">Zapisz zmiany</button>
+          <button class="onCancelEditEduMaterial" *ngIf="section.isEdit" (click)="onBackButton(section)">Wyjdź z edycji</button>
           <!-- <i class="fa fa-trash-o trash-icon" aria-hidden="true" (click)="onDelete(section)"></i> -->
-          <button class="delete-button" (click)="onDelete(section)">Usuń</button>
+          <button *ngIf="!section.isEdit" class="delete-button" (click)="onDelete(section)">Usuń</button>
         </mat-panel-title>
       </mat-expansion-panel-header>
       <p *ngIf="!section.isEdit">This is the content of section {{ srNo + 1 }}</p>
@@ -120,7 +120,7 @@
             </ul>
         </div>
         <input *ngIf="section.isEdit" class="new-material-input" type="text" [(ngModel)]="newHomeworkTestName" placeholder="Nowe zadanie">
-        <input *ngIf="section.isEdit" type="datetime-local" [(ngModel)]="newHomeworkTestDeadline">
+        <input class="datetime-local" *ngIf="section.isEdit" type="datetime-local" [(ngModel)]="newHomeworkTestDeadline">
         <button  *ngIf="section.isEdit" class="add-material-button" (click)="onAddHomeworkTest(section)">Dodaj zadanie</button>
       </ng-container>
       
