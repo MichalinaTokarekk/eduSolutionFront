@@ -1,7 +1,7 @@
 <div>
     <h2>Uczniowie w grupie zajęciowej:</h2>
 
-    <td>
+    <!-- <td>
       <div class="form-group">
         <mat-form-field appearance="fill" class="input-container">
           <mat-label>Wybierz grupy</mat-label>
@@ -12,7 +12,25 @@
             </mat-select>
         </mat-form-field>
       </div>
-    </td>
+    </td> -->
+
+    <!-- Dodaj poniższy kod HTML wewnątrz formularza -->
+    <div class="form-group">
+      <mat-form-field appearance="fill" class="input-container">
+        <input matInput placeholder="Wyszukaj po nazwisku" (input)="onSearchChange($event)">
+      </mat-form-field>
+    </div>
+    
+
+<mat-form-field appearance="fill" class="input-container">
+  <mat-label>Wybierz grupy</mat-label>
+  <mat-select [(ngModel)]="usersByClassGroup" name="classGroups" multiple [compareWith]="compareFn">
+    <mat-option *ngFor="let user of filteredUsers" [value]="user">
+      {{ user.firstName }} {{ user.lastName }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+
 
     <button (click)="onSubmit()">Dodaj</button>
   

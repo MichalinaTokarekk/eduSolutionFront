@@ -16,6 +16,7 @@ export class ParticipantsComponent implements OnInit {
   usersByClassGroup: any[] = [];
   allUsers: any[] = [];
   selectedGroups: { [groupId: number]: boolean } = {};
+  filteredUsers: any[] = [];
   
 
   constructor(private route: ActivatedRoute, private classGroupService: ClassGroupService, private location: Location, private userService: UserService) { }
@@ -48,9 +49,20 @@ export class ParticipantsComponent implements OnInit {
     this.userService.getAll().subscribe(
         (data) => {
             this.allUsers = data;
+            this.filteredUsers = this.allUsers.slice();
         }
     )
   }
+
+  onSearchChange(event: any): void {
+    const searchValue = event?.target?.value || ''; // Sprawdzenie null przed dostępem do target i value
+    // Filtruj użytkowników na podstawie wprowadzonego znaku
+    this.filteredUsers = this.allUsers.filter(user => {
+      const lastName = user.lastName.toLowerCase();
+      return lastName.startsWith(searchValue.toLowerCase());
+    });
+  }
+  
 
   
   goBack() {
