@@ -23,6 +23,7 @@
                     <th>Semestr</th>
                     <th>Kurs</th>
                     <th></th> 
+                    <th></th> 
                     <!-- <th></th> -->
                 </tr>
             </thead>
@@ -218,6 +219,10 @@
                         <div *ngIf="!course.isEdit">
                           {{ course.course?.name }} {{ course.course?.difficultyLevel }}
                         </div>
+                      </td>
+
+                      <td>
+                        <a  [routerLink]="['/participants', course.id]">Uczestnicy</a>
                       </td>
                       
                       

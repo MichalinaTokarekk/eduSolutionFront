@@ -69,6 +69,10 @@ export class UserService {
   changePassword(changePassword: ChangePassword): Observable<any> {
     return this.http.put(`${this.USER_API}/changePassword`, changePassword);
   }
+
+  findUsersByClassGroupId2(classGroupId: string) {
+    return this.http.get<any>(this.USER_API + '/findUsersByClassGroupId/' + classGroupId);
+  }
   
   
 
