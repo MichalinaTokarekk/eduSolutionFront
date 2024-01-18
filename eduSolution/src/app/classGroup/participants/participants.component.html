@@ -1,5 +1,51 @@
 <div>
-    <h2>Uczniowie w grupie zajęciowej:</h2>
+  <h2 style="margin-left: 10px; font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; font-weight: 600;">Nauczyciele w grupie zajęciowej</h2>
+
+  <div class="form-group">
+    <mat-form-field appearance="fill" class="input-container">
+      <input matInput placeholder="Wyszukaj po nazwisku" (input)="onSearchChange($event)">
+    </mat-form-field>
+  </div>
+  
+
+<mat-form-field appearance="fill" class="input-container">
+<mat-label>Wybierz grupy</mat-label>
+<mat-select [(ngModel)]="teachersByClassGroup" name="classGroups" multiple [compareWith]="compareFn" class="userSelect">
+  <mat-option *ngFor="let user of filteredTeachers" [value]="user">
+    {{ user.firstName }} {{ user.lastName }}
+  </mat-option>
+</mat-select>
+</mat-form-field><br>
+
+
+  <button class="saveButton" (click)="onSubmit()">Dodaj</button><br><br>
+
+  <table mat-table [dataSource]="teachersByClassGroup" class="mat-elevation-z8">
+
+    <!-- Nazwa kolumny -->
+    <ng-container matColumnDef="fullName">
+      <th mat-header-cell *matHeaderCellDef> Imię i nazwisko </th>
+      <td mat-cell *matCellDef="let user">{{ user.firstName }} {{ user.lastName }}</td>
+    </ng-container>
+
+    <!-- Dodaj kolumnę z przyciskiem do otwierania dialogu -->
+    <ng-container matColumnDef="detailsButton">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let user">
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="['fullName', 'detailsButton']"></tr>
+    <tr mat-row *matRowDef="let row; columns: ['fullName', 'detailsButton'];"></tr>
+  </table>
+</div><br><br>
+
+
+
+
+
+<div>
+    <h2 style="margin-left: 10px; font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; font-weight: 600;">Uczniowie w grupie zajęciowej (Limit {{studentsLimit}})</h2>
 
     <!-- <td>
       <div class="form-group">
@@ -29,10 +75,10 @@
       {{ user.firstName }} {{ user.lastName }}
     </mat-option>
   </mat-select>
-</mat-form-field>
+</mat-form-field><br>
 
 
-    <button (click)="onSubmit()">Dodaj</button>
+    <button class="saveButton" (click)="onSubmit()">Dodaj</button><br><br>
   
     <table mat-table [dataSource]="usersByClassGroup" class="mat-elevation-z8">
   

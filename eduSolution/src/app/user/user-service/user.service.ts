@@ -3,6 +3,7 @@ import { HttpClient, HttpParams } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { Role } from "src/app/interfaces/role-interface";
 import { ChangePassword } from "src/app/interfaces/changePassword-interface";
+import { User } from "src/app/interfaces/user-interface";
 
 
 @Injectable()
@@ -59,7 +60,7 @@ export class UserService {
     return this.http.get<any>(this.USER_API + '/teachingClassGroups/' + userId);
   }
 
-  getUsersByRole(role: Role): Observable<any[]> {
+  getUsersByRole(role: string): Observable<any[]> {
     return this.http.get<any[]>(`${this.USER_API}/usersByRole?role=${role}`);
   }
 
@@ -78,6 +79,10 @@ export class UserService {
 
   findUsersByClassGroupId2(classGroupId: string) {
     return this.http.get<any>(this.USER_API + '/findUsersByClassGroupId/' + classGroupId);
+  }
+
+  findUsersByClassGroupIdAndRole(classGroupId: string, userRole: string) {
+    return this.http.get<User[]>(`${this.USER_API}/findUsersByClassGroupIdAndRole/${classGroupId}/${userRole}`);
   }
   
   
