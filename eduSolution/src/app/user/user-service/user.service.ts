@@ -31,7 +31,7 @@ export class UserService {
       
     } else {
       if(user.id!=null){
-        result = this.http.put(this.USER_API + '/updateUser', user)
+        result = this.http.put(this.USER_API + '/updateUserWithoutPasswordNoLimitCheck', user)
 
       }else
       result = this.http.post(this.REGISTER_API + '/registerCreate', user)
@@ -48,6 +48,18 @@ export class UserService {
   updateUserClassGroup(user: any) {
     let result: Observable<Object>;
     result = this.http.put(this.USER_API + '/updateUserClassGroup', user)
+    return result;
+  }
+
+  updateUserWithoutPassword(user: any) {
+    let result: Observable<Object>;
+    result = this.http.put(this.USER_API + '/updateUserWithoutPassword', user)
+    return result;
+  }
+
+  updateUserWithoutPasswordNoLimitCheck(user: any) {
+    let result: Observable<Object>;
+    result = this.http.put(this.USER_API + '/updateUserWithoutPasswordNoLimitCheck', user)
     return result;
   }
 

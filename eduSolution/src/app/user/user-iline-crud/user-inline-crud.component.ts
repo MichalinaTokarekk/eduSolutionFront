@@ -159,7 +159,7 @@ export class UserInlineCrudComponent implements OnInit {
     
       // Jeśli nowy użytkownik, ustaw domyślne hasło
       // if (!userObj.id) {
-        userObj.password = '1234';
+        // userObj.password = '1234';
         // userObj.password = userObj.password;
       // }
     
@@ -169,7 +169,6 @@ export class UserInlineCrudComponent implements OnInit {
       }
       
     
-      // Przygotuj dane do zapisu
       const userData = { ...userObj };
     
       const saveService = userObj.id ? this.userService : this.registerService;
@@ -183,6 +182,11 @@ export class UserInlineCrudComponent implements OnInit {
           (error) => {
             console.error('Błąd podczas aktualizacji:', error);
             console.log('Wysyłane dane:', userData);
+            // this.snackBar.open('Osiągnieto limit użytkowników w tej grupie.', 'Zamknij', {
+            //   duration: 5000, // Duration in milliseconds
+            //   horizontalPosition: 'center',
+            //   verticalPosition: 'bottom',
+            // });
           }
         );
     
