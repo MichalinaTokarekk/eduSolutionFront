@@ -4,6 +4,7 @@ import { ActivatedRoute, ParamMap } from '@angular/router';
 import { ClassGroupService } from 'src/app/classGroup/classGroup-service/classGroup.service';
 import { Location } from '@angular/common';
 import { UserService } from 'src/app/user/user-service/user.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-offer-description',
@@ -19,7 +20,8 @@ export class ParticipantsComponent implements OnInit {
   filteredUsers: any[] = [];
   
 
-  constructor(private route: ActivatedRoute, private classGroupService: ClassGroupService, private location: Location, private userService: UserService) { }
+  constructor(private route: ActivatedRoute, private classGroupService: ClassGroupService, private location: Location, private userService: UserService,
+    private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((params: ParamMap) => {
@@ -111,20 +113,20 @@ onSubmit() {
           console.log('Zaktualizowano użytkownika:', response);
         },
         error => {
-          console.error('Błąd podczas aktualizacji użytkownika:', error);
-  
+        //   console.error('Błąd podczas aktualizacji użytkownika:', error);
+
+          this.snackBar.open('Osiągnieto limit użytkowników w tej grupie.', 'Zamknij', {
+            duration: 5000, // Duration in milliseconds
+            horizontalPosition: 'center',
+            verticalPosition: 'bottom',
+          });
           // Dodaj poniższy console.log, aby wyświetlić dokładną treść błędu
           console.log('Treść błędu:', error);
   
-          // Opcjonalnie, możesz dodać alert, aby łatwiej zauważyć błąd
-          alert('Błąd podczas aktualizacji użytkownika. Sprawdź konsolę dla więcej informacji.');
+        //   alert('Błąd podczas aktualizacji użytkownika. Sprawdź konsolę dla więcej informacji.');
         }
       );
     }
   }
-
-
-  
-  
 
 }
