@@ -128,7 +128,7 @@ import { ParticipantsComponent } from './classGroup/participants/participants.co
     MatMenuModule,
     MatOptionModule,
     MatIconModule,
-    MatButtonToggleModule
+    MatButtonToggleModule,
 
   ],
   declarations: [

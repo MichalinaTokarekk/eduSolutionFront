@@ -1,33 +1,83 @@
+<div class="col-6">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16" (click)="goBack()">
+      <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"/>
+    </svg>
+    <h2 style="margin-left: 10px;">Szczegóły wydarzenia</h2>
+  </div><br>
 
-    <h1>Szczegóły</h1>
+<!-- Edycja wydarzenia -->
+<form *ngIf="isEditMode" (submit)="saveChanges()" class="edit-form">
+  <div class="form-group">
+    <!-- <label for="eventName">Nazwa:</label> -->
+    <input type="text" id="eventName" [(ngModel)]="selectedEventName" name="eventName" required>
+  </div>
 
-    <form *ngIf="isEditMode" (submit)="saveChanges()">
-        <div>
-            <label for="eventName">Nazwa:</label>
-            <input type="text" id="eventName" [(ngModel)]="selectedEventName" name="eventName" required>            
-        </div>
+  <div class="form-group">
+    <label for="eventDate">Data:</label>
+    <input type="text" id="eventDate" [(ngModel)]="selectedEventDate" name="eventDate" required>
+  </div>
 
-        <div>
-            <label for="eventDate">Data:</label>
-            <input type="text" id="eventDate" [(ngModel)]="selectedEventDate" name="eventDate" required>
-        </div>
+  <!-- <mat-select id="classGroups" [(ngModel)]="selectedClassGroups" name="classGroups" multiple [compareWith]="compareFn">
+    <mat-option *ngFor="let group of allClassGroups" [value]="group">
+      {{ group.name }}
+    </mat-option>
+  </mat-select> -->
 
-        <button type="submit">Zapisz</button>
-        <button (click)="cancelEdit()">Anuluj</button>
-    </form>
+  <mat-form-field appearance="fill" class="input-container">
+    <input matInput placeholder="Wyszukaj po nazwie" (input)="onSearchChange($event)">
+  </mat-form-field>
 
-    <div *ngIf="!isEditMode">
-        <div>
-            <label>Nazwa:</label>
-            <span>{{ selectedEventName }}</span>
-        </div>
+  <mat-form-field appearance="fill" class="input-container">
+    <mat-label>Wybierz grupy</mat-label>
+    <mat-select id="classGroups" [(ngModel)]="selectedClassGroups" name="classGroups" multiple [compareWith]="compareFn" class="userSelect">
+      <mat-option *ngFor="let group of allClassGroups" [value]="group">
+        {{ group.name }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  
+  
+  
 
-        <div>
-            <label>Data:</label>
-            <span>{{ selectedEventDate }}</span>
-        </div>
+  <div class="button-group">
+    <button type="submit" class="save-button">Zapisz</button>
+    <button (click)="cancelEdit()" class="cancel-button">Anuluj</button>
+  </div>
+</form>
 
-        <button (click)="startEdit()">Edytuj</button>
-        <button (click)="deleteEvent()">Usuń</button>
-    </div>
+<!-- Wyświetlanie informacji o wydarzeniu -->
+<div *ngIf="!isEditMode" class="event-details">
+  <div class="info-group">
+    <span class="eventName">{{ selectedEventName }}</span>
+    <span class="eventDate">{{ selectedEventDate }}</span>
+  </div>
 
+  <!-- <div class="info-group">
+    <label>Data:</label>
+    <span>{{ selectedEventDate }}</span>
+  </div> -->
+
+  <!-- Grupy klasowe w tabeli -->
+<div class="info-group">
+    <table>
+      <thead>
+        <tr>
+          <th>Grupy zajęciowe</th>
+          <!-- Dodaj inne nagłówki tabeli w razie potrzeby -->
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let classGroup of selectedClassGroups">
+          <td>{{ classGroup.name }}</td>
+          <!-- Dodaj inne komórki w wierszu, jeśli istnieją dodatkowe informacje do wyświetlenia -->
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
+
+  <div class="button-group">
+    <button (click)="startEdit()" class="save-button">Edytuj</button>
+    <button (click)="deleteEvent()" class="cancel-button">Usuń</button>
+  </div>
+</div>

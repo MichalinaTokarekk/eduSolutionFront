@@ -15,6 +15,7 @@ import { EventsScheduleService } from '../eventsSchedule-service/eventsSchedule.
 export class AddEventDialogComponent {
     availableCourses: Course[] = [];
     availableClassGroups: ClassGroup[] = [];
+    
 
   constructor(
     public dialogRef: MatDialogRef<AddEventDialogComponent>,
@@ -84,4 +85,30 @@ export class AddEventDialogComponent {
       }
     );
   }
+
+  // toggleSelectAll(): void {
+  //   if (this.data.classGroups.length === this.availableClassGroups.length) {
+  //     // Jeśli wszystkie są zaznaczone, odznacz wszystkie
+  //     this.data.classGroups = [];
+  //   } else {
+  //     // Zaznacz wszystkie, usuń inne zaznaczenia
+  //     this.data.classGroups = [...this.availableClassGroups];
+  //   }
+  // }
+
+  isSelectAllSelected = false;
+
+  toggleSelectAll(): void {
+    if (this.isSelectAllSelected) {
+      // Jeśli "Select All" jest zaznaczone, odznacz wszystkie
+      this.data.classGroups = [];
+    } else {
+      // Zaznacz wszystkie, usuń inne zaznaczenia
+      this.data.classGroups = [...this.availableClassGroups];
+    }
+
+    // Zmiana statusu "Select All"
+    this.isSelectAllSelected = !this.isSelectAllSelected;
+  }
+  
 }

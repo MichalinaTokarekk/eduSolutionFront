@@ -10,7 +10,29 @@
     <label for="eventDate">Data Wydarzenia:</label>
     <input type="date" id="eventDate" name="eventDate" [(ngModel)]="data.eventDate" required>
   </div>
+
+  <!-- <mat-form-field>
+    <mat-label>Select Class Groups</mat-label>
+    <mat-select [(ngModel)]="data.classGroups" name="classGroups" multiple>
+      <mat-option *ngFor="let classGroup of availableClassGroups" [value]="classGroup">
+        {{ classGroup.name }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field> -->
+
+  <mat-form-field>
+    <mat-label>Select Class Groups</mat-label>
+    <mat-select [(ngModel)]="data.classGroups" name="classGroups" multiple>
+      <mat-option (click)="toggleSelectAll()">Select All</mat-option>
+      <mat-option *ngFor="let classGroup of availableClassGroups" [value]="classGroup">
+        {{ classGroup.name }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
   
+
+
+
   <!-- <form name="myForm">
     <mat-form-field>
       <mat-select multiple id="courses" name="courses" [(ngModel)]="data.courses" required>
