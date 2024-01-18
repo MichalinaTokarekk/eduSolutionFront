@@ -3,12 +3,12 @@
 <form (ngSubmit)="onAddClick()" class="event-form">
   <div class="form-group">
     <label for="eventName">Nazwa Wydarzenia:</label>
-    <input type="text" id="eventName" name="eventName" [(ngModel)]="data.eventName" required>
+    <input style="width: 204px; height: 30px;" type="text" id="eventName" name="eventName" [(ngModel)]="data.eventName" required>
   </div>
   
   <div class="form-group">
     <label for="eventDate">Data Wydarzenia:</label>
-    <input type="date" id="eventDate" name="eventDate" [(ngModel)]="data.eventDate" required>
+    <input style="width: 206px; height: 30px;" type="date" id="eventDate" name="eventDate" [(ngModel)]="data.eventDate" required>
   </div>
 
   <!-- <mat-form-field>
@@ -20,8 +20,15 @@
     </mat-select>
   </mat-form-field> -->
 
+  <mat-form-field appearance="fill" class="input-container">
+    <input matInput placeholder="Wyszukaj po nazwie" (input)="onSearchChange($event)">
+  </mat-form-field>
+
+  
+  
+
   <mat-form-field>
-    <mat-label>Select Class Groups</mat-label>
+    <mat-label>Wybierz grupę</mat-label>
     <mat-select [(ngModel)]="data.classGroups" name="classGroups" multiple>
       <mat-option (click)="toggleSelectAll()">Select All</mat-option>
       <mat-option *ngFor="let classGroup of availableClassGroups" [value]="classGroup">
@@ -56,7 +63,7 @@
   
 
   <div class="form-actions">
-    <button type="button" (click)="onCancelClick()">Anuluj</button>
-    <button type="submit" >Dodaj</button>
+    <button class="save-button" type="submit" >Dodaj</button>
+    <button class="cancel-button" type="button" (click)="onCancelClick()">Anuluj</button>
   </div>
 </form>

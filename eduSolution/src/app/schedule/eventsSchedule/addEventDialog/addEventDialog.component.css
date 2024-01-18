@@ -11,25 +11,15 @@
   margin-bottom: 15px;
 }
 
+
+
 label {
   display: block;
   font-weight: bold;
   margin-bottom: 5px;
 }
 
-input,
-mat-select {
-  width: 100%;
-  padding: 10px;
-  box-sizing: border-box;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-}
 
-/* Dodane style dla pól wyboru */
-mat-form-field {
-  width: 100%;
-}
 
 .mat-select {
   width: 100%;
@@ -39,7 +29,7 @@ mat-form-field {
   margin-top: 20px;
 }
 
-button {
+/* button {
   padding: 10px 15px;
   font-size: 16px;
   cursor: pointer;
@@ -58,5 +48,27 @@ button[type="button"] {
   border: none;
   border-radius: 5px;
   margin-right: 10px;
+} */
+
+.save-button{
+  margin-top: 1px;
+  margin-bottom: 10px;
+  margin-left: 1px;
+  margin-right: 5px;
+  background-color: #375aca; /* Kolor tła */
+  color: #fff; /* Kolor tekstu */
+  border: none;
+  padding: 7px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.cancel-button{
+  background-color: #dbdbd9; /* Kolor przycisku edycji */
+  color: #212529; /* Kolor tekstu na przycisku */
+  border: none;
+  padding: 7px 10px;
+  border-radius: 5px;
+  cursor: pointer;
 }
 

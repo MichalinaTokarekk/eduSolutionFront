@@ -75,10 +75,14 @@ export class AddEventDialogComponent {
     );
   }
 
+  originalClassGroups: ClassGroup[] = [];
+
   loadAvailableClassGroups() {
     this.classGroupService.getAll().subscribe(
       (classGroups) => {
-        this.availableClassGroups = classGroups;
+        // this.availableClassGroups = classGroups;
+        this.originalClassGroups = classGroups;
+      this.availableClassGroups = [...this.originalClassGroups];
       },
       (error) => {
         console.error('Błąd podczas pobierania grup klasowych', error);
@@ -109,6 +113,14 @@ export class AddEventDialogComponent {
 
     // Zmiana statusu "Select All"
     this.isSelectAllSelected = !this.isSelectAllSelected;
+  }
+
+  onSearchChange(event: any): void {
+    const searchValue = event?.target?.value || ''; 
+    this.availableClassGroups = this.originalClassGroups.filter(user => {
+      const lastName = user.name.toLowerCase();
+      return lastName.startsWith(searchValue.toLowerCase());
+    });
   }
   
 }
