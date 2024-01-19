@@ -26,16 +26,16 @@ export class UserService {
 
   save (user: any) : Observable <any> {
     let result: Observable<Object>;
-    if(user['href']){
-      result = this.http.put(user.href, user)
+    // if(user['href']){
+    //   result = this.http.put(user.href, user)
       
-    } else {
-      if(user.id!=null){
-        result = this.http.put(this.USER_API + '/updateUserWithoutPasswordNoLimitCheck', user)
+    // } else {
+    //   if(user.id!=null){
+    //     result = this.http.put(this.USER_API + '/updateUserWithoutPasswordNoLimitCheck', user)
 
-      }else
+    //   }else
       result = this.http.post(this.REGISTER_API + '/registerCreate', user)
-    }
+    // }
     return result;
   }
 

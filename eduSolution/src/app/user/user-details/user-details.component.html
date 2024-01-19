@@ -6,7 +6,7 @@
 
 <div class="row">
     <div class="col-8">
-        <button class="btn btn-sm btn-primary" (click)="openAddUserDialog()">Dodaj nowego</button>
+        <button class="btn btn-sm btn-primary" (click)="onAdd()">Dodaj nowego</button>
         <div class="col-7">
             <input type="text" [(ngModel)]="searchText" placeholder="Szukaj" class="form-control custom-search-input">
         </div><br>
@@ -17,14 +17,14 @@
                     <th (click)="onNameSort()">Imię</th>
                     <th (click)="onNameSort()">Nazwisko</th>
                     <th (click)="onNameSort()">E-mail</th>
-                    <!-- <th (click)="onNameSort()">Ulica i numer</th> -->
-                    <!-- <th (click)="onNameSort()">Miasto</th> -->
-                    <!-- <th (click)="onNameSort()">Poczta</th> -->
-                    <!-- <th (click)="onNameSort()">Kod pocztowy</th> -->
-                    <!-- <th (click)="onNameSort()">Kraj</th> -->
+                    <th (click)="onNameSort()">Ulica i numer</th>
+                    <th (click)="onNameSort()">Miasto</th>
+                    <th (click)="onNameSort()">Poczta</th>
+                    <th (click)="onNameSort()">Kod pocztowy</th>
+                    <th (click)="onNameSort()">Kraj</th>
                     <th (click)="onNameSort()">Rola</th>
                     <th (click)="onNameSort()">Status</th>
-                    <!-- <th (click)="onNameSort()">Grupy kursowe</th> -->
+                    <th (click)="onNameSort()">Grupy kursowe</th>
                     <!-- <th>Opis</th>  -->
                     <th></th>
                 </tr>
@@ -71,7 +71,7 @@
                         </div>
                      
                     </td>
-                    <!-- <td>
+                    <td>
                         <div *ngIf="user.isEdit" class="form-group">
                             <div class="input-container">
                                 <input type="text" class="form-control" [(ngModel)]="user.address" [ngClass]="{'is-invalid': validateUser(user.address) !== ''}">
@@ -85,8 +85,8 @@
                             {{user.address}}
                         </div>
                      
-                    </td> -->
-                    <!-- <td>
+                    </td>
+                    <td>
                         <div *ngIf="user.isEdit" class="form-group">
                             <div class="input-container">
                                 <input type="text" class="form-control" [(ngModel)]="user.city" [ngClass]="{'is-invalid': validateUser(user.city) !== ''}">
@@ -100,8 +100,8 @@
                             {{user.city}}
                         </div>
                      
-                    </td> -->
-                    <!-- <td>
+                    </td>
+                    <td>
                         <div *ngIf="user.isEdit" class="form-group">
                             <div class="input-container">
                                 <input type="text" class="form-control" [(ngModel)]="user.post" [ngClass]="{'is-invalid': validateUser(user.post) !== ''}">
@@ -115,8 +115,8 @@
                             {{user.post}}
                         </div>
                      
-                    </td> -->
-                    <!-- <td>
+                    </td>
+                    <td>
                         <div *ngIf="user.isEdit" class="form-group">
                             <div class="input-container">
                                 <input type="text" class="form-control" [(ngModel)]="user.postCode" [ngClass]="{'is-invalid': validateUser(user.postCode) !== ''}">
@@ -130,8 +130,8 @@
                             {{user.postCode}}
                         </div>
                      
-                    </td> -->
-                    <!-- <td>
+                    </td>
+                    <td>
                         <div *ngIf="user.isEdit" class="form-group">
                             <div class="input-container">
                                 <input type="text" class="form-control" [(ngModel)]="user.country" [ngClass]="{'is-invalid': validateUser(user.country) !== ''}">
@@ -145,7 +145,7 @@
                             {{user.country}}
                         </div>
                      
-                    </td> -->
+                    </td>
 
                     <td>
                         <div *ngIf="user.isEdit">
@@ -191,7 +191,7 @@
                     </div>
                 </td> -->
 
-                <!-- <td>
+                <td>
                     <div *ngIf="user.isEdit" class="form-group">
                       <mat-form-field appearance="fill" class="input-container">
                         <mat-label>Wybierz grupy</mat-label>
@@ -210,11 +210,9 @@
                         {{ group.name }}
                       </div>
                     </div>
-                </td> -->
-
-                  <td>
-                    <a [routerLink]="['/user-details', user.id]">Szczegóły</a>
                   </td>
+
+                
                   
                   
 
@@ -223,7 +221,7 @@
 
 
 
-                    <!-- <td class="text-center"> 
+                    <td class="text-center"> 
                         <div class="text-end" *ngIf="!user.isEdit">
                             <i class="fa fa-pencil-square-o px-1" aria-hidden="true" (click)="onEdit(user)"></i>
                             <i class="fa fa-trash-o" aria-hidden="true" (click)="onDelete(user)"></i>
@@ -232,7 +230,7 @@
                             <i class="fa fa-cloud px-1" (click)="onUpdate(user)" aria-hidden="true"></i>
                             <i class="fa fa-times-circle" aria-hidden="true" (click)="onCancel(user)"></i>
                         </div>
-                    </td> -->
+                    </td>
                     
                 </tr>
             </tbody>

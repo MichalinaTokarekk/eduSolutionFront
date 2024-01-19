@@ -1,0 +1,72 @@
+<!-- add-user-dialog.component.html -->
+
+<h2 mat-dialog-title>Dodaj nowego użytkownika</h2>
+<div mat-dialog-content>
+  <form #userForm="ngForm">
+    <mat-form-field>
+      <input matInput placeholder="Imię" [(ngModel)]="data.firstName" name="firstName" required>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput placeholder="Nazwisko" [(ngModel)]="data.lastName" name="lastName" required>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput placeholder="E-mail" [(ngModel)]="data.email" name="email" required email>
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+        <input matInput placeholder="Adres" [(ngModel)]="data.address" name="address" required>
+    </mat-form-field>
+      
+    <mat-form-field class="full-width">
+    <input matInput placeholder="Miasto" [(ngModel)]="data.city" name="city" required>
+    </mat-form-field>
+    
+    <mat-form-field class="full-width">
+    <input matInput placeholder="Poczta" [(ngModel)]="data.post" name="post" required>
+    </mat-form-field>
+    
+    <mat-form-field class="full-width">
+    <input matInput placeholder="Kod pocztowy" [(ngModel)]="data.postCode" name="postCode" required>
+    </mat-form-field>
+    
+    <mat-form-field class="full-width">
+    <input matInput placeholder="Kraj" [(ngModel)]="data.country" name="country" required>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Rola</mat-label>
+        <mat-select [(ngModel)]="data.role" name="role">
+          <mat-option *ngFor="let role of availableRoles" [value]="role">
+            {{ role }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Status użytkownika</mat-label>
+        <mat-select [(ngModel)]="data.userStatus" name="userStatus">
+          <mat-option *ngFor="let status of availableUserStatus" [value]="status">
+            {{ status }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+    <!-- Dodaj pozostałe pola formularza użytkownika -->
+
+    <mat-form-field appearance="fill" class="input-container">
+      <mat-label>Wybierz grupy</mat-label>
+      <mat-select [(ngModel)]="data.classGroups" name="classGroups" multiple>
+        <mat-option *ngFor="let group of availableClassGroups" [value]="group">
+          {{ group.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <div class="dialog-buttons">
+      <button mat-button (click)="onCancelClick()">Anuluj</button>
+      <button mat-button color="primary" (click)="onAddClick()" [disabled]="!userForm.valid">Dodaj</button>
+    </div>
+  </form>
+</div>

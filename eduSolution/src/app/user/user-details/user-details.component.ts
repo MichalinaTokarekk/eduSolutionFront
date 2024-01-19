@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ConfirmationDialogSemesterComponent } from 'src/app/confirmations/semester/confirmation-dialog-semester.component';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -11,14 +11,13 @@ import { forkJoin } from 'rxjs';
 import { LoginService } from 'src/app/authorization_authentication/service/login.service';
 import { ClassGroupService } from 'src/app/classGroup/classGroup-service/classGroup.service';
 import { RegisterService } from 'src/app/authorization_authentication/register/register-service/register.service';
-import { AddUserDialogComponent } from '../add-user-dialog/add-user-dialog.component';
 
 @Component({
   selector: 'app-basic-inline-editing',
-  templateUrl: './user-inline-crud.component.html',
-  styleUrls: ['./user-inline-crud.component.css']
+  templateUrl: './user-details.component.html',
+  styleUrls: ['./user-details.component.css']
 })
-export class UserInlineCrudComponent implements OnInit {
+export class UserDetailsComponent implements OnInit {
   userArray: any[] = [];
   filteredUsers: any []= [];
   oldUserObj: any;
@@ -29,19 +28,17 @@ export class UserInlineCrudComponent implements OnInit {
   allClassGroups: any[] = [];
   selectedClassGroups: number[] = [];
   constructor(private http: HttpClient, private userService: UserService, private router: Router, private dialog: MatDialog, private snackBar: MatSnackBar,
-    private loginService: LoginService, private classGroupService: ClassGroupService, private registerService: RegisterService){
+    private loginService: LoginService, private classGroupService: ClassGroupService, private registerService: RegisterService, private route: ActivatedRoute){
 
   }
 
   selectedGroups: { [groupId: number]: boolean } = {};
   ngOnInit(): void {
-    this.loadList();
     const token = this.loginService.getToken();
     const _token = token.split('.')[1];
     const _atobData = atob(_token);
     const _finalData = JSON.parse(_atobData);
 
-    // Zakładam, że groupIds to tablica stringów
     this.userService.findClassGroupsById(_finalData.id).subscribe((groupIds: string[]) => {
       this.classGroups = groupIds;
     });
@@ -60,6 +57,10 @@ export class UserInlineCrudComponent implements OnInit {
       });
     }
 
+    this.route.params.subscribe(params => {
+        const userId = params['userId'];
+        this.userService.get(userId).subscribe(user => this.userArray = [user]);
+    });
     
     
   }
@@ -100,21 +101,6 @@ export class UserInlineCrudComponent implements OnInit {
         return searchData
       }
     });
-  }
-
-  loadAllUser() {
-    this.userService.getAll().subscribe((res: any)=>{
-      this.userArray = res;
-      this.filteredUsers= res;
-    })
-  }
-
-  loadList() {
-    this.userService.getAll().subscribe (data => {
-      this.userArray = data;
-      this.filteredUsers = data
-
-    })
   }
 
   
@@ -221,7 +207,6 @@ onDelete(obj: any) {
       if (result === true) {
         this.userService.remove(obj.id).subscribe(
           response => {
-            this.loadList();
             this.openSnackBar('Pole usunięte pomyślnie', 'Success');
           },
           error => {
@@ -260,19 +245,6 @@ isGroupSelected(classGroups: any[], group: any): boolean {
   return classGroups && classGroups.some(selectedGroup => selectedGroup.id === group.id);
 }
 
-
-openAddUserDialog(): void {
-  const dialogRef = this.dialog.open(AddUserDialogComponent, {
-    width: '300px',
-    data: {
-    }
-  });
-
-  dialogRef.afterClosed().subscribe(result => {
-    if (result) {
-    }
-  });
-}
 
 
 }
