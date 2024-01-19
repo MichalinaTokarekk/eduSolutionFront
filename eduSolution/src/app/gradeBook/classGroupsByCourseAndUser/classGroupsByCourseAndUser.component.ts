@@ -23,6 +23,7 @@ import { CertificateConfirmationService } from 'src/app/certificateConfirmation/
 import { CertificateConfirmation } from 'src/app/interfaces/certificateConfirmation-interface';
 import { Location } from '@angular/common';
 import { AddCertificateConfirmationDetailComponent } from 'src/app/certificateConfirmation/addCertificateConfirmationDetail/addCertificateConfirmationDetail.component';
+import { Role } from 'src/app/interfaces/role-interface';
 
 
 /**
@@ -134,11 +135,23 @@ getCertificateConfirmation() {
   
   
   
-
+roleEnumToString(role: Role): string {
+  switch (role) {
+    case Role.USER:
+      return 'USER';
+    case Role.TEACHER:
+      return 'TEACHER';
+    // Dodaj pozostałe przypadki, jeśli istnieją inne role
+    default:
+      throw new Error('Nieobsługiwana rola.');
+  }
+}
   
 
 loadEduMaterialsBySectionId(): void {
-  this.userService.findUsersByClassGroupId(this.classGroup.id).subscribe(users => {
+  const userRole: Role = Role.USER; 
+  const userRoleAsString: string = this.roleEnumToString(userRole);
+  this.userService.findUsersByClassGroupIdAndRole(this.classGroup.id, userRoleAsString).subscribe(users => {
     this.users = users;
 
     this.loadGradesByStudentId(this.classGroup.id);
