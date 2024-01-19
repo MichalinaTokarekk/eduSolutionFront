@@ -160,7 +160,7 @@ export class UserDetailsComponent implements OnInit {
     
       const saveService = userObj.id ? this.userService : this.registerService;
     
-      saveService.save(userData)
+      this.userService.updateUserWithoutPassword(userData)
         .subscribe(
           (data) => {
             console.log('Aktualizacja zakończona sukcesem:', data);
