@@ -56,7 +56,8 @@ export class AddUserDialogComponent {
       post: this.data.email,
       postCode: this.data.email,
       country: this.data.email,
-      classGroups: this.data.classGroups,
+    //   classGroups: this.data.classGroups,
+    classGroups: this.data.classGroups.map((group: { id: any; }) => group.id),
       role: this.data.role,
       userStatus: this.data.userStatus
     };
