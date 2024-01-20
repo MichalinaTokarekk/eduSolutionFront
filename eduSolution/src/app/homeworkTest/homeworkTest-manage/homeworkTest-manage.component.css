@@ -148,6 +148,27 @@
     background-color: #0056b3;
   }
 
+  .saveButton{
+    background-color: #375aca; /* Kolor przycisku edycji */
+    color: #fff; /* Kolor tekstu na przycisku */
+    border: none;
+    padding: 6px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 1px;
+    margin-right: 5px;
+  }
+
+  .deleteButton{
+    background-color: #d46868; /* Kolor przycisku edycji */
+    color: #212529; /* Kolor tekstu na przycisku */
+    border: none;
+    padding: 6px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 1px;
+  }
+
 
 
 

@@ -128,7 +128,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
     }
 
     calculateTimeDifference(): { days: number, hours: number, minutes: number, beforeDeadline: boolean } {
-      const updatedAtDate = new Date(this.data.answer.updatedAt);
+      const updatedAtDate = new Date(this.data.answer.createdAt);
       const deadlineDate = new Date(this.data.homeworkTest.deadline);
       
       const timeDifference = deadlineDate.getTime() - updatedAtDate.getTime();

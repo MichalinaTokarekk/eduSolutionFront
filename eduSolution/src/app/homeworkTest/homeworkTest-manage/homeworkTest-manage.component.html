@@ -159,22 +159,27 @@
         <!-- <p><strong>Zawartość odpowiedzi:</strong> {{ answer.answerContent }}</p> -->
         <div *ngIf="!isAnswerContentVisible" class="answer-content">
           {{ answer.answerContent }}
-        </div>
-        <p *ngIf="!isAnswerContentVisible"><strong>Status odpowiedzi:</strong> {{ answer.answerStatus }}</p>
-        <p *ngIf="!isAnswerContentVisible"><strong>Utworzono:</strong> {{ answer.createdAt | date:'yyyy-MM-dd HH:mm:ss' }}</p>
-        <p *ngIf="!isAnswerContentVisible"><strong>Ostatnia modyfikacja:</strong> {{ answer.updatedAt | date:'yyyy-MM-dd HH:mm:ss' }}</p>
+        </div><br>
+        <!-- <p *ngIf="!isAnswerContentVisible"><strong>Utworzono:</strong> {{ answer.createdAt | date:'yyyy-MM-dd HH:mm:ss' }}</p>
+        <p *ngIf="!isAnswerContentVisible"><strong>Ostatnia modyfikacja:</strong> {{ answer.updatedAt | date:'yyyy-MM-dd HH:mm:ss' }}</p> -->
         <!-- <p *ngIf="!isAnswerContentVisible"><strong>Dni do deadline'u:</strong> {{ calculateDaysUntilDeadline() }} dni</p> -->
         <!-- <p>
           Pozostało: {{ calculateDaysUntilDeadline().days }} dni, {{ calculateDaysUntilDeadline().hours }} godzin, {{ calculateDaysUntilDeadline().minutes }} minut
         </p> -->
        
         <div [ngClass]="{'green-background': calculateTimeDifference().beforeDeadline, 'red-background': !calculateTimeDifference().beforeDeadline}">
+          <p *ngIf="!isAnswerContentVisible"><strong>Utworzono:</strong> {{ answer.createdAt | date:'yyyy-MM-dd HH:mm:ss' }}</p>
+        <p *ngIf="!isAnswerContentVisible"><strong>Ostatnia modyfikacja:</strong> {{ answer.updatedAt | date:'yyyy-MM-dd HH:mm:ss' }}</p>
         <p>
           {{ calculateTimeDifference().beforeDeadline ? 'Zadanie zostało przesłane ' : 'Zadanie zostało przesłane ' }}
           {{ calculateTimeDifference().days }} dni, {{ calculateTimeDifference().hours }} godzin i {{ calculateTimeDifference().minutes }} minut
           {{ calculateTimeDifference().beforeDeadline ? 'przed terminem.' : 'po terminie.' }}
         </p>
         </div>
+
+        <p *ngIf="!isAnswerContentVisible"><strong>Status odpowiedzi:</strong> {{ answer.answerStatus }}</p>
+        <p *ngIf="!isAnswerContentVisible"><strong>Ocena:</strong> {{ gradedValue  }}</p>
+        <p *ngIf="!isAnswerContentVisible"><strong>Komentarz:</strong> {{ answer.comment  }}</p>
 
       
           
@@ -185,7 +190,8 @@
             <p *ngIf="isAnswerContentVisible"><strong>Status odpowiedzi:</strong> {{ answer.answerStatus }}</p>
             <p *ngIf="isAnswerContentVisible"><strong>Utworzono:</strong> {{ answer.createdAt | date:'yyyy-MM-dd HH:mm:ss' }}</p>
             <p *ngIf="isAnswerContentVisible"><strong>Ostatnia modyfikacja:</strong> {{ answer.updatedAt | date:'yyyy-MM-dd HH:mm:ss' }}</p>
-            <button (click)="onUpdateAnswer()">Zapisz zmiany</button>
+            <button class="saveButton" (click)="onUpdateAnswer()">Zapisz zmiany</button>
+            <button class="deleteButton" (click)="closeEdit()">Anuluj</button>
             
         <!-- Formularz do dodawania plików -->
         <form (submit)="onAddAFile(answer)" enctype="multipart/form-data">

@@ -29,6 +29,8 @@ import { ChangeDetectionStrategy } from '@angular/core';
 import { Course } from 'src/app/interfaces/course-interface';
 import { Location } from '@angular/common';
 import { AddAnswerDialogComponent } from '../addAnswer-dialog/addAnswer-dialog.component';
+import { GradeService } from 'src/app/grade/grade-service/grade.service';
+import { Grade } from 'src/app/interfaces/grade-interface';
 
 
 
@@ -48,10 +50,12 @@ homeworkTest: any = {};
 classGroupsByUserId: any = {};
 answersByHomeworkTest: any = {};
 htFileIdContainer: any;
+  gradedValue!: number;
+  
 
   constructor(private http: HttpClient, private route: ActivatedRoute, private router: Router, private dialog: MatDialog, private snackBar: MatSnackBar, 
     private homeworkTestService: HomeworkTestService, private htFileService: HTFileService, private answerService: AnswerService, private loginService: LoginService,
-    private aFileService: AFileService, private courseService: CourseService, private userService: UserService, private location: Location){
+    private aFileService: AFileService, private courseService: CourseService, private userService: UserService, private location: Location, private gradeService: GradeService){
   }
 
 htFilesByHomeworkTest!: Array<any>;
@@ -64,6 +68,7 @@ answerId!: any;
 userRole!: string;
 private classGroupId!: number;
 homeworkTestId!: string;
+answerGrade: any;
 ngOnInit(): void {
     // Pobierz ID materiału edukacyjnego z parametrów routingu
     this.route.paramMap.subscribe((params: ParamMap) => {
@@ -90,6 +95,34 @@ ngOnInit(): void {
 
           this.answerService.getAnswerByHomeworkTestIdAndUserId(homeworkTest.id, _finalData.id).subscribe((answer: any) => {
             this.answer = answer;
+
+            this.gradeService.getGradeByAnswerId(answer.id).subscribe(
+              (data: Grade | Object) => {
+                if (data !== null && 'id' in data) {
+                  this.answerGrade = data as Grade;
+                  console.log('answer id', answer.id);
+                  console.log('answerGrade', data);
+            
+                  // Dostęp do wartości oceny
+                  const gradeValue = (data as Grade).value;
+                  console.log('Grade Value:', gradeValue);
+            
+                  // Przypisanie wartości do zmiennej na potrzeby widoku
+                  this.gradedValue = gradeValue;
+                } else {
+                  console.log('Brak oceny dla odpowiedzi o ID:', answer.id);
+                }
+              },
+              (error) => {
+                console.error('Błąd podczas pobierania oceny:', error);
+              }
+            );
+            
+            
+            
+            
+            
+            
 
             if(answer) {
             this.loadAFilesByAnswerId(answer.id);
@@ -764,7 +797,7 @@ downloadFileByIdAFile(fileId: number): void {
 
   
   calculateTimeDifference(): { days: number, hours: number, minutes: number, beforeDeadline: boolean } {
-    const updatedAtDate = new Date(this.answer.updatedAt);
+    const updatedAtDate = new Date(this.answer.createdAt);
     const deadlineDate = new Date(this.homeworkTest.deadline);
     
     const timeDifference = deadlineDate.getTime() - updatedAtDate.getTime();
