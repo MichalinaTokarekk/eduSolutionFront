@@ -31,6 +31,9 @@ export class EventDetailPageComponent {
     eventId!: string;
     selectedEventName: string = '';
     selectedEventDate: string = '';
+    selectedDescription: string = '';
+    selectedStartEventTime: string = '';
+    selectedEndEventTime: string = '';
     selectedClassGroups: any[] = [];
     allClassGroups: any[] = [];
     
@@ -49,6 +52,9 @@ export class EventDetailPageComponent {
             console.error('Event data not available or incomplete.');
             }
             this.selectedEventDate = res.eventDate;
+            this.selectedStartEventTime = res.startEventTime;
+            this.selectedEndEventTime = res.endEventTime;
+            this.selectedDescription = res.description;
             this.selectedClassGroups = res.classGroups;
         });      
     });
@@ -96,6 +102,9 @@ export class EventDetailPageComponent {
         const updatedEventData = {
           id: this.eventId,
           name: this.selectedEventName,
+          description: this.selectedDescription,
+          startEventTime: this.selectedStartEventTime,
+          endEventTime: this.selectedEndEventTime,
           eventDate: this.selectedEventDate,
           classGroups: this.selectedClassGroups
         };

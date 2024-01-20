@@ -13,15 +13,33 @@
   </div>
 
   <div class="form-group">
+    <label for="description">Opis:</label>
+    <input type="text" id="description" [(ngModel)]="selectedDescription" name="description" required>
+  </div>
+
+  <div class="form-group">
     <label for="eventDate">Data:</label>
     <input type="text" id="eventDate" [(ngModel)]="selectedEventDate" name="eventDate" required>
   </div>
+
+  <div class="form-group">
+    <label for="startEventTime">Godzina rozpoczęscia:</label>
+    <input type="text" id="startEventTime" [(ngModel)]="selectedStartEventTime" name="startEventTime" required>
+  </div>
+
+  <div class="form-group">
+    <label for="endEventTime">Godzina zakończenia:</label>
+    <input type="text" id="endEventTime" [(ngModel)]="selectedEndEventTime" name="endEventTime" required>
+  </div>
+
+  
 
   <!-- <mat-select id="classGroups" [(ngModel)]="selectedClassGroups" name="classGroups" multiple [compareWith]="compareFn">
     <mat-option *ngFor="let group of allClassGroups" [value]="group">
       {{ group.name }}
     </mat-option>
   </mat-select> -->
+  
 
   <mat-form-field appearance="fill" class="input-container">
     <input matInput placeholder="Wyszukaj po nazwie" (input)="onSearchChange($event)">
@@ -49,8 +67,12 @@
 <div *ngIf="!isEditMode" class="event-details">
   <div class="info-group">
     <span class="eventName">{{ selectedEventName }}</span>
-    <span class="eventDate">{{ selectedEventDate }}</span>
+    
   </div>
+  <span class="eventDate">{{ selectedEventDate }}</span>
+  <span class="eventDate">{{ selectedStartEventTime }}-{{selectedEndEventTime }}</span><br><br>
+
+  <span class="description">{{ selectedDescription }}</span><br><br>
 
   <!-- <div class="info-group">
     <label>Data:</label>

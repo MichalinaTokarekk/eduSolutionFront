@@ -45,7 +45,10 @@ export class AddEventDialogComponent {
     // Wygeneruj obiekt lesson do zapisania
     const newEvent = {
       name: this.data.eventName,
+      description: this.data.description,
       eventDate: this.data.eventDate,
+      startEventTime: this.data.startEventTime,
+      endEventTime: this.data.endEventTime,
       courses: this.data.courses,
       classGroups: this.data.classGroups,
     };

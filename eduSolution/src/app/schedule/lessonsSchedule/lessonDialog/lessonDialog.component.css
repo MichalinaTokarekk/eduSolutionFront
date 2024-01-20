@@ -1,8 +1,10 @@
 h1 {
-    font-size: 24px;
-    margin-bottom: 20px;
-    color: #333; /* Kolor tekstu */
-  }
+  font-size: 24px;
+  margin-bottom: 5px;
+  color: #333; /* Kolor tekstu */
+  font-family: 'Times New Roman', Times, serif;
+  margin-left: 125px;
+}
   
   form {
     max-width: 400px;
@@ -70,7 +72,7 @@ h1 {
   }
   
   .container button[color="warn"] {
-    background-color: #ff5d40; /* Kolor przycisku Usuń */
+    background-color: #d46868; /* Kolor przycisku Usuń */
     color: #fff; /* Kolor tekstu na przycisku Usuń */
   }
   
@@ -79,7 +81,7 @@ h1 {
   } */
   
 button.save-button {
-  background-color: #3498db;
+  background-color: #375aca;
     color: #fff;
     padding: 7px 20px;
     border: none;
@@ -97,8 +99,8 @@ button.delete-button {
 }
 
 button.cancel-button {
-  background-color: rgb(119, 121, 122);
-    color: #fff;
+    background-color: #c9c9c6; 
+    color: #212529;;
     padding: 7px 20px;
     border: none;
     border-radius: 5px;

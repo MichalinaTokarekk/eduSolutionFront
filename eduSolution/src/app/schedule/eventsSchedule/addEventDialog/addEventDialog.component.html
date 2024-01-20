@@ -5,11 +5,28 @@
     <label for="eventName">Nazwa Wydarzenia:</label>
     <input style="width: 204px; height: 30px;" type="text" id="eventName" name="eventName" [(ngModel)]="data.eventName" required>
   </div>
+
+  <div class="form-group">
+    <label for="description">Opis:</label>
+    <input style="width: 204px; height: 30px;" type="text" id="description" name="description" [(ngModel)]="data.description" required>
+  </div>
+
+  <div class="form-group">
+    <label for="startEventTime">Godzina rozpoczęcia:</label>
+    <input style="width: 204px; height: 30px;" type="text" id="startEventTime" name="startEventTime" [(ngModel)]="data.startEventTime" required>
+  </div>
+
+  <div class="form-group">
+    <label for="endEventTime">Godzina zakończenia:</label>
+    <input style="width: 204px; height: 30px;" type="text" id="endEventTime" name="endEventTime" [(ngModel)]="data.endEventTime" required>
+  </div>
   
   <div class="form-group">
     <label for="eventDate">Data Wydarzenia:</label>
     <input style="width: 206px; height: 30px;" type="date" id="eventDate" name="eventDate" [(ngModel)]="data.eventDate" required>
   </div>
+
+ 
 
   <!-- <mat-form-field>
     <mat-label>Select Class Groups</mat-label>

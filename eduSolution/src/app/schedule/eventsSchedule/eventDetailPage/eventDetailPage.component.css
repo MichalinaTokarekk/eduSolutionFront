@@ -120,9 +120,14 @@ table {
   }
 
   .eventDate{
-    margin-left: 10px;
+    margin-left: 1px;
     font-family: 'Times New Roman', Times, serif;
-    font-size: 30px;
+    font-size: 23px;
+    margin-right: 10px;
+  }
+
+  .description{
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   }
 
   .col-6 {

@@ -1,7 +1,9 @@
 h1 {
     font-size: 24px;
-    margin-bottom: 20px;
+    margin-bottom: 5px;
     color: #333; /* Kolor tekstu */
+    font-family: 'Times New Roman', Times, serif;
+    margin-left: 103px;
   }
   
   form {
@@ -76,5 +78,27 @@ h1 {
   
   .container button[color="warn"]:hover {
     background-color: #d81b60; /* Kolor przycisku Usuń w stanie hover */
+  }
+
+  .add-button {
+    background-color: #375aca;
+    color: #fff;
+    padding: 8px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 10px;
+    margin-left: 1px;
+  }
+
+  .cancel-button{
+    background-color: #dbdbd9; /* Kolor przycisku edycji */
+    color: #212529; /* Kolor tekstu na przycisku */
+    border: none;
+    padding: 8px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
   }
   
