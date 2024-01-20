@@ -10,7 +10,7 @@
         <a routerLink="/lessonSchedule" style="color: aliceblue;">Plan lekcji</a><br><br>
         <a routerLink="/calendar-view" style="color: aliceblue;">Kalendarz</a><br><br>
         <a routerLink="/teachingCourses" style="color: aliceblue;" >Dziennik nauczyciela</a><br><br>
-        <a routerLink="/coursesByStudent-view" style="color: aliceblue;" *ngIf="userRole === 'user' || userRole === 'user'">Dziennik ucznia</a><br><br>
+        <a routerLink="/coursesByStudent-view" style="color: aliceblue;" *ngIf="userRole === 'admin' || userRole === 'user'">Dziennik ucznia</a><br><br>
     <main >
     </main>
   </div>
