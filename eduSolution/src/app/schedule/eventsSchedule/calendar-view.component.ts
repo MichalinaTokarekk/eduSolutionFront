@@ -14,6 +14,7 @@ import { Lesson } from 'src/app/interfaces/lesson-interface';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import { Router } from '@angular/router';
+import { Time } from '@angular/common';
 
 
 
@@ -108,9 +109,11 @@ export class CalendarViewComponent {
     this.eventService.getAll().subscribe(
       (events) => {
         // Mapowanie pól z backendu na oczekiwane przez FullCalendar
-        const mappedEvents = events.map((event: {id: any; name: any; eventDate: any; }) => {
+        const mappedEvents = events.map((event: {id: any; name: any; eventDate: any; startEventTime: Time, endEventTime: Time}) => {
           // Przekształć datę do formatu FullCalendar
-          const startDateTime = new Date(event.eventDate);
+          // const startDateTime = new Date(event.eventDate);
+          const startDateTime = new Date(`${event.eventDate} ${event.startEventTime}`);
+          const endDateTime = new Date(`${event.eventDate} ${event.endEventTime}`);
 
           const eventType = 'event';
   
@@ -118,6 +121,8 @@ export class CalendarViewComponent {
             id: event.id,
             title: event.name,
             start: startDateTime,
+            end: endDateTime,
+            // start: startDateTime,
             extendedProps: { type: eventType },
           };
         });
