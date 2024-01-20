@@ -11,6 +11,7 @@ import { User } from 'src/app/interfaces/user-interface';
 import { Course } from 'src/app/interfaces/course-interface';
 import { TypeOfTestingKnowledge } from 'src/app/interfaces/typeOfTestingKnowledge-interface';
 import { TypeOfTestingKnowledgeService } from 'src/app/typeOfTestingKnowledge/typeOfTestingKnowledge-service/typeOfTestingKnowledge.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-answer-detail',
@@ -139,7 +140,7 @@ import { TypeOfTestingKnowledgeService } from 'src/app/typeOfTestingKnowledge/ty
 
     constructor(@Inject(MAT_DIALOG_DATA) public data: any, public dialogRef: MatDialogRef<AddGradeDetailComponent>, private router: Router,
                         private route: ActivatedRoute, private gradeService: GradeService, private homeworkTestService: HomeworkTestService, private htFileService: HTFileService,
-                        private loginService: LoginService, private typeOfTestingKnowledgeService: TypeOfTestingKnowledgeService) {
+                        private loginService: LoginService, private typeOfTestingKnowledgeService: TypeOfTestingKnowledgeService, private snackBar: MatSnackBar) {
 
 
         this.studentFirstName = data.studentFirstName;
@@ -156,31 +157,78 @@ import { TypeOfTestingKnowledgeService } from 'src/app/typeOfTestingKnowledge/ty
 
     
 
+    // addNewGrade(): void {
+    // console.log('newValue:', this.newValue);
+    //       // Przygotowanie nowej oceny
+    //       const token = this.loginService.getToken();
+    //       const _token = token.split('.')[1];
+    //       const _atobData = atob(_token);
+    //       const _finalData = JSON.parse(_atobData);
+    
+    //       const newGrade = {
+    //         value: this.newValue,
+    //         description: this.newDescription,
+    //         student: this.data.studentId,
+    //         teacher: _finalData.id,
+    //         typeOfTestingKnowledge: this.selectedKnowledge,
+    //         classGroup: this.data.courseId, // Dostosuj do swoich potrzeb
+    //       };
+    //       console.log('student', this.data.studentId);
+    //       console.log('student', this.data.courseId);
+    //       this.openSnackBar('Wartość musi być większa od 0 i mniejsza od 7', 'Error');
+    
+    //       // Wywołanie usługi do zapisu nowej oceny
+    //       this.gradeService.save(newGrade).subscribe((createdGrade) => {
+    //         console.log('Nowa ocena została dodana:', createdGrade);
+    //         this.dialogRef.close('saved');
+    //         location.reload();
+
+            
+    //       });
+          
+    //   }
+
+
     addNewGrade(): void {
-    console.log('newValue:', this.newValue);
+      console.log('newValue:', this.newValue);
+  
+      // Sprawdź, czy wartość spełnia określone kryteria
+      if (this.newValue > 0 && this.newValue < 7) {
           // Przygotowanie nowej oceny
           const token = this.loginService.getToken();
           const _token = token.split('.')[1];
           const _atobData = atob(_token);
           const _finalData = JSON.parse(_atobData);
-    
+  
           const newGrade = {
-            value: this.newValue,
-            description: this.newDescription,
-            student: this.data.studentId,
-            teacher: _finalData.id,
-            typeOfTestingKnowledge: this.selectedKnowledge,
-            classGroup: this.data.courseId, // Dostosuj do swoich potrzeb
+              value: this.newValue,
+              description: this.newDescription,
+              student: this.data.studentId,
+              teacher: _finalData.id,
+              typeOfTestingKnowledge: this.selectedKnowledge,
+              classGroup: this.data.courseId,
           };
+  
           console.log('student', this.data.studentId);
           console.log('student', this.data.courseId);
-    
+  
           // Wywołanie usługi do zapisu nowej oceny
           this.gradeService.save(newGrade).subscribe((createdGrade) => {
-            console.log('Nowa ocena została dodana:', createdGrade);
-            this.dialogRef.close('saved');
+              console.log('Nowa ocena została dodana:', createdGrade);
+              this.dialogRef.close('saved');
+              location.reload();
           });
-          location.reload();
+      } else {
+          // Wartość nie spełnia kryteriów, wyświetl Snackbar z błędem
+          this.openSnackBar('Wartość musi być większa od 0 i mniejsza od 7', 'Error');
+      }
+  }
+  
+
+      openSnackBar(message: string, action: string) {
+        this.snackBar.open(message, action, {
+          duration: 5000, // Czas wyświetlania powiadomienia (w milisekundach)
+        });
       }
       
 

@@ -82,13 +82,28 @@
             <td>
               {{ user.firstName }} {{ user.lastName }}
             </td>
-            <td>
+            <!-- <td>
               <div *ngIf="gradesByUser[user.id]">
-                <div *ngIf="gradesByUser[user.id]">
+                <div *ngIf="gradesByUser[user.id]" >
                   {{ mapGradesToString(gradesByUser[user.id]) }}
                 </div>
               </div>
+            </td> -->
+
+            <td>
+              <div *ngIf="gradesByUser[user.id]">
+                <ng-container *ngFor="let grade of gradesByUser[user.id]; let last = last">
+                  <ng-container *ngIf="!grade.finalValue">
+                    {{ grade.value }}
+                    <!-- Dodaj przecinek, jeśli to nie jest ostatnia ocena -->
+                    <ng-container *ngIf="!last">,</ng-container>
+                  </ng-container>
+                </ng-container>
+              </div>
             </td>
+            
+            
+
             <td>
               <div *ngIf="gradesByUser[user.id]">
                 <div *ngFor="let grade of gradesByUser[user.id]; let last = last">
