@@ -21,17 +21,31 @@
   <button class="saveButton" (click)="onSubmit()">Dodaj</button><br><br>
 
   <table mat-table [dataSource]="teachersByClassGroup" class="mat-elevation-z8">
+    
 
     <!-- Nazwa kolumny -->
     <ng-container matColumnDef="fullName">
       <th mat-header-cell *matHeaderCellDef> Imię i nazwisko </th>
       <td mat-cell *matCellDef="let user">{{ user.firstName }} {{ user.lastName }}</td>
+      <button mat-icon-button color="warn" (click)="onDeleteClassGroupFromUser(user, classGroup)">
+        <mat-icon>delete</mat-icon>
+      </button>
     </ng-container>
 
     <!-- Dodaj kolumnę z przyciskiem do otwierania dialogu -->
+    <!-- <ng-container matColumnDef="detailsButton">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let user">
+         <i class="fa fa-trash-o trash-icon" aria-hidden="true"></i>
+      </td>
+    </ng-container> -->
+
     <ng-container matColumnDef="detailsButton">
       <th mat-header-cell *matHeaderCellDef></th>
       <td mat-cell *matCellDef="let user">
+        <button mat-icon-button>
+          <mat-icon>delete</mat-icon>
+        </button>
       </td>
     </ng-container>
 
@@ -89,9 +103,18 @@
       </ng-container>
   
       <!-- Dodaj kolumnę z przyciskiem do otwierania dialogu -->
+      <!-- <ng-container matColumnDef="detailsButton">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let user">
+        </td>
+      </ng-container> -->
+
       <ng-container matColumnDef="detailsButton">
         <th mat-header-cell *matHeaderCellDef></th>
         <td mat-cell *matCellDef="let user">
+          <button mat-icon-button color="warn" (click)="onDeleteClassGroupFromUser(user, classGroup)">
+            <mat-icon>delete</mat-icon>
+          </button>
         </td>
       </ng-container>
   

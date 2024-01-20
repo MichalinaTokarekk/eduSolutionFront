@@ -25,6 +25,7 @@ export class ParticipantsComponent implements OnInit {
   selectStudents: any[] = [];
   selectTeachers: any[] = [];
   studentsLimit: any;
+  user: any; 
   
 
   constructor(private route: ActivatedRoute, private classGroupService: ClassGroupService, private location: Location, private userService: UserService,
@@ -238,5 +239,31 @@ onSubmit() {
       }
       location.reload();
   }
+
+  onDeleteClassGroupFromUser(user: any, classGroup: any) {
+    const index = user.classGroups.findIndex((cg: any) => cg.id === classGroup.id);
+  
+    if (index !== -1) {
+      user.classGroups.splice(index, 1);
+  
+      this.userService.updateUserClassGroup(user).subscribe(
+        (response) => {
+          console.log('User updated successfully:', response);
+        },
+        (error) => {
+          console.error('Error updating user:', error);
+        }
+      );
+    }
+  }
+
+  openSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action, {
+      duration: 5000, // Czas wyświetlania powiadomienia (w milisekundach)
+    });
+  }
+  
+  
+  
 
 }
