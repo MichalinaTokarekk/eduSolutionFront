@@ -138,6 +138,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
     addNewGrade(): void {
     console.log('newValue:', this.newValue);
           // Przygotowanie nowej oceny
+          if (this.newValue > 0 && this.newValue < 7) {
           const token = this.loginService.getToken();
           const _token = token.split('.')[1];
           const _atobData = atob(_token);
@@ -163,6 +164,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
             () => {
                 console.log('Nowa ocena została dodana');
                 this.dialogRef.close('saved');
+                location.reload();
             },
           error => {
             let errorMessage = 'Nie można dodać drugiej oceny końcowej';
@@ -173,9 +175,12 @@ import { MatSnackBar } from '@angular/material/snack-bar';
           }
         );
         this.isEditing = true;
-
+      } else {
+        // Wyświetl Snackbar z błędem
+        this.openSnackBar('Wartość musi być większa niż 0 i mniejsza niż 7', 'Error');
+    }
           
-          location.reload();
+          
     }
 
     openSnackBar(message: string, action: string) {

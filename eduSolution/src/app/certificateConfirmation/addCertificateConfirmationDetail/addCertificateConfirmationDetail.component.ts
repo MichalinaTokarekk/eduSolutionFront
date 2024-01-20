@@ -10,6 +10,7 @@ import { TypeOfTestingKnowledge } from 'src/app/interfaces/typeOfTestingKnowledg
 import { TypeOfTestingKnowledgeService } from 'src/app/typeOfTestingKnowledge/typeOfTestingKnowledge-service/typeOfTestingKnowledge.service';
 import { CertificateConfirmationService } from '../certificateConfirmation-service/certificateConfirmation.service';
 import { CertificateConfirmation } from 'src/app/interfaces/certificateConfirmation-interface';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-certificate-confirmation-detail',
@@ -30,7 +31,8 @@ import { CertificateConfirmation } from 'src/app/interfaces/certificateConfirmat
 
     constructor(@Inject(MAT_DIALOG_DATA) public data: any, public dialogRef: MatDialogRef<AddCertificateConfirmationDetailComponent>, private router: Router,
                         private route: ActivatedRoute, private homeworkTestService: HomeworkTestService, private htFileService: HTFileService,
-                        private loginService: LoginService, private typeOfTestingKnowledgeService: TypeOfTestingKnowledgeService, private certificateConfirmationService: CertificateConfirmationService) {
+                        private loginService: LoginService, private typeOfTestingKnowledgeService: TypeOfTestingKnowledgeService, 
+                        private certificateConfirmationService: CertificateConfirmationService, private snackBar: MatSnackBar) {
 
 
         this.studentFirstName = data.studentFirstName;
@@ -57,14 +59,24 @@ import { CertificateConfirmation } from 'src/app/interfaces/certificateConfirmat
         };
         console.log('student', this.data.studentId);
   
+        if (typeof this.newPercentageScore === 'number' && this.newPercentageScore >= 0 && this.newPercentageScore <= 100) {
         // Wywołanie usługi do zapisu nowej oceny
         this.certificateConfirmationService.save(newCertificateConfirmation).subscribe((createdCertificateConfirmation) => {
           console.log('Nowa ocena została dodana:', createdCertificateConfirmation);
           this.dialogRef.close('saved');
+          location.reload();
         });
-        location.reload();
+        
+    } else {
+      this.openSnackBar('Wynik musi być liczbą między 0 a 100', 'Error');
     }
+  }
       
 
+  openSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action, {
+      duration: 5000, // Czas wyświetlania powiadomienia (w milisekundach)
+    });
+  } 
 }
 
