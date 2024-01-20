@@ -1,0 +1,8 @@
+<form (submit)="onAddAFile()" enctype="multipart/form-data">
+    <div class="filesadd">
+      <label for="file">Wybierz plik:</label>
+      <input type="file" name="file" id="file" accept=".pdf, .doc, .docx, .jpg, .png" (change)="onAFileSelected($event)">
+      <!-- Akceptowane rozszerzenia plików -->
+    <button type="submit">Prześlij plik</button>
+    </div>
+</form>

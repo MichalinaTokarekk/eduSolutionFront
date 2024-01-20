@@ -91,7 +91,7 @@
     padding: 16px;
     border: 1px solid #ccc;
     border-radius: 4px;
-    width: 300px;
+    width: 600px;
   }
   
   a {
@@ -275,7 +275,26 @@
   }
   
 
-  
+  .addNaswer-button{
+    background-color: #375aca; /* Kolor przycisku edycji */
+    color: #fff; /* Kolor tekstu na przycisku */
+    border: none;
+    padding: 6px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 0px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+  }
+
+  .cancel-button{
+    background-color: #dbdbd9; /* Kolor przycisku edycji */
+    color: #212529; /* Kolor tekstu na przycisku */
+    border: none;
+    padding: 6px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
 
   
   

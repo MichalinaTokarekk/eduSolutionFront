@@ -28,6 +28,7 @@ import { AnswerDetailComponent } from 'src/app/answer/answer-detail/answer-detai
 import { ChangeDetectionStrategy } from '@angular/core';
 import { Course } from 'src/app/interfaces/course-interface';
 import { Location } from '@angular/common';
+import { AddAnswerDialogComponent } from '../addAnswer-dialog/addAnswer-dialog.component';
 
 
 
@@ -299,6 +300,10 @@ currentEditingAnswer: any;
     this.isAnswerContentVisible = true;
 }
 
+closeEdit() {
+  this.isAnswerContentVisible = false;
+}
+
   notOnEdit(section: any) {
     // Zapisz aktualnie edytowaną sekcję
     this.currentEditingSection = section;
@@ -360,6 +365,7 @@ onAddFile(homeworkTest: any) {
         this.htFileService.remove(obj.id).subscribe(
           response => {
             this.openSnackBar('Pole usunięte pomyślnie', 'Success');
+            location.reload();
           },
           error => {
             let errorMessage = 'An error occurred';
@@ -373,6 +379,8 @@ onAddFile(homeworkTest: any) {
     });
     
   }
+
+  
     
   
     openSnackBar(message: string, action: string) {
@@ -444,7 +452,51 @@ onAddFile(homeworkTest: any) {
 //     });
 //   }
 
-downloadFileById(fileId: number): void {
+downloadFileByIdHTFile(fileId: number): void {
+  this.htFileService.downloadFileById(fileId).subscribe((blob: Blob) => {
+    // Tworzymy link do pobierania pliku
+
+  
+    const contentType  = blob.type;
+  
+    let fileName = `${fileId}.pdf`;
+
+    if (contentType) {
+      // Sprawdzenie, czy Content-Type wskazuje na plik PDF
+      if (contentType === 'application/pdf') {
+        fileName = `${fileId}.pdf`;
+      } else if (contentType === 'image/png') {
+        // Jeśli to obraz PNG, nadaj rozszerzenie .png
+        fileName = `${fileId}.png`;
+      } else {
+        // Obsłuż inne typy plików i nadaj odpowiednie rozszerzenia
+        // np. contentType === 'image/jpeg' dla obrazów JPEG
+      }
+    }
+
+
+    const url = window.URL.createObjectURL(blob);
+
+    // Tworzymy element <a> i nadajemy mu atrybuty, aby otworzyć pobrany plik w nowej karcie
+    const a = document.createElement('a');
+    document.body.appendChild(a);
+    a.style.display = 'none';
+    a.href = url;
+    a.download = fileName; // Zmień nazwę pliku na coś sensownego lub korzystając z informacji o pliku
+
+    // Klikamy na ten element, aby rozpocząć pobieranie pliku
+    a.click();
+
+    // Po pobraniu pliku usuwamy link i element <a>
+    window.URL.revokeObjectURL(url);
+    document.body.removeChild(a);
+  }, error => {
+    console.error('Błąd podczas pobierania pliku', error);
+  });
+}
+
+
+downloadFileByIdAFile(fileId: number): void {
   this.aFileService.downloadFileById(fileId).subscribe((blob: Blob) => {
     // Tworzymy link do pobierania pliku
 
@@ -505,7 +557,7 @@ downloadFileById(fileId: number): void {
 
           
         const answer: Answer = {
-            id: 0,
+            id: this.answer?.id,
             answerContent: this.newAnswerContent,
             homeworkTest: homeworkTest,
             user: _finalData.id,
@@ -521,18 +573,42 @@ downloadFileById(fileId: number): void {
             this.isEditing = false;
             this.isAnswerContentVisible = false;
 
-            location.reload();
+            // location.reload();
+            this.openAddAnswerDialogComponent(savedAnswer.id);
+            console.log('answerId', savedAnswer.id);
+            
           }, error => {
             console.error('Błąd podczas zapisywania odpowiedzi:', error);
           });
+
+          
 
 
           }, error => {
             console.error(error);
           });
+
+          
         } 
       });
   }
+
+  openAddAnswerDialogComponent(answerId: number): void {
+    const dialogRef = this.dialog.open(AddAnswerDialogComponent, {
+      width: '500px',
+      height: '100px',
+      data: {
+        answerId: answerId
+      }
+    });
+  
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        // Handle the result if needed
+      }
+    });
+  }
+  
 
 
 
@@ -567,7 +643,7 @@ downloadFileById(fileId: number): void {
             if (error && error.error) {
               errorMessage = error.error;
             }
-            this.openSnackBar(errorMessage, 'Error');
+            this.openSnackBar('Nie można usunąc, ponieważ zadanie jest ocenione', 'Error');
           }
         );
       }
