@@ -1,15 +1,16 @@
-<div class="row">
-    <div class="col-6">
-        <h2>Lista użytkowników</h2>
-    </div> 
-</div><br>
+<div class="col-6">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16" (click)="goBack()">
+      <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"/>
+    </svg>
+    <h2 style="margin-left: 10px;">Szczegóły</h2>
+  </div><br>
 
 <div class="row">
     <div class="col-8">
-        <button class="btn btn-sm btn-primary" (click)="onAdd()">Dodaj nowego</button>
-        <div class="col-7">
+        <!-- <button class="btn btn-sm btn-primary" (click)="onAdd()">Dodaj nowego</button> -->
+        <!-- <div class="col-7">
             <input type="text" [(ngModel)]="searchText" placeholder="Szukaj" class="form-control custom-search-input">
-        </div><br>
+        </div><br> -->
         <table class="table table-bordered ">
             <thead>
                 <tr class="bg-success text-white">
@@ -224,7 +225,7 @@
                     <td class="text-center"> 
                         <div class="text-end" *ngIf="!user.isEdit">
                             <i class="fa fa-pencil-square-o px-1" aria-hidden="true" (click)="onEdit(user)"></i>
-                            <i class="fa fa-trash-o" aria-hidden="true" (click)="onDelete(user)"></i>
+                            <!-- <i class="fa fa-trash-o" aria-hidden="true" (click)="onDelete(user)"></i> -->
                         </div>
                         <div class="text-end" *ngIf="user.isEdit">
                             <i class="fa fa-cloud px-1" (click)="onUpdate(user)" aria-hidden="true"></i>

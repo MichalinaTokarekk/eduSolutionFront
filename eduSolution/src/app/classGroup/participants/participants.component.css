@@ -19,4 +19,90 @@
 }
 
 
+/* Wspólne style dla obu sekcji */
+div {
+    margin-bottom: 20px;
+  }
+  
+  h2 {
+    margin-left: 10px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-weight: 600;
+  }
+  
+  .form-group {
+    margin-bottom: 10px;
+  }
+  
+  .input-container {
+    width: 800px;
+  }
+  
+  /* Style dla pierwszej sekcji "Nauczyciele w grupie zajęciowej" */
+  .saveButton {
+    background-color: #375aca; /* Zielony kolor przycisku */
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  .mat-elevation-z8 {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+  }
+  
+  .mat-elevation-z8 th, .mat-elevation-z8 td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+  }
+  
+  .mat-elevation-z8 th {
+    background-color: #f2f2f2;
+  }
+  
+  /* Style dla drugiej sekcji "Uczniowie w grupie zajęciowej (Limit {{studentsLimit}})" */
+  .saveButton {
+    background-color: #375aca; /* Zielony kolor przycisku */
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  .mat-elevation-z8 {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+  }
+  
+  .mat-elevation-z8 th, .mat-elevation-z8 td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+  }
+  
+  .mat-elevation-z8 th {
+    background-color: #acc2b9;
+  }
+  
+  /* Dodatkowe style dla przycisku "delete" */
+  mat-icon {
+    font-size: 20px;
+  }
+  
+
+
 

@@ -110,6 +110,8 @@ selectedCourseNames: string[] = [];
       "name": "",
       "description": "",
       "courses": [],
+      "startDate": '',
+      "endDate": '',
       "isEdit": true
     };
     this.courseArray.unshift(obj);

@@ -40,12 +40,19 @@
       </td>
     </ng-container> -->
 
-    <ng-container matColumnDef="detailsButton">
+    <!-- <ng-container matColumnDef="detailsButton">
       <th mat-header-cell *matHeaderCellDef></th>
       <td mat-cell *matCellDef="let user">
         <button mat-icon-button>
           <mat-icon>delete</mat-icon>
         </button>
+      </td>
+    </ng-container> -->
+
+    <ng-container matColumnDef="detailsButton">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let user">
+          <mat-icon (click)="onDeleteClassGroupFromUser(user, classGroup)">delete</mat-icon>
       </td>
     </ng-container>
 
@@ -112,9 +119,7 @@
       <ng-container matColumnDef="detailsButton">
         <th mat-header-cell *matHeaderCellDef></th>
         <td mat-cell *matCellDef="let user">
-          <button mat-icon-button color="warn" (click)="onDeleteClassGroupFromUser(user, classGroup)">
-            <mat-icon>delete</mat-icon>
-          </button>
+            <mat-icon (click)="onDeleteClassGroupFromUser(user, classGroup)">delete</mat-icon>
         </td>
       </ng-container>
   

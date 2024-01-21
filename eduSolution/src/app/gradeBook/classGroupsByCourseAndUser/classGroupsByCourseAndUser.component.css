@@ -142,7 +142,7 @@ i {
 
   /* Przyciski dla dodawania oceny, szczegółów, itp. */
 .add-grade-button {
-  background-color: #d3d3d3; /* Jasnoszary kolor tła */
+  background-color: #c8cdfa; /* Jasnoszary kolor tła */
   color: #333; /* Ciemny kolor tekstu */
   border: none;
   padding: 5px 12px; /* Mniejsze paddingi dla mniejszego przycisku */
@@ -154,7 +154,7 @@ i {
 }
 
 .add-grade-button:hover {
-  background-color: #c0c0c0; /* Jaśniejszy szary po najechaniu myszką */
+  background-color: #c8cdfa; /* Jaśniejszy szary po najechaniu myszką */
 }
 
 /* Przycisk dla dodawania oceny końcowej */

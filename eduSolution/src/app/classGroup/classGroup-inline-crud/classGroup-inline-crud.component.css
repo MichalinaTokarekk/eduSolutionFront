@@ -14,7 +14,7 @@ i {
 
 /* Style for the table */
 .table {
-    width: 1400px;
+    width: 1500px;
     border-collapse: collapse;
     margin-top: 0px;
     margin-left: 5px;
@@ -89,7 +89,7 @@ i {
 }
 
 .btn.btn-sm.btn-primary {
-    background-color: #3498db;
+    background-color: #375aca;
     color: #fff;
     padding: 7px 20px;
     border: none;
@@ -151,4 +151,16 @@ i {
     margin: 0;
     font-size: 24px;
     font-weight: bold;
+  }
+
+  .participants-button{
+    background-color: #c8cdfa; /* Jasnoszary kolor tła */
+    color: #333; /* Ciemny kolor tekstu */
+    border: none;
+    padding: 5px 12px; /* Mniejsze paddingi dla mniejszego przycisku */
+    margin-right: -1px; /* Mniejsze marginesy */
+    cursor: pointer;
+    border-radius: 3px; /* Lekko zaokrąglone rogi */
+    /* margin-top: 10px; */
+    /* margin-left: 18px; */
   }

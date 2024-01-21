@@ -7,6 +7,8 @@ import { UserService } from 'src/app/user/user-service/user.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { LoginService } from 'src/app/authorization_authentication/service/login.service';
 import { Role } from 'src/app/interfaces/role-interface';
+import { ConfirmationDialogSemesterComponent } from 'src/app/confirmations/semester/confirmation-dialog-semester.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-offer-description',
@@ -29,7 +31,7 @@ export class ParticipantsComponent implements OnInit {
   
 
   constructor(private route: ActivatedRoute, private classGroupService: ClassGroupService, private location: Location, private userService: UserService,
-    private snackBar: MatSnackBar, private loginService: LoginService) { }
+    private snackBar: MatSnackBar, private loginService: LoginService, private dialog: MatDialog) { }
 
 
   ngOnInit(): void {
@@ -241,20 +243,24 @@ onSubmit() {
   }
 
   onDeleteClassGroupFromUser(user: any, classGroup: any) {
+    const dialogRef = this.dialog.open(ConfirmationDialogSemesterComponent);
     const index = user.classGroups.findIndex((cg: any) => cg.id === classGroup.id);
   
+    dialogRef.afterClosed().subscribe((result: boolean) => {
     if (index !== -1) {
       user.classGroups.splice(index, 1);
   
       this.userService.updateUserClassGroup(user).subscribe(
         (response) => {
           console.log('User updated successfully:', response);
+          location.reload();
         },
         (error) => {
           console.error('Error updating user:', error);
         }
       );
     }
+  });
   }
 
   openSnackBar(message: string, action: string) {
@@ -262,6 +268,28 @@ onSubmit() {
       duration: 5000, // Czas wyświetlania powiadomienia (w milisekundach)
     });
   }
+
+  
+onDelete(obj: any) {
+  const dialogRef = this.dialog.open(ConfirmationDialogSemesterComponent);
+
+  dialogRef.afterClosed().subscribe((result: boolean) => {
+    if (result === true) {
+      this.classGroupService.remove(obj.id).subscribe(
+        response => {
+          this.openSnackBar('Pole usunięte pomyślnie', 'Success');
+        },
+        error => {
+          let errorMessage = 'An error occurred';
+          if (error && error.error) {
+            errorMessage = error.error;
+          }
+          this.openSnackBar(errorMessage, 'Error');
+        }
+      );
+    }
+  });
+}
   
   
   

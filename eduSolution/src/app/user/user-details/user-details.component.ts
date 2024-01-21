@@ -11,6 +11,7 @@ import { forkJoin } from 'rxjs';
 import { LoginService } from 'src/app/authorization_authentication/service/login.service';
 import { ClassGroupService } from 'src/app/classGroup/classGroup-service/classGroup.service';
 import { RegisterService } from 'src/app/authorization_authentication/register/register-service/register.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-basic-inline-editing',
@@ -28,7 +29,7 @@ export class UserDetailsComponent implements OnInit {
   allClassGroups: any[] = [];
   selectedClassGroups: number[] = [];
   constructor(private http: HttpClient, private userService: UserService, private router: Router, private dialog: MatDialog, private snackBar: MatSnackBar,
-    private loginService: LoginService, private classGroupService: ClassGroupService, private registerService: RegisterService, private route: ActivatedRoute){
+    private loginService: LoginService, private classGroupService: ClassGroupService, private registerService: RegisterService, private route: ActivatedRoute, private location: Location){
 
   }
 
@@ -245,6 +246,9 @@ isGroupSelected(classGroups: any[], group: any): boolean {
   return classGroups && classGroups.some(selectedGroup => selectedGroup.id === group.id);
 }
 
+goBack() {
+  this.location.back();
+}
 
 
 }

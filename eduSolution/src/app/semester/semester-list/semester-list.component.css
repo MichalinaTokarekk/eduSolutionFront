@@ -76,7 +76,7 @@ i {
 
 /* Style for the Add New button */
 .btn-primary {
-    background-color: #007bff; /* Blue background color */
+    background-color: #375aca; /* Blue background color */
     color: #fff; /* White text color */
     border: none;
     padding: 5px 10px;
@@ -89,7 +89,7 @@ i {
 }
 
 .btn.btn-sm.btn-primary {
-    background-color: #3498db;
+    background-color: #375aca;
     color: #fff;
     padding: 7px 20px;
     border: none;
