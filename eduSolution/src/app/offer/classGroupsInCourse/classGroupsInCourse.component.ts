@@ -70,7 +70,7 @@ export class ClassGroupsInCourseComponent implements OnInit {
   loadAllCourse() {
     this.route.params.subscribe(params => {
         this.courseId = params['courseId'];
-        this.classGroupService.findByCourseId(this.courseId).subscribe((res: any)=>{
+        this.classGroupService.findPendingClassGroupsByCourseId(this.courseId).subscribe((res: any)=>{
             this.classGroupArray = res;
             this.filteredCourses= res;
             this.selectedCourseName = res.length > 0 ? res[0].course.name : '';

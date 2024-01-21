@@ -31,6 +31,7 @@ import { Location } from '@angular/common';
 import { AddAnswerDialogComponent } from '../addAnswer-dialog/addAnswer-dialog.component';
 import { GradeService } from 'src/app/grade/grade-service/grade.service';
 import { Grade } from 'src/app/interfaces/grade-interface';
+import { Role } from 'src/app/interfaces/role-interface';
 
 
 
@@ -194,7 +195,9 @@ ngOnInit(): void {
   usersByClassGroup: any[] = [];
   findUsersByClassGroupId(): void {
     console.log('Przed wywołaniem findUsersByClassGroupId');
-    this.userService.findUsersByClassGroupId(this.classGroupId).subscribe(
+    const userRole: Role = Role.USER; 
+    const userRoleAsString: string = this.roleEnumToString(userRole);
+    this.userService.findUsersByClassGroupIdAndRole2(this.classGroupId, userRoleAsString).subscribe(
       users => {
         console.log('Odpowiedź z serwera:', users);
         this.usersByClassGroup = users;
@@ -205,6 +208,18 @@ ngOnInit(): void {
       }
     );
     console.log('Po wywołaniu findUsersByClassGroupId');
+  }
+
+  roleEnumToString(role: Role): string {
+    switch (role) {
+      case Role.USER:
+        return 'USER';
+      case Role.TEACHER:
+        return 'TEACHER';
+      // Dodaj pozostałe przypadki, jeśli istnieją inne role
+      default:
+        throw new Error('Nieobsługiwana rola.');
+    }
   }
   
   

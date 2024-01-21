@@ -60,6 +60,10 @@ export class ClassGroupService {
   findNameById(id: string): Observable<string> {
     return this.http.get<string>(this.CLASSGROUP_API + '/findNameById/' + id, { responseType: 'text' as 'json' });
   }
+
+  findPendingClassGroupsByCourseId(courseId: number) {
+    return this.http.get(this.CLASSGROUP_API + '/findPendingClassGroupsByCourseId/' + courseId);
+  }
   
 }
 

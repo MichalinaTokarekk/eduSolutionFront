@@ -96,6 +96,10 @@ export class UserService {
   findUsersByClassGroupIdAndRole(classGroupId: string, userRole: string) {
     return this.http.get<User[]>(`${this.USER_API}/findUsersByClassGroupIdAndRole/${classGroupId}/${userRole}`);
   }
+
+  findUsersByClassGroupIdAndRole2(classGroupId: number, userRole: string) {
+    return this.http.get<User[]>(`${this.USER_API}/findUsersByClassGroupIdAndRole/${classGroupId}/${userRole}`);
+  }
   
   
 
