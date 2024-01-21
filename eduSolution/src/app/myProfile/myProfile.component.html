@@ -8,6 +8,8 @@
     <p *ngIf="!isEditing"><strong>Poczta:</strong> {{ user?.post }}</p>
     <p *ngIf="!isEditing"><strong>Kod pocztowy:</strong> {{ user?.postCode }}</p>
     <p *ngIf="!isEditing"><strong>Kraj:</strong> {{ user?.country }}</p>
+    <p *ngIf="!isEditing"><strong>Rola:</strong> {{ user?.role }}</p>
+    <p *ngIf="!isEditing"><strong>Status:</strong> {{ user?.userStatus }}</p>
   
     <!-- <button (click)="toggleEdit()">{{ isEditing ? 'Zapisz' : 'Edytuj' }}</button> -->
   </div>
@@ -15,16 +17,39 @@
   <div *ngIf="user">
     <h2>Zmień hasło</h2>
     
-    <div >
-      <label for="oldPassword">Stare hasło</label>
-      <input type="password" id="oldPassword" [(ngModel)]="user.changePassword.oldPassword" />
+
+    <div>
+    <label for="oldPassword">Stare hasło</label>
+    <div class="password-input-container">
+      <input type="{{ showOldPassword ? 'text' : 'password' }}" id="oldPassword" [(ngModel)]="user.changePassword.oldPassword" />
+      <mat-icon *ngIf="showOldPassword" class="password-toggle" (click)="toggleShowOldPassword()">visibility_off</mat-icon>
+      <mat-icon *ngIf="!showOldPassword" class="password-toggle" (click)="toggleShowOldPassword()">visibility</mat-icon>
+    </div>
       
-      <label for="newPassword">Nowe hasło:</label>
+      <!-- <label for="newPassword">Nowe hasło:</label>
       <input type="password" id="newPassword" [(ngModel)]="user.changePassword.newPassword" />
 
       <label for="newPasswordConfirm">Nowe hasło (potwierdź):</label>
       <input type="password" id="newPasswordConfirm" [(ngModel)]="user.changePassword.newPasswordConfirm" />
+    </div> -->
+
+    
+      <label for="newPassword">Nowe hasło:</label>
+      <div class="password-input-container">
+        <input type="{{ showPassword ? 'text' : 'password' }}" id="newPassword" [(ngModel)]="user.changePassword.newPassword" />
+        <mat-icon *ngIf="showPassword" class="password-toggle" (click)="toggleShowPassword()">visibility_off</mat-icon>
+        <mat-icon *ngIf="!showPassword" class="password-toggle" (click)="toggleShowPassword()">visibility</mat-icon>
+      </div>
+    
+      <label for="newPasswordConfirm">Nowe hasło (potwierdź):</label>
+      <div class="password-input-container">
+        <input type="{{ showPasswordConfirm ? 'text' : 'password' }}" id="newPasswordConfirm" [(ngModel)]="user.changePassword.newPasswordConfirm" />
+        <mat-icon *ngIf="showPasswordConfirm" class="password-toggle" (click)="toggleShowPasswordConfirm()">visibility_off</mat-icon>
+        <mat-icon *ngIf="!showPasswordConfirm" class="password-toggle" (click)="toggleShowPasswordConfirm()">visibility</mat-icon>
+      </div>
     </div>
+    
+    
   
     <!-- <button (click)="toggleEditPassword(); changePassword(user.id)">{{ isEditingPassword ? 'Zapisz' : 'Edytuj' }}</button> -->
     <!-- <button (click)="isEditingPassword ? changePassword(user.changePassword) : toggleEditPassword()">
@@ -35,7 +60,6 @@
       Zapisz
     </button>
     
-  </div>
 
   
   

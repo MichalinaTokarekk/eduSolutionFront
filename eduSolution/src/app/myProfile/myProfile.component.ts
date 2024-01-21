@@ -107,6 +107,26 @@ export class MyProfileComponent implements OnInit{
       verticalPosition: 'top',
     });
   }
+
+showPassword: boolean = false;
+showPasswordConfirm: boolean = false;
+showOldPassword: boolean = false;
+
+toggleShowOldPassword(): void {
+  this.showOldPassword = !this.showOldPassword;
+  this.showPassword = false; // Wyłącz showPassword
+  this.showPasswordConfirm = false; // Wyłącz showPasswordConfirm
+}
+
+toggleShowPassword(): void {
+  this.showPassword = !this.showPassword;
+  this.showPasswordConfirm = false; // Wyłącz showPasswordConfirm
+}
+
+toggleShowPasswordConfirm(): void {
+  this.showPasswordConfirm = !this.showPasswordConfirm;
+  this.showPassword = false; // Wyłącz showPassword
+}
   
 
 }
