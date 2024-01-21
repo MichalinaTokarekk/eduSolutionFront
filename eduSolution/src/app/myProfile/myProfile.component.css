@@ -59,6 +59,7 @@ button:hover {
   
   .password-input-container input {
     padding-right: 40px; /* Ustawienie odpowiedniego odstępu dla ikony */
+    border-radius: 5px;
   }
   
   .password-toggle {

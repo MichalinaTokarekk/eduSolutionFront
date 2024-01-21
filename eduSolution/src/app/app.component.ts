@@ -22,12 +22,12 @@ export class AppComponent {
   actions(){
     if(this.loginService.getToken()!=''){
       let _currentRole = this.loginService.getRoleByToken(this.loginService.getToken());
-      if(_currentRole=='admin' || _currentRole=='student' || _currentRole=='teacher' || _currentRole=='user'){
+      if(_currentRole=='admin' ||  _currentRole=='teacher' || _currentRole=='user'){
         return true;
       }
     }
     return false
-}
+  }
 
 actionsAdmin(){
   if(this.loginService.getToken()!=''){

@@ -317,7 +317,7 @@
   <!-- <span style="margin-left: 10px;"><a [routerLink]="['/main-page']" style="color: white; font-size: large;" >Strona główna</a></span> -->
   <span style="margin-left: 10px;"><a [routerLink]="['/offerPage']" style="color: white; font-size: large;">Oferta</a></span>
   <span style="margin-left: 10px;"><a [routerLink]="['/dashboard']" style="color: white; font-size: large;" *ngIf="actions()">Kokpit</a></span>
-  <span style="margin-left: 10px;"><a [routerLink]="['/admin-panel']" style="color: white; font-size: large;" *ngIf="actions()">Panel administratora</a></span>
+  <span style="margin-left: 10px;"><a [routerLink]="['/admin-panel']" style="color: white; font-size: large;" *ngIf="actionsAdmin()">Panel administratora</a></span>
     <div class="spacer"></div>
 
     <!-- <a *ngIf="actions()" class="basket-icon" [matMenuTriggerFor]="basketMenu">
@@ -351,19 +351,19 @@
 
 
 
-    <button mat-icon-button>
-      <a [routerLink]="isLoggedIn() ? 'login' : 'login'" class="menulink">
-        {{ isLoggedIn() ? 'Wyloguj się' : 'Zaloguj się' }}
-      </a>
-    </button>
-
-    <button mat-icon-button *ngIf="!isLoggedIn()">
-      <a [routerLink]="['/register-edit']" class="registerlink">Zarejestruj się</a>
+  <button mat-icon-button style="margin-right: 5px; background-color: #e2e9ec; border-radius: 5px;">
+    <a style="color: #151616;" [routerLink]="isLoggedIn() ? 'login' : 'login'" class="menulink">
+      {{ isLoggedIn() ? 'Wyloguj się' : 'Zaloguj się' }}
+    </a>
   </button>
 
-  <button mat-icon-button *ngIf="isLoggedIn()">
-    <a [routerLink]="['/myProfile']" class="registerlink">Mój profil</a>
-</button>
+  <!-- <button mat-icon-button *ngIf="!isLoggedIn()">
+      <a [routerLink]="['/register-edit']" class="registerlink">Zarejestruj się</a>
+  </button> -->
+
+  <button mat-icon-button *ngIf="isLoggedIn()" style="background-color: #e2e9ec; border-radius: 5px;">
+      <a style="color: #151616;" [routerLink]="['/myProfile']" class="registerlink">Mój profil</a>
+  </button>
     <!-- <a aria-label="Angular on twitter" target="_blank" rel="noopener" href="https://twitter.com/angular" title="Twitter">
       <svg id="twitter-logo" height="24" data-name="Logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
         <rect width="400" height="400" fill="none"/>

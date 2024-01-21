@@ -23,29 +23,41 @@ export class DashboardComponent {
       };
     }
 
-    actions(){
-          if(this.loginService.getToken()!=''){
-            let _currentRole = this.loginService.getRoleByToken(this.loginService.getToken());
-            if(_currentRole=='admin' || _currentRole=='teacher'){
-              return true;
-            }
-          }
-          return false
+    actionsTeacher(){
+      if(this.loginService.getToken()!=''){
+        let _currentRole = this.loginService.getRoleByToken(this.loginService.getToken());
+        if(_currentRole=='admin' || _currentRole=='teacher'){
+          return true;
+        }
+      }
+      return false
     }
 
 
     userRole!: string;
-extractUserRole() {
-  const token = this.loginService.getToken();
-  
-  if (token) {
-    const _token = token.split('.')[1];
-    const _atobData = atob(_token);
-    const _finalData = JSON.parse(_atobData);
+  extractUserRole() {
+    const token = this.loginService.getToken();
     
-    // Zakładając, że rola znajduje się w polu 'role' obiektu danych
-    this.userRole = _finalData.role;
-    console.log('role', this.userRole);
+    if (token) {
+      const _token = token.split('.')[1];
+      const _atobData = atob(_token);
+      const _finalData = JSON.parse(_atobData);
+      
+      // Zakładając, że rola znajduje się w polu 'role' obiektu danych
+      this.userRole = _finalData.role;
+      console.log('role', this.userRole);
+    }
   }
-}
+
+ 
+
+  actionsUser(){
+    if(this.loginService.getToken()!=''){
+      let _currentRole = this.loginService.getRoleByToken(this.loginService.getToken());
+      if(_currentRole=='admin' || _currentRole == 'user'){
+        return true;
+      }
+    }
+    return false
+  }
 }
