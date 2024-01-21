@@ -9,7 +9,7 @@
   
   <h1>Oferta</h1>
 
-  <mat-button-toggle-group name="courseStatus" [(ngModel)]="selectedCourseName" style="margin-left: 7px;">
+  <mat-button-toggle-group class="custom-button-group" name="courseStatus" [(ngModel)]="selectedCourseName" style="margin-left: 7px;">
     <mat-button-toggle (click)="filterClassGroupsByStatus('Wszystkie')" value="Wszystkie">Wszystkie</mat-button-toggle>
     <mat-button-toggle *ngFor="let courseName of uniqueCourseNames" (click)="filterClassGroupsByStatus(courseName)" [value]="courseName">{{ courseName }}</mat-button-toggle>
   </mat-button-toggle-group><br><br>
@@ -33,7 +33,7 @@
   <footer class="footer">
     <div class="container">
       <p>&copy; 2023 EduSolution. Wszelkie prawa zastrzeżone.</p>
-      <p>Kontakt: kontakt@example.com</p>
+      <p>Kontakt: eduSolution@gmail.com</p>
     </div>
   </footer>
   

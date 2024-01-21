@@ -139,5 +139,6 @@ export class ClassGroupsInCourseComponent implements OnInit {
     goBack() {
       this.location.back();
     }
+    
 
 }
