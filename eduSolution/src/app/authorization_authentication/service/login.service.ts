@@ -115,7 +115,18 @@ export class LoginService {
     return null;
   }
 
+  hasRole(role: string): boolean {
+    const token = this.getToken();
+    if (token) {
+      const _token = token.split('.')[1];
+      const _atobData = atob(_token);
+      const _finalData = JSON.parse(_atobData);
 
+      return _finalData.role === role;
+    }
+
+    return false;
+  }
   
   
   

@@ -6,7 +6,6 @@ import { SemesterListComponent } from './semester/semester-list/semester-list.co
 import { CourseInlineEditingComponent } from './course/course-inline-editing/course-inline-editing.component';
 import { ClassGroupInlineCrudComponent } from './classGroup/classGroup-inline-crud/classGroup-inline-crud.component';
 import { LoginComponent } from './authorization_authentication/login/login.component';
-import { AuthGuard } from './authorization_authentication/shared/auth.guard';
 import { UserInlineCrudComponent } from './user/user-iline-crud/user-inline-crud.component';
 import { AdminPanelComponent } from './admin-panel/admin-panel.component';
 import { SectionManage } from './section/section-manage/section-manage.component';
@@ -34,16 +33,17 @@ import { MyCartComponent } from './offer/cart/myCart/myCart.component';
 import { OfferDescriptionComponent } from './offer/offerDescription/offerDescription.component';
 import { ParticipantsComponent } from './classGroup/participants/participants.component';
 import { UserDetailsComponent } from './user/user-details/user-details.component';
+import { AuthGuard } from './authorization_authentication/service/auth.guard';
 
 const routes: Routes = [
-  {path: "dashboard", component: DashboardComponent, canActivate:[AuthGuard]},
+  {path: "dashboard", component: DashboardComponent, canActivate:[AuthGuard], data: { roles: ['admin', 'user', 'teacher'] }},
   {path: "main-page", component: MainPageComponent},
-  {path: "semester-list", component: SemesterListComponent},
-  {path: "course-inline-editing", component: CourseInlineEditingComponent},
-  {path: "classGroup-inline-crud", component: ClassGroupInlineCrudComponent},
+  {path: "semester-list", component: SemesterListComponent, canActivate:[AuthGuard], data: { roles: ['admin'] }},
+  {path: "course-inline-editing", component: CourseInlineEditingComponent, canActivate:[AuthGuard], data: { roles: ['admin'] }},
+  {path: "classGroup-inline-crud", component: ClassGroupInlineCrudComponent, canActivate:[AuthGuard], data: { roles: ['admin'] }},
   {path: "login", component: LoginComponent},
-  {path: "user-inline-crud", component: UserInlineCrudComponent},
-  {path: "admin-panel", component: AdminPanelComponent},
+  {path: "user-inline-crud", component: UserInlineCrudComponent, canActivate:[AuthGuard], data: { roles: ['admin'] }},
+  {path: "admin-panel", component: AdminPanelComponent, canActivate:[AuthGuard], data: { roles: ['admin'] }},
   {path: "classGroup-grid-view/:courseId", component: ClassGroupGridViewComponent},
   {path: "section-manage", component: SectionManage},
   {path: "section-manage/:courseId", component: SectionManage},
