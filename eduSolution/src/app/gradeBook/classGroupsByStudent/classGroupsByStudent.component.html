@@ -55,34 +55,42 @@
                      
                     </td>
 
-                      <td>
-                        <ng-container *ngFor="let grade of course.grades; let i = index">
-                            <ng-container *ngIf="i !== 0 && !grade.finalValue">, </ng-container>
-                            <ng-container *ngIf="!grade.finalValue">
-                                {{ grade.value }}
-                            </ng-container>
-                            <ng-container *ngIf="!grade.finalValue && grade.value === null"> 
-                                {{ ' ' }}
-                            </ng-container>
-                        </ng-container>
-                    </td>
-
                     <td>
-                        {{ course.grades ? (obliczSredniaWazona(course.grades) | number: '1.2-2') : 'Brak ocen' }}
-                    </td>
+                        <ng-container *ngFor="let course of courseArray; let i = index">
+                          <ng-container *ngIf="i !== 0 && course.grades && course.grades.length > 0">, </ng-container>
+                          <ng-container *ngIf="course.grades && course.grades.length > 0">
+                            {{ course.grades[i]?.value }}
+                          </ng-container>
+                          <ng-container *ngIf="course.grades && course.grades.length > 0 && course.grades[i]?.value === null">
+                            {{ ' ' }}
+                          </ng-container>
+                        </ng-container>
+                      </td>
+                      
+                      <td>
+                        {{ courseArray ? (obliczSredniaWazona(courseArray[0]?.grades) | number: '1.2-2') : 'Brak ocen' }}
+                      </td>
+                      
                     
                       
 
-                    <td>
-                        <ng-container *ngFor="let grade of course.grades; let i = index">
-                            <ng-container *ngIf="grade.finalValue">
-                                {{ grade.value }}
+                      <td>
+                        <ng-container *ngIf="courseArray && courseArray.length > 0">
+                            <ng-container *ngFor="let course of courseArray; let i = index">
+                                <ng-container *ngIf="course && course.grades && course.grades.length > 0">
+                                    <ng-container *ngFor="let grade of course.grades; let j = index">
+                                        <ng-container *ngIf="grade.finalValue === true">
+                                            {{ grade.value }}
+                                            <ng-container *ngIf="j !== course.grades.length - 1 && courseArray.length > 1 && grade.finalValue === true">, </ng-container>
+                                        </ng-container>
+                                    </ng-container>
+                                </ng-container>
                             </ng-container>
-                            <!-- <ng-container *ngIf="grade.finalValue && grade.value === null"> 
-                                {{ ' ' }}
-                            </ng-container> -->
                         </ng-container>
                     </td>
+                    
+                    
+                    
 
                     <td>
                         <!-- <a (click)="openStudentDetailGradeDialog(course.id, course.name)" style="cursor: pointer; text-decoration: underline; color: #007bff;">Szczegóły</a> -->

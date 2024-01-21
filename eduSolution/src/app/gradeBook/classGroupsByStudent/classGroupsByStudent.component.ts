@@ -85,12 +85,38 @@ export class ClassGroupsByStudentComponent implements OnInit {
   }
   
 
+  // obliczSredniaWazona(grades: Grade[]): number {
+  //   let sumaOcen = 0.0;
+  //   let sumaWag = 0.0;
+
+  //   for (const ocena of grades) {
+  //     if (!ocena.finalValue) {
+  //       const wagaOceny: TypeOfTestingKnowledge = ocena.typeOfTestingKnowledge;
+  //       if (wagaOceny) {
+  //         sumaOcen += ocena.value * wagaOceny.weight;
+  //         sumaWag += wagaOceny.weight;
+  //       }
+  //     }
+  //   }
+
+  //   if (sumaWag === 0.0) {
+  //     return 0.0; // W przypadku braku ocen lub wag ocen
+  //   } else {
+  //     return sumaOcen / sumaWag;
+  //   }
+    
+  // }
+
   obliczSredniaWazona(grades: Grade[]): number {
+    if (!grades || !Array.isArray(grades) || grades.length === 0) {
+      return 0.0; // Brak ocen
+    }
+  
     let sumaOcen = 0.0;
     let sumaWag = 0.0;
-
+  
     for (const ocena of grades) {
-      if (!ocena.finalValue) {
+      if (ocena && !ocena.finalValue) {
         const wagaOceny: TypeOfTestingKnowledge = ocena.typeOfTestingKnowledge;
         if (wagaOceny) {
           sumaOcen += ocena.value * wagaOceny.weight;
@@ -98,25 +124,28 @@ export class ClassGroupsByStudentComponent implements OnInit {
         }
       }
     }
-
+  
     if (sumaWag === 0.0) {
       return 0.0; // W przypadku braku ocen lub wag ocen
     } else {
       return sumaOcen / sumaWag;
     }
-    
   }
+  
 
   gradesByUser: { [key: number]: Grade[] } = {}; 
   teacher: any;
 
-loadGradesByStudentId(studentId: number, courseId: number) {
+  loadGradesByStudentId(studentId: number, courseId: number) {
     console.log('Kliknięto przycisk Pobierz oceny.');
     this.gradeService.getGradesByStudentId(studentId, courseId).subscribe((grades) => {
-        console.log('Oceny dla studentId ' + studentId + ':', grades);
-        this.gradesByUser[studentId] = grades as Grade[];
+       console.log('Oceny dla studentId ' + studentId + ':', grades);
+       this.gradesByUser[studentId] = grades as Grade[];
+       console.log('Przypisano do gradesByUser:', this.gradesByUser);
     });
-}
+ }
+ 
+ 
 
   openStudentDetailGradeDialog(courseId: number, courseName: string) {
     const userId = this.loginService.getUserId();
