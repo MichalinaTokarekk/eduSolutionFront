@@ -80,7 +80,7 @@
   </div> -->
 
   <!-- Grupy klasowe w tabeli -->
-<div class="info-group">
+<div class="info-group" *ngIf="actionsTeachacher()">
     <table>
       <thead>
         <tr>
@@ -98,7 +98,7 @@
   </div>
   
 
-  <div class="button-group">
+  <div class="button-group" *ngIf="actionsTeachacher()">
     <button (click)="startEdit()" class="save-button">Edytuj</button>
     <button (click)="deleteEvent()" class="cancel-button">Usuń</button>
   </div>

@@ -56,7 +56,7 @@
   </div><br>
   
 
-   <button  class="add-section-button" (click)="onAddSection()">Dodaj nowy panel</button><br>
+   <button  class="add-section-button" (click)="onAddSection()" *ngIf="actionsTeachacher()" >Dodaj nowy panel</button><br>
    <input class="newSectionInput" *ngIf="isAddingNewSection" type="text" [(ngModel)]="newSectionName" placeholder="Nowa nazwa sekcji">
    <button class="onSaveNew" *ngIf="isAddingNewSection" (click)="onSaveNew()">Zapisz</button>
    <button class="onCancelNew" *ngIf="isAddingNewSection" (click)="onCloseButton()">Anuluj</button>
@@ -73,11 +73,11 @@
             placeholder=""
           >
           <span class="section-name" *ngIf="!section.isEdit && !section.isNewSection">{{ section.name }}</span>
-          <button *ngIf="!section.isEdit" class="edit-button" (click)="onEdit(section)">Edytuj</button>
+          <button *ngIf="!section.isEdit && actionsTeachacher()" class="edit-button" (click)="onEdit(section)">Edytuj</button>
           <button class="onEditEduMaterial" *ngIf="section.isEdit" (click)="onSave(section)">Zapisz zmiany</button>
           <button class="onCancelEditEduMaterial" *ngIf="section.isEdit" (click)="onBackButton(section)">Wyjdź z edycji</button>
           <!-- <i class="fa fa-trash-o trash-icon" aria-hidden="true" (click)="onDelete(section)"></i> -->
-          <button *ngIf="!section.isEdit" class="delete-button" (click)="onDelete(section)">Usuń</button>
+          <button *ngIf="!section.isEdit && actionsTeachacher()" class="delete-button" (click)="onDelete(section)">Usuń</button>
         </mat-panel-title>
       </mat-expansion-panel-header>
       <!-- <p *ngIf="!section.isEdit">This is the content of section {{ srNo + 1 }}</p> -->
@@ -94,7 +94,7 @@
             <ul>
               <li >
                 <a [routerLink]="['/eduMaterial-manage', eduMaterial.id, section.id]">{{ eduMaterial.name }}</a>
-                <i class="fa fa-trash-o" aria-hidden="true" (click)="onDeleteEduMaterial(eduMaterial)"></i>
+                <i class="fa fa-trash-o" aria-hidden="true" (click)="onDeleteEduMaterial(eduMaterial)" *ngIf="actionsTeachacher()"></i>
               </li>
             </ul>
         </div>
@@ -115,7 +115,7 @@
             <ul>
               <li >
                 <a [routerLink]="['/homeworkTest-manage', homeworkTest.id]">{{ homeworkTest.name }}</a>
-                <i class="fa fa-trash-o" aria-hidden="true" (click)="onDeleteHomeworkTest(homeworkTest)"></i>
+                <i class="fa fa-trash-o" aria-hidden="true" (click)="onDeleteHomeworkTest(homeworkTest)" *ngIf="actionsTeachacher()"></i>
               </li>
             </ul>
         </div>

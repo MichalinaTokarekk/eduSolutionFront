@@ -14,6 +14,7 @@ import { HomeworkTestService } from 'src/app/homeworkTest/homeworkTest-service/h
 import { HomeworkTest } from 'src/app/interfaces/homeworkTest-interface';
 import { ClassGroupService } from 'src/app/classGroup/classGroup-service/classGroup.service';
 import { Location } from '@angular/common';
+import { LoginService } from 'src/app/authorization_authentication/service/login.service';
 
 
 
@@ -37,7 +38,7 @@ export class SectionManage implements OnInit {
   ascendingSort = true;
   constructor(private http: HttpClient, private route: ActivatedRoute, private sectionService: SectionService, private router: Router, 
     private dialog: MatDialog, private snackBar: MatSnackBar, private eduMaterialService: EduMaterialService, private homeworkTestService: HomeworkTestService,
-    private classGroupService: ClassGroupService, private location: Location){
+    private classGroupService: ClassGroupService, private location: Location, private loginService: LoginService){
     this.route.params.subscribe(params => {
       const courseId = params['courseId'];
       // Teraz możesz wykorzystać courseId w swoim kodzie, np. w żądaniach HTTP
@@ -559,6 +560,26 @@ isAddingNewSection: boolean = false;
     this.isAddingNewSection = false;
   }
 
+
+  actions(){
+    if(this.loginService.getToken()!=''){
+      let _currentRole = this.loginService.getRoleByToken(this.loginService.getToken());
+      if(_currentRole=='admin' ||  _currentRole=='teacher' || _currentRole=='user'){
+        return true;
+      }
+    }
+    return false
+  }
+
+actionsTeachacher(){
+  if(this.loginService.getToken()!=''){
+    let _currentRole = this.loginService.getRoleByToken(this.loginService.getToken());
+    if(_currentRole=='admin' || _currentRole == 'teacher'){
+      return true;
+    }
+  }
+  return false
+}
   
   
 }

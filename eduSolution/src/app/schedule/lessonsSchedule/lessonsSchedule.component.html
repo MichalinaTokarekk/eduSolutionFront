@@ -1,6 +1,6 @@
 
 
-<button (click)="openAddLessonDetailDialog()" class="add-button">Dodaj nową lekcję</button><br><br>
+<button (click)="openAddLessonDetailDialog()" class="add-button" *ngIf="actionsTeachacher()">Dodaj nową lekcję</button><br><br>
 
 <!-- <div *ngFor="let day of weekDays">
   <h3>{{ day }}</h3>

@@ -83,7 +83,7 @@
           <label for="name">Nazwa:</label><br><br>
           <input *ngIf="homeworkTest.isEdit" class="input" type="text" id="name" name="name" [(ngModel)]="homeworkTest.name">
           <span class="input" *ngIf="!homeworkTest.isEdit">{{ homeworkTest.name }}</span>
-          <button class="editButton" *ngIf="!homeworkTest.isEdit" (click)="onEdit(homeworkTest)">Edytuj</button>
+          <button class="editButton" *ngIf="!homeworkTest.isEdit && actionsTeachacher()" (click)="onEdit(homeworkTest)">Edytuj</button>
           <button class="saveButton" *ngIf="homeworkTest.isEdit" type="submit">Zapisz zmiany</button>
         </div><br>
         <label for="taskContent">Polecenie:</label>
@@ -105,7 +105,7 @@
               {{ homeworkTest.deadline | date:'yyyy-MM-dd HH:mm:ss' }}
             </span>
             <!-- Dodaj tutaj warunek sprawdzający obecność daty przed pokazaniem przycisku Edytuj -->
-            <button class="editButton" *ngIf="homeworkTest && homeworkTest.deadline" (click)="isEditingDate = true">
+            <button class="editButton" *ngIf="homeworkTest && homeworkTest.deadline && actionsTeachacher()" (click)="isEditingDate = true">
               Edytuj
             </button>
           </ng-container><br><br>
@@ -123,7 +123,7 @@
             <button (click)="saveEditedDeadline()">Zapisz</button>
             <button (click)="cancelEditDate()">Anuluj</button>
           </ng-template>
-        </div>
+        </div><br>
         
         
         
@@ -132,7 +132,7 @@
         
     
         <!-- Formularz do dodawania plików -->
-        <form (submit)="onAddFile(homeworkTest)" enctype="multipart/form-data">
+        <form (submit)="onAddFile(homeworkTest)" enctype="multipart/form-data" *ngIf="actionsTeachacher()">
           <div class="filesadd">
             <label for="file">Wybierz plik:</label>
             <input type="file" name="file" id="file" accept=".pdf, .doc, .docx, .jpg, .png" (change)="onFileSelected($event)">

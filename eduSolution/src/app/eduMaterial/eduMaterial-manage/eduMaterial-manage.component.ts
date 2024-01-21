@@ -13,6 +13,7 @@ import { EMFile } from 'src/app/interfaces/emFile-interface';
 import { EMFileService } from 'src/app/emFile/emFile-service/emFile.service';
 import { Location } from '@angular/common';
 import { SectionService } from 'src/app/section/section-service/section.service';
+import { LoginService } from 'src/app/authorization_authentication/service/login.service';
 
 
 /**
@@ -28,7 +29,8 @@ eduMaterial: any = {};
   emFileIdContainer: any;
 
   constructor(private http: HttpClient, private route: ActivatedRoute, private router: Router, private dialog: MatDialog, private snackBar: MatSnackBar, 
-    private eduMaterialService: EduMaterialService, private emFileService: EMFileService, private location: Location, private sectionService: SectionService){
+    private eduMaterialService: EduMaterialService, private emFileService: EMFileService, private location: Location, private sectionService: SectionService, 
+    private loginService: LoginService){
   }
 
   emFilesByEduMaterial!: Array<any>;
@@ -330,6 +332,26 @@ downloadFileById(fileId: number): void {
     this.eduMaterial.isEdit = false;
     location.reload();
   }
+
+  actions(){
+    if(this.loginService.getToken()!=''){
+      let _currentRole = this.loginService.getRoleByToken(this.loginService.getToken());
+      if(_currentRole=='admin' ||  _currentRole=='teacher' || _currentRole=='user'){
+        return true;
+      }
+    }
+    return false
+  }
+
+actionsTeachacher(){
+  if(this.loginService.getToken()!=''){
+    let _currentRole = this.loginService.getRoleByToken(this.loginService.getToken());
+    if(_currentRole=='admin' || _currentRole == 'teacher'){
+      return true;
+    }
+  }
+  return false
+}
   
 
 }

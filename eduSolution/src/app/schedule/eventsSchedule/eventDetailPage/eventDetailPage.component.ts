@@ -164,6 +164,26 @@ export class EventDetailPageComponent {
   goBack() {
     this.location.back();
   }
+
+  actions(){
+    if(this.loginService.getToken()!=''){
+      let _currentRole = this.loginService.getRoleByToken(this.loginService.getToken());
+      if(_currentRole=='admin' ||  _currentRole=='teacher' || _currentRole=='user'){
+        return true;
+      }
+    }
+    return false
+  }
+
+actionsTeachacher(){
+  if(this.loginService.getToken()!=''){
+    let _currentRole = this.loginService.getRoleByToken(this.loginService.getToken());
+    if(_currentRole=='admin' || _currentRole == 'teacher'){
+      return true;
+    }
+  }
+  return false
+}
   
   
   

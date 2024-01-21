@@ -16,7 +16,7 @@
       <label for="name"></label>
       <input style="font-size: large;" *ngIf="eduMaterial.isEdit" class="input" type="text" id="name" name="name" [(ngModel)]="eduMaterial.name">
       <span style="font-size: large;" class="input" *ngIf="!eduMaterial.isEdit">{{ eduMaterial.name }}</span>
-      <button class="editButton" *ngIf="!eduMaterial.isEdit" (click)="onEdit(eduMaterial)">Edytuj</button>
+      <button class="editButton" *ngIf="!eduMaterial.isEdit && actionsTeachacher()" (click)="onEdit(eduMaterial)">Edytuj</button>
       <button class="saveButton" *ngIf="eduMaterial.isEdit" type="submit">Zapisz zmiany</button>
       <button class="closeButton" *ngIf="eduMaterial.isEdit" (click)="onCloseButton()">Anuluj</button>
     </div>
