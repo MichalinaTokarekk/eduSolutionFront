@@ -1,29 +1,29 @@
-<h2>Dodaj Nowe Wydarzenie</h2>
+<h2 style="text-align: center; font-family: 'Times New Roman', Times, serif; font-size: 25px; margin-bottom: 1px; font-weight: bold;">Dodaj Nowe Wydarzenie</h2>
 
 <form (ngSubmit)="onAddClick()" class="event-form">
   <div class="form-group">
     <label for="eventName">Nazwa Wydarzenia:</label>
-    <input style="width: 204px; height: 30px;" type="text" id="eventName" name="eventName" [(ngModel)]="data.eventName" required>
+    <input style="width: 270px; height: 30px; border-radius: 5px;" type="text" id="eventName" name="eventName" [(ngModel)]="data.eventName" required>
   </div>
 
   <div class="form-group">
     <label for="description">Opis:</label>
-    <input style="width: 204px; height: 30px;" type="text" id="description" name="description" [(ngModel)]="data.description" required>
+    <input style="width: 270px; height: 30px; border-radius: 5px;" type="text" id="description" name="description" [(ngModel)]="data.description" required>
   </div>
 
   <div class="form-group">
     <label for="startEventTime">Godzina rozpoczęcia:</label>
-    <input style="width: 204px; height: 30px;" type="text" id="startEventTime" name="startEventTime" [(ngModel)]="data.startEventTime" required>
+    <input style="width: 270px; height: 30px; border-radius: 5px;" type="text" id="startEventTime" name="startEventTime" [(ngModel)]="data.startEventTime" required>
   </div>
 
   <div class="form-group">
     <label for="endEventTime">Godzina zakończenia:</label>
-    <input style="width: 204px; height: 30px;" type="text" id="endEventTime" name="endEventTime" [(ngModel)]="data.endEventTime" required>
+    <input style="width: 270px; height: 30px; border-radius: 5px;" type="text" id="endEventTime" name="endEventTime" [(ngModel)]="data.endEventTime" required>
   </div>
   
   <div class="form-group">
     <label for="eventDate">Data Wydarzenia:</label>
-    <input style="width: 206px; height: 30px;" type="date" id="eventDate" name="eventDate" [(ngModel)]="data.eventDate" required>
+    <input style="width: 272px; height: 30px; border-radius: 5px;" type="date" id="eventDate" name="eventDate" [(ngModel)]="data.eventDate" required>
   </div>
 
  
@@ -37,14 +37,14 @@
     </mat-select>
   </mat-form-field> -->
 
-  <mat-form-field appearance="fill" class="input-container">
+  <mat-form-field appearance="fill" class="input-container" style="width: 276px;">
     <input matInput placeholder="Wyszukaj po nazwie" (input)="onSearchChange($event)">
   </mat-form-field>
 
   
   
 
-  <mat-form-field>
+  <mat-form-field style="width: 276px; margin-bottom: -20px;">
     <mat-label>Wybierz grupę</mat-label>
     <mat-select [(ngModel)]="data.classGroups" name="classGroups" multiple>
       <mat-option (click)="toggleSelectAll()">Select All</mat-option>

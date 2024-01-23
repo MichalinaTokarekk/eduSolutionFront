@@ -186,7 +186,8 @@ export class CalendarViewComponent {
 
   openAddEventDialog(): void {
     const dialogRef = this.dialog.open(AddEventDialogComponent, {
-      width: '300px',
+      width: '350px',
+      height: '560px',
       data: {
       }
     });
