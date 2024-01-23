@@ -172,7 +172,7 @@ export class ClassGroupsByStudentComponent implements OnInit {
       const teacherLastName = firstGrade.teacher.lastName;
 
       const dialogRef = this.dialog.open(StudentDetailGradeComponent, {
-        width: '520px',
+        width: '510px',
         height: '500px',
         data: {
           grades,

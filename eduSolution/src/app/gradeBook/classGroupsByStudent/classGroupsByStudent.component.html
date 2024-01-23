@@ -5,7 +5,7 @@
     <h2 style="margin-left: 10px;">Twoje grupy w kursie {{ selectedCourseName }} {{ selectedCourseDifficultyLevel }} </h2>
   </div><br>
 
-<mat-button-toggle-group name="status" [(ngModel)]="selectedStatus" style="margin-left: 7px;">
+<mat-button-toggle-group class="custom-button-group" name="status" [(ngModel)]="selectedStatus" style="margin-left: 7px;">
     <mat-button-toggle (click)="filterClassGroupsByStatus('Wszystkie')" value="Wszystkie">Wszystkie</mat-button-toggle>
     <mat-button-toggle (click)="filterClassGroupsByStatus('OCZEKUJĄCY')" value="OCZEKUJĄCY">OCZEKUJĄCY</mat-button-toggle>
     <mat-button-toggle (click)="filterClassGroupsByStatus('WTRAKCIE')"value="WTRAKCIE">W TRAKCIE</mat-button-toggle>
@@ -107,7 +107,7 @@
 
                     <td>
                         <!-- <a (click)="openStudentDetailGradeDialog(course.id, course.name)" style="cursor: pointer; text-decoration: underline; color: #007bff;">Szczegóły</a> -->
-                        <button (click)="openStudentDetailGradeDialog(course.id, course.id)" class="add-grade-button">Pokaż szczegóły</button>
+                        <button (click)="openStudentDetailGradeDialog(course.id, course.name)" class="add-grade-button">Pokaż szczegóły</button>
                     </td>
 
                     

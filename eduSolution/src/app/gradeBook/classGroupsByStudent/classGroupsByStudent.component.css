@@ -14,7 +14,7 @@ i {
 
 /* Style for the table */
 .table {
-    width: 1400px;
+    width: 1600px;
     border-collapse: collapse;
     margin-top: 0px;
     margin-left: 5px;
@@ -113,7 +113,7 @@ i {
 .col-6 {
     display: flex;
     align-items: center;
-    background-color: #d5d6d8;
+    background-color: #f0f1f3;
     padding: 10px;
     color: rgb(61, 60, 60);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -137,7 +137,12 @@ i {
     /* margin-left: 18px; */
   }
 
-
+  .custom-button-group {
+    border: 1px solid #333; /* Zmiana koloru obramowania na ciemniejszy */
+    border-radius: 3px; /* Dodanie zaokrąglenia obramowania */
+    padding: 5px; /* Dodanie wewnętrznego odstępu dla lepszego wyglądu */
+  }
+  
 
 
 

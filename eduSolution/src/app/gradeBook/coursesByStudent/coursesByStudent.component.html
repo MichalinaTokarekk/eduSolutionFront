@@ -2,7 +2,7 @@
     <h2 style="margin-left: 10px;">Dziennik ocen - wybierz kurs</h2>
 </div><br>
 
-<mat-button-toggle-group name="courseStatus" [(ngModel)]="selectedCourseName" style="margin-left: 7px;">
+<mat-button-toggle-group class="custom-button-group" name="courseStatus" [(ngModel)]="selectedCourseName" style="margin-left: 7px;">
     <mat-button-toggle (click)="filterClassGroupsByStatus('Wszystkie')" value="Wszystkie">Wszystkie</mat-button-toggle>
     <mat-button-toggle *ngFor="let courseName of uniqueCourseNames" (click)="filterClassGroupsByStatus(courseName)" [value]="courseName">{{ courseName }}</mat-button-toggle>
 </mat-button-toggle-group><br><br>
@@ -20,7 +20,7 @@
     <br><br>
     <div class="row">
         <div class="col-8">
-            <table class="table table-bordered ">
+            <table class="table table-bordered table-responsive">
                 <thead>
                     <tr class="bg-success text-white">
                         <th>Lp</th>
@@ -48,7 +48,7 @@
                         </td>  
     
                         <td>
-                            <a [routerLink]="['/classGroupsByStudent-view', course.id]" style="cursor: pointer; text-decoration: underline; color: #007bff;">Przejdź dalej</a> 
+                            <a [routerLink]="['/classGroupsByStudent-view', course.id]" style="cursor: pointer; text-decoration: none; color: #116dce;">Przejdź dalej</a> 
                         </td>            
                     </tr>
                 </tbody>

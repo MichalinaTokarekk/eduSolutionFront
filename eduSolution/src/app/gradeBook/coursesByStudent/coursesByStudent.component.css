@@ -131,7 +131,7 @@ i {
 .col-6 {
     display: flex;
     align-items: center;
-    background-color: #d5d6d8;
+    background-color: #f0f1f3;
     padding: 10px;
     color: rgb(61, 60, 60);
     /* border-radius: 2px; */
@@ -145,5 +145,15 @@ i {
 }
 
 
+.custom-button-group {
+    border: 1px solid #333; /* Zmiana koloru obramowania na ciemniejszy */
+    border-radius: 3px; /* Dodanie zaokrąglenia obramowania */
+    padding: 5px; /* Dodanie wewnętrznego odstępu dla lepszego wyglądu */
+}
 
+.table-responsive {
+    overflow-x: auto;
+}
+
+  
 
