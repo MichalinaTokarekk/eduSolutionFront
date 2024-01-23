@@ -64,6 +64,13 @@
   color: #888;
 }
 
+.separator {
+  height: 20px;
+  width: 1px;
+  background-color: white;
+  display: inline-block;
+  margin: 0 10px; /* Możesz dostosować margines według potrzeb */
+}
 
 
 

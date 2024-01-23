@@ -264,6 +264,16 @@
     margin-left: 5px;
   }
 
+  .editButton-term{
+    background-color: #bebeb9; /* Kolor przycisku edycji */
+    color: #212529; /* Kolor tekstu na przycisku */
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 5px;
+  }
+
   .editButton-answer{
     background-color: #dbdbd9; /* Kolor przycisku edycji */
     color: #212529; /* Kolor tekstu na przycisku */

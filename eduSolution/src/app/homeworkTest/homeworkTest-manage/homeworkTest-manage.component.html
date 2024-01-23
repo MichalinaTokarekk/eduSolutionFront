@@ -105,7 +105,7 @@
               {{ homeworkTest.deadline | date:'yyyy-MM-dd HH:mm:ss' }}
             </span>
             <!-- Dodaj tutaj warunek sprawdzający obecność daty przed pokazaniem przycisku Edytuj -->
-            <button class="editButton" *ngIf="homeworkTest && homeworkTest.deadline && actionsTeachacher()" (click)="isEditingDate = true">
+            <button class="editButton-term" *ngIf="homeworkTest && homeworkTest.deadline && actionsTeachacher()" (click)="isEditingDate = true">
               Edytuj
             </button>
           </ng-container><br><br>
@@ -258,9 +258,7 @@
         <ng-container matColumnDef="detailsButton">
           <th mat-header-cell *matHeaderCellDef></th>
           <td mat-cell *matCellDef="let user">
-            <button mat-icon-button (click)="openAnswerDetailsDialog(user, homeworkTest)">
-              <mat-icon>info</mat-icon>
-            </button>
+              <mat-icon style="cursor: pointer;" (click)="openAnswerDetailsDialog(user, homeworkTest)">info</mat-icon>
           </td>
         </ng-container>
     

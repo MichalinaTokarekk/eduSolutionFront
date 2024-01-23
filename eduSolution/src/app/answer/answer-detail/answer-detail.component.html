@@ -8,9 +8,11 @@
     <div *ngFor="let aFile of aFilesByAnswer" (click)="loadAFilesByAnswerId(data.answer.id)">
       <a (click)="downloadFileById(aFile.id)" href="javascript:void(0);">{{ aFile.name }}</a>
     </div><br>
-    <p>Utworzono: {{ data.answer.createdAt | date:'yyyy-MM-dd HH:mm:ss' }}</p>
-    <p>Ostatnia modyfikacja: {{ data.answer.updatedAt | date:'yyyy-MM-dd HH:mm:ss' }}</p>
+    <!-- <p>Utworzono: {{ data.answer.createdAt | date:'yyyy-MM-dd HH:mm:ss' }}</p> -->
+    <!-- <p>Ostatnia modyfikacja: {{ data.answer.updatedAt | date:'yyyy-MM-dd HH:mm:ss' }}</p> -->
     <div [ngClass]="{'green-background': calculateTimeDifference().beforeDeadline, 'red-background': !calculateTimeDifference().beforeDeadline}">
+      <p>Utworzono: {{ data.answer.createdAt | date:'yyyy-MM-dd HH:mm:ss' }}</p>
+      <p>Ostatnia modyfikacja: {{ data.answer.updatedAt | date:'yyyy-MM-dd HH:mm:ss' }}</p>
       <p>
         {{ calculateTimeDifference().beforeDeadline ? 'Zadanie zostało przesłane ' : 'Zadanie zostało przesłane ' }}
         {{ calculateTimeDifference().days }} dni, {{ calculateTimeDifference().hours }} godzin i {{ calculateTimeDifference().minutes }} minut
@@ -18,12 +20,17 @@
       </p>
     </div>
   
+    <!-- <label for="editedValue">Komentarz:</label><br>
+    <input class="comment" [(ngModel)]="editedComment" name="editedComment" placeholder="Edytuj komentarz"> -->
+
     <label for="editedValue">Komentarz:</label><br>
-    <input class="comment" [(ngModel)]="editedComment" name="editedComment" placeholder="Edytuj komentarz"><br>
+    <textarea class="comment" [(ngModel)]="editedComment" name="editedComment" placeholder="Edytuj komentarz" rows="35" cols="62"></textarea>
+
     <label for="editedValue">Status odpowiedzi:</label><br>
-    <input class="answerStatus" [(ngModel)]="editedAnswerStatus" name="editedAnswerStatus" placeholder="Edytuj status odpowiedzi">
+    <input class="answerStatus" [(ngModel)]="editedAnswerStatus" name="editedAnswerStatus" placeholder="Edytuj status odpowiedzi"><br><br>
   
-    <div *ngIf="!hasGrade" class="grade-input">
+    <div *ngIf="!hasGrade" class="grade-input" >
+      <label for="editedValue">Ocena:</label><br>
       <div class="input-field">
         <input class="value-input" [(ngModel)]="newValue" name="newValue" type="number" placeholder="Wartość oceny" required>
       </div>
@@ -57,7 +64,7 @@
       </div>
     </div><br> -->
 
-    <div class="grade-info">
+    <div class="grade-info" *ngIf="existingGrade">
       <ng-container *ngIf="!isEditing; else editingTemplate">
         <div class="info-field">
           <label>Ocena: </label>

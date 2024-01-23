@@ -28,16 +28,14 @@
   }
   
   button {
-    background-color: #007bff;
+    background-color: #0056b3;
     color: #fff;
     padding: 10px 20px;
     border: none;
     cursor: pointer;
   }
   
-  button:hover {
-    background-color: #d46868;
-  }
+ 
   
   .green-background {
     background-color: rgb(153, 206, 153);
