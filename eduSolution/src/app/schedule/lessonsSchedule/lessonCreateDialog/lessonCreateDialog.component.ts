@@ -30,6 +30,7 @@ export class LessonCreateDialogComponent {
       dates: ['', Validators.required],
       classGroupId: [null, Validators.required] // Domyślnie null
     });
+    
   }
 
   loadData(): void {

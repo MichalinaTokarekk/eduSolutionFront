@@ -21,8 +21,8 @@
 
 <form [formGroup]="editedLessonForm">
   <div>
-    <label for="dayName">Nazwa:</label>
-    <input id="dayName" formControlName="dayName" readonly/>
+    <label for="name">Nazwa:</label>
+    <input id="name" formControlName="name" readonly/>
   </div>
   <div>
     <label for="dayName">Dzień:</label>
@@ -31,12 +31,12 @@
 
   <div>
     <label for="startLessonTime">Godzina rozpoczęcia:</label>
-    <input id="startLessonTime" formControlName="startLessonTime" [readonly]="isUser()"/>
+    <input type="time" id="startLessonTime" formControlName="startLessonTime" [readonly]="isUser()"/>
   </div>
 
   <div>
     <label for="endLessonTime">Godzina zakończenia:</label>
-    <input id="endLessonTime" formControlName="endLessonTime" [readonly]="isUser()"/>
+    <input type="time" id="endLessonTime" formControlName="endLessonTime" [readonly]="isUser()"/>
   </div>
 
   <div>
