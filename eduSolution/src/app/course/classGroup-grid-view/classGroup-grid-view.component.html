@@ -29,7 +29,7 @@
   <button mat-raised-button (click)="filterClassGroupsByStatus('ZAKOŃCZONY')">ZAKOŃCZONY</button>
 </div> -->
 
-<mat-button-toggle-group name="status" [(ngModel)]="selectedStatus" style="margin-left: 7px;">
+<mat-button-toggle-group name="status" [(ngModel)]="selectedStatus" style="margin-left: 7px;" class="custom-button-group ">
   <mat-button-toggle (click)="filterClassGroupsByStatus('Wszystkie')" value="Wszystkie">Wszystkie</mat-button-toggle>
   <mat-button-toggle (click)="filterClassGroupsByStatus('OCZEKUJĄCY')" value="OCZEKUJĄCY">OCZEKUJĄCY</mat-button-toggle>
   <mat-button-toggle (click)="filterClassGroupsByStatus('WTRAKCIE')"value="WTRAKCIE">W TRAKCIE</mat-button-toggle>

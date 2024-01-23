@@ -55,6 +55,11 @@
     transform: scale(1.05); 
   }
   
+  .custom-button-group {
+    border: 1px solid #333; /* Zmiana koloru obramowania na ciemniejszy */
+    border-radius: 3px; /* Dodanie zaokrąglenia obramowania */
+    padding: 5px; /* Dodanie wewnętrznego odstępu dla lepszego wyglądu */
+  }
 
 
 

@@ -104,6 +104,8 @@ import { OfferDescriptionComponent } from './offer/offerDescription/offerDescrip
 import { ParticipantsComponent } from './classGroup/participants/participants.component';
 import { UserDetailsComponent } from './user/user-details/user-details.component';
 import { AddUserDialogComponent } from './user/add-user-dialog/add-user-dialog.component';
+import { MatDividerModule } from '@angular/material/divider';
+
 
 
 
@@ -129,6 +131,7 @@ import { AddUserDialogComponent } from './user/add-user-dialog/add-user-dialog.c
     MatOptionModule,
     MatIconModule,
     MatButtonToggleModule,
+    MatDividerModule
 
   ],
   declarations: [

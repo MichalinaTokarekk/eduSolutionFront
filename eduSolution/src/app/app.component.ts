@@ -39,6 +39,32 @@ actionsAdmin(){
   return false
 }
 
+
+actionsTeacher(){
+  if(this.loginService.getToken()!=''){
+    let _currentRole = this.loginService.getRoleByToken(this.loginService.getToken());
+    if(_currentRole=='admin' || _currentRole=='teacher'){
+      return true;
+    }
+  }
+  return false
+}
+
+actionsUser(){
+  if(this.loginService.getToken()!=''){
+    let _currentRole = this.loginService.getRoleByToken(this.loginService.getToken());
+    if(_currentRole=='admin' || _currentRole == 'user'){
+      return true;
+    }
+  }
+  return false
+}
+
+showDashboardLinks = false;
+toggleDashboardLinks() {
+  this.showDashboardLinks = !this.showDashboardLinks;
+}
+
 cartItemCount!: number;
 cartItems: any[] = [];
 ngOnInit(): void {
