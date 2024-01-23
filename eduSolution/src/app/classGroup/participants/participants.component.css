@@ -35,7 +35,7 @@ div {
   }
   
   .input-container {
-    width: 800px;
+    width: 500px;
   }
   
   /* Style dla pierwszej sekcji "Nauczyciele w grupie zajęciowej" */
@@ -95,7 +95,7 @@ div {
   }
   
   .mat-elevation-z8 th {
-    background-color: #acc2b9;
+    background-color: #cec2b8;
   }
   
   /* Dodatkowe style dla przycisku "delete" */

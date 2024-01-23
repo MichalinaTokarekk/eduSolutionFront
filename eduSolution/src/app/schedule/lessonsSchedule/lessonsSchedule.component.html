@@ -86,7 +86,7 @@
             <ng-container *ngFor="let lesson of entry.value">
               <ng-container *ngIf="lesson.dayName.toLowerCase() === day.toLowerCase() && isLessonInTimeSlot(lesson, timeSlot)">
                 <div (click)="openEditLessonDialog(lesson)">
-                  {{ lesson.name }} {{ lesson.startLessonTime }} - {{ lesson.endLessonTime }}
+                  • {{ lesson.name }} {{ lesson.startLessonTime }} - {{ lesson.endLessonTime }} <br><br>
                 </div>
               </ng-container>
             </ng-container>

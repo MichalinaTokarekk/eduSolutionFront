@@ -99,7 +99,7 @@
         </div> -->
 
         <div style="background-color: lightblue; padding: 10px;">
-          <h3>Termin oddania zadania:</h3>
+          <strong>Termin oddania zadania:</strong><br><br>
           <ng-container *ngIf="!isEditingDate; else dateEditor">
             <span (click)="isEditingDate = true">
               {{ homeworkTest.deadline | date:'yyyy-MM-dd HH:mm:ss' }}
@@ -134,15 +134,15 @@
         <!-- Formularz do dodawania plików -->
         <form (submit)="onAddFile(homeworkTest)" enctype="multipart/form-data" *ngIf="actionsTeachacher()">
           <div class="filesadd">
-            <label for="file">Wybierz plik:</label>
+            <label for="file">Wybierz plik: </label>
             <input type="file" name="file" id="file" accept=".pdf, .doc, .docx, .jpg, .png" (change)="onFileSelected($event)">
             <!-- Akceptowane rozszerzenia plików -->
           <button type="submit">Prześlij plik</button>
           </div>
-        </form>
+        </form><br>
     
         <div *ngIf="htFiles && htFiles.length > 0">
-          <h2>Pliki do zadania:</h2>
+          <h2 style="margin-bottom: -10px;">Pliki do zadania:</h2>
           <ul>
             <li *ngFor="let htFile of htFiles">
               <a (click)="downloadFileByIdHTFile(htFile.id)" href="javascript:void(0);">{{ htFile.name }}</a>
@@ -150,7 +150,7 @@
             </li>
           </ul>
         </div>
-      </form>
+      </form><br>
       <div *ngIf="userRole === 'user' || userRole === 'admin'">
       <div *ngIf="answer">
         <h2>Odpowiedź na pracę domową</h2>
@@ -170,12 +170,12 @@
         <div [ngClass]="{'green-background': calculateTimeDifference().beforeDeadline, 'red-background': !calculateTimeDifference().beforeDeadline}">
           <p *ngIf="!isAnswerContentVisible"><strong>Utworzono:</strong> {{ answer.createdAt | date:'yyyy-MM-dd HH:mm:ss' }}</p>
         <p *ngIf="!isAnswerContentVisible"><strong>Ostatnia modyfikacja:</strong> {{ answer.updatedAt | date:'yyyy-MM-dd HH:mm:ss' }}</p>
-        <p>
+        <strong>
           {{ calculateTimeDifference().beforeDeadline ? 'Zadanie zostało przesłane ' : 'Zadanie zostało przesłane ' }}
           {{ calculateTimeDifference().days }} dni, {{ calculateTimeDifference().hours }} godzin i {{ calculateTimeDifference().minutes }} minut
           {{ calculateTimeDifference().beforeDeadline ? 'przed terminem.' : 'po terminie.' }}
-        </p>
-        </div>
+        </strong>
+        </div><br>
 
         <p *ngIf="!isAnswerContentVisible"><strong>Status odpowiedzi:</strong> {{ answer.answerStatus }}</p>
         <p *ngIf="!isAnswerContentVisible"><strong>Ocena:</strong> {{ gradedValue  }}</p>
@@ -204,13 +204,15 @@
         </form>
             </div>
 
-            <h3>Załączniki:</h3>
+            
             <!-- <div *ngFor="let aFile of aFilesByAnswer" (click)="loadAFilesByAnswerId(answer.id)">
                 <a (click)="downloadFileById(aFile.id)" href="javascript:void(0);">{{ aFile.name }}</a>
                 <i class="fa fa-trash-o" aria-hidden="true" (click)="onDeleteAFile(aFile)"></i>
             </div> -->
 
+            <strong style="margin-bottom: 3px;">Załączniki:</strong>
             <ul>
+              
               <li *ngFor="let aFile of aFilesByAnswer">
                 <a (click)="downloadFileByIdAFile(aFile.id)" href="javascript:void(0);">{{ aFile.name }}</a>
                 <i class="fa fa-trash-o" aria-hidden="true" (click)="onDeleteAFile(aFile)"></i>

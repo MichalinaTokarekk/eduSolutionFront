@@ -29,7 +29,7 @@
   </form><br>
 
 <div class="panelfiles">
-  <h2>Panel do dodawania plików</h2>
+  <h2 style="margin-bottom: -15px;">Panel do dodawania plików</h2>
   
   <!-- Formularz do dodawania plików -->
   <form (submit)="onAddFile(eduMaterial)" enctype="multipart/form-data">
@@ -37,10 +37,10 @@
     <input type="file" name="file" id="file" accept=".pdf, .doc, .docx, .jpg, .png" (change)="onFileSelected($event)">
     <!-- Akceptowane rozszerzenia plików -->
     <button type="submit">Prześlij plik</button>
-  </form>
+  </form><br>
 
   <div *ngIf="emFiles && emFiles.length > 0">
-    <h2>Pliki materiałów edukacyjnych:</h2>
+    <h2 style="margin-bottom: -10px;">Pliki materiałów edukacyjnych</h2>
     <ul>
       <li *ngFor="let emFile of emFiles">
         <a (click)="downloadFileById(emFile.id)" href="javascript:void(0);" >{{ emFile.name }}</a>

@@ -9,7 +9,7 @@
   
 
 <mat-form-field appearance="fill" class="input-container">
-<mat-label>Wybierz grupy</mat-label>
+<mat-label>Wybierz nauczyciela</mat-label>
 <mat-select [(ngModel)]="teachersByClassGroup" name="classGroups" multiple [compareWith]="compareFn" class="userSelect">
   <mat-option *ngFor="let user of filteredTeachers" [value]="user">
     {{ user.firstName }} {{ user.lastName }}
@@ -90,7 +90,7 @@
     
 
 <mat-form-field appearance="fill" class="input-container">
-  <mat-label>Wybierz grupy</mat-label>
+  <mat-label>Wybierz ucznia</mat-label>
   <mat-select [(ngModel)]="usersByClassGroup" name="classGroups" multiple [compareWith]="compareFn">
     <mat-option *ngFor="let user of filteredUsers" [value]="user">
       {{ user.firstName }} {{ user.lastName }}
