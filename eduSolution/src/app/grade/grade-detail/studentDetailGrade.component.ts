@@ -9,6 +9,8 @@ import { GradeService } from '../grade-service/grade.service';
 import { TypeOfTestingKnowledge } from 'src/app/interfaces/typeOfTestingKnowledge-interface';
 import { Grade } from 'src/app/interfaces/grade-interface';
 import { TypeOfTestingKnowledgeService } from 'src/app/typeOfTestingKnowledge/typeOfTestingKnowledge-service/typeOfTestingKnowledge.service';
+import { CertificateConfirmation } from 'src/app/interfaces/certificateConfirmation-interface';
+import { CertificateConfirmationService } from 'src/app/certificateConfirmation/certificateConfirmation-service/certificateConfirmation.service';
 
 @Component({
   selector: 'app-answer-detail',
@@ -50,10 +52,10 @@ import { TypeOfTestingKnowledgeService } from 'src/app/typeOfTestingKnowledge/ty
       </mat-select>
         </p>
 
-      <button *ngIf="!isEditing[i]" (click)="toggleEditing(i)" class="edit-button">Edytuj ocenę</button>
-      <button *ngIf="isEditing[i]" (click)="saveEditing(i)" class="edit-button">Zapisz</button>
+      <!-- <button *ngIf="!isEditing[i]" (click)="toggleEditing(i)" class="edit-button">Edytuj ocenę</button> -->
+      <!-- <button *ngIf="isEditing[i]" (click)="saveEditing(i)" class="edit-button">Zapisz</button> -->
 
-      <button (click)="deleteGrade(i)" class="delete-button">Usuń</button>
+      <!-- <button (click)="deleteGrade(i)" class="delete-button">Usuń</button> -->
     </div>
    
   </ng-container>
@@ -66,12 +68,25 @@ import { TypeOfTestingKnowledgeService } from 'src/app/typeOfTestingKnowledge/ty
         <input [(ngModel)]="gradesByUser[studentId][i].value" [readonly]="!isEditing[i]" class="grade-input">
       </p>
       <p>Nauczyciel: {{ data.teacherFirstName }} {{ data.teacherLastName }}</p>
-      <button *ngIf="!isEditing[i]" (click)="toggleEditing(i)" class="edit-button">Edytuj ocenę</button>
-      <button *ngIf="isEditing[i]" (click)="saveEditing(i)" class="edit-button">Zapisz</button>
+      <!-- <button *ngIf="!isEditing[i]" (click)="toggleEditing(i)" class="edit-button">Edytuj ocenę</button> -->
+      <!-- <button *ngIf="isEditing[i]" (click)="saveEditing(i)" class="edit-button">Zapisz</button> -->
 
-      <button (click)="deleteGrade(i)" class="delete-button">Usuń</button>
+      <!-- <button (click)="deleteGrade(i)" class="delete-button">Usuń</button> -->
     </div>
   </ng-container>
+
+  <h4>Certyfikat:</h4>
+<ng-container *ngIf="certificateByUser && certificateByUser.length > 0">
+  <div class="grade-item" *ngIf="certificateByUser[0]">
+    <label for="percentageScore">Wynik:</label>
+    <input type="number" id="percentageScore" [(ngModel)]="certificateByUser[0].percentageScore" /><br>
+
+    <label for="gained">Status:</label>
+    <input type="checkbox" id="gained" [(ngModel)]="certificateByUser[0].gained" />
+    <span *ngIf="certificateByUser[0].gained; else notGained">Zaliczony</span>
+    <ng-template #notGained>Niezaliczony</ng-template><br>
+  </div>
+</ng-container>
 </div>
 
 
@@ -149,13 +164,15 @@ import { TypeOfTestingKnowledgeService } from 'src/app/typeOfTestingKnowledge/ty
     allKnowledge: TypeOfTestingKnowledge[] = [];
     selectedKnowledge: number[] = [];
     courseName!: string;
+    certificateByUser: CertificateConfirmation[] = [];
 
 
 
     
     constructor(@Inject(MAT_DIALOG_DATA) public data: any, public dialogRef: MatDialogRef<StudentDetailGradeComponent>, private router: Router,
                         private route: ActivatedRoute, private aFileService: AFileService, private homeworkTestService: HomeworkTestService, private htFileService: HTFileService,
-                        private loginService: LoginService, private gradeService: GradeService, private typeOfTestingKnowledgeService: TypeOfTestingKnowledgeService) {
+                        private loginService: LoginService, private gradeService: GradeService, private typeOfTestingKnowledgeService: TypeOfTestingKnowledgeService,
+                        private certificateService: CertificateConfirmationService) {
         this.grades = data.grades;
         this.teacherFirstName = data.teacherFirstName;
         this.teacherLastName = data.teacherLastName;
@@ -180,6 +197,20 @@ ngOnInit(): void {
     this.typeOfTestingKnowledgeService.getAll().subscribe((knowledge: TypeOfTestingKnowledge[]) => {
         this.allKnowledge = knowledge;
     });
+
+    this.certificateService.findCertificateConfirmationByUserIdAndClassGroupId(this.studentId, this.courseId).subscribe(
+      (certificate: CertificateConfirmation | CertificateConfirmation[]) => {
+        if (Array.isArray(certificate)) {
+          this.certificateByUser = certificate;
+        } else {
+          this.certificateByUser = [certificate];
+        }
+        console.log('Certificate for user:', this.certificateByUser);
+      },
+      (error) => {
+        console.error('Error fetching certificate:', error);
+      }
+    );
 }
 
 

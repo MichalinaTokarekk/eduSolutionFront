@@ -32,6 +32,7 @@
                     <th>Oceny</th>
                     <th>Średnia ważona</th>
                     <th>Ocena końcowa</th>
+                    <th>Certyfikat</th>
                     <th></th>
                 </tr>
             </thead>
@@ -58,14 +59,16 @@
                     <td>
                         <ng-container *ngFor="let course of courseArray; let i = index">
                           <ng-container *ngIf="i !== 0 && course.grades && course.grades.length > 0">, </ng-container>
-                          <ng-container *ngIf="course.grades && course.grades.length > 0">
-                            {{ course.grades[i]?.value }}
-                          </ng-container>
-                          <ng-container *ngIf="course.grades && course.grades.length > 0 && course.grades[i]?.value === null">
-                            {{ ' ' }}
+                          <ng-container *ngFor="let grade of course.grades">
+                            <ng-container *ngIf="!grade.finalValue">
+                              {{ grade.value }}
+                              <ng-container *ngIf="grade.value !== null">,</ng-container>
+                            </ng-container>
                           </ng-container>
                         </ng-container>
                       </td>
+                      
+                      
                       
                       <td>
                         {{ courseArray ? (obliczSredniaWazona(courseArray[0]?.grades) | number: '1.2-2') : 'Brak ocen' }}
@@ -88,7 +91,17 @@
                             </ng-container>
                         </ng-container>
                     </td>
-                    
+
+                    <td>
+                        <div *ngIf="certificate">
+                          <p> {{certificate.percentageScore}}% {{certificate.gained ? 'Zaliczony' : 'Niezaliczony'}}</p>
+                        </div>
+                        <div *ngIf="!certificate">
+                          No Certificate Available
+                        </div>
+                    </td>
+
+                            
                     
                     
 

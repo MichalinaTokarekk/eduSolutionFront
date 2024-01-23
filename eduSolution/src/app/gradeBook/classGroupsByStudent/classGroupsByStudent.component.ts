@@ -14,6 +14,8 @@ import { StudentDetailGradeComponent } from 'src/app/grade/grade-detail/studentD
 import { UserService } from 'src/app/user/user-service/user.service';
 import { ClassGroupService } from 'src/app/classGroup/classGroup-service/classGroup.service';
 import { Location } from '@angular/common';
+import { catchError } from 'rxjs';
+import { CertificateConfirmationService } from 'src/app/certificateConfirmation/certificateConfirmation-service/certificateConfirmation.service';
 
 @Component({
   selector: 'courses-by-student',
@@ -27,9 +29,10 @@ export class ClassGroupsByStudentComponent implements OnInit {
   searchText: string ='';
   isEditing = false;
   ascendingSort = true;
+  certificate: any;
   constructor(private http: HttpClient, private courseService: CourseService, private router: Router, private dialog: MatDialog, private snackBar: MatSnackBar,
                 private loginService: LoginService, private gradeService: GradeService, private route: ActivatedRoute, private userService: UserService, 
-                private classGroupService: ClassGroupService, private location: Location){
+                private classGroupService: ClassGroupService, private location: Location, private certificateConfirmationService: CertificateConfirmationService){
 
   }
 
@@ -48,12 +51,16 @@ export class ClassGroupsByStudentComponent implements OnInit {
       this.courseArray = data as any[];
       // this.filteredCourses = data as any[];
       console.log('courseArray:', this.courseArray);
+      console.log('gradecFromCourse:', this.courseArray);
   
       if (this.courseArray && this.courseArray.length > 0) {
         this.courseArray.forEach((course) => {
           this.gradeService.findAllByStudentAndClassGroup(_finalData.id, course.id).subscribe(
-            (gradesData: any) => {
+            (gradesData) => {
               course.grades = gradesData;
+              this.getCertificateConfirmation(course.id);
+              console.log('classGroupId2', course.id);
+              console.log('grades', course.grades);
             },
             (error: any) => {
               console.error('Błąd podczas pobierania ocen dla kursu', course.name, error);
@@ -63,6 +70,8 @@ export class ClassGroupsByStudentComponent implements OnInit {
       }
     });
   }); 
+
+  
   }
 
   selectedCourseName: string = '';
@@ -227,6 +236,26 @@ export class ClassGroupsByStudentComponent implements OnInit {
     this.location.back();
   }
 
+
+  getCertificateConfirmation(classGroupId: number) {
+    const token = this.loginService.getToken();
+    const _token = token.split('.')[1];
+    const _atobData = atob(_token);
+    const _finalData = JSON.parse(_atobData);
+   
+    this.certificateConfirmationService.findCertificateConfirmationByUserIdAndClassGroupId(_finalData.id, classGroupId)
+    .subscribe(
+      (data) => {
+        this.certificate = data;
+        console.log('certificate', this.certificate);
+      },
+      (error) => {
+        console.error('Error fetching certificate:', error);
+      }
+    );
+  
+     
+  }
   
   
 }
