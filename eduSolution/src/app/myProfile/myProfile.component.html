@@ -20,11 +20,9 @@
 
     <div>
     <label for="oldPassword">Stare hasło</label>
-    <div class="password-input-container">
       <input type="{{ showOldPassword ? 'text' : 'password' }}" id="oldPassword" [(ngModel)]="user.changePassword.oldPassword" />
       <mat-icon *ngIf="showOldPassword" class="password-toggle" (click)="toggleShowOldPassword()">visibility_off</mat-icon>
       <mat-icon *ngIf="!showOldPassword" class="password-toggle" (click)="toggleShowOldPassword()">visibility</mat-icon>
-    </div>
       
       <!-- <label for="newPassword">Nowe hasło:</label>
       <input type="password" id="newPassword" [(ngModel)]="user.changePassword.newPassword" />
@@ -35,18 +33,14 @@
 
     
       <label for="newPassword">Nowe hasło:</label>
-      <div class="password-input-container">
         <input type="{{ showPassword ? 'text' : 'password' }}" id="newPassword" [(ngModel)]="user.changePassword.newPassword" />
         <mat-icon *ngIf="showPassword" class="password-toggle" (click)="toggleShowPassword()">visibility_off</mat-icon>
         <mat-icon *ngIf="!showPassword" class="password-toggle" (click)="toggleShowPassword()">visibility</mat-icon>
-      </div>
     
       <label for="newPasswordConfirm">Nowe hasło (potwierdź):</label>
-      <div class="password-input-container">
         <input type="{{ showPasswordConfirm ? 'text' : 'password' }}" id="newPasswordConfirm" [(ngModel)]="user.changePassword.newPasswordConfirm" />
         <mat-icon *ngIf="showPasswordConfirm" class="password-toggle" (click)="toggleShowPasswordConfirm()">visibility_off</mat-icon>
         <mat-icon *ngIf="!showPasswordConfirm" class="password-toggle" (click)="toggleShowPasswordConfirm()">visibility</mat-icon>
-      </div>
     </div>
     
     

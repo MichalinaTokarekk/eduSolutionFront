@@ -9,6 +9,7 @@ import { LoginService } from 'src/app/authorization_authentication/service/login
 import { Role } from 'src/app/interfaces/role-interface';
 import { ConfirmationDialogSemesterComponent } from 'src/app/confirmations/semester/confirmation-dialog-semester.component';
 import { MatDialog } from '@angular/material/dialog';
+import { ClassGroup } from 'src/app/interfaces/classGroup-interface';
 
 @Component({
   selector: 'app-offer-description',
@@ -28,6 +29,7 @@ export class ParticipantsComponent implements OnInit {
   selectTeachers: any[] = [];
   studentsLimit: any;
   user: any; 
+  selectedClassGroup: string = '';
   
 
   constructor(private route: ActivatedRoute, private classGroupService: ClassGroupService, private location: Location, private userService: UserService,
@@ -65,6 +67,7 @@ export class ParticipantsComponent implements OnInit {
         this.classGroupService.get(id).subscribe(
             classGroup => {
               this.classGroup = classGroup;
+              this.selectedClassGroup = (classGroup as ClassGroup).name;
               this.studentsLimit = this.classGroup.studentsLimit;
               console.log(this.studentsLimit);
             },
