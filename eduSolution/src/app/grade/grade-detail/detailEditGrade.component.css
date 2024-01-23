@@ -1,0 +1,59 @@
+.edit-button {
+    background-color: #0056b3;
+    color: #fff; 
+    padding: 5px 10px; 
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s; 
+    outline: none; 
+    margin-right: 5px;
+  }
+  
+  .edit-button:hover, .edit-button:focus {
+    background-color: #0056b3; /* Kolor tła po najechaniu myszką (hover) lub uzyskaniu focusu */
+  }
+  
+  .delete-button{
+    background-color: #d46868;
+  }
+  
+  
+   .answer-detail-container {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin: 10px;
+    background-color: #ffffff;
+    border-radius: 5px;
+  }
+  
+  .add-grade-heading {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .grade-item {
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin: 10px 0;
+    background-color: #fff;
+    border-radius: 5px;
+  }
+  
+  .grade-item p {
+    margin: 5px 0;
+  }
+  
+  /* Dodatkowy styl dla przycisku "Edytuj ocenę", który jest aktualnie wyłączony */
+  .grade-item button {
+    background-color: #ddd;
+    border: none;
+    color: #333;
+    padding: 5px 10px;
+    border-radius: 3px;
+    cursor: not-allowed;
+  }
+  
+  .grade-item button:hover {
+    background-color: #ddd;
+  }

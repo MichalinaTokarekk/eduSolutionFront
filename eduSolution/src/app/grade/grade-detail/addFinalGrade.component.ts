@@ -45,7 +45,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   border: 1px solid #ccc;
   padding: 10px;
   margin: 10px;
-  background-color: #f5f5f5;
+  background-color: #ffffff;
   border-radius: 5px;
   height: 120px;
   width: 400px;
@@ -84,7 +84,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 
 /* Styl dla przycisku Dodaj ocenę */
 .add-button {
-  background-color: #3498db;
+  background-color: #0056b3;
   color: #fff;
   padding: 10px 20px;
   border: none;

@@ -33,8 +33,9 @@ import { MatSnackBar } from '@angular/material/snack-bar';
       <input class="value-input" [(ngModel)]="newValue" name="newValue" type="number" placeholder="Wartość oceny" required>
     </div>
     <div class="input-field">
-      <input class="description-input" [(ngModel)]="newDescription" name="newDescription" type="text" placeholder="Opis oceny">
+      <textarea class="description-input" [(ngModel)]="newDescription" name="newDescription" placeholder="Opis oceny" rows="5" cols="40"></textarea>
     </div>
+
     <div class="input-field">
       <mat-select class="knowledge-select" [(ngModel)]="selectedKnowledge" name="knowledge" placeholder="Wybierz rodzaj oceny">
         <mat-option *ngFor="let knowledge of allKnowledge" [value]="knowledge.id">{{ knowledge.name }}</mat-option>
@@ -50,7 +51,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   border: 1px solid #ccc;
   padding: 10px;
   margin: 10px;
-  background-color: #f5f5f5;
+  background-color: #ffffff;
   border-radius: 5px;
   height: 300px;
   width: 460px;
@@ -108,7 +109,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 
 /* Styl dla przycisku Dodaj ocenę */
 .add-button {
-  background-color: #3498db;
+  background-color: #375aca;
   color: #fff;
   padding: 10px 20px;
   border: none;
@@ -116,6 +117,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   cursor: pointer;
   font-size: 16px;
   margin-left: -343px;
+  margin-bottom: -35px;
+  margin-top: 8px;
 }
 
 .add-button:hover {
