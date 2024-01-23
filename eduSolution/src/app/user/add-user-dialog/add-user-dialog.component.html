@@ -2,16 +2,16 @@
 
 <h2 mat-dialog-title>Dodaj nowego użytkownika</h2>
 <div mat-dialog-content>
-  <form #userForm="ngForm">
-    <mat-form-field>
+  <form #userForm="ngForm" class="form">
+    <mat-form-field style="margin-right: 5px;">
       <input matInput placeholder="Imię" [(ngModel)]="data.firstName" name="firstName" required>
     </mat-form-field>
 
     <mat-form-field>
-      <input matInput placeholder="Nazwisko" [(ngModel)]="data.lastName" name="lastName" required>
+      <input  matInput placeholder="Nazwisko" [(ngModel)]="data.lastName" name="lastName" required>
     </mat-form-field>
 
-    <mat-form-field>
+    <mat-form-field style="margin-right: 5px;">
       <input matInput placeholder="E-mail" [(ngModel)]="data.email" name="email" required email>
     </mat-form-field>
 
@@ -19,7 +19,7 @@
         <input matInput placeholder="Adres" [(ngModel)]="data.address" name="address" required>
     </mat-form-field>
       
-    <mat-form-field class="full-width">
+    <mat-form-field class="full-width" style="margin-right: 5px;">
     <input matInput placeholder="Miasto" [(ngModel)]="data.city" name="city" required>
     </mat-form-field>
     
@@ -27,7 +27,7 @@
     <input matInput placeholder="Poczta" [(ngModel)]="data.post" name="post" required>
     </mat-form-field>
     
-    <mat-form-field class="full-width">
+    <mat-form-field class="full-width" style="margin-right: 5px;">
     <input matInput placeholder="Kod pocztowy" [(ngModel)]="data.postCode" name="postCode" required>
     </mat-form-field>
     
@@ -35,7 +35,7 @@
     <input matInput placeholder="Kraj" [(ngModel)]="data.country" name="country" required>
     </mat-form-field>
 
-    <mat-form-field appearance="fill" class="full-width">
+    <mat-form-field appearance="fill" class="full-width" style="margin-right: 5px;">
         <mat-label>Rola</mat-label>
         <mat-select [(ngModel)]="data.role" name="role">
           <mat-option *ngFor="let role of availableRoles" [value]="role">
@@ -65,8 +65,8 @@
     </mat-form-field>
 
     <div class="dialog-buttons">
-      <button mat-button (click)="onCancelClick()">Anuluj</button>
-      <button mat-button color="primary" (click)="onAddClick()" [disabled]="!userForm.valid">Dodaj</button>
+      <button mat-button color="primary" class="add-material-button" (click)="onAddClick()" [disabled]="!userForm.valid">Dodaj</button>
+      <button mat-button (click)="onCancelClick()" class="cancel-button">Anuluj</button>
     </div>
   </form>
 </div>

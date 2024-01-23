@@ -1,0 +1,18 @@
+.add-material-button {
+    background-color: #375aca; /* Kolor zielony */
+    color: #fff;
+    border: none;
+    padding: 7px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 5px;
+  }
+
+  .cancel-button{
+    background-color: #dbdbd9; /* Kolor zielony */
+    color: #0e0d0d;
+    border: none;
+    padding: 7px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+  }

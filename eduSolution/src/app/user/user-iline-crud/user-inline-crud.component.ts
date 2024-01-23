@@ -263,7 +263,8 @@ isGroupSelected(classGroups: any[], group: any): boolean {
 
 openAddUserDialog(): void {
   const dialogRef = this.dialog.open(AddUserDialogComponent, {
-    width: '300px',
+    width: '500px',
+    height: '500px',
     data: {
     }
   });

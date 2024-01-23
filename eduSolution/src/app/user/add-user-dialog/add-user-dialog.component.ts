@@ -15,7 +15,7 @@ import { UserService } from '../user-service/user.service';
 export class AddUserDialogComponent {
     availableCourses: Course[] = [];
     availableClassGroups: ClassGroup[] = [];
-    availableRoles: string[] = ['USER', 'ADMIN']; // Dodaj role, które chcesz udostępnić
+    availableRoles: string[] = ['ADMIN', 'USER', 'TEACHER']; // Dodaj role, które chcesz udostępnić
     availableUserStatus: string[] = ['AKTYWNY', 'NIEAKTYWNY'];
     
 
