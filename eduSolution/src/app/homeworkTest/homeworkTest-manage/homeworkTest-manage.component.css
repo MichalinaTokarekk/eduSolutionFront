@@ -13,7 +13,7 @@
   
   /* Stylizacja panelu plików */
   .panelfiles {
-    background-color: #f5f5f5;
+    background-color: #f1f1f1;
     padding: 20px;
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -229,7 +229,7 @@
   }
 
   .green-background {
-    background-color: rgb(153, 206, 153);
+    background-color: rgb(146, 189, 146);
     color: rgb(19, 18, 18);
   }
   

@@ -80,6 +80,9 @@
 .section-name {
   /* font-weight: bold; */
   margin-right: 10px; /* Odstęp z prawej strony */
+  font-size: 18px;
+  color: #753232;
+  margin-left: -7px;
 }
 
 /* Styl przycisku "Edytuj" */
@@ -105,7 +108,7 @@
 
 /* Stylizacja bloczków */
 .panelfiles {
-  background-color: #cccdce; /* Kolor tła bloczka */
+  background-color: #d1d1d1; /* Kolor tła bloczka */
   border-radius: 5px; /* Zaokrąglenie rogów bloczka */
   margin-bottom: 10px; /* Odstęp między bloczkami */
   overflow: hidden; /* Ukryj zawartość, która wychodzi poza bloczek */
@@ -120,12 +123,14 @@
 }
 
 .panelfiles li {
-  background-color: #cccdce; /* Kolor tła pojedynczego bloczka */
+  background-color: #d1d1d1; /* Kolor tła pojedynczego bloczka */
   padding-left: 10px;
   padding-bottom: 100px;
   padding-top: -100px;
   display: flex; /* Ustawienie elementów li na poziomie */
   justify-content: space-between; /* Rozłożenie elementów li na całej szerokości bloczka */
+  border-color: #753232;
+  border: #212529;
 }
 
 /* Stylizacja linku i ikony kosza */

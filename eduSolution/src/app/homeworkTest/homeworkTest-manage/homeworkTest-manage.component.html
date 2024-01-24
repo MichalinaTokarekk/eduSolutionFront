@@ -80,13 +80,13 @@
     <div class="panelfiles">
       <form (submit)="submitForm()">
         <div class="form-group">
-          <label for="name">Nazwa:</label><br><br>
+          <strong style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; font-size: 23px;" for="name">Nazwa</strong><br><br>
           <input *ngIf="homeworkTest.isEdit" class="input" type="text" id="name" name="name" [(ngModel)]="homeworkTest.name">
-          <span class="input" *ngIf="!homeworkTest.isEdit">{{ homeworkTest.name }}</span>
+          <span class="input" style="font-size: 20px;" *ngIf="!homeworkTest.isEdit">{{ homeworkTest.name }}</span>
           <button class="editButton" *ngIf="!homeworkTest.isEdit && actionsTeachacher()" (click)="onEdit(homeworkTest)">Edytuj</button>
           <button class="saveButton" *ngIf="homeworkTest.isEdit" type="submit">Zapisz zmiany</button>
         </div><br>
-        <label for="taskContent">Polecenie:</label>
+        <label for="taskContent" style="font-size: 20px;">Polecenie</label>
         <div class="form-group">
           <!-- <label for="taskContent">Polecenie:</label> -->
           <textarea class="textarea" id="taskContent" name="taskContent" [(ngModel)]="homeworkTest.taskContent" [readonly]="!homeworkTest.isEdit"></textarea>
@@ -98,10 +98,10 @@
           <span style="font-size: 18px;">{{ homeworkTest.deadline | date:'yyyy-MM-dd HH:mm:ss' }}</span>
         </div> -->
 
-        <div style="background-color: lightblue; padding: 10px;">
-          <strong>Termin oddania zadania:</strong><br><br>
+        <div style="background-color: rgb(173, 194, 226); padding: 10px;">
+          <label style="font-size: 19px; font-weight: 640;">Termin oddania zadania</label><br><br>
           <ng-container *ngIf="!isEditingDate; else dateEditor">
-            <span (click)="isEditingDate = true">
+            <span style="font-size: 15px;" (click)="isEditingDate = true">
               {{ homeworkTest.deadline | date:'yyyy-MM-dd HH:mm:ss' }}
             </span>
             <!-- Dodaj tutaj warunek sprawdzający obecność daty przed pokazaniem przycisku Edytuj -->
@@ -109,12 +109,12 @@
               Edytuj
             </button>
           </ng-container><br><br>
-          <p *ngIf="!calculateDaysUntilDeadline().overdue">
+          <p *ngIf="!calculateDaysUntilDeadline().overdue" style="font-size: 15px;">
             Pozostało: {{ calculateDaysUntilDeadline().days }} dni, {{ calculateDaysUntilDeadline().hours }} godzin, {{ calculateDaysUntilDeadline().minutes }} minut
           </p>
           
           <div *ngIf="calculateDaysUntilDeadline().overdue">
-            <p>
+            <p style="font-size: 15px;">
               Termin zadania upłynął {{ calculateDaysUntilDeadline().days }} dni, {{ calculateDaysUntilDeadline().hours }} godzin i {{ calculateDaysUntilDeadline().minutes }} minut temu.
             </p>
           </div>
@@ -125,24 +125,18 @@
           </ng-template>
         </div><br>
         
-        
-        
-
-       
-        
-    
-        <!-- Formularz do dodawania plików -->
-        <form (submit)="onAddFile(homeworkTest)" enctype="multipart/form-data" *ngIf="actionsTeachacher()">
-          <div class="filesadd">
-            <label for="file">Wybierz plik: </label>
-            <input type="file" name="file" id="file" accept=".pdf, .doc, .docx, .jpg, .png" (change)="onFileSelected($event)">
-            <!-- Akceptowane rozszerzenia plików -->
-          <button type="submit">Prześlij plik</button>
-          </div>
-        </form><br>
+              
     
         <div *ngIf="htFiles && htFiles.length > 0">
-          <h2 style="margin-bottom: -10px;">Pliki do zadania:</h2>
+          <h2 style="margin-bottom: -10px; font-size: 20px;">Pliki do zadania</h2>
+          <form (submit)="onAddFile(homeworkTest)" enctype="multipart/form-data" *ngIf="actionsTeachacher()">
+            <div class="filesadd">
+              <label for="file">Wybierz plik: </label>
+              <input type="file" name="file" id="file" accept=".pdf, .doc, .docx, .jpg, .png" (change)="onFileSelected($event)">
+              <!-- Akceptowane rozszerzenia plików -->
+            <button type="submit">Prześlij plik</button>
+            </div>
+          </form>
           <ul>
             <li *ngFor="let htFile of htFiles">
               <a (click)="downloadFileByIdHTFile(htFile.id)" href="javascript:void(0);">{{ htFile.name }}</a>
@@ -153,7 +147,7 @@
       </form><br>
       <div *ngIf="userRole === 'user' || userRole === 'admin'">
       <div *ngIf="answer">
-        <h2>Odpowiedź na pracę domową</h2>
+        <h2>Odpowiedź na zadanie</h2>
         <button class="editButton-answer" (click)="onEditAnswer(answer)">Edytuj odpowiedź</button>
         <button class="deleteButton-answer" (click)="onDeleteAnswer(answer)">Usuń odpowiedź</button>
         <!-- <p><strong>Zawartość odpowiedzi:</strong> {{ answer.answerContent }}</p> -->
@@ -179,7 +173,13 @@
 
         <p *ngIf="!isAnswerContentVisible"><strong>Status odpowiedzi:</strong> {{ answer.answerStatus }}</p>
         <p *ngIf="!isAnswerContentVisible"><strong>Ocena:</strong> {{ gradedValue  }}</p>
-        <p *ngIf="!isAnswerContentVisible"><strong>Komentarz:</strong> {{ answer.comment  }}</p>
+        <!-- <p *ngIf="!isAnswerContentVisible"><strong>Komentarz:</strong> {{ answer.comment  }}</p> -->
+        <div>
+          <p *ngIf="!isAnswerContentVisible"><strong>Komentarz:</strong></p>
+          <textarea *ngIf="!isAnswerContentVisible" [(ngModel)]="answer.comment" style="width: 630px; height: 60px; margin-top: -10px; border-radius: 5x;"></textarea>
+        </div>
+        
+        
 
       
           
@@ -210,8 +210,8 @@
                 <i class="fa fa-trash-o" aria-hidden="true" (click)="onDeleteAFile(aFile)"></i>
             </div> -->
 
-            <strong style="margin-bottom: 3px;">Załączniki:</strong>
             <ul>
+            <strong style="margin-top: 10px;">Załączniki:</strong>
               
               <li *ngFor="let aFile of aFilesByAnswer">
                 <a (click)="downloadFileByIdAFile(aFile.id)" href="javascript:void(0);">{{ aFile.name }}</a>

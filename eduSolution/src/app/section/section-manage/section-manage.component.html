@@ -93,7 +93,7 @@
         <div *ngFor="let eduMaterial of eduMaterialsBySection" class="panelfiles">
             <ul>
               <li >
-                <a [routerLink]="['/eduMaterial-manage', eduMaterial.id, section.id]">{{ eduMaterial.name }}</a>
+                <a [routerLink]="['/eduMaterial-manage', eduMaterial.id, section.id]" style="font-size: 18px;">{{ eduMaterial.name }}</a>
                 <i class="fa fa-trash-o" aria-hidden="true" (click)="onDeleteEduMaterial(eduMaterial)" *ngIf="actionsTeachacher()"></i>
               </li>
             </ul>
@@ -114,13 +114,13 @@
         <div *ngFor="let homeworkTest of homeworkTestsBySection" class="panelfiles">
             <ul>
               <li >
-                <a [routerLink]="['/homeworkTest-manage', homeworkTest.id]">{{ homeworkTest.name }}</a>
+                <a [routerLink]="['/homeworkTest-manage', homeworkTest.id]" style="font-size: 18px;">{{ homeworkTest.name }}</a>
                 <i class="fa fa-trash-o" aria-hidden="true" (click)="onDeleteHomeworkTest(homeworkTest)" *ngIf="actionsTeachacher()"></i>
               </li>
             </ul>
         </div>
         <input *ngIf="section.isEdit" class="new-material-input" type="text" [(ngModel)]="newHomeworkTestName" placeholder="Nowe zadanie">
-        <label for="newHomeworkTestDeadline">Termin oddania: </label>
+        <label *ngIf="section.isEdit" for="newHomeworkTestDeadline">Termin oddania: </label>
         <input class="datetime-local" *ngIf="section.isEdit" type="datetime-local" [(ngModel)]="newHomeworkTestDeadline">
         <button  *ngIf="section.isEdit" class="add-material-button" (click)="onAddHomeworkTest(section)">Dodaj zadanie</button>
       </ng-container>
