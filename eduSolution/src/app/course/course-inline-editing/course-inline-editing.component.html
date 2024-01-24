@@ -52,7 +52,7 @@
                         </div>
                     </td>
 
-                    <td> 
+                    <!-- <td> 
                         <div *ngIf="course.isEdit" class="form-group">
                             <div class="input-container">
                                 <input type="text" class="form-control" [(ngModel)]="course.difficultyLevel" [ngClass]="{'is-invalid': validateCourseDifficultyLevel(course.difficultyLevel) !== ''}" required>
@@ -64,9 +64,27 @@
                         <div *ngIf="!course.isEdit">
                             {{course.difficultyLevel}}
                         </div>
-                    </td>
+                    </td> -->
 
-                    <td> 
+                    <td>
+                        <div *ngIf="course.isEdit" class="form-group">
+                          <div class="input-container">
+                            <select style="height: 29px; width: 280px; margin-right: -120px; border: 2px solid #347fca" class="input-container" [(ngModel)]="course.difficultyLevel" name="difficultyLevel" required>
+                              <option class="input-container" *ngFor="let level of availableDifficultyLevels" [value]="level">
+                                {{ level }}
+                              </option>
+                            </select>
+                          </div>
+                        </div>
+                      
+                        <div *ngIf="!course.isEdit">
+                          {{ course.difficultyLevel }}
+                        </div>
+                      </td>
+                      
+                    
+
+                    <!-- <td> 
                         <div *ngIf="course.isEdit">
                             <div class="input-container">
                                 <input type="text" class="form-control" [(ngModel)]="course.amountToPay" required="">
@@ -78,7 +96,38 @@
                         <div *ngIf="!course.isEdit">
                             {{course.amountToPay + 'zł'}}
                         </div>
+                    </td> -->
+
+                    <td> 
+                        <div *ngIf="course.isEdit" class="form-group">
+                            <div class="input-container">
+                                <input 
+                                    type="text" 
+                                    class="form-control" 
+                                    [(ngModel)]="course.amountToPay" 
+                                    [ngClass]="{
+                                        'is-invalid': 
+                                            validateCourseName(course.amountToPay) !== '' || 
+                                            !isValidAmountToPay(course.amountToPay)
+                                    }" 
+                                    pattern="[1-9]\d*" 
+                                    required
+                                >
+                                <div class="text-danger error-message" *ngIf="!course.amountToPay">
+                                    Pole wymagane
+                                </div>
+                                <div class="text-danger error-message" *ngIf="course.amountToPay && !isValidAmountToPay(course.amountToPay)">
+                                    Proszę podać liczbę większą od 0.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div *ngIf="!course.isEdit">
+                            {{course.amountToPay + 'zł'}}
+                        </div>
                     </td>
+                    
+                    
 
                     <td class="text-center"> 
                         <div class="text-end" *ngIf="!course.isEdit">

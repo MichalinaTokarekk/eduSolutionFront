@@ -19,6 +19,8 @@ export class CourseInlineEditingComponent implements OnInit {
   searchText: string ='';
   isEditing = false;
   ascendingSort = true;
+  availableDifficultyLevels: string[] = ["PODSTAWOWY", "ŚREDNIOZAAWANSOWANY", "ZAAWANSOWANY"];
+
   constructor(private http: HttpClient, private courseService: CourseService, private router: Router, private dialog: MatDialog, private snackBar: MatSnackBar){
 
   }
@@ -127,6 +129,7 @@ export class CourseInlineEditingComponent implements OnInit {
                 // Obsłuż dane po udanej aktualizacji
                 console.log('Aktualizacja zakończona sukcesem:', data);
                 userObj.isEdit = false;
+                location.reload();
 
             },
             (error) => {
@@ -248,6 +251,14 @@ validateCourseDifficultyLevel(difficultyLevel: string) {
       this.isDifficultyLevelEmpty = false;
       return "";
   }
+
 }
+
+isValidAmountToPay(value: any): boolean {
+  const parsedValue = parseFloat(value);
+  return !isNaN(parsedValue) && parsedValue > 0;
+}
+
+
 
 }
