@@ -34,6 +34,7 @@ import { OfferDescriptionComponent } from './offer/offerDescription/offerDescrip
 import { ParticipantsComponent } from './classGroup/participants/participants.component';
 import { UserDetailsComponent } from './user/user-details/user-details.component';
 import { AuthGuard } from './authorization_authentication/service/auth.guard';
+import { TypeOfTestingKnowledgeComponent } from './typeOfTestingKnowledge/typeOfTestingKnowledge-component/typeOfTestingKnowledge.component';
 
 const routes: Routes = [
   {path: "dashboard", component: DashboardComponent, canActivate:[AuthGuard], data: { roles: ['admin', 'user', 'teacher'] }},
@@ -70,6 +71,7 @@ const routes: Routes = [
   { path: 'offer-description/:classGroupId', component: OfferDescriptionComponent },
   { path: 'participants/:classGroupId', component: ParticipantsComponent },
   { path: 'user-details/:userId', component: UserDetailsComponent },
+  { path: 'typeOfTestingKnowledge-inline', component: TypeOfTestingKnowledgeComponent },
 
   
 ];

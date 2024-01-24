@@ -1,0 +1,97 @@
+<div class="row">
+    <div class="col-6">
+         <h2>Lista semestrów</h2>
+     </div>
+ </div><br>
+ <div class="row">
+     <div class="col-8">
+         <button class="btn btn-sm btn-primary" (click)="onAdd()">Dodaj nowy</button>
+         <!-- <div class="col-7">
+             <input type="text" [(ngModel)]="searchText" placeholder="Szukaj" class="form-control custom-search-input">
+         </div><br> -->
+         <table class="table table-bordered ">
+             <thead>
+                 <tr class="bg-success text-white">
+                     <th>Lp</th>
+                     <th>Nazwa</th>
+                     <th>Opis</th>
+                     <th>Waga</th>
+                     <th></th>
+                 </tr>
+             </thead>
+             <tbody>
+                 <tr *ngFor="let typeOfTestingKnowledge of filteredTypeOfTestingKnowledgesArray | search: searchText;let srNo = index">
+                     <td>{{srNo+1}}</td>
+                     <td>
+                         <div *ngIf="typeOfTestingKnowledge.isEdit" class="form-group">
+                             <div class="input-container">
+                                 <input type="text" class="form-control" [(ngModel)]="typeOfTestingKnowledge.name" [ngClass]="{'is-invalid': validateCourseName(typeOfTestingKnowledge.name) !== ''}">
+                                 <div class="text-danger error-message" *ngIf="!typeOfTestingKnowledge.name">
+                                     {{validateCourseName(typeOfTestingKnowledge.name)}}
+                                 </div>
+                             </div>
+                         </div>
+                         
+                         <div *ngIf="!typeOfTestingKnowledge.isEdit">
+                             {{typeOfTestingKnowledge.name}}
+                         </div>
+                      
+                     </td>
+ 
+                     
+ 
+                     <td>
+                         <div *ngIf="typeOfTestingKnowledge.isEdit" class="form-group">
+                             <div class="input-container">
+                                 <input type="text" class="form-control" [(ngModel)]="typeOfTestingKnowledge.description" [ngClass]="{'is-invalid': validateCourseName(typeOfTestingKnowledge.description) !== ''}">
+                                 <div class="text-danger error-message" *ngIf="!typeOfTestingKnowledge.description">
+                                     {{typeOfTestingKnowledge.description}}
+                                 </div>
+                             </div>
+                         </div>
+                         
+                         <div *ngIf="!typeOfTestingKnowledge.isEdit">
+                             {{typeOfTestingKnowledge.description}}
+                         </div>
+                      
+                     </td>
+                     
+
+                     <td>
+                        <div *ngIf="typeOfTestingKnowledge.isEdit" class="form-group">
+                            <div class="input-container">
+                                <input type="text" class="form-control" [(ngModel)]="typeOfTestingKnowledge.weight" [ngClass]="{
+                                    'is-invalid': validateCourseName(typeOfTestingKnowledge.weight) !== '' || !isValidWeight(typeOfTestingKnowledge.weight)
+                                }" pattern="[0-9]+">
+                                <div class="text-danger error-message" *ngIf="!typeOfTestingKnowledge.weight">
+                                    Pole wymagane
+                                </div>
+                                <div class="text-danger error-message" *ngIf="typeOfTestingKnowledge.weight && !isValidWeight(typeOfTestingKnowledge.weight)">
+                                    Proszę podać liczbę większą lub równą 0.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div *ngIf="!typeOfTestingKnowledge.isEdit">
+                            {{typeOfTestingKnowledge.weight}}
+                        </div>
+                    </td>
+                    
+                     
+ 
+                     <td class="text-center"> 
+                         <div class="text-end" *ngIf="!typeOfTestingKnowledge.isEdit">
+                             <i class="fa fa-pencil-square-o px-1" aria-hidden="true" (click)="onEdit(typeOfTestingKnowledge)"></i>
+                             <i class="fa fa-trash-o" aria-hidden="true" (click)="onDelete(typeOfTestingKnowledge)"></i>
+                         </div>
+                         <div class="text-end" *ngIf="typeOfTestingKnowledge.isEdit">
+                             <i class="fa fa-cloud px-1" (click)="onUpdate(typeOfTestingKnowledge)" aria-hidden="true"></i>
+                             <i class="fa fa-times-circle" aria-hidden="true" (click)="onCancel(typeOfTestingKnowledge)"></i>
+                         </div>
+                     </td>
+                     
+                 </tr>
+             </tbody>
+         </table>
+     </div>
+ </div>

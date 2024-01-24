@@ -317,7 +317,7 @@
   <!-- <span style="margin-left: 10px;"><a [routerLink]="['/main-page']" style="color: white; font-size: large;" >Strona główna</a></span> -->
   <span style="margin-left: 10px;"><a [routerLink]="['/offerPage']" style="color: white; font-size: 20px; font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif">Oferta</a></span>
   <!-- <span style="margin-left: 10px;"><a [routerLink]="['/dashboard']" style="color: white; font-size: large;" *ngIf="actions()">Kokpit</a></span> -->
-  <div class="separator"></div>
+  <div class="separator" *ngIf="actions()"></div>
   <span style="margin-left: 10px; font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; font-size: 20px; cursor: pointer;">
     <strong mat-button [matMenuTriggerFor]="dashboardMenu" *ngIf="actions()">Kokpit</strong>
   </span>
@@ -338,19 +338,21 @@
   <button mat-menu-item *ngIf="actionsUser()" routerLink="/coursesByStudent-view">Dziennik ucznia</button>
 </mat-menu>
 
-  <div class="separator"></div>
+  <div class="separator" *ngIf="actions()"></div>
   
   <!-- <span style="margin-left: 10px;"><a [routerLink]="['/admin-panel']" style="color: white; font-size: large;" *ngIf="actionsAdmin()">Panel administratora</a></span>
     <div class="spacer"></div> -->
 
     <span style="margin-left: 10px; font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; font-size: 20px; cursor: pointer;">
-      <strong mat-button [matMenuTriggerFor]="adminPanelMenu" *ngIf="actions()">Panel administratora</strong>
+      <strong mat-button [matMenuTriggerFor]="adminPanelMenu" *ngIf="actionsAdmin()">Panel administratora</strong>
     </span>
 
     <mat-menu #adminPanelMenu="matMenu">
       <button mat-menu-item routerLink="/main-page">Strona główna</button>
       <mat-divider></mat-divider>
       <button mat-menu-item routerLink="/semester-list">Semestry</button>
+      <mat-divider></mat-divider>
+      <button mat-menu-item routerLink="/typeOfTestingKnowledge-inline">Formy oceniania</button>
       <mat-divider></mat-divider>
       <button mat-menu-item routerLink="/course-inline-editing">Kursy</button>
       <mat-divider></mat-divider>

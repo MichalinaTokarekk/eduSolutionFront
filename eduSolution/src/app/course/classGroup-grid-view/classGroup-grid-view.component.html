@@ -41,7 +41,7 @@
   <mat-grid-tile *ngFor="let course of filteredCourses" class="custom-grid-tile">
     <div class="tile-container">
       <a [routerLink]="['/section-manage', { courseId: course.id }]" class="no-underline">
-        <img src="assets/images/ksiazka2.jpg" [alt]="course.name" class="course-image"/>
+        <img src="assets/images/no-image.jpg" [alt]="course.name" class="course-image"/>
         <p>
           <a [routerLink]="['/section-manage', { courseId: course.id }]" class="no-underline" style="color: rgb(8, 8, 8); font-size: 16px; text-decoration: none; transition: transform 0.3s;">
             {{ course.name }}

@@ -105,6 +105,7 @@ import { ParticipantsComponent } from './classGroup/participants/participants.co
 import { UserDetailsComponent } from './user/user-details/user-details.component';
 import { AddUserDialogComponent } from './user/add-user-dialog/add-user-dialog.component';
 import { MatDividerModule } from '@angular/material/divider';
+import { TypeOfTestingKnowledgeComponent } from './typeOfTestingKnowledge/typeOfTestingKnowledge-component/typeOfTestingKnowledge.component';
 
 
 
@@ -195,7 +196,8 @@ export class MaterialModule { }
     OfferDescriptionComponent,
     ParticipantsComponent,
     UserDetailsComponent,
-    AddUserDialogComponent
+    AddUserDialogComponent,
+    TypeOfTestingKnowledgeComponent
   ],
   imports: [
     BrowserModule,
