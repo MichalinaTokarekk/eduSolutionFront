@@ -58,3 +58,57 @@ body {
     padding: 20px; /* Wewnętrzny odstęp w stopce */
     text-align: center; /* Wyrównanie tekstu do środka */
   }
+
+
+
+/* Styl dla całego diva z lekcjami */
+div {
+  margin-top: 20px;
+}
+
+/* Styl dla nagłówka tabeli */
+h2 {
+  color: #333;
+}
+
+/* Styl dla tabeli */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+/* Styl dla nagłówka tabeli */
+thead {
+  background-color: #d1a67e;
+}
+
+/* Styl dla komórek nagłówka tabeli */
+th {
+  border: 1px solid #919090;
+  padding: 8px;
+  text-align: left;
+}
+
+/* Styl dla komórek ciała tabeli */
+td {
+  border: 1px solid #b9b7b7;
+  padding: 8px;
+  text-align: left;
+}
+
+/* Alternatywne tło dla wierszy w tabeli */
+tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+/* Styl dla komórek z godzinami rozpoczęcia i zakończenia */
+td:nth-child(3),
+td:nth-child(4) {
+  font-weight: bold;
+}
+
+/* Styl dla komórek z dniami tygodnia */
+td:nth-child(5) {
+  text-transform: capitalize;
+}

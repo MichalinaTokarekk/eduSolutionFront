@@ -1,9 +1,9 @@
-<div class="col-6">
+<div class="col-6" style="margin-top: 0px;">
     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16" (click)="goBack()">
       <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"/>
     </svg>
     <h2 style="margin-left: 10px;"> {{classGroupName}} </h2>
-  </div><br>
+</div><br>
 
 <h1>Opis oferty</h1>
 <div class="description-container">
@@ -21,7 +21,7 @@
 
         <p class="description-text" style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; font-size: 20px;">{{ classGroup?.description }}</p>
 
-        <div *ngIf="lessons && lessons.length > 0">
+        <!-- <div *ngIf="lessons && lessons.length > 0">
           <h2>Lekcje:</h2>
           <ul>
               <li *ngFor="let lesson of lessons">
@@ -32,7 +32,33 @@
                   <p>Dzień tygodnia: {{ lesson.dayName }}</p>
               </li>
           </ul>
-      </div>
+      </div> -->
+
+      <div *ngIf="lessons && lessons.length > 0">
+    <h2 style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">Lekcje:</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Nazwa lekcji</th>
+                <!-- <th>Daty lekcji</th> -->
+                <th>Godzina rozpoczęcia</th>
+                <th>Godzina zakończenia</th>
+                <th>Dzień tygodnia</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let lesson of lessons">
+                <td>{{ lesson.name }}</td>
+                <!-- <td>{{ lesson.dates?.join(', ') }}</td> -->
+                <td>{{ convertToTime(lesson.startLessonTime) | date: 'HH:mm' }}</td>
+<td>{{ convertToTime(lesson.endLessonTime) | date: 'HH:mm' }}</td>
+
+                <td>{{ lesson.dayName }}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
 
     </div>
 </div>

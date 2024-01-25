@@ -55,4 +55,20 @@ export class OfferDescriptionComponent implements OnInit {
     this.location.back();
   }
 
+  convertToTime(timeString: string): Date {
+    const [hours, minutes] = timeString.split(':').map(Number);
+    const date = new Date();
+    date.setHours(hours);
+    date.setMinutes(minutes);
+    return date;
+  }
+
+  sortLessonsByDay(): void {
+    this.lessons.sort((a, b) => {
+      const daysOrder = ['poniedziałek', 'wtorek', 'środa', 'czwartek', 'piątek', 'sobota', 'niedziela'];
+      return daysOrder.indexOf(a.dayName.toLowerCase()) - daysOrder.indexOf(b.dayName.toLowerCase());
+    });
+  }
+  
+
 }
