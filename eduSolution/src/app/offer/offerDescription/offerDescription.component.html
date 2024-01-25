@@ -2,29 +2,44 @@
     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16" (click)="goBack()">
       <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"/>
     </svg>
-    <h2 style="margin-left: 10px;"></h2>
+    <h2 style="margin-left: 10px;"> {{classGroupName}} </h2>
   </div><br>
 
 <h1>Opis oferty</h1>
 <div class="description-container">
     <div *ngIf="classGroup">
-        <p>Limit studentów: {{ classGroup.studentsLimit }}</p>
-        <p>Rok: {{ classGroup.year }}</p>
-        <p>Adres: {{ classGroup.address }}</p>
-        <p>Tryb: {{ classGroup.mode }}</p>
-        <p>Status: {{ classGroup.classGroupStatus }}</p>
-        <p>Semestr: {{ classGroup.semester?.name }}</p>
-        <p>Kurs: {{ classGroup.course?.name }}</p>
-        <p>Cena: {{ classGroup.course?.amountToPay }}zł</p><br>
+      <p style="font-size: 20px;"><strong style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; font-size: 20px;">Kurs: </strong>{{ classGroup.course?.name }}</p>
+      <p style="font-size: 20px;"><strong style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; font-size: 20px;">Grupa zajeciowa: </strong>{{ classGroup.name }}</p>
+      <p style="font-size: 20px;"><strong style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; font-size: 20px;">Semestr:</strong> {{ classGroup.semester?.name }}</p>  
+      <p style="font-size: 20px;"><strong style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; font-size: 20px;">Rok: </strong>{{ classGroup.year }}</p>
+      <p style="font-size: 20px;"><strong style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; font-size: 20px;"> Adres:</strong> {{ classGroup.address }}</p>
+      <p style="font-size: 20px;"><strong style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; font-size: 20px;">Tryb:</strong> {{ classGroup.mode }}</p>
+      <p style="font-size: 20px;"><strong style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; font-size: 20px;">Status: </strong>{{ classGroup.classGroupStatus }}</p>
+      
+      <p style="font-size: 20px;"><strong style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; font-size: 20px;">Limit studentów: </strong> {{ classGroup.studentsLimit }}</p>
+        <p style="font-size: 20px;"><strong style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; font-size: 20px;">Cena: </strong>{{ classGroup.course?.amountToPay }}zł</p><br>
 
-        <p class="description-text">{{ classGroup?.description }}</p>
+        <p class="description-text" style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; font-size: 20px;">{{ classGroup?.description }}</p>
+
+        <div *ngIf="lessons && lessons.length > 0">
+          <h2>Lekcje:</h2>
+          <ul>
+              <li *ngFor="let lesson of lessons">
+                  <p>Nazwa lekcji: {{ lesson.name }}</p>
+                  <p>Daty lekcji: {{ lesson.dates?.join(', ') }}</p>
+                  <p>Godzina rozpoczęcia: {{ lesson.startLessonTime }}</p>
+                  <p>Godzina zakończenia: {{ lesson.endLessonTime }}</p>
+                  <p>Dzień tygodnia: {{ lesson.dayName }}</p>
+              </li>
+          </ul>
+      </div>
 
     </div>
 </div>
   
-<footer class="footer">
+<!-- <footer class="footer">
     <div class="container">
       <p>&copy; 2023 EduSolution. Wszelkie prawa zastrzeżone.</p>
       <p>Kontakt: eduSolution@gmail.com</p>
     </div>
-  </footer>
+  </footer> -->

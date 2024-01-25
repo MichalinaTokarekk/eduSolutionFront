@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ClassGroupService } from 'src/app/classGroup/classGroup-service/classGroup.service';
 import { Location } from '@angular/common';
+import { LessonScheduleService } from 'src/app/schedule/lessonsSchedule/lessonsSchedule-service/lessonsSchedule.service';
 
 @Component({
   selector: 'app-offer-description',
@@ -12,8 +13,10 @@ import { Location } from '@angular/common';
 export class OfferDescriptionComponent implements OnInit {
   classGroupId: number | undefined;
   classGroup: any; // Tu możesz przechowywać dane klasy
+  lessons!: any[];
+  classGroupName: any;
 
-  constructor(private route: ActivatedRoute, private classGroupService: ClassGroupService, private location: Location) { }
+  constructor(private route: ActivatedRoute, private classGroupService: ClassGroupService, private location: Location, private lessonService: LessonScheduleService) { }
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
@@ -26,6 +29,16 @@ export class OfferDescriptionComponent implements OnInit {
           this.classGroupService.get(classGroupIdString).subscribe(
             (classGroupData) => {
               this.classGroup = classGroupData;
+              this.classGroupName = this.classGroup.name;
+
+
+              this.lessonService.findLessonsByClassGroupId(classGroupIdString).subscribe(
+                (data) => {
+                  this.lessons = data;
+                  console.log('lessons', this.lessons);
+                }
+              )
+
             },
             (error) => {
               console.error('Błąd podczas pobierania danych klasy:', error);
