@@ -147,7 +147,7 @@ export class CalendarViewComponent {
     const _atobData = atob(_token);
     const _finalData = JSON.parse(_atobData);
   
-    this.lessonsScheduleService.findLessonsForUserInClassGroups(_finalData.id).subscribe(
+    this.lessonsScheduleService.findLessonsForUserInClassGroupsWithoutStatus(_finalData.id).subscribe(
       (lessons: Lesson[]) => {
         const mappedEvents = lessons.flatMap((lesson) => {
           if (lesson && lesson.dates && lesson.dates.length > 0) {

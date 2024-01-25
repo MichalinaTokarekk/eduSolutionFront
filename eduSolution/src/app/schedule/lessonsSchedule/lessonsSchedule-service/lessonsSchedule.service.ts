@@ -44,6 +44,10 @@ export class LessonScheduleService {
     return this.http.get<Lesson[]>(this.LESSON_API + '/findLessonsForUserInClassGroups/' + userId);
   }
 
+  findLessonsForUserInClassGroupsWithoutStatus(userId: number): Observable<Lesson[]> {
+    return this.http.get<Lesson[]>(this.LESSON_API + '/findLessonsForUserInClassGroupsWithoutStatus/' + userId);
+  }
+
   getAllWeekDays() {
     return this.http.get<Lesson[]>(this.LESSON_API + '/weekDays');
   }

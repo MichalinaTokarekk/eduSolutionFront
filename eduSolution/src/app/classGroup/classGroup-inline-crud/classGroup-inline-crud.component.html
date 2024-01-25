@@ -223,14 +223,14 @@
                     <td>
                         <div *ngIf="course.isEdit" class="form-group">
                           <div class="input-container">
-                            <!-- <mat-select [ngModel]="course.semester" (ngModelChange)="course.semester = $event" [ngClass]="{'is-invalid': !course.semester}">
+                            <mat-select style="width: 140px;" [ngModel]="course.semester" (ngModelChange)="course.semester = $event" [ngClass]="{'is-invalid': !course.semester}">
                                 <mat-option *ngFor="let semester of semesters" [value]="semester">{{semester.name}}</mat-option>
-                              </mat-select> -->
-                              <select style="height: 43px; width: 110px; margin-left: -7px; border: 2px solid #347fca" [(ngModel)]="course.semester" class="form-control" name="semester" [ngClass]="{'is-invalid': !course.semesterId}">
+                              </mat-select>
+                              <!-- <select style="height: 43px; width: 110px; margin-left: -7px; border: 2px solid #347fca" [(ngModel)]="course.semester" class="form-control" name="semester" [ngClass]="{'is-invalid': !course.semesterId}">
                                 <option *ngFor="let semester of semesters" [value]="semester.name">
                                   {{ semester.name }}
                                 </option>
-                              </select>
+                              </select> -->
                               
                            
                             <div class="text-danger error-message" *ngIf="!course.semester?.name">
