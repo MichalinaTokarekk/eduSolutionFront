@@ -5,7 +5,7 @@
 </div><br>
 <div class="row">
     <div class="col-8">
-        <button class="btn btn-sm btn-primary" (click)="onAdd()">Dodaj nowe</button>
+        <button class="btn btn-sm btn-primary" (click)="onAdd()" *ngIf="actionsAdmin()">Dodaj nowe</button>
         <div class="col-7">
             <input type="text" [(ngModel)]="searchText" placeholder="Szukaj" class="form-control custom-search-input">
         </div><br>
@@ -279,8 +279,8 @@
 
                     <td class="text-center"> 
                         <div class="text-end" *ngIf="!course.isEdit">
-                            <i class="fa fa-pencil-square-o px-1" aria-hidden="true" (click)="onEdit(course)"></i>
-                            <i class="fa fa-trash-o" aria-hidden="true" (click)="onDelete(course)"></i>
+                            <i class="fa fa-pencil-square-o px-1" aria-hidden="true" *ngIf="actionsAdmin()" (click)="onEdit(course)"></i>
+                            <i class="fa fa-trash-o" aria-hidden="true" (click)="onDelete(course)" *ngIf="actionsAdmin()"></i>
                         </div>
                         <div class="text-end" *ngIf="course.isEdit">
                             <i class="fa fa-cloud px-1" (click)="onUpdate(course)" aria-hidden="true"></i>

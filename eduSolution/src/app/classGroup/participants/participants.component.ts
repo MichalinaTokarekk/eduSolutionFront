@@ -226,6 +226,7 @@ onSubmit() {
         this.userService.updateUserClassGroup(user).subscribe(
           response => {
             console.log('Zaktualizowano użytkownika:', response);
+            location.reload();
           },
           error => {
           //   console.error('Błąd podczas aktualizacji użytkownika:', error);
@@ -242,7 +243,6 @@ onSubmit() {
           }
         );
       }
-      location.reload();
   }
 
   onDeleteClassGroupFromUser(user: any, classGroup: any) {

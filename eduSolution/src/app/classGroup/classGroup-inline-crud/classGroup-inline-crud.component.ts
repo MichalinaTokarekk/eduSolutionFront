@@ -10,6 +10,7 @@ import { ClassGroupService } from '../classGroup-service/classGroup.service';
 import { SemesterService } from 'src/app/semester/semester-service/semester.service';
 import { Semester } from 'src/app/interfaces/semester-interface';
 import { Course } from 'src/app/interfaces/course-interface';
+import { LoginService } from 'src/app/authorization_authentication/service/login.service';
 
 @Component({
   selector: 'app-basic-inline-editing',
@@ -29,7 +30,7 @@ export class ClassGroupInlineCrudComponent implements OnInit {
   availableStatus: string[] = ["OCZEKUJĄCY", "WTRAKCIE", "ZAKOŃCZONY"];
 
   constructor(private http: HttpClient, private classGroupService: ClassGroupService, private router: Router, private dialog: MatDialog, private snackBar: MatSnackBar,
-    private semesterService: SemesterService, private courseService: CourseService){
+    private semesterService: SemesterService, private courseService: CourseService, private loginService: LoginService){
 
   }
   ngOnInit(): void {
@@ -238,6 +239,14 @@ onDelete(obj: any) {
     return value > 0;
   }
   
-  
+  actionsAdmin(){
+    if(this.loginService.getToken()!=''){
+      let _currentRole = this.loginService.getRoleByToken(this.loginService.getToken());
+      if(_currentRole=='admin'){
+        return true;
+      }
+    }
+    return false
+  }
 
 }

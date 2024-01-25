@@ -41,7 +41,7 @@ const routes: Routes = [
   {path: "main-page", component: MainPageComponent},
   {path: "semester-list", component: SemesterListComponent, canActivate:[AuthGuard], data: { roles: ['admin'] }},
   {path: "course-inline-editing", component: CourseInlineEditingComponent, canActivate:[AuthGuard], data: { roles: ['admin'] }},
-  {path: "classGroup-inline-crud", component: ClassGroupInlineCrudComponent, canActivate:[AuthGuard], data: { roles: ['admin'] }},
+  {path: "classGroup-inline-crud", component: ClassGroupInlineCrudComponent, canActivate:[AuthGuard], data: { roles: ['admin', 'teacher'] }},
   {path: "login", component: LoginComponent},
   {path: "user-inline-crud", component: UserInlineCrudComponent, canActivate:[AuthGuard], data: { roles: ['admin'] }},
   {path: "admin-panel", component: AdminPanelComponent, canActivate:[AuthGuard], data: { roles: ['admin'] }},
