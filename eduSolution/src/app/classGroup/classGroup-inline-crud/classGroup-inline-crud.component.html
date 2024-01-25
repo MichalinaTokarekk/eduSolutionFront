@@ -33,7 +33,7 @@
                     <td>
                         <div *ngIf="course.isEdit" class="form-group">
                             <div class="input-container">
-                                <input type="text" class="form-control" [(ngModel)]="course.name" [ngClass]="{'is-invalid': validateCourseName(course.name) !== ''}">
+                                <input style="margin-left: -16px; height: 30px;" type="text" class="form-control" [(ngModel)]="course.name" [ngClass]="{'is-invalid': validateCourseName(course.name) !== ''}">
                                 <div class="text-danger error-message" *ngIf="!course.name">
                                     {{validateCourseName(course.name)}}
                                 </div>
@@ -46,10 +46,10 @@
                      
                     </td>
 
-                    <td>
+                    <!-- <td>
                         <div *ngIf="course.isEdit" class="form-group">
                             <div class="input-container">
-                                <input type="text" class="form-control" [(ngModel)]="course.description" [ngClass]="{'is-invalid': validateCourseName(course.description) !== ''}">
+                                <input style="margin-left: -16px; height: 30px;" type="text" class="form-control" [(ngModel)]="course.description" [ngClass]="{'is-invalid': validateCourseName(course.description) !== ''}">
                                 <div class="text-danger error-message" *ngIf="!course.description">
                                     {{course.description}}
                                 </div>
@@ -60,15 +60,28 @@
                             {{course.description}}
                         </div>
                      
+                    </td> -->
+
+                    <td>
+                        <div *ngIf="course.isEdit" class="form-group">
+                            <div class="input-container">
+                                <textarea style="margin-left: -16px; height: 30px;" class="form-control" [(ngModel)]="course.description" [ngClass]="{'is-invalid': validateCourseName(course.description) !== ''}"></textarea>
+                            </div>
+                        </div>
+                        
+                        <div *ngIf="!course.isEdit">
+                            {{course.description}}
+                        </div>
                     </td>
+                    
 
 
                     <td>
                         <div *ngIf="course.isEdit" class="form-group">
                             <div class="input-container">
-                                <input type="text" class="form-control" [(ngModel)]="course.studentsLimit" [ngClass]="{'is-invalid': validateCourseName(course.studentsLimit) !== ''}">
-                                <div class="text-danger error-message" *ngIf="!course.studentsLimit">
-                                    {{validateCourseName(course.studentsLimit)}}
+                                <input style="margin-left: -16px; height: 30px;" type="number" class="form-control" [(ngModel)]="course.studentsLimit" [ngClass]="{'is-invalid': !isPositiveNumber(course.studentsLimit)}">
+                                <div class="text-danger error-message" *ngIf="!isPositiveNumber(course.studentsLimit)">
+                                    Większa od 0
                                 </div>
                             </div>
                         </div>
@@ -76,13 +89,13 @@
                         <div *ngIf="!course.isEdit">
                             {{course.studentsLimit}}
                         </div>
-                     
                     </td>
+                    
 
                     <td>
                         <div *ngIf="course.isEdit" class="form-group">
                             <div class="input-container">
-                                <input type="text" class="form-control" [(ngModel)]="course.year" [ngClass]="{'is-invalid': validateCourseName(course.year) !== ''}">
+                                <input style="margin-left: -16px; height: 30px;" type="text" class="form-control" [(ngModel)]="course.year" [ngClass]="{'is-invalid': validateCourseName(course.year) !== ''}" required>
                                 <div class="text-danger error-message" *ngIf="!course.year">
                                     {{validateCourseName(course.year)}}
                                 </div>
@@ -98,7 +111,7 @@
                     <td>
                         <div *ngIf="course.isEdit" class="form-group">
                             <div class="input-container">
-                                <input type="text" class="form-control" [(ngModel)]="course.address" [ngClass]="{'is-invalid': validateCourseName(course.address) !== ''}">
+                                <input style="margin-left: -16px; height: 30px;" type="text" class="form-control" [(ngModel)]="course.address" [ngClass]="{'is-invalid': validateCourseName(course.address) !== ''}">
                                 <div class="text-danger error-message" *ngIf="!course.address">
                                     {{validateCourseName(course.address)}}
                                 </div>
@@ -111,7 +124,7 @@
                      
                     </td>
 
-                    <td>
+                    <!-- <td>
                         <div *ngIf="course.isEdit" class="form-group">
                             <div class="input-container">
                                 <input type="text" class="form-control" [(ngModel)]="course.classGroupStatus" [ngClass]="{'is-invalid': validateCourseName(course.classGroupStatus) !== ''}">
@@ -125,9 +138,25 @@
                             {{course.classGroupStatus}}
                         </div>
                      
-                    </td>
+                    </td> -->
 
                     <td>
+                        <div *ngIf="course.isEdit" class="form-group">
+                          <div class="input-container">
+                            <select style="height: 43px; width: 110px; margin-right: -120px; margin-left: -16px; border: 2px solid #347fca" class="input-container" [(ngModel)]="course.classGroupStatus" name="classGroupStatus" required>
+                              <option class="input-container" *ngFor="let classGroupStatus of availableStatus" [value]="classGroupStatus">
+                                {{ classGroupStatus }}
+                              </option>
+                            </select>
+                          </div>
+                        </div>
+                      
+                        <div *ngIf="!course.isEdit">
+                          {{ course.classGroupStatus }}
+                        </div>
+                    </td>
+
+                    <!-- <td>
                         <div *ngIf="course.isEdit" class="form-group">
                             <div class="input-container">
                                 <input type="text" class="form-control" [(ngModel)]="course.mode" [ngClass]="{'is-invalid': validateCourseName(course.mode) !== ''}">
@@ -141,6 +170,22 @@
                             {{course.mode}}
                         </div>
                      
+                    </td> -->
+
+                    <td>
+                        <div *ngIf="course.isEdit" class="form-group">
+                          <div class="input-container">
+                            <select style="height: 43px; width: 110px; margin-right: -120px; margin-left: -6px; border: 2px solid #347fca" class="input-container" [(ngModel)]="course.mode" name="difficultyLevel" required>
+                              <option class="input-container" *ngFor="let mode of availableMode" [value]="mode">
+                                {{ mode }}
+                              </option>
+                            </select>
+                          </div>
+                        </div>
+                      
+                        <div *ngIf="!course.isEdit">
+                          {{ course.mode }}
+                        </div>
                     </td>
 
                     <!-- <td>
@@ -178,14 +223,14 @@
                     <td>
                         <div *ngIf="course.isEdit" class="form-group">
                           <div class="input-container">
-                            <mat-select [ngModel]="course.semester" (ngModelChange)="course.semester = $event" [ngClass]="{'is-invalid': !course.semester}">
+                            <!-- <mat-select [ngModel]="course.semester" (ngModelChange)="course.semester = $event" [ngClass]="{'is-invalid': !course.semester}">
                                 <mat-option *ngFor="let semester of semesters" [value]="semester">{{semester.name}}</mat-option>
-                              </mat-select>
-                              <!-- <select [(ngModel)]="course.semester" class="form-control" name="semester" [ngClass]="{'is-invalid': !course.semesterId}">
-                                <option *ngFor="let semester of semesters" [value]="semester.id">
+                              </mat-select> -->
+                              <select style="height: 43px; width: 110px; margin-left: -7px; border: 2px solid #347fca" [(ngModel)]="course.semester" class="form-control" name="semester" [ngClass]="{'is-invalid': !course.semesterId}">
+                                <option *ngFor="let semester of semesters" [value]="semester.name">
                                   {{ semester.name }}
                                 </option>
-                              </select> -->
+                              </select>
                               
                            
                             <div class="text-danger error-message" *ngIf="!course.semester?.name">
@@ -205,7 +250,7 @@
                             <!-- <mat-select [ngModel]="course.course" (ngModelChange)="course.course = $event" [ngClass]="{'is-invalid': !course.course}">
                                 <mat-option *ngFor="let availableCourse of availableCourses" [value]="availableCourse">{{availableCourse.name}}</mat-option>
                               </mat-select>                               -->
-                              <select [(ngModel)]="course.course" class="form-control" name="course" [ngClass]="{'is-invalid': !course.courseId}">
+                              <select style="height: 43px; width: 110px; margin-right: -120px; margin-left: -15px; border: 2px solid #347fca" [(ngModel)]="course.course" class="form-control" name="course" [ngClass]="{'is-invalid': !course.courseId}">
                                 <option *ngFor="let availableCourse of availableCourses" [value]="availableCourse.id">
                                   {{ availableCourse.name }}
                                 </option>

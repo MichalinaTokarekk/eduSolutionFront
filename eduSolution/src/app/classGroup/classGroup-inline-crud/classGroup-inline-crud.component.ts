@@ -25,6 +25,9 @@ export class ClassGroupInlineCrudComponent implements OnInit {
   semesters!: Semester[];
   availableCourses!: Course[];
   ascendingSort = true;
+  availableMode: string[] = ["STACJONARNY", "ZDALNY"];
+  availableStatus: string[] = ["OCZEKUJĄCY", "WTRAKCIE", "ZAKOŃCZONY"];
+
   constructor(private http: HttpClient, private classGroupService: ClassGroupService, private router: Router, private dialog: MatDialog, private snackBar: MatSnackBar,
     private semesterService: SemesterService, private courseService: CourseService){
 
@@ -231,7 +234,9 @@ onDelete(obj: any) {
   }
   
 
-
+  isPositiveNumber(value: number): boolean {
+    return value > 0;
+  }
   
   
 
