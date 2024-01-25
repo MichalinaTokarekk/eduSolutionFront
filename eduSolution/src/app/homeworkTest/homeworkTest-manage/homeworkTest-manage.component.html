@@ -127,7 +127,7 @@
         
               
     
-        <div *ngIf="htFiles && htFiles.length > 0">
+        <div>
           <h2 style="margin-bottom: -10px; font-size: 20px;">Pliki do zadania</h2>
           <form (submit)="onAddFile(homeworkTest)" enctype="multipart/form-data" *ngIf="actionsTeachacher()">
             <div class="filesadd">
@@ -176,7 +176,7 @@
         <!-- <p *ngIf="!isAnswerContentVisible"><strong>Komentarz:</strong> {{ answer.comment  }}</p> -->
         <div>
           <p *ngIf="!isAnswerContentVisible"><strong>Komentarz:</strong></p>
-          <textarea *ngIf="!isAnswerContentVisible" [(ngModel)]="answer.comment" style="width: 630px; height: 60px; margin-top: -10px; border-radius: 5x;"></textarea>
+          <textarea *ngIf="!isAnswerContentVisible" [(ngModel)]="answer.comment" style="width: 625px; height: 60px; margin-top: -10px; border-radius: 5x;"></textarea>
         </div>
         
         

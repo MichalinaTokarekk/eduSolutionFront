@@ -88,6 +88,7 @@ export class ClassGroupsByStudentComponent implements OnInit {
             this.filteredCourses= res;
             this.selectedCourseName = res.length > 0 ? res[0].course.name : '';
             this.selectedCourseDifficultyLevel = res.length > 0 ? res[0].course.difficultyLevel : '';
+            console.log('filteredC', this.filteredCourses);
         })
     });
    
@@ -237,25 +238,28 @@ export class ClassGroupsByStudentComponent implements OnInit {
   }
 
 
-  getCertificateConfirmation(classGroupId: number) {
+  getCertificateConfirmation(courseId: number) {
     const token = this.loginService.getToken();
     const _token = token.split('.')[1];
     const _atobData = atob(_token);
     const _finalData = JSON.parse(_atobData);
-   
-    this.certificateConfirmationService.findCertificateConfirmationByUserIdAndClassGroupId(_finalData.id, classGroupId)
-    .subscribe(
-      (data) => {
-        this.certificate = data;
-        console.log('certificate', this.certificate);
-      },
-      (error) => {
-        console.error('Error fetching certificate:', error);
-      }
-    );
   
-     
+    this.certificateConfirmationService.findCertificateConfirmationByUserIdAndClassGroupId(_finalData.id, courseId)
+      .subscribe(
+        (data) => {
+          // Przypisz informacje o certyfikacie do odpowiedniego kursu
+          const courseIndex = this.courseArray.findIndex(course => course.id === courseId);
+          if (courseIndex !== -1) {
+            this.courseArray[courseIndex].certificate = data;
+            console.log('certificate', this.courseArray[courseIndex].certificate);
+          }
+        },
+        (error) => {
+          console.error('Error fetching certificate:', error);
+        }
+      );
   }
+  
   
   
 }

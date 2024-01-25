@@ -85,7 +85,7 @@
 
       
       <ng-container>
-        <h2>Materiały zajęciowe</h2>
+        <h2 style="margin-bottom: 4px;">Materiały zajęciowe</h2>
         <!-- <div *ngFor="let eduMaterial  of eduMaterialsBySection">
           <a [routerLink]="['/eduMaterial-manage', eduMaterial.id]">{{ eduMaterial.name }}</a>
           <i class="fa fa-trash-o" aria-hidden="true" (click)="onDeleteEduMaterial(eduMaterial)"></i>
@@ -108,10 +108,10 @@
         <input *ngIf="section.isEdit" class="new-material-input" type="text" [(ngModel)]="newMaterialName" placeholder="Nowy materiał">
         <button  *ngIf="section.isEdit" class="add-material-button" (click)="onAddMaterial(section)">Dodaj materiał</button>
       </ng-container>
-      <br>
+      <br><br>
 
       <ng-container>
-        <h2>Zadania</h2>
+        <h2 style="margin-bottom: 2px;">Zadania</h2>
         <div *ngFor="let homeworkTest of homeworkTestsBySection" class="panelfiles">
             <ul>
               <li >

@@ -37,7 +37,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let course of filteredCourses;let srNo = index">
+                <tr *ngFor="let course of courseArray;let srNo = index">
                     <td>{{srNo+1}}</td>
                     <td>
                         <div *ngIf="course.isEdit" class="form-group">
@@ -52,54 +52,42 @@
                         <div *ngIf="!course.isEdit">
                             {{course.name}}
                         </div>
-                       
-                     
                     </td>
 
                     <td>
-                        <ng-container *ngFor="let course of courseArray; let i = index">
-                          <ng-container *ngIf="i !== 0 && course.grades && course.grades.length > 0">, </ng-container>
-                          <ng-container *ngFor="let grade of course.grades">
-                            <ng-container *ngIf="!grade.finalValue">
+                        <ng-container *ngFor="let grade of course.grades; let i = index">
+                          <ng-container *ngIf="!grade.finalValue">
+                            {{ grade.value }}
+                            <ng-container *ngIf="i !== course.grades.length - 1">, </ng-container>
+                          </ng-container>
+                        </ng-container>
+                      </td>
+                      
+                      <td>
+                        {{ obliczSredniaWazona(course.grades) | number: '1.2-2' }}
+                      </td>
+                      
+                      <td>
+                        <ng-container *ngIf="course.grades && course.grades.length > 0">
+                          <ng-container *ngFor="let grade of course.grades; let i = index">
+                            <ng-container *ngIf="grade.finalValue === true">
                               {{ grade.value }}
-                              <ng-container *ngIf="grade.value !== null">,</ng-container>
+                              <ng-container *ngIf="i !== course.grades.length - 1">, </ng-container>
                             </ng-container>
                           </ng-container>
                         </ng-container>
                       </td>
                       
-                      
-                      
+
                       <td>
-                        {{ courseArray ? (obliczSredniaWazona(courseArray[0]?.grades) | number: '1.2-2') : 'Brak ocen' }}
+                        <div *ngIf="course.certificate">
+                          <p>{{course.certificate.percentageScore}}% {{course.certificate.gained ? 'Zaliczony' : 'Niezaliczony'}}</p>
+                        </div>
+                        <div *ngIf="!course.certificate">
+                          Brak podejścia do certyfikatu
+                        </div>
                       </td>
                       
-                    
-                      
-
-                      <td>
-                        <ng-container *ngIf="courseArray && courseArray.length > 0">
-                            <ng-container *ngFor="let course of courseArray; let i = index">
-                                <ng-container *ngIf="course && course.grades && course.grades.length > 0">
-                                    <ng-container *ngFor="let grade of course.grades; let j = index">
-                                        <ng-container *ngIf="grade.finalValue === true">
-                                            {{ grade.value }}
-                                            <ng-container *ngIf="j !== course.grades.length - 1 && courseArray.length > 1 && grade.finalValue === true">, </ng-container>
-                                        </ng-container>
-                                    </ng-container>
-                                </ng-container>
-                            </ng-container>
-                        </ng-container>
-                    </td>
-
-                    <td>
-                        <div *ngIf="certificate">
-                          <p> {{certificate.percentageScore}}% {{certificate.gained ? 'Zaliczony' : 'Niezaliczony'}}</p>
-                        </div>
-                        <div *ngIf="!certificate">
-                          No Certificate Available
-                        </div>
-                    </td>
 
                             
                     
