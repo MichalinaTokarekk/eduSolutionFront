@@ -80,7 +80,7 @@
                         <div *ngIf="course.isEdit" class="form-group">
                             <div class="input-container1">
                                 <input style="margin-left: -16px; height: 27px; width: 90px;" type="number" class="form-control" [(ngModel)]="course.studentsLimit" [ngClass]="{'is-invalid': !isPositiveNumber(course.studentsLimit)}">
-                                <div class="text-danger error-message" *ngIf="!isPositiveNumber(course.studentsLimit)">
+                                <div style="margin-right: -80px" class="text-danger error-message" *ngIf="!isPositiveNumber(course.studentsLimit)">
                                     Większa od 0
                                 </div>
                             </div>
