@@ -174,3 +174,8 @@ h1 {
   border-radius: 3px; /* Dodanie zaokrąglenia obramowania */
   padding: 5px; /* Dodanie wewnętrznego odstępu dla lepszego wyglądu */
 }
+
+.course-image{
+  height: 400px;
+  width: 200px;
+}

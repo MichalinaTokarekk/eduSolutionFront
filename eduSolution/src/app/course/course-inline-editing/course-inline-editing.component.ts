@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { ConfirmationDialogSemesterComponent } from 'src/app/confirmations/semester/confirmation-dialog-semester.component';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { DifficultyLevel } from 'src/app/interfaces/difficulty-level-interface';
 
 @Component({
   selector: 'app-basic-inline-editing',
@@ -117,27 +118,153 @@ export class CourseInlineEditingComponent implements OnInit {
     }
 }
 
-    onUpdate(userObj: any) {
-        // write api call and send obj
-      if (!userObj.name || userObj.name.trim() === '') {
-        // Jeśli pole "name" jest puste, nie wykonuj aktualizacji
-        return;
-      }
-      this.courseService.save(userObj)
-          .subscribe(
-            (data) => {
-                // Obsłuż dane po udanej aktualizacji
-                console.log('Aktualizacja zakończona sukcesem:', data);
-                userObj.isEdit = false;
-                location.reload();
+// save(userObj: any) {
+//   const formData = this.prepareFormData(userObj);
 
-            },
-            (error) => {
-                console.error('Błąd podczas aktualizacji:', error);
-            }
-          );
+//   this.courseService.save(formData)
+//     .subscribe(
+//       (data) => {
+//         // Obsłuż dane po udanym zapisie
+//         console.log('Zapis zakończony sukcesem:', data);
+//         userObj.isEdit = false;
+//         // location.reload();
+//       },
+//       (error) => {
+//         console.error('Błąd podczas zapisywania:', error);
+//       }
+//     );
+// }
+
+// updateCourse(course: any) {
+//   const formData = new FormData();
+//   formData.append('name', course.name);
+//   formData.append('description', course.description);
+//   formData.append('difficultyLevel', course.difficultyLevel);
+//   formData.append('amountToPay', course.amountToPay.toString());
+
+//   // Dodaj plik, jeśli został wybrany
+//   if (this.selectedFile) {
+//     formData.append('imageFile', this.selectedFile, this.selectedFile.name);
+//   }
+
+//   this.courseService.updateCourse(formData)
+//     .subscribe(
+//       (data) => {
+//         // Obsłuż dane po udanej aktualizacji
+//         console.log('Aktualizacja zakończona sukcesem:', data);
+//         course.isEdit = false;
+//         // location.reload();
+//       },
+//       (error) => {
+//         console.error('Błąd podczas aktualizacji:', error);
+//       }
+//     );
+// }
+
+
+
+prepareFormData(userObj: any): FormData {
+  const formData = new FormData();
+  formData.append('name', userObj.name);
+  formData.append('description', userObj.description);
+  formData.append('difficultyLevel', userObj.difficultyLevel);
+  formData.append('amountToPay', userObj.amountToPay.toString());
+
+  // Dodaj plik, jeśli został wybrany
+  if (this.selectedFile) {
+    formData.append('imageFile', this.selectedFile, this.selectedFile.name);
+  }
+
+  return formData;
+}
+
+selectedFile: File | null = null;
+  // onUpdate(userObj: any) {
+  //   // write api call and send obj
+  // if (!userObj.name || userObj.name.trim() === '') {
+  //   // Jeśli pole "name" jest puste, nie wykonuj aktualizacji
+  //   return;
+  // }
+
+      
+  //   const formData = new FormData();
+  //   formData.append('name', userObj.name);
+  //   // Dodaj pozostałe pola
+  //   formData.append('description', userObj.description);
+  //   formData.append('difficultyLevel', userObj.difficultyLevel);
+  //   formData.append('amountToPay', userObj.amountToPay.toString());
+
+    
+  //   // Dodaj plik, jeśli został wybrany
+  //   if (this.selectedFile) {
+  //     formData.append('imageFile', this.selectedFile, this.selectedFile.name);
+  //   }
+  //     this.courseService.save(formData)
+  //         .subscribe(
+  //           (data) => {
+  //               // Obsłuż dane po udanej aktualizacji
+  //               console.log('Aktualizacja zakończona sukcesem:', data);
+  //               userObj.isEdit = false;
+  //               // location.reload();
+
+  //           },
+  //           (error) => {
+  //               console.error('Błąd podczas aktualizacji:', error);
+  //           }
+  //         );
         
+  //   }
+
+  onUpdate(userObj: any) {
+    if (!userObj.name || userObj.name.trim() === '') {
+      // Jeśli pole "name" jest puste, nie wykonuj aktualizacji
+      return;
     }
+  
+    const formData = new FormData();
+    formData.append('name', userObj.name);
+    formData.append('description', userObj.description);
+    formData.append('difficultyLevel', userObj.difficultyLevel || '');
+    formData.append('amountToPay', userObj.amountToPay.toString());
+     // Informacja, że zdjęcie ma być usunięte
+
+    if (userObj.id) {
+      formData.append('id', userObj.id); // Dodaj identyfikator kursu tylko podczas edycji
+      formData.append('removeImage', 'false'); 
+    }
+  
+    if (this.selectedFile) {
+      formData.append('imageFile', this.selectedFile, this.selectedFile.name);
+    }
+  
+    if (userObj.id) {
+      // Aktualizacja kursu
+      this.courseService.updateCourse(formData)
+        .subscribe(
+          (data) => {
+            console.log('Aktualizacja zakończona sukcesem:', data);
+            userObj.isEdit = false;
+            location.reload();
+          },
+          (error) => {
+            console.error('Błąd podczas aktualizacji:', error);
+          }
+        );
+    } else {
+      // Zapis nowego kursu
+      this.courseService.save(formData)
+        .subscribe(
+          (data) => {
+            console.log('Zapis zakończony sukcesem:', data);
+            userObj.isEdit = false;
+            location.reload();
+          },
+          (error) => {
+            console.error('Błąd podczas zapisywania:', error);
+          }
+        );
+    }
+  }
 
     // onUpdate(userObj: any) {
     //     // Wywołanie metody save z CourseService do aktualizacji danych lub zapisania nowego kursu
@@ -258,6 +385,50 @@ isValidAmountToPay(value: any): boolean {
   const parsedValue = parseFloat(value);
   return !isNaN(parsedValue) && parsedValue > 0;
 }
+
+onFileChange(files: FileList | null) {
+  if (files && files.length > 0) {
+    this.selectedFile = files[0];
+  } else {
+    this.selectedFile = null;
+  }
+}
+
+
+onFileSelected(event: any, course: any) {
+  const file = event.target.files[0];
+  if (file) {
+    course.selectedFile = file;
+  }
+}
+
+removeImage(course: any) {
+  // Przygotuj dane do przesłania w formie FormData
+  const formData = new FormData();
+  formData.append('id', course.id);  // Identyfikator kursu
+  formData.append('name', course.name);  // Identyfikator kursu
+  formData.append('amountToPay', course.amountToPay);  // Identyfikator kursu
+  formData.append('difficultyLevel', course?.difficultyLevel ? DifficultyLevel[course.difficultyLevel] : ''); 
+  formData.append('description', course.description);  // Identyfikator kursu
+  formData.append('removeImage', 'true');  // Informacja, że zdjęcie ma być usunięte
+
+  course.image = null;
+  // Wywołaj usługę do aktualizacji kursu
+  this.courseService.updateCourse(formData)
+    .subscribe(
+      (data) => {
+        console.log('Aktualizacja zakończona sukcesem:', data);
+        course.isEdit = false;
+      },
+      (error) => {
+        console.error('Błąd podczas aktualizacji:', error);
+      }
+    );
+}
+
+
+
+
 
 
 

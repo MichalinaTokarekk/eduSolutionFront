@@ -15,7 +15,7 @@
   </mat-button-toggle-group><br><br>
   
 
-  <mat-grid-list cols="3" rowHeight="1:1" class="custom-grid-list">
+  <!-- <mat-grid-list cols="3" rowHeight="1:1" class="custom-grid-list">
     <mat-grid-tile *ngFor="let course of filteredCourses" class="custom-grid-tile" [hidden]="selectedCourseName && course.name !== selectedCourseName">
       <div class="tile-container">
         <a [routerLink]="['/classGroupsInCourse', course.id]" class="no-underline">
@@ -28,7 +28,39 @@
         </a>
       </div>
     </mat-grid-tile>
+  </mat-grid-list> -->
+
+  <!-- <mat-grid-list cols="3" rowHeight="1:1" class="custom-grid-list">
+    <mat-grid-tile *ngFor="let course of filteredCourses" class="custom-grid-tile" [hidden]="selectedCourseName && course.name !== selectedCourseName">
+      <div class="tile-container">
+        <a [routerLink]="['/classGroupsInCourse', course.id]" class="no-underline">
+          <img [src]="getImageSource(course.image)" [alt]="course.name" class="course-image"/>
+          <p style="display: flex; align-items: center; margin-left: 23px;">
+            <a [routerLink]="['/classGroupsInCourse', course.id]" class="no-underline" style="color: rgb(8, 8, 8); font-size: 16px; text-decoration: none; ">
+              {{ course.name }} {{ course.difficultyLevel }}
+            </a>
+          </p>
+        </a>
+      </div>
+    </mat-grid-tile>
+  </mat-grid-list> -->
+
+  <mat-grid-list cols="3" rowHeight="1:1" class="custom-grid-list">
+    <mat-grid-tile *ngFor="let course of filteredCourses" class="custom-grid-tile" [hidden]="selectedCourseName && course.name !== selectedCourseName">
+      <div class="tile-container">
+        <a [routerLink]="['/classGroupsInCourse', course.id]" class="no-underline">
+          <img *ngIf="course.image" [src]="getImageSource(course.image)" [alt]="course.name" class="course-image"/>
+          <img *ngIf="!course.image" src="assets/images/no-image.jpg" [alt]="course.name" class="course-image"/>
+          <p style="display: flex; align-items: center; margin-left: 23px;">
+            <a [routerLink]="['/classGroupsInCourse', course.id]" class="no-underline" style="color: rgb(8, 8, 8); font-size: 16px; text-decoration: none; ">
+              {{ course.name }} {{ course.difficultyLevel }}
+            </a>
+          </p>
+        </a>
+      </div>
+    </mat-grid-tile>
   </mat-grid-list>
+  
 
   <footer class="footer">
     <div class="container">

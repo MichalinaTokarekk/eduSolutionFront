@@ -20,6 +20,7 @@
                     <th>Poziom</th> 
                     <th>Kwota</th> 
                     <th></th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -28,7 +29,7 @@
                     <td>
                         <div *ngIf="course.isEdit" class="form-group">
                             <div class="input-container">
-                                <input type="text" class="form-control" [(ngModel)]="course.name" [ngClass]="{'is-invalid': validateCourseName(course.name) !== ''}">
+                                <input sty type="text" class="form-control" [(ngModel)]="course.name" [ngClass]="{'is-invalid': validateCourseName(course.name) !== ''}">
                                 <div class="text-danger error-message" *ngIf="!course.name">
                                     {{validateCourseName(course.name)}}
                                 </div>
@@ -126,6 +127,32 @@
                             {{course.amountToPay + 'zł'}}
                         </div>
                     </td>
+
+                    <!-- <td>
+                        <div *ngIf="course.isEdit">
+                            <div class="input-container">
+                                <input type="file" #fileInput (change)="onFileChange(fileInput.files)" accept="image/*">
+
+
+                            </div>
+                        </div>
+                        <div *ngIf="!course.isEdit">
+                            {{ course.image ? 'Zdjęcie dodane' : 'Brak zdjęcia' }}
+                        </div>
+                    </td> -->
+
+                    <td>
+                        <div *ngIf="course.isEdit">
+                          <div class="input-container">
+                            <input type="file" #fileInput (change)="onFileChange(fileInput.files)" accept="image/*">
+                            <button (click)="removeImage(course)">Usuń zdjęcie</button>
+                          </div>
+                        </div>
+                        <div *ngIf="!course.isEdit">
+                          {{ course.image ? 'Zdjęcie dodane' : 'Brak zdjęcia' }}
+                        </div>
+                      </td>
+                      
                     
                     
 
@@ -138,6 +165,16 @@
                             <i class="fa fa-cloud px-1" (click)="onUpdate(course)" aria-hidden="true"></i>
                             <i class="fa fa-times-circle" aria-hidden="true" (click)="onCancel(course)"></i>
                         </div>
+
+                    <!-- <div class="text-end" *ngIf="course.isEdit">
+                        <i class="fa fa-plus" (click)="save(course)" aria-hidden="true"></i>
+                    </div>
+                    
+                    <div class="text-end" *ngIf="course.isEdit">
+                        <i class="fa fa-cloud px-1" (click)="updateCourse(course)" aria-hidden="true"></i>
+                        <i class="fa fa-times-circle" aria-hidden="true" (click)="onCancel(course)"></i>
+                    </div> -->
+  
                     </td>
                     
                 </tr>
