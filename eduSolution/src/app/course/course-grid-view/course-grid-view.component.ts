@@ -6,6 +6,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { UserService } from 'src/app/user/user-service/user.service';
 import { LoginService } from 'src/app/authorization_authentication/service/login.service';
 import { CourseService } from 'src/app/course/course-service/course.service';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-basic-course-grid-view',
@@ -20,7 +21,7 @@ export class CourseGridViewComponent implements OnInit {
   isEditing = false;
   ascendingSort = true;
   constructor(private http: HttpClient, private courseService: CourseService, private router: Router, private dialog: MatDialog, private snackBar: MatSnackBar,
-    private userService: UserService, private loginService: LoginService){
+    private userService: UserService, private loginService: LoginService, private sanitizer: DomSanitizer){
 
   }
   ngOnInit(): void {
@@ -92,6 +93,12 @@ selectedCourseName: string | null = null;
     }
     // console.log('Po filtrowaniu:', this.filteredCourses);
   }
+
+  getImageSource(encodedImage: string) {
+    const imageUrl = `data:image/*;base64,${encodedImage}`;
+    return this.sanitizer.bypassSecurityTrustUrl(imageUrl);
+  }
+
   
 
 }

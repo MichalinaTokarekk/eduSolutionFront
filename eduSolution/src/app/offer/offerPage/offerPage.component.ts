@@ -94,4 +94,6 @@ selectedCourseName: string | null = null;
     return this.sanitizer.bypassSecurityTrustUrl(imageUrl);
   }
 
+  
+
 }

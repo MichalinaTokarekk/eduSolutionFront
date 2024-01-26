@@ -224,7 +224,7 @@ selectedFile: File | null = null;
     const formData = new FormData();
     formData.append('name', userObj.name);
     formData.append('description', userObj.description);
-    formData.append('difficultyLevel', userObj.difficultyLevel);
+    formData.append('difficultyLevel', userObj.difficultyLevel || '');
     formData.append('amountToPay', userObj.amountToPay.toString());
      // Informacja, że zdjęcie ma być usunięte
 
@@ -423,6 +423,8 @@ removeImage(course: any) {
       }
     );
 }
+
+
 
 
 
