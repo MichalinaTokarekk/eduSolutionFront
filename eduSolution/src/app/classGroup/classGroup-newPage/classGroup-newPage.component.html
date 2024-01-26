@@ -1,0 +1,68 @@
+<!-- classGroup-inline-crud.component.html -->
+
+<div class="row">
+  <div class="col-6">
+    <h2>Dodaj nową grupę zajęciową</h2>
+  </div>
+</div><br>
+
+<div class="row">
+  <div class="col-8">
+    <form #classGroupForm="ngForm" (ngSubmit)="onSave()">
+      <div class="form-group">
+        <label for="name">Nazwa:</label>
+        <input type="text" class="form-control" id="name" name="name" [(ngModel)]="newClassGroup.name" required>
+      </div>
+
+      <div class="form-group">
+        <label for="description">Opis:</label>
+        <textarea class="form-control" id="description" name="description" [(ngModel)]="newClassGroup.description"></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="studentsLimit">Limit studentów:</label>
+        <input type="number" class="form-control" id="studentsLimit" name="studentsLimit" [(ngModel)]="newClassGroup.studentsLimit" required>
+      </div>
+
+      <div class="form-group">
+        <label for="year">Rok rozpoczęcia:</label>
+        <input type="text" class="form-control" id="year" name="year" [(ngModel)]="newClassGroup.year" required>
+      </div>
+
+      <div class="form-group">
+        <label for="address">Adres/Placówka:</label>
+        <input type="text" class="form-control" id="address" name="address" [(ngModel)]="newClassGroup.address" required>
+      </div>
+
+      <div class="form-group">
+        <label for="classGroupStatus">Status:</label>
+        <select class="form-control" id="classGroupStatus" name="classGroupStatus" [(ngModel)]="newClassGroup.classGroupStatus" required>
+          <option *ngFor="let status of availableStatus" [value]="status">{{ status }}</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="mode">Tryb:</label>
+        <select class="form-control" id="mode" name="mode" [(ngModel)]="newClassGroup.mode" required>
+          <option *ngFor="let mode of availableMode" [value]="mode">{{ mode }}</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="semester">Semestr:</label>
+        <select class="form-control" id="semester" name="semester" [(ngModel)]="newClassGroup.semester" required>
+          <option *ngFor="let semester of semesters" [value]="semester.id">{{ semester.name }}</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="course">Kurs:</label>
+        <select class="form-control" id="course" name="course" [(ngModel)]="newClassGroup.course" required>
+          <option *ngFor="let course of availableCourses" [value]="course.id">{{ course.name }}</option>
+        </select>
+      </div>
+
+      <button type="submit" class="btn btn-primary">Dodaj</button>
+    </form>
+  </div>
+</div>

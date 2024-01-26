@@ -35,6 +35,7 @@ import { ParticipantsComponent } from './classGroup/participants/participants.co
 import { UserDetailsComponent } from './user/user-details/user-details.component';
 import { AuthGuard } from './authorization_authentication/service/auth.guard';
 import { TypeOfTestingKnowledgeComponent } from './typeOfTestingKnowledge/typeOfTestingKnowledge-component/typeOfTestingKnowledge.component';
+import { ClassGroupNewPageComponent } from './classGroup/classGroup-newPage/classGroup-newPage.component';
 
 const routes: Routes = [
   {path: "dashboard", component: DashboardComponent, canActivate:[AuthGuard], data: { roles: ['admin', 'user', 'teacher'] }},
@@ -72,6 +73,7 @@ const routes: Routes = [
   { path: 'participants/:classGroupId', component: ParticipantsComponent },
   { path: 'user-details/:userId', component: UserDetailsComponent },
   { path: 'typeOfTestingKnowledge-inline', component: TypeOfTestingKnowledgeComponent },
+  { path: 'classGroupNewPage', component: ClassGroupNewPageComponent },
 
   
 ];

@@ -14,12 +14,12 @@
         <table class="table table-bordered ">
             <thead>
                 <tr class="bg-success text-white">
-                    <th>Lp</th>
+                    <th style="width: 50px;">Lp</th>
                     <th>Nazwa</th>
                     <th>Opis</th> 
-                    <th>Poziom</th> 
+                    <th style="width: 200px;">Poziom</th> 
                     <th>Kwota</th> 
-                    <th></th>
+                    <th>Zdjęcie</th>
                     <th></th>
                 </tr>
             </thead>
@@ -29,7 +29,7 @@
                     <td>
                         <div *ngIf="course.isEdit" class="form-group">
                             <div class="input-container">
-                                <input sty type="text" class="form-control" [(ngModel)]="course.name" [ngClass]="{'is-invalid': validateCourseName(course.name) !== ''}">
+                                <input style="margin-left: -45px; height: 25px;" type="text" class="form-control" [(ngModel)]="course.name" [ngClass]="{'is-invalid': validateCourseName(course.name) !== ''}">
                                 <div class="text-danger error-message" *ngIf="!course.name">
                                     {{validateCourseName(course.name)}}
                                 </div>
@@ -45,7 +45,7 @@
                     <td> 
                         <div *ngIf="course.isEdit" class="form-group">
                         <div class="input-container">
-                            <input type="text" class="form-control" [(ngModel)]="course.description">
+                            <input style="margin-left: -10px; height: 25px;" type="text" class="form-control" [(ngModel)]="course.description">
                         </div>
                         </div>
                         <div  *ngIf="!course.isEdit">
@@ -70,7 +70,7 @@
                     <td>
                         <div *ngIf="course.isEdit" class="form-group">
                           <div class="input-container">
-                            <select style="height: 29px; width: 280px; margin-right: -120px; border: 2px solid #347fca" class="input-container" [(ngModel)]="course.difficultyLevel" name="difficultyLevel" required>
+                            <select style="height: 38px; width: 190px; margin-left: -10px; margin-right: -120px; border: 2px solid #347fca" class="input-container" [(ngModel)]="course.difficultyLevel" name="difficultyLevel" required>
                               <option class="input-container" *ngFor="let level of availableDifficultyLevels" [value]="level">
                                 {{ level }}
                               </option>
@@ -102,7 +102,7 @@
                     <td> 
                         <div *ngIf="course.isEdit" class="form-group">
                             <div class="input-container">
-                                <input 
+                                <input style="margin-left: -30px; width: 150px; height: 25px;"
                                     type="text" 
                                     class="form-control" 
                                     [(ngModel)]="course.amountToPay" 
@@ -117,7 +117,7 @@
                                 <div class="text-danger error-message" *ngIf="!course.amountToPay">
                                     Pole wymagane
                                 </div>
-                                <div class="text-danger error-message" *ngIf="course.amountToPay && !isValidAmountToPay(course.amountToPay)">
+                                <div class="text-danger error-message" style="margin-right: -6px" *ngIf="course.amountToPay && !isValidAmountToPay(course.amountToPay)">
                                     Proszę podać liczbę większą od 0.
                                 </div>
                             </div>
@@ -144,8 +144,8 @@
                     <td>
                         <div *ngIf="course.isEdit">
                           <div class="input-container">
-                            <input type="file" #fileInput (change)="onFileChange(fileInput.files)" accept="image/*">
-                            <button (click)="removeImage(course)">Usuń zdjęcie</button>
+                            <input style="margin-left: 1px;" type="file" #fileInput (change)="onFileChange(fileInput.files)" accept="image/*">
+                            <button (click)="removeImage(course)" style="margin-left: -40px; padding: 3px; border-radius: 5px; cursor: pointer; background-color:rgb(187, 133, 133)">Usuń zdjęcie</button>
                           </div>
                         </div>
                         <div *ngIf="!course.isEdit">
