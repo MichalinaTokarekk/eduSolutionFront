@@ -224,13 +224,12 @@ selectedFile: File | null = null;
     const formData = new FormData();
     formData.append('name', userObj.name);
     formData.append('description', userObj.description);
-    formData.append('difficultyLevel', userObj.difficultyLevel || '');
+    formData.append('difficultyLevel', userObj.difficultyLevel);
     formData.append('amountToPay', userObj.amountToPay.toString());
      // Informacja, że zdjęcie ma być usunięte
 
     if (userObj.id) {
       formData.append('id', userObj.id); // Dodaj identyfikator kursu tylko podczas edycji
-      formData.append('removeImage', 'false'); 
     }
   
     if (this.selectedFile) {
@@ -408,13 +407,12 @@ removeImage(course: any) {
   formData.append('id', course.id);  // Identyfikator kursu
   formData.append('name', course.name);  // Identyfikator kursu
   formData.append('amountToPay', course.amountToPay);  // Identyfikator kursu
-  formData.append('difficultyLevel', course?.difficultyLevel ? DifficultyLevel[course.difficultyLevel] : ''); 
-  formData.append('description', course.description);  // Identyfikator kursu
+  formData.append('difficultyLevel', course.difficultyLevel || '');  // Jeżeli difficultyLevel jest zdefiniowane, użyj tej wartości, w przeciwnym razie ustaw pusty string
   formData.append('removeImage', 'true');  // Informacja, że zdjęcie ma być usunięte
 
   course.image = null;
   // Wywołaj usługę do aktualizacji kursu
-  this.courseService.updateCourse(formData)
+  this.courseService.updateCourseRemove(formData)
     .subscribe(
       (data) => {
         console.log('Aktualizacja zakończona sukcesem:', data);
@@ -425,6 +423,7 @@ removeImage(course: any) {
       }
     );
 }
+
 
 
 

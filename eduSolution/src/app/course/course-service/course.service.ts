@@ -46,6 +46,11 @@ updateCourse(formData: FormData): Observable<any> {
   return this.http.put(this.COURSE_API + '/updateCourse', formData);
 }
 
+updateCourseRemove(formData: FormData): Observable<any> {
+  console.log('formData:', formData);
+  return this.http.put(this.COURSE_API + '/updateCourseRemove', formData);
+}
+
 
 
 
