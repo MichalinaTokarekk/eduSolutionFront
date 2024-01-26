@@ -337,7 +337,7 @@
   <mat-divider></mat-divider>
   <button mat-menu-item *ngIf="actionsUser()" routerLink="/coursesByStudent-view">Dziennik ucznia</button>
   <mat-divider></mat-divider>
-  <button mat-menu-item routerLink="/classGroup-inline-crud">Grupy zajęciowe</button>
+  <button mat-menu-item *ngIf="actionsTeacher()" routerLink="/classGroup-inline-crud">Grupy zajęciowe</button>
 </mat-menu>
 
   <div class="separator" *ngIf="actions()"></div>
