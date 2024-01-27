@@ -92,9 +92,10 @@
         </div> -->
         <div *ngFor="let eduMaterial of eduMaterialsBySection" class="panelfiles">
             <ul>
-              <li >
-                <i class="material-icons" style="font-size: 28px;">library_books</i>
-                <a [routerLink]="['/eduMaterial-manage', eduMaterial.id, section.id]" style="font-size: 18px; margin-right: 110px; margin-top: 3px;">{{ eduMaterial.name }}</a>
+              <li>
+                <i class="material-icons" style="font-size: 28px; vertical-align: middle;">explore</i>
+<a [routerLink]="['/eduMaterial-manage', eduMaterial.id, section.id]" style="font-size: 18px; max-width: 300px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-right: 5px; vertical-align: middle;">{{ eduMaterial.name }}</a>
+
                 <i class="fa fa-trash-o" aria-hidden="true" (click)="onDeleteEduMaterial(eduMaterial)" *ngIf="actionsTeachacher()"></i>
               </li>
             </ul>
@@ -115,8 +116,8 @@
         <div *ngFor="let homeworkTest of homeworkTestsBySection" class="panelfiles">
             <ul>
               <li >
-                <i class="material-icons" style="font-size: 28px;">assignment</i>
-                <a [routerLink]="['/homeworkTest-manage', homeworkTest.id]" style="font-size: 18px; margin-right: 140px; margin-top: 3px;">{{ homeworkTest.name }}</a>
+                <i class="material-icons" style="font-size: 28px; vertical-align: middle;">assignment</i>
+                <a [routerLink]="['/homeworkTest-manage', homeworkTest.id]" style="font-size: 18px; margin-right: 210px; margin-top: 3px; vertical-align: middle;">{{ homeworkTest.name }}</a>
                 <i class="fa fa-trash-o" aria-hidden="true" (click)="onDeleteHomeworkTest(homeworkTest)" *ngIf="actionsTeachacher()"></i>
               </li>
             </ul>

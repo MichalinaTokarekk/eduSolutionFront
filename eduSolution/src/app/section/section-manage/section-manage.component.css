@@ -127,7 +127,6 @@
   padding-left: 10px;
   padding-bottom: 100px;
   padding-top: -100px;
-  display: flex; /* Ustawienie elementów li na poziomie */
   justify-content: space-between; /* Rozłożenie elementów li na całej szerokości bloczka */
   border-color: #753232;
   border: #212529;
