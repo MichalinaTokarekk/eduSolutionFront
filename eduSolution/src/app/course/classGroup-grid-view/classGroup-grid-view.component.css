@@ -61,6 +61,11 @@
     padding: 5px; /* Dodanie wewnętrznego odstępu dla lepszego wyglądu */
   }
 
+  .no-underline {
+    text-decoration: none;
+    text-align: center;
+    margin-right: 30px;
+    }
 
 
 

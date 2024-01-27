@@ -112,7 +112,7 @@
   border-radius: 5px; /* Zaokrąglenie rogów bloczka */
   margin-bottom: 10px; /* Odstęp między bloczkami */
   overflow: hidden; /* Ukryj zawartość, która wychodzi poza bloczek */
-  width: 300px;
+  width: 340px;
   height: 70px;
   border: #212529;
 }
@@ -149,7 +149,7 @@
 }
 
 .expansion-panel-container {
-  background-color: #b9a27f;
+  background-color: #d4ccc2;
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 4px;

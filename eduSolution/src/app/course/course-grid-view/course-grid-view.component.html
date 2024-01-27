@@ -26,11 +26,11 @@
   </mat-grid-list> -->
 
  
-  <mat-button-toggle-group name="courseStatus" [(ngModel)]="selectedCourseName" style="margin-left: 7px;" class="custom-button-group ">
+  <!-- <mat-button-toggle-group name="courseStatus" [(ngModel)]="selectedCourseName" style="margin-left: 7px;" class="custom-button-group ">
     <mat-button-toggle (click)="filterClassGroupsByStatus('Wszystkie')" value="Wszystkie">Wszystkie</mat-button-toggle>
     <mat-button-toggle *ngFor="let courseName of uniqueCourseNames" (click)="filterClassGroupsByStatus(courseName)" [value]="courseName">{{ courseName }}</mat-button-toggle>
   </mat-button-toggle-group><br><br>
-  
+   -->
 
   <!-- <mat-grid-list cols="3" rowHeight="1:1" class="custom-grid-list">
     <mat-grid-tile *ngFor="let course of filteredCourses" class="custom-grid-tile" [hidden]="selectedCourseName && course.name !== selectedCourseName">
@@ -50,7 +50,7 @@
   <mat-grid-list cols="3" rowHeight="1:1" class="custom-grid-list">
     <mat-grid-tile *ngFor="let course of filteredCourses" class="custom-grid-tile" [hidden]="selectedCourseName && course.name !== selectedCourseName">
       <div class="tile-container">
-        <a [routerLink]="['/classGroupsInCourse', course.id]" class="no-underline">
+        <a [routerLink]="['/classGroup-grid-view', course.id]" class="no-underline">
           <img *ngIf="course.image" [src]="getImageSource(course.image)" [alt]="course.name" class="course-image"/>
           <img *ngIf="!course.image" src="assets/images/no-image.jpg" [alt]="course.name" class="course-image"/>
           <p style="display: flex; align-items: center; margin-left: 23px;">

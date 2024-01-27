@@ -83,6 +83,12 @@ a:hover {
   width: 200px;
 }
 
+.no-underline {
+  text-decoration: none;
+  text-align: center;
+  margin-right: 30px;
+  }
+
 .course-image {
   max-width: 100%;
 }

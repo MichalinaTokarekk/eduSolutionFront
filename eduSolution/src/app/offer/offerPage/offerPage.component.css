@@ -137,15 +137,20 @@ text-align: center;
 border-radius: 7px;
 border: 2px solid #c0bdba;
 height: 260px;
-width: 200px;
+width: 205px;
 }
 
 .course-image {
-max-width: 100%;
+max-width: 600px;
 }
+
+
+
 
 .no-underline {
 text-decoration: none;
+text-align: center;
+margin-right: 30px;
 }
 
 .no-underline:hover {

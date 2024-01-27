@@ -490,6 +490,7 @@ isAddingNewSection: boolean = false;
           } else {
             this.sectionMaterials.push(response);
           }
+          location.reload();
         },
         (error) => {
           console.error("Błąd podczas dodawania materiału:", error);
@@ -530,6 +531,7 @@ isAddingNewSection: boolean = false;
           } else {
             this.sectionHomeworkTests.push(response);
           }
+          location.reload();
         },
         (error) => {
           console.error("Błąd podczas dodawania materiału:", error);

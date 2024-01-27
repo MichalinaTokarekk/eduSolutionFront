@@ -142,6 +142,7 @@ a:hover {
 
 .course-image {
   max-width: 100%;
+  height: 500px;
 }
 
 .no-underline {
@@ -157,4 +158,10 @@ a:hover {
   border-radius: 3px; /* Dodanie zaokrąglenia obramowania */
   padding: 5px; /* Dodanie wewnętrznego odstępu dla lepszego wyglądu */
 }
+
+.no-underline {
+  text-decoration: none;
+  text-align: center;
+  margin-right: 30px;
+  }
   
