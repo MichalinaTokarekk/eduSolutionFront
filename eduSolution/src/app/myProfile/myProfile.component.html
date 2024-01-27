@@ -1,13 +1,14 @@
 
+<body>
+
 <div>
     <h2 style="font-size: 25px;">Informacje o użytkowniku</h2>
     <p *ngIf="!isEditing" style="font-size: 18px;"><strong>Nazwa użytkownika:</strong> {{ user?.username }}</p>
+    <p *ngIf="!isEditing" style="font-size: 18px;"><strong>Numer albumu:</strong> {{ user?.albumNr }}</p>
+    <p *ngIf="!isEditing" style="font-size: 18px;"><strong>Data urodzenia:</strong> {{ user?.dateOfBirth }}</p>
     <p *ngIf="!isEditing" style="font-size: 18px;"><strong>Email:</strong> {{ user?.email }}</p>
+    <p *ngIf="!isEditing" style="font-size: 18px;"><strong>Numer telefonu:</strong> {{ user?.phoneNr }}</p>
     <p *ngIf="!isEditing" style="font-size: 18px;"><strong>Adres:</strong> {{ user?.address }}</p>
-    <p *ngIf="!isEditing" style="font-size: 18px;"><strong>Miasto:</strong> {{ user?.city }}</p>
-    <p *ngIf="!isEditing" style="font-size: 18px;"><strong>Poczta:</strong> {{ user?.post }}</p>
-    <p *ngIf="!isEditing" style="font-size: 18px;"><strong>Kod pocztowy:</strong> {{ user?.postCode }}</p>
-    <p *ngIf="!isEditing" style="font-size: 18px;"><strong>Kraj:</strong> {{ user?.country }}</p>
     <p *ngIf="!isEditing" style="font-size: 18px;"><strong>Rola:</strong> {{ user?.role }}</p>
     <p *ngIf="!isEditing" style="font-size: 18px;"><strong>Status:</strong> {{ user?.userStatus }}</p>
   
@@ -53,7 +54,15 @@
     <button (click)="changePassword(user.changePassword)">
       Zapisz
     </button>
+
     
 
-  
-  
+    
+
+  </div>
+
+  <!-- <footer>
+    <p>&copy; 2024 EduSolution. Wszelkie prawa zastrzeżone.</p>
+    <p>Kontakt: eduSolution@gmail.com</p>
+  </footer> -->
+  </body>

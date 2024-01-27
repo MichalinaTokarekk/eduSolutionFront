@@ -163,13 +163,15 @@ export class ClassGroupInlineCrudComponent implements OnInit {
 
      
 
-     formData.append('semester', userObj.semester.id ?? '');
-     formData.append('course', userObj.course.id ?? '');
+     formData.append('semester', userObj.semester ? userObj.semester.id.toString() : '');
+     formData.append('course', userObj.courseId !== undefined ? userObj.courseId.toString() : '');
+
+
      
 
   console.log('formData:', formData);
 console.log('userObj.semesterId:', userObj.semester.id);
-console.log('userObj.courseId:', userObj.course.id);
+console.log('userObj.courseId:', userObj.courseId);
 
     if (userObj.id) {
       formData.append('id', userObj.id); // Dodaj identyfikator kursu tylko podczas edycji
@@ -186,7 +188,7 @@ console.log('userObj.courseId:', userObj.course.id);
           (data) => {
             console.log('Aktualizacja zakończona sukcesem:', data);
             userObj.isEdit = false;
-            // location.reload();
+            location.reload();
           },
           (error) => {
             console.error('Błąd podczas aktualizacji:', error);
