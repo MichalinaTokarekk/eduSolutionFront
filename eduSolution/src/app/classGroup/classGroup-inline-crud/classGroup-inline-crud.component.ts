@@ -249,4 +249,45 @@ onDelete(obj: any) {
     return false
   }
 
+
+  selectedFile: File | null = null;
+  onFileChange(files: FileList | null) {
+    if (files && files.length > 0) {
+      this.selectedFile = files[0];
+    } else {
+      this.selectedFile = null;
+    }
+  }
+  
+  
+  onFileSelected(event: any, course: any) {
+    const file = event.target.files[0];
+    if (file) {
+      course.selectedFile = file;
+    }
+  }
+  
+  removeImage(course: any) {
+    // Przygotuj dane do przesłania w formie FormData
+    const formData = new FormData();
+    formData.append('id', course.id);  // Identyfikator kursu
+    formData.append('name', course.name);  // Identyfikator kursu
+    formData.append('amountToPay', course.amountToPay);  // Identyfikator kursu
+    formData.append('difficultyLevel', course.difficultyLevel || '');  // Jeżeli difficultyLevel jest zdefiniowane, użyj tej wartości, w przeciwnym razie ustaw pusty string
+    formData.append('removeImage', 'true');  // Informacja, że zdjęcie ma być usunięte
+  
+    course.image = null;
+    // Wywołaj usługę do aktualizacji kursu
+    this.courseService.updateCourseRemove(formData)
+      .subscribe(
+        (data) => {
+          console.log('Aktualizacja zakończona sukcesem:', data);
+          course.isEdit = false;
+        },
+        (error) => {
+          console.error('Błąd podczas aktualizacji:', error);
+        }
+      );
+  }
+
 }

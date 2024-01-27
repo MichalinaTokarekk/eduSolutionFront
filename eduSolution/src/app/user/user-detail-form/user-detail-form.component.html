@@ -1,0 +1,171 @@
+<div class="col-6">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16" (click)="goBack()">
+        <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"/>
+    </svg>
+    <h2 style="margin-left: 10px;">Szczegóły</h2>
+</div><br>
+
+<div class="row">
+    <div class="col-8">
+        <form *ngFor="let user of userArray | search: searchText; let srNo = index" #userForm="ngForm" (ngSubmit)="onUpdate(userForm, user)">
+            <div class="form-group">
+                <label for="firstName">Imię:</label>
+                <div *ngIf="user.isEdit">
+                    <input type="text" class="form-control" id="firstName" name="firstName" [(ngModel)]="user.firstName" [ngClass]="{'is-invalid': validateUser(user.firstName) !== ''}">
+                    <div class="text-danger error-message" *ngIf="!user.firstName">
+                        {{user.firstName}}
+                    </div>
+                </div>
+                <div *ngIf="!user.isEdit">
+                    {{user.firstName}}
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="lastName">Nazwisko:</label>
+                <div *ngIf="user.isEdit">
+                    <input type="text" class="form-control" id="lastName" name="lastName" [(ngModel)]="user.lastName" [ngClass]="{'is-invalid': validateUser(user.lastName) !== ''}">
+                    <div class="text-danger error-message" *ngIf="!user.lastName">
+                        {{user.lastName}}
+                    </div>
+                </div>
+                <div *ngIf="!user.isEdit">
+                    {{user.lastName}}
+                </div>
+            </div>
+
+            <!-- Dodaj podobne pola dla reszty danych użytkownika -->
+            
+            <div class="form-group">
+                <label for="email">E-mail:</label>
+                <div *ngIf="user.isEdit">
+                    <input type="text" class="form-control" id="email" name="email" [(ngModel)]="user.email" [ngClass]="{'is-invalid': validateUser(user.email) !== ''}">
+                    <div class="text-danger error-message" *ngIf="!user.email">
+                        {{user.email}}
+                    </div>
+                </div>
+                <div *ngIf="!user.isEdit">
+                    {{user.email}}
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="address">Ulica i numer:</label>
+                <div *ngIf="user.isEdit">
+                    <input type="text" class="form-control" id="address" name="address" [(ngModel)]="user.address" [ngClass]="{'is-invalid': validateUser(user.address) !== ''}">
+                    <div class="text-danger error-message" *ngIf="!user.address">
+                        {{user.address}}
+                    </div>
+                </div>
+                <div *ngIf="!user.isEdit">
+                    {{user.address}}
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="city">Miasto:</label>
+                <div *ngIf="user.isEdit">
+                    <input type="text" class="form-control" id="city" name="city" [(ngModel)]="user.city" [ngClass]="{'is-invalid': validateUser(user.city) !== ''}">
+                    <div class="text-danger error-message" *ngIf="!user.city">
+                        {{user.city}}
+                    </div>
+                </div>
+                <div *ngIf="!user.isEdit">
+                    {{user.city}}
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="post">Poczta:</label>
+                <div *ngIf="user.isEdit">
+                    <input type="text" class="form-control" id="post" name="post" [(ngModel)]="user.post" [ngClass]="{'is-invalid': validateUser(user.post) !== ''}">
+                    <div class="text-danger error-message" *ngIf="!user.post">
+                        {{user.post}}
+                    </div>
+                </div>
+                <div *ngIf="!user.isEdit">
+                    {{user.post}}
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="postCode">Kod pocztowy:</label>
+                <div *ngIf="user.isEdit">
+                    <input type="text" class="form-control" id="postCode" name="postCode" [(ngModel)]="user.postCode" [ngClass]="{'is-invalid': validateUser(user.postCode) !== ''}">
+                    <div class="text-danger error-message" *ngIf="!user.postCode">
+                        {{user.postCode}}
+                    </div>
+                </div>
+                <div *ngIf="!user.isEdit">
+                    {{user.postCode}}
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="country">Kraj:</label>
+                <div *ngIf="user.isEdit">
+                    <input type="text" class="form-control" id="country" name="country" [(ngModel)]="user.country" [ngClass]="{'is-invalid': validateUser(user.country) !== ''}">
+                    <div class="text-danger error-message" *ngIf="!user.country">
+                        {{user.country}}
+                    </div>
+                </div>
+                <div *ngIf="!user.isEdit">
+                    {{user.country}}
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="role">Rola:</label>
+                <div *ngIf="user.isEdit">
+                    <input type="text" class="form-control" id="role" name="role" [(ngModel)]="user.role" [ngClass]="{'is-invalid': validateUser(user.role) !== ''}">
+                    <div class="text-danger error-message" *ngIf="!user.role">
+                        {{user.role}}
+                    </div>
+                </div>
+                <div *ngIf="!user.isEdit">
+                    {{user.role}}
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="userStatus">Status:</label>
+                <div *ngIf="user.isEdit">
+                    <input type="text" class="form-control" id="userStatus" name="userStatus" [(ngModel)]="user.userStatus" [ngClass]="{'is-invalid': validateUser(user.userStatus) !== ''}">
+                    <div class="text-danger error-message" *ngIf="!user.userStatus">
+                        {{user.userStatus}}
+                    </div>
+                </div>
+                <div *ngIf="!user.isEdit">
+                    {{user.userStatus}}
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="classGroups">Grupy kursowe:</label>
+                <div *ngIf="user.isEdit">
+                    <mat-form-field appearance="fill" class="input-container">
+                        <mat-label>Wybierz grupy</mat-label>
+                        <mat-select [(ngModel)]="user.classGroups" name="classGroups" multiple [compareWith]="compareFn">
+                            <mat-option *ngFor="let group of allClassGroups" [value]="group">
+                                {{ group.name }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div *ngIf="!user.isEdit">
+                    <div *ngFor="let group of user.classGroups">
+                        {{ group.name }}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dodaj inne pola według potrzeb -->
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary" *ngIf="user.isEdit">Zapisz</button>
+                <button type="button" class="btn btn-secondary" *ngIf="user.isEdit" (click)="onCancel(user)">Anuluj</button>
+                <button type="button" class="btn btn-warning" *ngIf="!user.isEdit" (click)="onEdit(user)">Edytuj</button>
+            </div>
+        </form>
+    </div>
+</div>

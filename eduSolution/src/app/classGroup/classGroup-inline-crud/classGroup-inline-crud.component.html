@@ -24,6 +24,7 @@
                     <th>Kurs</th>
                     <th></th> 
                     <th></th> 
+                    <th></th> 
                     <!-- <th></th> -->
                 </tr>
             </thead>
@@ -263,6 +264,18 @@
                         
                         <div *ngIf="!course.isEdit">
                           {{ course.course?.name }} {{ course.course?.difficultyLevel }}
+                        </div>
+                      </td>
+
+                      <td>
+                        <div *ngIf="course.isEdit">
+                          <div class="input-container">
+                            <input style="margin-left: 1px;" type="file" #fileInput (change)="onFileChange(fileInput.files)" accept="image/*">
+                            <button (click)="removeImage(course)" style="margin-left: -40px; padding: 3px; border-radius: 5px; cursor: pointer; background-color:rgb(187, 133, 133)">Usuń zdjęcie</button>
+                          </div>
+                        </div>
+                        <div *ngIf="!course.isEdit">
+                          {{ course.image ? 'Zdjęcie dodane' : 'Brak zdjęcia' }}
                         </div>
                       </td>
 

@@ -107,6 +107,7 @@ import { AddUserDialogComponent } from './user/add-user-dialog/add-user-dialog.c
 import { MatDividerModule } from '@angular/material/divider';
 import { TypeOfTestingKnowledgeComponent } from './typeOfTestingKnowledge/typeOfTestingKnowledge-component/typeOfTestingKnowledge.component';
 import { ClassGroupNewPageComponent } from './classGroup/classGroup-newPage/classGroup-newPage.component';
+import { UserDetailFormComponent } from './user/user-detail-form/user-detail-form.component';
 
 
 
@@ -199,7 +200,8 @@ export class MaterialModule { }
     UserDetailsComponent,
     AddUserDialogComponent,
     TypeOfTestingKnowledgeComponent,
-    ClassGroupNewPageComponent
+    ClassGroupNewPageComponent,
+    UserDetailFormComponent
   ],
   imports: [
     BrowserModule,
