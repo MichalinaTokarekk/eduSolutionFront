@@ -9,6 +9,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { UserService } from 'src/app/user/user-service/user.service';
 import { LoginService } from 'src/app/authorization_authentication/service/login.service';
 import { ClassGroupService } from 'src/app/classGroup/classGroup-service/classGroup.service';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-basic-classGroup-grid-view',
@@ -24,7 +25,7 @@ export class ClassGroupGridViewComponent implements OnInit {
   ascendingSort = true;
   selectedStatus: string | null = null;
   constructor(private http: HttpClient, private courseService: CourseService, private router: Router, private dialog: MatDialog, private snackBar: MatSnackBar,
-    private userService: UserService, private loginService: LoginService, private route: ActivatedRoute, private classGroupService: ClassGroupService){
+    private userService: UserService, private loginService: LoginService, private route: ActivatedRoute, private classGroupService: ClassGroupService, private sanitizer: DomSanitizer){
 
   }
   ngOnInit(): void {
@@ -131,5 +132,9 @@ export class ClassGroupGridViewComponent implements OnInit {
         this.router.navigate(['/section-manage', courseId]);
   }
   
+  getImageSource(encodedImage: string) {
+    const imageUrl = `data:image/*;base64,${encodedImage}`;
+    return this.sanitizer.bypassSecurityTrustUrl(imageUrl);
+  }
 
 }

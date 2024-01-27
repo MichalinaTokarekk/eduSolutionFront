@@ -9,6 +9,7 @@ import { CourseService } from 'src/app/course/course-service/course.service';
 import { ClassGroupService } from 'src/app/classGroup/classGroup-service/classGroup.service';
 import { CartService } from '../cart/cart-service/cart.service';
 import { Location } from '@angular/common';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-classGroupsInCourse',
@@ -23,7 +24,7 @@ export class ClassGroupsInCourseComponent implements OnInit {
   isEditing = false;
   ascendingSort = true;
   constructor(private http: HttpClient, private courseService: CourseService, private router: Router, private route: ActivatedRoute, 
-    private classGroupService: ClassGroupService, private loginService: LoginService, private cartService: CartService, private location: Location){
+    private classGroupService: ClassGroupService, private loginService: LoginService, private cartService: CartService, private location: Location, private sanitizer: DomSanitizer){
 
   }
   ngOnInit(): void {
@@ -140,5 +141,9 @@ export class ClassGroupsInCourseComponent implements OnInit {
       this.location.back();
     }
     
+    getImageSource(encodedImage: string) {
+      const imageUrl = `data:image/*;base64,${encodedImage}`;
+      return this.sanitizer.bypassSecurityTrustUrl(imageUrl);
+    }
 
 }
