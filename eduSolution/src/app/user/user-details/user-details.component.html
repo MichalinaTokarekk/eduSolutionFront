@@ -17,12 +17,11 @@
                     <th>Lp</th>
                     <th (click)="onNameSort()">Imię</th>
                     <th (click)="onNameSort()">Nazwisko</th>
+                    <th (click)="onNameSort()">Numer albumu</th>
+                    <th (click)="onNameSort()">Data urodzenia</th>
                     <th (click)="onNameSort()">E-mail</th>
-                    <th (click)="onNameSort()">Ulica i numer</th>
-                    <th (click)="onNameSort()">Miasto</th>
-                    <th (click)="onNameSort()">Poczta</th>
-                    <th (click)="onNameSort()">Kod pocztowy</th>
-                    <th (click)="onNameSort()">Kraj</th>
+                    <th (click)="onNameSort()">Numer telefonu</th>
+                    <th (click)="onNameSort()">Adres</th>
                     <th (click)="onNameSort()">Rola</th>
                     <th (click)="onNameSort()">Status</th>
                     <th (click)="onNameSort()">Grupy kursowe</th>
@@ -63,6 +62,27 @@
                         </div>
                      
                     </td>
+
+                    <td>
+                        <div *ngIf="user.isEdit">
+                            <input type="text" class="form-control" [(ngModel)]="user.albumNr">
+                        </div>
+                        <div  *ngIf="!user.isEdit">
+                            {{user.albumNr}}
+                        </div>
+                     
+                    </td>
+
+                    <td>
+                        <div *ngIf="user.isEdit">
+                            <input type="text" class="form-control" [(ngModel)]="user.dateOfBirth">
+                        </div>
+                        <div  *ngIf="!user.isEdit">
+                            {{user.dateOfBirth}}
+                        </div>
+                     
+                    </td>
+
                     <td>
                         <div *ngIf="user.isEdit">
                             <input type="text" class="form-control" [(ngModel)]="user.email">
@@ -72,6 +92,17 @@
                         </div>
                      
                     </td>
+
+                    <td>
+                        <div *ngIf="user.isEdit">
+                            <input type="text" class="form-control" [(ngModel)]="user.phoneNr">
+                        </div>
+                        <div  *ngIf="!user.isEdit">
+                            {{user.phoneNr}}
+                        </div>
+                     
+                    </td>
+                    
                     <td>
                         <div *ngIf="user.isEdit" class="form-group">
                             <div class="input-container">
@@ -87,22 +118,8 @@
                         </div>
                      
                     </td>
-                    <td>
-                        <div *ngIf="user.isEdit" class="form-group">
-                            <div class="input-container">
-                                <input type="text" class="form-control" [(ngModel)]="user.city" [ngClass]="{'is-invalid': validateUser(user.city) !== ''}">
-                                <div class="text-danger error-message" *ngIf="!user.city">
-                                    {{user.city}}
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div *ngIf="!user.isEdit">
-                            {{user.city}}
-                        </div>
-                     
-                    </td>
-                    <td>
+                  
+                    <!-- <td>
                         <div *ngIf="user.isEdit" class="form-group">
                             <div class="input-container">
                                 <input type="text" class="form-control" [(ngModel)]="user.post" [ngClass]="{'is-invalid': validateUser(user.post) !== ''}">
@@ -116,37 +133,9 @@
                             {{user.post}}
                         </div>
                      
-                    </td>
-                    <td>
-                        <div *ngIf="user.isEdit" class="form-group">
-                            <div class="input-container">
-                                <input type="text" class="form-control" [(ngModel)]="user.postCode" [ngClass]="{'is-invalid': validateUser(user.postCode) !== ''}">
-                                <div class="text-danger error-message" *ngIf="!user.postCode">
-                                    {{user.postCode}}
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div *ngIf="!user.isEdit">
-                            {{user.postCode}}
-                        </div>
-                     
-                    </td>
-                    <td>
-                        <div *ngIf="user.isEdit" class="form-group">
-                            <div class="input-container">
-                                <input type="text" class="form-control" [(ngModel)]="user.country" [ngClass]="{'is-invalid': validateUser(user.country) !== ''}">
-                                <div class="text-danger error-message" *ngIf="!user.country">
-                                    {{user.country}}
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div *ngIf="!user.isEdit">
-                            {{user.country}}
-                        </div>
-                     
-                    </td>
+                    </td> -->
+                    
+                    
 
                     <td>
                         <div *ngIf="user.isEdit">

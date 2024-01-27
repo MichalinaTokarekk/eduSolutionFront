@@ -30,10 +30,26 @@ export class ClassGroupService {
     return result;
   }
 
+  saveClassGroupWithImage(formData: FormData): Observable<any> {
+    const result = this.http.post(this.CLASSGROUP_API + '/saveClassGroupWithImage', formData);
+    return result;
+}
+
   update(classGroup: any): Observable<any> {
     let result: Observable<Object>;
     result = this.http.put(this.CLASSGROUP_API + '/updateGroup', classGroup);
     return result;
+  }
+
+  updateWithImage(classGroup: any): Observable<any> {
+    let result: Observable<Object>;
+    result = this.http.put(this.CLASSGROUP_API + '/updateClassGroupWithImage', classGroup);
+    return result;
+  }
+
+  updateClassGroupRemove(formData: FormData): Observable<any> {
+    console.log('formData:', formData);
+    return this.http.put(this.CLASSGROUP_API + '/updateClassGroupRemove', formData);
   }
 
   remove (id: string):Observable<string> {

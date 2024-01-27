@@ -248,24 +248,25 @@
                       <td>
                         <div *ngIf="course.isEdit" class="form-group">
                           <div class="input-container-course">
-                            <!-- <mat-select [ngModel]="course.course" (ngModelChange)="course.course = $event" [ngClass]="{'is-invalid': !course.course}">
-                                <mat-option *ngFor="let availableCourse of availableCourses" [value]="availableCourse">{{availableCourse.name}}</mat-option>
-                              </mat-select>                               -->
-                              <select style="height: 40px; width: 110px; margin-right: -120px; margin-left: -15px; border: 2px solid #347fca" [(ngModel)]="course.course" class="form-control" name="course" [ngClass]="{'is-invalid': !course.courseId}">
-                                <option *ngFor="let availableCourse of availableCourses" [value]="availableCourse.id">
-                                  {{ availableCourse.name }}
-                                </option>
-                              </select>
-                            <div class="text-danger error-message" *ngIf="!course.course?.name">
-                              {{ course.course?.name }}
+                            <select style="height: 40px; width: 110px; margin-right: -120px; margin-left: -15px; border: 2px solid #347fca"
+                                    [(ngModel)]="course.courseId"
+                                    class="form-control"
+                                    name="course"
+                                    [ngClass]="{'is-invalid': !course.courseId}">
+                              <option *ngFor="let availableCourse of availableCourses" [value]="availableCourse.id">
+                                {{ availableCourse.name }}
+                              </option>
+                            </select>
+                            <div class="text-danger error-message" *ngIf="!course.courseId">
+                              {{ course.courseId }}
                             </div>
                           </div>
                         </div>
-                        
                         <div *ngIf="!course.isEdit">
                           {{ course.course?.name }} {{ course.course?.difficultyLevel }}
                         </div>
                       </td>
+                      
 
                       <td>
                         <div *ngIf="course.isEdit">
@@ -296,7 +297,7 @@
                             <i class="fa fa-trash-o" aria-hidden="true" (click)="onDelete(course)" *ngIf="actionsAdmin()"></i>
                         </div>
                         <div class="text-end" *ngIf="course.isEdit">
-                            <i class="fa fa-cloud px-1" (click)="onUpdate(course)" aria-hidden="true"></i>
+                            <i class="fa fa-cloud px-1" (click)="onUpdateWithImage(course)" aria-hidden="true"></i>
                             <i class="fa fa-times-circle" aria-hidden="true" (click)="onCancel(course)"></i>
                         </div>
                     </td>

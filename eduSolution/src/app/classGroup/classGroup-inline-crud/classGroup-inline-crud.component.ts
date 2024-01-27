@@ -12,6 +12,7 @@ import { Semester } from 'src/app/interfaces/semester-interface';
 import { Course } from 'src/app/interfaces/course-interface';
 import { LoginService } from 'src/app/authorization_authentication/service/login.service';
 
+
 @Component({
   selector: 'app-basic-inline-editing',
   templateUrl: './classGroup-inline-crud.component.html',
@@ -144,6 +145,69 @@ export class ClassGroupInlineCrudComponent implements OnInit {
       
   }
 
+  onUpdateWithImage(userObj: any) {
+    if (!userObj.name || userObj.name.trim() === '') {
+      // Jeśli pole "name" jest puste, nie wykonuj aktualizacji
+      return;
+    }
+  
+    const formData = new FormData();
+    formData.append('name', userObj.name);
+    formData.append('description', userObj.description);
+    formData.append('studentsLimit', userObj.studentsLimit.toString());
+    formData.append('year', userObj.year || '');
+    formData.append('address', userObj.address);
+    formData.append('mode', userObj.mode || '');
+    formData.append('classGroupStatus', userObj.classGroupStatus);
+     // Informacja, że zdjęcie ma być usunięte
+
+     
+
+     formData.append('semester', userObj.semester.id ?? '');
+     formData.append('course', userObj.course.id ?? '');
+     
+
+  console.log('formData:', formData);
+console.log('userObj.semesterId:', userObj.semester.id);
+console.log('userObj.courseId:', userObj.course.id);
+
+    if (userObj.id) {
+      formData.append('id', userObj.id); // Dodaj identyfikator kursu tylko podczas edycji
+    }
+  
+    if (this.selectedFile) {
+      formData.append('imageFile', this.selectedFile, this.selectedFile.name);
+    }
+  
+    if (userObj.id) {
+      // Aktualizacja kursu
+      this.classGroupService.updateWithImage(formData)
+        .subscribe(
+          (data) => {
+            console.log('Aktualizacja zakończona sukcesem:', data);
+            userObj.isEdit = false;
+            // location.reload();
+          },
+          (error) => {
+            console.error('Błąd podczas aktualizacji:', error);
+          }
+        );
+    } else {
+      // Zapis nowego kursu
+      this.classGroupService.saveClassGroupWithImage(formData)
+        .subscribe(
+          (data) => {
+            console.log('Zapis zakończony sukcesem:', data);
+            userObj.isEdit = false;
+            location.reload();
+          },
+          (error) => {
+            console.error('Błąd podczas zapisywania:', error);
+          }
+        );
+    }
+  }
+
   
   getCourseName(courseId: number): string {
     if (this.availableCourses && this.availableCourses.length > 0) {
@@ -270,15 +334,24 @@ onDelete(obj: any) {
   removeImage(course: any) {
     // Przygotuj dane do przesłania w formie FormData
     const formData = new FormData();
-    formData.append('id', course.id);  // Identyfikator kursu
-    formData.append('name', course.name);  // Identyfikator kursu
-    formData.append('amountToPay', course.amountToPay);  // Identyfikator kursu
-    formData.append('difficultyLevel', course.difficultyLevel || '');  // Jeżeli difficultyLevel jest zdefiniowane, użyj tej wartości, w przeciwnym razie ustaw pusty string
-    formData.append('removeImage', 'true');  // Informacja, że zdjęcie ma być usunięte
+    formData.append('id', course.id);  
+    formData.append('name', course.name);
+    formData.append('description', course.description);
+    formData.append('studentsLimit', course.studentsLimit.toString());
+    formData.append('year', course.year || '');
+    formData.append('address', course.address);
+    formData.append('mode', course.mode || '');
+    formData.append('classGroupStatus', course.classGroupStatus);
+    formData.append('semester', course.semester ? course.semester.id.toString() : '');
+    formData.append('course', course.courseId ? course.courseId.toString() : '');
+    formData.append('removeImage', 'true');
+
+
+
   
     course.image = null;
     // Wywołaj usługę do aktualizacji kursu
-    this.courseService.updateCourseRemove(formData)
+    this.classGroupService.updateClassGroupRemove(formData)
       .subscribe(
         (data) => {
           console.log('Aktualizacja zakończona sukcesem:', data);

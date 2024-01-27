@@ -16,3 +16,7 @@
     border-radius: 5px;
     cursor: pointer;
   }
+
+  .input-container{
+    margin-bottom: -50px;
+  }

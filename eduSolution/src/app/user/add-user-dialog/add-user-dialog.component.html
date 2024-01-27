@@ -19,8 +19,22 @@
     </mat-form-field>
 
     <mat-form-field style="margin-right: 5px;">
+      <input matInput placeholder="dateOfBirth" [(ngModel)]="data.dateOfBirth" name="dateOfBirth" required  #dateOfBirth="ngModel">
+      <mat-error *ngIf="dateOfBirth.invalid && (dateOfBirth.dirty || dateOfBirth.touched)">
+        Pole wymagane
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
       <input matInput placeholder="E-mail" [(ngModel)]="data.email" name="email" required  #email="ngModel">
       <mat-error *ngIf="email.invalid && (email.dirty || email.touched)">
+        Pole wymagane
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field style="margin-right: 5px;">
+      <input matInput placeholder="phoneNr" [(ngModel)]="data.phoneNr" name="phoneNr" required  #phoneNr="ngModel">
+      <mat-error *ngIf="phoneNr.invalid && (phoneNr.dirty || phoneNr.touched)">
         Pole wymagane
       </mat-error>
     </mat-form-field>
@@ -32,36 +46,9 @@
         </mat-error>
     </mat-form-field>
       
-    <mat-form-field class="full-width" style="margin-right: 5px;">
-    <input matInput placeholder="Miasto" [(ngModel)]="data.city" name="city" required #city="ngModel">
-    <mat-error *ngIf="city.invalid && (city.dirty || city.touched)">
-      Pole wymagane
-    </mat-error>
-    </mat-form-field>
-    
-    <mat-form-field class="full-width">
-    <input matInput placeholder="Poczta" [(ngModel)]="data.post" name="post" required #post="ngModel">
-    <mat-error *ngIf="post.invalid && (post.dirty || post.touched)">
-      Pole wymagane
-    </mat-error>
-    </mat-form-field>
-    
-    <mat-form-field class="full-width" style="margin-right: 5px;">
-      <input matInput placeholder="Kod pocztowy" [(ngModel)]="data.postCode" name="postCode" required #postCode="ngModel" pattern="\d{2}-\d{3}">
-      <mat-error *ngIf="postCode.invalid && (postCode.dirty || postCode.touched)">
-        {{ postCode.hasError('required') ? 'Pole wymagane' : 'Nieprawidłowy format kodu pocztowego (xx-xxx)' }}
-      </mat-error>
-    </mat-form-field>
-    
-    
-    <mat-form-field class="full-width">
-    <input matInput placeholder="Kraj" [(ngModel)]="data.country" name="country" required #country="ngModel">
-    <mat-error *ngIf="country.invalid && (country.dirty || country.touched)">
-      Pole wymagane
-    </mat-error>
-    </mat-form-field>
-
-    <!-- <mat-form-field appearance="fill" class="full-width" style="margin-right: 5px;"> 
+   
+<!-- 
+    <mat-form-field appearance="fill" class="full-width" style="margin-right: 5px;"> 
         <mat-label>Rola</mat-label>
         <mat-select [(ngModel)]="data.role" name="role" #role="ngModel">
           <mat-option *ngFor="let role of availableRoles" [value]="role">
@@ -71,9 +58,9 @@
             Pole wymagane
           </mat-error>
         </mat-select>
-      </mat-form-field>
+      </mat-form-field> -->
       
-      <mat-form-field appearance="fill" class="full-width">
+      <!-- <mat-form-field appearance="fill" class="full-width">
         <mat-label>Status użytkownika</mat-label>
         <mat-select [(ngModel)]="data.userStatus" name="userStatus" #userStatus="ngModel">
           <mat-option *ngFor="let status of availableUserStatus" [value]="status" >
@@ -84,14 +71,14 @@
 
     <!-- Dodaj pozostałe pola formularza użytkownika -->
 
-    <mat-form-field appearance="fill" class="input-container">
+    <!-- <mat-form-field appearance="fill" class="input-container">
       <mat-label>Wybierz grupy</mat-label>
       <mat-select [(ngModel)]="data.classGroups" name="classGroups" multiple>
         <mat-option *ngFor="let group of availableClassGroups" [value]="group">
           {{ group.name }}
         </mat-option>
       </mat-select>
-    </mat-form-field>
+    </mat-form-field> -->
 
     <div class="dialog-buttons">
       <button mat-button color="primary" class="add-material-button" (click)="onAddClick()" [disabled]="!userForm.valid">Dodaj</button>
