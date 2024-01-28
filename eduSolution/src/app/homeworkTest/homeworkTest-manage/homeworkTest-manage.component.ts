@@ -51,7 +51,8 @@ homeworkTest: any = {};
 classGroupsByUserId: any = {};
 answersByHomeworkTest: any = {};
 htFileIdContainer: any;
-  gradedValue!: number;
+gradedValue!: number;
+selectedHomeworkTestName: string = '';
   
 
   constructor(private http: HttpClient, private route: ActivatedRoute, private router: Router, private dialog: MatDialog, private snackBar: MatSnackBar, 

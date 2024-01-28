@@ -228,7 +228,7 @@ isLessonInTimeSlot(lesson: any, timeSlot: string): boolean {
   actionsTeachacher(){
     if(this.loginService.getToken()!=''){
       let _currentRole = this.loginService.getRoleByToken(this.loginService.getToken());
-      if(_currentRole=='admin' || _currentRole == 'teacher'){
+      if(_currentRole=='admin' || _currentRole == 'admin'){
         return true;
       }
     }

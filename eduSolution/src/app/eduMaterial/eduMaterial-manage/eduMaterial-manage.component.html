@@ -29,10 +29,10 @@
   </form><br>
 
 <div class="panelfiles">
-  <h2 style="margin-bottom: -15px;">Panel do dodawania plików</h2>
+  <h2 style="margin-bottom: -15px;" *ngIf="actionsTeachacher()">Panel do dodawania plików</h2>
   
   <!-- Formularz do dodawania plików -->
-  <form (submit)="onAddFile(eduMaterial)" enctype="multipart/form-data">
+  <form (submit)="onAddFile(eduMaterial)" enctype="multipart/form-data" *ngIf="actionsTeachacher()">
     <label for="file">Wybierz plik:</label>
     <input type="file" name="file" id="file" accept=".pdf, .doc, .docx, .jpg, .png" (change)="onFileSelected($event)">
     <!-- Akceptowane rozszerzenia plików -->
@@ -44,17 +44,17 @@
     <ul>
       <li *ngFor="let emFile of emFiles">
         <a (click)="downloadFileById(emFile.id)" href="javascript:void(0);" >{{ emFile.name }}</a>
-        <i class="fa fa-trash-o" aria-hidden="true" (click)="onDeleteEMFile(emFile)"></i>
+        <i class="fa fa-trash-o" aria-hidden="true" (click)="onDeleteEMFile(emFile)" *ngIf="actionsTeachacher()"></i>
       </li>
     </ul>
   </div>
 </div>
 
-<footer class="footer">
+<!-- <footer class="footer">
   <div class="container">
     <p>&copy; 2023 EduSolution. Wszelkie prawa zastrzeżone.</p>
     <p>Kontakt: kontakt@example.com</p>
   </div>
-</footer>
+</footer> -->
 
 

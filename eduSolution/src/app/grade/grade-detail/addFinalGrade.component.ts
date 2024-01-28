@@ -27,7 +27,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
     </div> -->
 
 <div class="additional-block">
-  <h3 class="add-grade-heading">Dodaj nową ocenę dla {{ studentFirstName }} {{ studentLastName }}</h3>
+  <h3 class="add-grade-heading">Dodaj ocenę końcową dla {{ studentFirstName }} {{ studentLastName }}</h3>
   <div class="grade-input">
   <div class="input-field">
     <input class="value-input" [(ngModel)]="newValue" name="newValue" type="number" placeholder="Wartość oceny" required>

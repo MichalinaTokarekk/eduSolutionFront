@@ -20,3 +20,10 @@
   .input-container{
     margin-bottom: -50px;
   }
+
+  .head{
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    text-align: center;
+    font-size: 30px;
+    margin-right: 20px;
+  }
